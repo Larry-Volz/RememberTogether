@@ -1,0 +1,47 @@
+@startuml Remember Together - use cases 
+skinparam actorStyle Hollow
+
+"Loved ones" as LO
+"Officiant" as Of
+"Funeral director" as Admin
+"Staff" as staff
+"Moderator" as mod 
+
+
+' "Admin the app" as (admin)
+"announcement/RSVP calendar" as (cal)
+"Zoom Service" as (zoom)
+"Memorial board" as (board)
+"Facebook" as (fb)
+"Live Chat" as (chat)
+"Instagram" as (insta)
+
+' LO <-- (board)
+LO --> (zoom) 
+LO --> (board)
+
+(zoom) --> (chat)
+
+Of --> (board)
+' Of <-- (board)
+mod --> (board)
+
+
+(zoom) --> (board)
+(board) --> (fb)
+(board) <-- (fb)
+(board) --> (insta)
+(board) <-- (insta)
+
+
+' Admin --> (admin)
+
+Admin --> (cal)
+' (admin) --> (board)
+' (admin) <-- (board)
+(cal) --> LO
+(cal) --> Of
+(cal) --> staff
+
+
+@enduml

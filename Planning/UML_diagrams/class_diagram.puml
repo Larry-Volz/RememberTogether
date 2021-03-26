@@ -1,0 +1,26 @@
+@startuml
+
+class ChatPanel {
+    + words : dict
+    - read_dict(inout dict_path): dict
+    - make_board():list [5 rows][5 letters]
+    - check_valid_word(board, word):str
+    - find_from(board,word,x,y,seen):boolean
+    - find(board, word):boolean
+}
+note right of Boggle::read_dict
+reads file and returns attr: words for global use
+end note
+note right of Boggle::check_valid_word
+returns: ok, not-on-board or not-word
+end note
+note right of Boggle::find_from
+can we find word in specific position
+end note
+note right of Boggle::find
+can we find word on whole board (uses find_from)
+end note
+
+
+
+@enduml
