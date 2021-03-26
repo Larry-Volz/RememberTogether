@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2 class="display-1 ml-5"><strong>Remember Together</strong></h2>
+    {% for msg in get_flashed_messages() %} 
+    <div class="bg-success m-4 text-center">
+    <br>
+        <h3 class="display-3 text-center">{{msg}}</h3>
+        <br>
+    </div>
+        {% endfor %}
+        <!-- {% for pet in pets%}
+        <div class="card col-sm-3 m-5">
+            <a href="/{{pet.id}}"><img class="card-img-top" alt="card image cap" src="{{pet.photo_url}}"></a>
+            <p class="card-text weird"><a href="/{{pet.id}}">{{pet.name}}</a> 
+                {% if pet.available %}
+                    <strong>is available</strong> 
+                {% else %}
+                    <i class="fas fa-home" style="color:pink;font-size:small;">
+                    </i><span style="color: gray"> found a home </span> 
+                    <i class="fas fa-home" style="color:pink;font-size:small;"></i>
+                {% endif %}
+            </p>
+        </div>
+        {% endfor %} -->
+{% endblock %}

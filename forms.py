@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, FloatField, DateField, DateTimeField, IntegerField, StringField, TextAreaField, BooleanField
-from wtforms.validators import InputRequired, Optional, Email, NumberRange, AnyOf, URL, PasswordField, EqualTo, DataRequired
+from wtforms.validators import InputRequired, Optional, Email, NumberRange, AnyOf, URL,  EqualTo, DataRequired
+#TODO: add PasswordField?
 
 class User_registration(FlaskForm):
     """For loved ones to sign up to use the service"""
@@ -12,33 +13,30 @@ class User_registration(FlaskForm):
     validators = [InputRequired(message = "cannot be blank")])
 
     email = StringField("Email Address",
-                        validators=[InputRequired("required field"), Email()])
+    validators=[InputRequired("required field"), Email()])
 
-    username = StringField("Username", 
-    validators = [InputRequired(message = "cannot be blank")])
-
-    password = PasswordField("Password", 
+    password = TextAreaField("Password", 
     validators = [DataRequired(message = "required field"), EqualTo('confirm', message="passwords must match") ])
 
-    confirm = PasswordField('Repeat Password')
+    confirm = TextAreaField('Repeat Password')
     
     accept_tos = BooleanField('I accept the TOS', 
     validators = [DataRequired("required to register")])
 
-class User_login(Flaskform):
-    """For loved ones to login"""
+# class User_login(Flaskform):
+#     """For loved ones to login"""
 
-    username = StringField("Username", 
-    validators = [InputRequired(message = "cannot be blank")])
+#     username = StringField("Username", 
+#     validators = [InputRequired(message = "cannot be blank")])
 
-    password = PasswordField("Password", 
-    validators = [DataRequired(message = "required field")])
+#     password = PasswordField("Password", 
+#     validators = [DataRequired(message = "required field")])
 
 
-class Admin_registration(Flaskform):
+# class Admin_registration(Flaskform):
     #TODO
 
-class Admin_login(Flaskform):
+# class Admin_login(Flaskform):
     #TODO
 
 

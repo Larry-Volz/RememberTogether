@@ -1,7 +1,10 @@
 from flask import Flask, request, render_template, redirect, flash, session
 from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db, User, Admin_user
-from forms import User_registration, User_login, Admin_registration, Admin_login
+from forms import User_registration
+
+#TODO:
+# from forms import User_registration, User_login, Admin_registration, Admin_login
 
 app=Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///remembertogether'
@@ -14,7 +17,12 @@ app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 connect_db(app)
 db.create_all()
 
-@app.route('/',methods=[“GET”,”POST”])
+@app.route('/')
+def home():
+    """ home page - should give login option and information about app"""
+    return render_template("index.html")
+
+@app.route('/add',methods=["GET","POST"])
 def user_sign_in():
     """displays app sign-in form for end users"""
     form = User_registration()
@@ -23,11 +31,14 @@ def user_sign_in():
         
         fname = form.fname.data  
         lname = form.lname.data 
-        username = form.username.data 
+
         email = form.email.data 
+        password = form.password.data
+        accept_tos = form.accept_tos.data
+
         #TODO - departed lookup/id 
 
-        user = User(fname=fname, lname=lname, username=username, email=email)
+        user = User(fname=fname, lname=lname, email=email, password=password, accept_tos=accept_tos)
 
         db.session.add(user)
         db.session.commit()
@@ -37,11 +48,10 @@ def user_sign_in():
         return redirect('/')
 
     else:
-        return render_template("add_pet.html", form=form)
-    return render_template("index.html")
+        return render_template("add_user.html", form=form)
 
-@app.route('/admin')
-def admin_sign_in():
-    """displays app sign-in form for admin users"""
-    return render_template('admin_sign_in.html')
+# @app.route('/admin')
+# def admin_sign_in():
+#     """displays app sign-in form for admin users"""
+#     return render_template('admin_sign_in.html')
 
