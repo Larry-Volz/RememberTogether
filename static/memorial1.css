@@ -1,0 +1,92 @@
+
+html body {
+    /* font-family: 'Roboto', sans-serif; */
+    font-family: 'Montserrat', sans-serif;
+
+    font-size: 1rem;
+    /* background-color: rgba(0,0,0,1.0) !important; */
+}
+
+h1 {
+    text-align: center;
+    font-family: 'Merriweather', serif;
+    font-size: 3.5rem;
+    color: darkblue;
+}
+
+h2 {
+    font-family: 'Montserrat', sans-serif;
+    color: darkblue;
+    font-size: 1.5rem;
+}
+
+
+h4 {
+    text-align: center;
+    font-family: 'Merriweather', serif;
+    font-size: 3.5rem;
+}
+
+h5 {
+    text-align: center;
+    font-family: 'Merriweather', serif;
+    color: darkblue;
+    font-size: 2.5rem;
+}
+
+h6 {
+    text-align: center;
+    font-family: 'Merriweather', serif;
+    font-size: 1.5rem;
+}
+
+.zoom {
+    font-size: 4rem;
+}
+.usp {
+    font-size: 1.2rem;
+
+}
+
+.card-text {
+    text-align: center;
+}
+
+#sci-fi-bg-btn {
+    width: 80%;
+    height: auto;
+}
+
+.lft-jus {
+    text-align: left;
+}
+
+.p-smaller {
+    font-size: small;
+
+}
+
+.hidden {
+    display: none !important;
+}
+
+.title {
+    cursor: pointer;
+}
+
+.title:hover {
+    color: darkblue;
+}
+
+#badge {
+    opacity: 0.2;
+}
+
+.nav-custom-color {
+    background-color: lightblue;
+}
+
+.blk-title {
+    /* background-color: black !important; */
+}
+
