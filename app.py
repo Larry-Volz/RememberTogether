@@ -1,6 +1,6 @@
-from flask import Flask, request, render_template, redirect, flash, session
+from flask import Flask, request, render_template, redirect, flash, session, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
-from models import db, connect_db, User, Admin_user
+from models import db, connect_db, User, Admin_user, Departed
 from forms import User_registration
 
 #TODO:
@@ -20,7 +20,19 @@ db.create_all()
 @app.route('/')
 def home():
     """ home page - should give login option and information about app"""
-    return render_template("index.html")
+    #TODO = later use AJAX/Axios query for departed with JSON?
+    departed = Departed.query.all()
+    return render_template("index.html", departed=departed)
+
+@app.route('/api/departed')
+def list_departed():
+    """return list of all departed in JSON format"""
+
+    #should turn into [{{'':''},{'':''},{'':''}...}, {{'':''},{'':''},{'':''}...}... ]
+    serialized = [friend.serialize() for friend in Departed.query.all()]
+
+    #turns it into {cupcakes:{'':'','':''}}
+    return jsonify(departed = serialized)
 
 @app.route('/add',methods=["GET","POST"])
 def user_sign_in():

@@ -27,7 +27,28 @@ class User(db.Model):
     # salt = db.Column(db.Text, nullable = True)
 
     accept_tos = db.Column(db.Boolean, nullable = False)
-    
+
+class Departed(db.Model):
+    """ Sign-in/contact information for end user """
+    __tablename__ = 'departed'
+
+    def __repr__(self):
+           return f"departed id={self.id} fname={self.fname} lname={self.lname}"  #for better referencing
+
+    id = db.Column(db.Integer,
+    primary_key = True,
+    autoincrement = True)
+
+    fname = db.Column(db.Text, nullable = False)
+    lname = db.Column(db.Text, nullable = False)
+
+    def serialize(self):
+        """turn model into a dictionary/JSON format"""
+        return {
+        'id':self.id,
+        'fname':self.fname,
+        'lname':self.lname
+    }
 
 class Admin_user(db.Model):
     """ Sign-in/contact information for end user """

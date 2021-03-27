@@ -1,13 +1,28 @@
 {% extends 'base.html' %}
-{% block content %}
-    <h2 class="display-1 ml-5"><strong>Remember Together</strong></h2>
+{% block control_panel %}
     {% for msg in get_flashed_messages() %} 
     <div class="bg-success m-4 text-center">
     <br>
         <h3 class="display-3 text-center">{{msg}}</h3>
         <br>
     </div>
-        {% endfor %}
+    {% endfor %}
+
+    <div id = "zoom-game-area">
+        <!-- AUTO-FILL EXPERIMENT -->
+        <form action="/api/departed/1">
+            <div class="ui-widget form-control-small" style="display: inline-flex;">
+                <label for="first-names">Name: </label>
+                <input id="first-names">
+                <!-- <label for="last-names">Last name: </label>
+                <input id="last-names"> -->
+            </div>
+            <div class="button btn btn-success form-control-small">Search</div>
+        </form>
+
+        <div class="departed-display"></div>
+
+    </div>
         <!-- {% for pet in pets%}
         <div class="card col-sm-3 m-5">
             <a href="/{{pet.id}}"><img class="card-img-top" alt="card image cap" src="{{pet.photo_url}}"></a>
