@@ -3,10 +3,12 @@ $(function(){
     let fnames=[];
     let lnames=[];
     let wholeNames=[];
+    let nameObjects = [];
+    
 
     getDeparted();
 
-    //get departed (from cupcakes)
+    //get departed - collects all departed in db and formats it for search box
     async function getDeparted() {
         /** GET ALL DEPARTED LIST FROM API then UPDATE DOM */
         let res = await axios.get('/api/departed');
@@ -20,17 +22,37 @@ $(function(){
             // txt+= build__4_dom(friend);
             fnames.push(friend.fname);
             lnames.push(friend.lname);
-            wholeNames.push(`${friend.fname} ${friend.lname}`)
+            wholeNames.push(`${friend.fname} ${friend.lname}`);
+            let wholeName=`${friend.fname} ${friend.lname}`;
+
+            born = makePrettyDate(friend.born);
+            died = makePrettyDate(friend.died);
             
+            let departedDetail=`${friend.fname} ${friend.lname} (${born} - ${died})`;
+            console.log(`${friend.city_born}, ${friend.state_born}`)
+                if ((friend.city_born) && (friend.state_born)){
+                    departedDetail += `  Born in ${friend.city_born}, ${friend.state_born}`
+                };
+            departedDetail += ` Memorial id: ${friend.id}`;
+            nameObjects.push({label:departedDetail , value:friend.id, id:friend.id});
         }
-        
-        // $('.departed-display').append(txt);
+
+        for (mem_id of arrayOfDeparted){
+            let mem_name = `${mem_id.id}: ${mem_id.fname} ${mem_id.lname}`
+            nameObjects.push({label: mem_name, value:mem_id.id, id:friend.id});
+        }
+        //TODO: ADD ERROR MESSAGES IF NOT FOUND
+        //TODO: refactor to get rid of unused
+
+        // TODO: $('.departed-display').append(txt);
         
     }
 
     //AUTO-FILL
-      $( "#first-names" ).autocomplete({
-        source: wholeNames
+      $( "#departed-search" ).autocomplete({
+        source: nameObjects,
+        autoFocus: true
+        // minLength: 3
       });
 
     //   $( "#last-names" ).autocomplete({  
@@ -38,5 +60,12 @@ $(function(){
     //   });
 
 
+
+    function makePrettyDate(date){
+        let months =['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+        let dateObj = new Date(date);
+        return `${months[dateObj.getMonth()]} ${dateObj.getDate()}, ${dateObj.getFullYear()}`
+    }
 
 });

@@ -20,7 +20,7 @@ db.create_all()
 @app.route('/')
 def home():
     """ home page - should give login option and information about app"""
-    #TODO = later use AJAX/Axios query for departed with JSON?
+    
     departed = Departed.query.all()
     return render_template("index.html", departed=departed)
 
@@ -66,4 +66,15 @@ def user_sign_in():
 # def admin_sign_in():
 #     """displays app sign-in form for admin users"""
 #     return render_template('admin_sign_in.html')
+
+@app.route('/memorial/<int:id>')
+def memorial_page(id):
+    """render memorial for chosen departed -- make it the zoom version if memorial service is currently going on or will be starting within ___ minutes (as set by Admin)"""
+    # if (live):
+    #     render_template("zoom_memorial.html")
+    # else:
+    
+    departed = Departed.query.get_or_404(id)
+    return render_template('memorial.html', departed=departed)
+
 

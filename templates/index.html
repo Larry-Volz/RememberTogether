@@ -10,31 +10,16 @@
 
     <div id = "zoom-game-area">
         <!-- AUTO-FILL EXPERIMENT -->
-        <form action="/api/departed/1">
-            <div class="ui-widget form-control-small" style="display: inline-flex;">
-                <label for="first-names">Name: </label>
-                <input id="first-names">
-                <!-- <label for="last-names">Last name: </label>
-                <input id="last-names"> -->
+        <form action="/api/departed/1"> 
+            <div class="ui-widget form-control">
+                <label for="departed-search">Search: </label>
+                <input id="departed-search" placeholder="Name or memorial id">
             </div>
-            <div class="button btn btn-success form-control-small">Search</div>
+            <div class="button btn btn-primary form-control-small mt-2">Go to Memorial</div>
         </form>
 
         <div class="departed-display"></div>
 
     </div>
-        <!-- {% for pet in pets%}
-        <div class="card col-sm-3 m-5">
-            <a href="/{{pet.id}}"><img class="card-img-top" alt="card image cap" src="{{pet.photo_url}}"></a>
-            <p class="card-text weird"><a href="/{{pet.id}}">{{pet.name}}</a> 
-                {% if pet.available %}
-                    <strong>is available</strong> 
-                {% else %}
-                    <i class="fas fa-home" style="color:pink;font-size:small;">
-                    </i><span style="color: gray"> found a home </span> 
-                    <i class="fas fa-home" style="color:pink;font-size:small;"></i>
-                {% endif %}
-            </p>
-        </div>
-        {% endfor %} -->
+    
 {% endblock %}

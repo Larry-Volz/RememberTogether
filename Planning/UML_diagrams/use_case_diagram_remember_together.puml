@@ -5,11 +5,12 @@ skinparam actorStyle Hollow
 "Officiant" as Of
 "Funeral director" as Admin
 "Staff" as staff
-"Moderator" as mod 
+"Immediate family" as mod 
 
 
 ' "Admin the app" as (admin)
-"announcement/RSVP calendar" as (cal)
+"Setup users" as (setupUsers)
+"Setup/mod zoom & board" as (z_setup)
 "Zoom Service" as (zoom)
 "Memorial board" as (board)
 "Facebook" as (fb)
@@ -17,31 +18,36 @@ skinparam actorStyle Hollow
 "Instagram" as (insta)
 
 ' LO <-- (board)
-LO --> (zoom) 
+' LO --> (zoom) 
 LO --> (board)
 
 (zoom) --> (chat)
 
 Of --> (board)
 ' Of <-- (board)
-mod --> (board)
 
 
-(zoom) --> (board)
+(zoom) <-- (board)
 (board) --> (fb)
 (board) <-- (fb)
 (board) --> (insta)
 (board) <-- (insta)
+(z_setup) --> (board)
 
 
 ' Admin --> (admin)
 
-Admin --> (cal)
+Admin --> (setupUsers)
 ' (admin) --> (board)
 ' (admin) <-- (board)
-(cal) --> LO
-(cal) --> Of
-(cal) --> staff
+(setupUsers) --> LO
+(setupUsers) --> Of
+(setupUsers) --> staff
+(setupUsers) --> mod
+
+Admin --> (z_setup)
+staff --> (z_setup)
+mod --> (z_setup)
 
 
 @enduml

@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<!--
+TODO: 
+- Change h5's to possibly be h1 (reformat CSS) for SEO optimization
+- or ust h2 for app name and h1 (reformat for smaller) using keywords for SEO optimization
+
+-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -56,41 +62,20 @@
           </nav> -->
 
 
-        <div class="card  mm-title">
-            <!-- <div class="jumbotron">  -->
-                <div class="container  mm-title">
-                    <div class="row justify-content-start mb-2 mt-4  mm-title">
-                        <div class=" mm-title" >
-                            
-                            <h5 class=" card-title mm-title" style="display: inline-flex;">
-                                Remember Together
-                            </h5>
-                            <p class="card-text usp py-0 my-0  mm-title">A place to share memories of those we love</p>
-                        </div>
-                    </div>
-                </div>
-           <!-- </div> -->
-       </div> 
+        
     </header>
 
     <section>
-        <div class="container-fluid justify-content-around">
-            <div class="row my-3">
+        
                 <!-- ---------------------------- CONTROL PANEL ------------------------------------------------>
 
-                <div class="col-lg-5  bg-muted zoomPanel p-3 mx-0 border rounded shadow align-content-center">
 
                     {% block control_panel %}
                     {% endblock %}
                     
-                </div> <!----------------------- end of game panel ---------------------------->
 
 
-                <div class="col-lg-7 gamePanel mx-0 border rounded shadow justify-content-center text-center">
-                    <h2 class="">Zoom Memorial Service Window</h2>
-                    <img src="static/images/flower_chair_horiz.jpg" class="img-fluid" alt="Zoom Logo">
-                    <!-- <iframe src="https://www.zoom.us/signin" style="border:none;" title="Iframe Example"></iframe> -->
-                </div>
+
 
 
                           
@@ -101,14 +86,21 @@
 
 
 
-                </div>
-            </div>
         </div>
     </section>
     
 
 
     <footer>
+        <div class="row justify-content-start mb-2 mt-4  mm-title">
+            <div class=" mm-title" >
+                
+                <h5 class=" card-title mm-title" style="display: inline-flex;">
+                    Remember Together
+                </h5>
+                <p class="card-text usp py-0 my-0  mm-title">A place to share memories of those we love</p>
+            </div>
+        </div>
         <small><i>Photo by Kelly Jean on Unsplash</i></small>
     </footer>
     <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script> -->

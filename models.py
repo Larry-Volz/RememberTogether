@@ -26,7 +26,7 @@ class User(db.Model):
     password = db.Column(db.Text, nullable = False)
     # salt = db.Column(db.Text, nullable = True)
 
-    accept_tos = db.Column(db.Boolean, nullable = False)
+    # accept_tos = db.Column(db.Boolean, nullable = False)
 
 class Departed(db.Model):
     """ Sign-in/contact information for end user """
@@ -41,13 +41,21 @@ class Departed(db.Model):
 
     fname = db.Column(db.Text, nullable = False)
     lname = db.Column(db.Text, nullable = False)
+    city_born = db.Column(db.Text, nullable = True)
+    state_born = db.Column(db.Text, nullable = True)
+    born = db.Column(db.Date, nullable = False)
+    died = db.Column(db.Date, nullable = False)
 
     def serialize(self):
         """turn model into a dictionary/JSON format"""
         return {
         'id':self.id,
         'fname':self.fname,
-        'lname':self.lname
+        'lname':self.lname,
+        'city_born':self.city_born,
+        'state_born':self.state_born,
+        'born':self.born,
+        'died':self.died
     }
 
 class Admin_user(db.Model):

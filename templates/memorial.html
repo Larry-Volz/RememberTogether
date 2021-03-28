@@ -1,0 +1,13 @@
+{% extends 'base_no_zoom.html' %}
+{% block control_panel %}
+
+<div class="container-fluid justify-content-around">
+    <div class="card col m-2">
+        <img class="card-img-top" alt="picture of {{departed.fname}} {{departed.lname}}" src="static/images/hypnoFromAbove2_opt.jpg">
+        <!-- TODO: update model/change to {{departed.banner_url}}-->
+
+        <h1>In Loving Memory of {{ departed.fname}} {{departed.lname}}</h1>
+
+    </div>
+</div>
+{% endblock %}
