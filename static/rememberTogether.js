@@ -7,6 +7,14 @@ $(function(){
     
 
     getDeparted();
+    
+    $("#departed-search-btn").on('click',()=>{
+        // departed_id = document.getElementById("departed-search-btn").value;
+        departed_id = $("#departed-search").val();
+        // console.log("DEPARTED id:", departed_id)
+        url=`http://127.0.0.1:5000/memorial/${departed_id}`;
+        window.location.href = url;
+    })
 
     //get departed - collects all departed in db and formats it for search box
     async function getDeparted() {

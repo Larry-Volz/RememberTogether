@@ -9,7 +9,7 @@ def connect_db(app):
 
 
 class User(db.Model):
-    """ Sign-in/contact information for end user """
+    """ Sign-in/contact information for end user """ 
     __tablename__ = 'users'
 
     def __repr__(self):
@@ -28,6 +28,32 @@ class User(db.Model):
 
     # accept_tos = db.Column(db.Boolean, nullable = False)
 
+    post = db.relationship('Post', backref="user")
+
+
+class Post(db.Model):
+    """posts by users about specific departed 
+    newpost = Post(text='', file_url='', user_id = '', departed_id = '')
+    """
+    __tablename__ = 'posts'
+
+    id = db.Column(db.Integer,
+    primary_key = True,
+    autoincrement = True)
+
+    text = db.Column(db.Text, nullable = True)
+
+    file_url = db.Column(db.Text, nullable = True)
+
+    user_id = db.Column(db.Integer, db.ForeignKey(
+        'users.id'), primary_key=True)
+
+    departed_id = db.Column(db.Integer, db.ForeignKey(
+        'departed.id'), primary_key=True)
+
+
+
+
 class Departed(db.Model):
     """ Sign-in/contact information for end user """
     __tablename__ = 'departed'
@@ -45,6 +71,7 @@ class Departed(db.Model):
     state_born = db.Column(db.Text, nullable = True)
     born = db.Column(db.Date, nullable = False)
     died = db.Column(db.Date, nullable = False)
+    headshot = db.Column(db.Text, nullable = True) #url for face picture
 
     def serialize(self):
         """turn model into a dictionary/JSON format"""
@@ -57,6 +84,9 @@ class Departed(db.Model):
         'born':self.born,
         'died':self.died
     }
+    post = db.relationship('Post', backref="deceased")
+
+    
 
 class Admin_user(db.Model):
     """ Sign-in/contact information for end user """

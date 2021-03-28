@@ -2,8 +2,8 @@
   "canvas": {
     "width": 2000,
     "height": 2000,
-    "scrollTop": 0,
-    "scrollLeft": 0,
+    "scrollTop": 125.55554962158203,
+    "scrollLeft": 538.3333129882812,
     "show": {
       "tableComment": true,
       "columnComment": true,
@@ -351,7 +351,7 @@
           "active": false,
           "left": 625.5555386454984,
           "top": 278.3333262470045,
-          "zIndex": 465,
+          "zIndex": 808,
           "widthName": 114,
           "widthComment": 335
         },
@@ -780,7 +780,7 @@
           "active": false,
           "left": 12.222229599952625,
           "top": 40.00000238418575,
-          "zIndex": 507,
+          "zIndex": 760,
           "widthName": 60,
           "widthComment": 124
         },
@@ -860,29 +860,6 @@
             "id": "4d9b4679-0738-c317-1f35-34afb6bb5119"
           },
           {
-            "name": "",
-            "comment": "",
-            "dataType": "",
-            "default": "",
-            "option": {
-              "autoIncrement": false,
-              "primaryKey": false,
-              "unique": false,
-              "notNull": false
-            },
-            "ui": {
-              "active": false,
-              "pk": false,
-              "fk": false,
-              "pfk": false,
-              "widthName": 60,
-              "widthComment": 60,
-              "widthDataType": 60,
-              "widthDefault": 60
-            },
-            "id": "cffaadc8-fd37-655d-c1bc-5236a954d829"
-          },
-          {
             "name": "departed_id",
             "comment": "fk",
             "dataType": "INT",
@@ -906,7 +883,7 @@
             "id": "dbcfc669-a9e4-1896-829d-4b95dea27d86"
           },
           {
-            "name": "users_id",
+            "name": "user_id",
             "comment": "fk",
             "dataType": "INT",
             "default": "",
@@ -956,7 +933,7 @@
           "active": false,
           "left": 684.999980953006,
           "top": 766.1110883862898,
-          "zIndex": 758,
+          "zIndex": 763,
           "widthName": 60,
           "widthComment": 153
         },
@@ -1213,7 +1190,7 @@
           }
         ],
         "ui": {
-          "active": true,
+          "active": false,
           "left": 196.66666679912146,
           "top": 778.3333070278175,
           "zIndex": 759,
@@ -1221,6 +1198,113 @@
           "widthComment": 185
         },
         "id": "ea0a9425-290f-1378-9b32-df92a827fd23"
+      },
+      {
+        "name": "preferences",
+        "comment": "Preferences on memorial look & feel",
+        "columns": [
+          {
+            "name": "background-color",
+            "comment": "",
+            "dataType": "TEXT",
+            "default": "lightblue",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 103,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "7ea17c3c-cbe8-b6bc-f33a-ece108738e08"
+          },
+          {
+            "name": "banner-picture",
+            "comment": "",
+            "dataType": "TEXT",
+            "default": "clouds",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 86,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "f757fbff-d34e-8294-c07b-b50d92b7ae79"
+          },
+          {
+            "name": "privacy",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "9a2c2217-5685-778f-7838-8e7a108d6d21"
+          },
+          {
+            "name": "id",
+            "comment": "",
+            "dataType": "int",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "3faa2db7-33d3-28c7-b6fa-77690864f32a"
+          }
+        ],
+        "ui": {
+          "active": true,
+          "left": 1231.6666269169905,
+          "top": 306.66665358455134,
+          "zIndex": 809,
+          "widthName": 71,
+          "widthComment": 211
+        },
+        "id": "01c93a63-aa1f-2cbd-f696-22c55b7091b6"
       }
     ],
     "indexes": []
@@ -1385,11 +1469,34 @@
             "79912b0b-4c23-1992-5a0b-0b5db3124204"
           ],
           "x": 684.999980953006,
-          "y": 872.3610883862898,
+          "y": 862.1110883862898,
           "direction": "left"
         },
         "id": "0d11391e-ea10-0049-c220-3f56d2c9c8e5",
         "relationshipType": "OneN"
+      },
+      {
+        "identification": false,
+        "start": {
+          "tableId": "bddcdfb3-fd97-3a6f-a281-4dbf5377a436",
+          "columnIds": [
+            "5f417334-3c5a-9e46-409f-9f47fa9d4ccc"
+          ],
+          "x": 1106.5555386454985,
+          "y": 353.8333262470045,
+          "direction": "right"
+        },
+        "end": {
+          "tableId": "01c93a63-aa1f-2cbd-f696-22c55b7091b6",
+          "columnIds": [
+            "3faa2db7-33d3-28c7-b6fa-77690864f32a"
+          ],
+          "x": 1231.6666269169905,
+          "y": 382.16665358455134,
+          "direction": "left"
+        },
+        "id": "06596348-5a21-cba9-26e1-c9887da0ebaf",
+        "relationshipType": "One"
       }
     ]
   }
