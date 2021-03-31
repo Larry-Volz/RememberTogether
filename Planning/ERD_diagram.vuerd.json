@@ -2,8 +2,8 @@
   "canvas": {
     "width": 2000,
     "height": 2000,
-    "scrollTop": 125.55554962158203,
-    "scrollLeft": 538.3333129882812,
+    "scrollTop": 14.444443702697754,
+    "scrollLeft": 366.111083984375,
     "show": {
       "tableComment": true,
       "columnComment": true,
@@ -144,7 +144,7 @@
         "id": "4bcfde9f-0892-b73e-9896-266bcc7b8b3c"
       },
       {
-        "name": "memorial",
+        "name": "events",
         "comment": "Event itself",
         "columns": [
           {
@@ -244,14 +244,14 @@
           "active": false,
           "left": 692.7777581965497,
           "top": 44.44444665202428,
-          "zIndex": 653,
+          "zIndex": 819,
           "widthName": 60,
           "widthComment": 65
         },
         "id": "e6e44ba7-493e-f6d6-0659-1559c737dc21"
       },
       {
-        "name": "memorial_departed",
+        "name": "departed_events",
         "comment": "mapping table for memorials with more than one departed",
         "columns": [
           {
@@ -301,7 +301,7 @@
             "id": "cd515b4c-662b-0d35-e9c9-041c804adf12"
           },
           {
-            "name": "memorial_id",
+            "name": "event_id",
             "comment": "FK",
             "dataType": "INT",
             "default": "",
@@ -316,7 +316,7 @@
               "pk": false,
               "fk": false,
               "pfk": false,
-              "widthName": 73,
+              "widthName": 60,
               "widthComment": 60,
               "widthDataType": 60,
               "widthDefault": 60
@@ -351,8 +351,8 @@
           "active": false,
           "left": 625.5555386454984,
           "top": 278.3333262470045,
-          "zIndex": 808,
-          "widthName": 114,
+          "zIndex": 817,
+          "widthName": 99,
           "widthComment": 335
         },
         "id": "bddcdfb3-fd97-3a6f-a281-4dbf5377a436"
@@ -1297,7 +1297,7 @@
           }
         ],
         "ui": {
-          "active": true,
+          "active": false,
           "left": 1231.6666269169905,
           "top": 306.66665358455134,
           "zIndex": 809,
@@ -1353,7 +1353,7 @@
           "columnIds": [
             "9bf80419-7cd3-d751-bc55-84ab35865ec3"
           ],
-          "x": 866.0555386454984,
+          "x": 858.5555386454984,
           "y": 278.3333262470045,
           "direction": "top"
         },
@@ -1367,7 +1367,7 @@
           "columnIds": [
             "5f417334-3c5a-9e46-409f-9f47fa9d4ccc"
           ],
-          "x": 866.0555386454984,
+          "x": 858.5555386454984,
           "y": 429.3333262470045,
           "direction": "bottom"
         },
@@ -1482,7 +1482,7 @@
           "columnIds": [
             "5f417334-3c5a-9e46-409f-9f47fa9d4ccc"
           ],
-          "x": 1106.5555386454985,
+          "x": 1091.5555386454985,
           "y": 353.8333262470045,
           "direction": "right"
         },

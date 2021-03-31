@@ -8,6 +8,28 @@ def connect_db(app):
     db.init_app(app)
 
 
+class Event(db.Model):
+    '''table for individual events - connected to 1 or more departed through event-departed mapping table, also foreign key for admin (funeral home) '''
+    __tablename__ = 'events'
+
+    def __repr__(self):
+           return f"event id={self.id} fname={self.fname} lname={self.lname}"  #for better referencing
+    
+    id = db.Column(db.Integer, primary_key = True, autoincrement = True)
+    when = db.Column(db.DateTime(timezone=True), nullable=False)
+    admin_id = db.Column(db.Integer, db.ForeignKey('Admin_user.id'), primary_key=True)
+    room = db.Column(db.String(30), nullable=True)
+
+
+class Departed-event(db.Model):
+    '''mapping table for when there is more than one departed being memorialized'''
+    __tablename__ = 'departed_events'
+
+    id = db.Column(db.Integer, primary_key = True, autoincrement = True)
+    departed_id = db.Column(db.Integer, db.ForeignKey('departed.id'), primary_key=True)
+    event_id = db.Column(db.Integer, db.ForeignKey('events.id'), primary_key=True)
+
+
 class User(db.Model):
     """ Sign-in/contact information for end user """ 
     __tablename__ = 'users'

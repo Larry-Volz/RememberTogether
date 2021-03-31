@@ -7,6 +7,9 @@ html body {
     background-color: lightblue !important;
 }
 
+p {
+    font-size: 10 px;
+}
 
 h2, h5 {
     font-family: 'Merriweather', serif;
@@ -91,6 +94,9 @@ h6 {
 
 img.face {
     width: 250px;
+    position: absolute;
+    top: 30;
+    left: 40;
 
 }
 
@@ -108,16 +114,12 @@ h6 {
 }
 
 .zoom {
-    font-size: 4rem;
-}
-.usp {
-    font-size: 1.2rem;
-
+    font-size: 4rem; 
 }
 
 .card {
     background-color: lightblue;
-    display: inline-flex;
+    display: inline-flex; /*needed so img shrinks to frame */
 }
 
 .card-title {
@@ -175,6 +177,20 @@ p, label, #suspect-num, table {
     width: 100%;
     height: auto;
     object-fit: cover;
+}
+
+.departed-cards-holder {
+    display: flex;
+    position: absolute;
+    top: 375px;
+    left: 10px;
+}
+
+.ending {
+    z-index: auto;
+    position: absolute;
+    top: 375px;
+    left: 10px;
 }
 
 

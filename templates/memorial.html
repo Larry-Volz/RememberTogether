@@ -10,7 +10,7 @@
 
 -->
 
-    <div class="card bg-dark text-white col m-2">
+    <div class="card">
         <!-- IDEAL BANNER WIDTH = 1381wx250h  look at css for card-img-top-->
         <img src="http://127.0.0.1:5000/static/images/sunset_over_clouds_banner.jpg" class=" card-img " alt="picture of {{departed.fname}} {{departed.lname}}" >
         <div class="card-img-overlay">
@@ -19,18 +19,23 @@
             <h1 class="card-title">
                 In Loving Memory of {{ departed.fname}} {{departed.lname}}
             </h1>
-            <img class="rounded-circle z-depth-2 face card-img-top" alt="100x100" src="{{ departed.headshot }}" data-holder-rendered="true">
-            
+            <img class="rounded-circle z-depth-2 face card-img-top" alt="close-up of {{departed.fname}} {{departed.lname}}" src="{{ departed.headshot }}" data-holder-rendered="true">
         </div>
     </div>
 
-    <br><br><br><br><br>
+    <div class="row">
+        <div class="col">
+            <!-- <br><br><br><br><br> -->
+            <hr>
+        </div>
+    </div>
+
     
 <!-- ---------------------------------------  RENDER CARDS ----------------------------------------------------- -->
-    <div class="align-items-start">
+    <div class="align-items-start departed-cards-holder">
         {% for ea in posts %}
 
-            <div class="card col-sm-3">
+            <div class="card departed-card col-sm-12 col-md-6 col-lg-4">
                 <img src="{{ea.file_url}}" alt="picture of {{ departed.fname}} {{departed.lname}}" class="card-img-top">
                 <div class="card-text">
                     {{ ea.text}}
@@ -44,23 +49,5 @@
 
 
     <!-- ------------------------------------------------------------------------------------------ -->
-    <footer>
-
-        <hr>
-            <div class="row">
-                <div class="card m-4">
-                    <h5 class="card-title">
-                        <a href="/"> Remember Together</a>
-                    </h5>
-                    <p class="card-text text-start usp py-0 my-0   ">A place to share memories of those we love</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="card ml-4 mt-1">
-                    <small><i>Thanks to these artists on Unsplash for their beautiful backgrounds: <br>
-                        Kelly Jean and Jörg Angeli
-                    </i></small>
-                </div>
-            </div>
-    </footer>
+  
 {% endblock %}
