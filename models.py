@@ -7,6 +7,8 @@ def connect_db(app):
     db.app = app 
     db.init_app(app)
 
+'''NOTE: view departed as plural and deceased as singular for sqlalchemy relationship referencing'''
+
 
 class Event(db.Model):
     '''table for individual events - connected to 1 or more departed through event-departed mapping table, also foreign key for admin (funeral home) '''
@@ -28,6 +30,10 @@ class Departed-event(db.Model):
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
     departed_id = db.Column(db.Integer, db.ForeignKey('departed.id'), primary_key=True)
     event_id = db.Column(db.Integer, db.ForeignKey('events.id'), primary_key=True)
+
+    event = db.relationship('Event', backref="departed_event")
+    deceased = db.relationship('Departed', backref="departed_event")
+
 
 
 class User(db.Model):
@@ -94,6 +100,9 @@ class Departed(db.Model):
     born = db.Column(db.Date, nullable = False)
     died = db.Column(db.Date, nullable = False)
     headshot = db.Column(db.Text, nullable = True) #url for face picture
+    hero1 = db.Column(db.Text, nullable = True) #url for large picture 1
+    hero2 = db.Column(db.Text, nullable = True) #url for large picture 2
+    biography = db.Column(db.Text, nullable = False) #obituary
 
     def serialize(self):
         """turn model into a dictionary/JSON format"""
