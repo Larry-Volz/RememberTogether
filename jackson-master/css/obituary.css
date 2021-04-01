@@ -377,7 +377,7 @@ body.offcanvas {
 .colorlib-education,
 .colorlib-blog,
 .colorlib-work,
-.colorlib-about,
+.colorlib-memorial,
 .colorlib-services,
 .colorlib-contact {
   padding-top: 4em;
@@ -391,7 +391,7 @@ body.offcanvas {
     .colorlib-education,
     .colorlib-blog,
     .colorlib-work,
-    .colorlib-about,
+    .colorlib-memorial,
     .colorlib-services,
     .colorlib-contact {
       padding-top: 5em;
@@ -431,7 +431,7 @@ body.offcanvas {
   height: 600px;
   margin-bottom: 30px; }
 
-.about-desc h3 {
+.memorial-desc h3 {
   font-size: 18px;
   text-transform: uppercase;
   letter-spacing: 5px;

@@ -21,6 +21,8 @@ class Event(db.Model):
     when = db.Column(db.DateTime(timezone=True), nullable=False)
     admin_id = db.Column(db.Integer, db.ForeignKey('Admin_user.id'), primary_key=True)
     room = db.Column(db.String(30), nullable=True)
+     
+    facility = db.relationship('Admin_user', backref="event")
 
 
 class Departed-event(db.Model):

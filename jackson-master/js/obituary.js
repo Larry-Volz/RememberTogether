@@ -37,26 +37,26 @@
 	};
 
 
-	var counter = function() {
-		$('.js-counter').countTo({
-			 formatter: function (value, options) {
-	      return value.toFixed(options.decimals);
-	    },
-		});
-	};
+	// var counter = function() {
+	// 	$('.js-counter').countTo({
+	// 		 formatter: function (value, options) {
+	//       return value.toFixed(options.decimals);
+	//     },
+	// 	});
+	// };
 
 
-	var counterWayPoint = function() {
-		if ($('#colorlib-counter').length > 0 ) {
-			$('#colorlib-counter').waypoint( function( direction ) {
+	// var counterWayPoint = function() {
+	// 	if ($('#colorlib-counter').length > 0 ) {
+	// 		$('#colorlib-counter').waypoint( function( direction ) {
 										
-				if( direction === 'down' && !$(this.element).hasClass('animated') ) {
-					setTimeout( counter , 400);					
-					$(this.element).addClass('animated');
-				}
-			} , { offset: '90%' } );
-		}
-	};
+	// 			if( direction === 'down' && !$(this.element).hasClass('animated') ) {
+	// 				setTimeout( counter , 400);					
+	// 				$(this.element).addClass('animated');
+	// 			}
+	// 		} , { offset: '90%' } );
+	// 	}
+	// };
 
 	// Animations
 	var contentWayPoint = function() {
@@ -176,7 +176,7 @@
 		$el.each(function(){
 			$(this).find('a[data-nav-section="'+section+'"]').closest('li').addClass('active');
 		});
-
+		
 	};
 
 	var navigationSection = function() {
@@ -289,8 +289,8 @@
 	// Document on load.
 	$(function(){
 		fullHeight();
-		counter();
-		counterWayPoint();
+		// counter();
+		// counterWayPoint();
 		contentWayPoint();
 		burgerMenu();
 
