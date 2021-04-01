@@ -19,22 +19,22 @@ class Event(db.Model):
     
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
     when = db.Column(db.DateTime(timezone=True), nullable=False)
-    admin_id = db.Column(db.Integer, db.ForeignKey('Admin_user.id'), primary_key=True)
+    admin_id = db.Column(db.Integer, db.ForeignKey('admins.id'))
     room = db.Column(db.String(30), nullable=True)
      
-    facility = db.relationship('Admin_user', backref="event")
+    # facility = db.relationship('Admin_user', backref="event")
 
 
-class Departed-event(db.Model):
+class Departed_event(db.Model):
     '''mapping table for when there is more than one departed being memorialized'''
     __tablename__ = 'departed_events'
 
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
-    departed_id = db.Column(db.Integer, db.ForeignKey('departed.id'), primary_key=True)
-    event_id = db.Column(db.Integer, db.ForeignKey('events.id'), primary_key=True)
+    departed_id = db.Column(db.Integer, db.ForeignKey('departed.id'))
+    event_id = db.Column(db.Integer, db.ForeignKey('events.id'))
 
-    event = db.relationship('Event', backref="departed_event")
-    deceased = db.relationship('Departed', backref="departed_event")
+    # event = db.relationship('Event', backref="departed_event")
+    # deceased = db.relationship('Departed', backref="departed_event")
 
 
 
@@ -58,7 +58,7 @@ class User(db.Model):
 
     # accept_tos = db.Column(db.Boolean, nullable = False)
 
-    post = db.relationship('Post', backref="user")
+    # post = db.relationship('Post', backref="user")
 
 
 class Post(db.Model):
@@ -115,9 +115,13 @@ class Departed(db.Model):
         'city_born':self.city_born,
         'state_born':self.state_born,
         'born':self.born,
-        'died':self.died
+        'died':self.died,
+        'headshot':self.headshot,
+        'hero1':self.hero1,
+        'hero2':self.hero2,
+        'biography':self.biography
     }
-    post = db.relationship('Post', backref="deceased")
+    # post = db.relationship('Post', backref="deceased")
 
     
 

@@ -75,6 +75,6 @@ def memorial_page(id):
     # else:
     
     departed = Departed.query.get_or_404(id)
-    return render_template('memorial.html', departed=departed, posts=departed.post) 
+    return render_template('obituary_full.html', departed=departed, posts=departed.post) 
 
 
