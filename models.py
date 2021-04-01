@@ -19,7 +19,7 @@ class Event(db.Model):
     
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
     when = db.Column(db.DateTime(timezone=True), nullable=False)
-    admin_id = db.Column(db.Integer, db.ForeignKey('admins.id'))
+    admin_id = db.Column(db.Integer, db.ForeignKey('admins.id'), primary_key=True)
     room = db.Column(db.String(30), nullable=True)
      
     # facility = db.relationship('Admin_user', backref="event")
@@ -30,8 +30,8 @@ class Departed_event(db.Model):
     __tablename__ = 'departed_events'
 
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
-    departed_id = db.Column(db.Integer, db.ForeignKey('departed.id'))
-    event_id = db.Column(db.Integer, db.ForeignKey('events.id'))
+    departed_id = db.Column(db.Integer, db.ForeignKey('departed.id'), primary_key=True)
+    event_id = db.Column(db.Integer, db.ForeignKey('events.id'), primary_key=True)
 
     # event = db.relationship('Event', backref="departed_event")
     # deceased = db.relationship('Departed', backref="departed_event")
