@@ -3,11 +3,11 @@
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>{{ departed.fname }} {{ departed.lname }} obituary</title>
+	<title>Jackson Template</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="virtual memorial wall in loving memory of {{ departed.fname }} {{ departed.lname }}" />
-	<meta name="keywords" content="virtual memorial, zoom funeral, memorial website" />
-	<meta name="author" content="Larry Volz https://www.larry-volz.com" />
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<meta name="author" content="" />
 
   <!-- Facebook and Twitter integration -->
 	<meta property="og:title" content=""/>
@@ -27,20 +27,20 @@
 	<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700" rel="stylesheet">
 	
 	<!-- Animate.css -->
-	<link rel="stylesheet" href="../static/css/animate.css">
+	<link rel="stylesheet" href="css/animate.css">
 	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="../static/css/icomoon.css">
+	<link rel="stylesheet" href="css/icomoon.css">
 	<!-- Bootstrap  -->
-	<link rel="stylesheet" href="../static/css/bootstrap.css">
+	<link rel="stylesheet" href="css/bootstrap.css">
 	<!-- Flexslider  -->
-	<link rel="stylesheet" href="../static/css/flexslider.css">
+	<link rel="stylesheet" href="css/flexslider.css">
 	<!-- Flaticons  -->
 	<link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
 	<!-- Owl Carousel -->
-	<link rel="stylesheet" href="../static/css/owl.carousel.min.css">
-	<link rel="stylesheet" href="../static/css/owl.theme.default.min.css">
+	<link rel="stylesheet" href="css/owl.carousel.min.css">
+	<link rel="stylesheet" href="css/owl.theme.default.min.css">
 	<!-- Theme style  -->
-	<link rel="stylesheet" href="../static/css/obituary.css">
+	<link rel="stylesheet" href="css/style.css">
 
 	<!-- Modernizr JS -->
 	<script src="../static/js/modernizr-2.6.2.min.js"></script>
@@ -56,32 +56,30 @@
 		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
 		<aside id="colorlib-aside" role="complementary" class="border js-fullheight">
 			<div class="text-center">
-				<div class="author-img" style="background-image: url({{ departed.headshot }});"></div>
-				<h1 id="colorlib-logo"><a href="/memorial/{{ departed.id }}">{{ departed.fname }} {{ departed.lname }}</a></h1>
-				<span class="position">{{ departed.headline }}</span>
+				<div class="author-img" style="background-image: url(http://127.0.0.1:5000/static/images/about.jpg);"></div>
+				<h1 id="colorlib-logo"><a href="index.html">Jackson Ford</a></h1>
+				<span class="position"><a href="#">UI/UX/Designer</a> in Philippines</span>
 			</div>
 			<nav id="colorlib-main-menu" role="navigation" class="navbar">
 				<div id="navbar" class="collapse">
 					<ul>
 						<li class="active"><a href="#" data-nav-section="home">Home</a></li>
-						<li><a href="#" data-nav-section="memorial">Memorial</a></li>
-						<li><a href="#" data-nav-section="biography">Life Story</a></li>
-						<li><a href="#" data-nav-section="gallery">Gallery</a></li>
-						<li><a href="#" data-nav-section="education">Condolences</a></li>
-						<li><a href="#" data-nav-section="experience">Tributes</a></li>
-						<li><a href="#" data-nav-section="work">Memories</a></li>
-						<li><a href="#" data-nav-section="blog">Guest Book</a></li>
-						<li><a href="#" data-nav-section="contact">Manage This Memorial</a></li>
+						<li><a href="#" data-nav-section="about">About</a></li>
+						<li><a href="#" data-nav-section="services">Services</a></li>
+						<li><a href="#" data-nav-section="skills">Skills</a></li>
+						<li><a href="#" data-nav-section="education">Education</a></li>
+						<li><a href="#" data-nav-section="experience">Experience</a></li>
+						<li><a href="#" data-nav-section="work">Work</a></li>
+						<li><a href="#" data-nav-section="blog">Blog</a></li>
+						<li><a href="#" data-nav-section="contact">Contact</a></li>
 					</ul>
 				</div>
 			</nav>
 
 			<div class="colorlib-footer">
 				<p><small>&copy; <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright <script>document.write(new Date().getFullYear());</script> Larry Volz
-<br> All rights reserved. 
-<br>Made with <i class="icon-heart" aria-hidden="true"></i> with contributions by <a href="https://colorlib.com" target="_blank">Colorlib</a> <br>that are licensed under CC and <span>distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a></span> 
- <!-- <span>Demo Images: <a href="https://unsplash.com/" target="_blank">Unsplash.com</a></span></small></p> -->
+Copyright <script>document.write(new Date().getFullYear());</script> All rights reserved. Made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --> </span> <span>Distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a></span> <span>Demo Images: <a href="https://unsplash.com/" target="_blank">Unsplash.com</a></span></small></p>
 				<ul>
 					<li><a href="#"><i class="icon-facebook2"></i></a></li>
 					<li><a href="#"><i class="icon-twitter2"></i></a></li>
@@ -96,31 +94,32 @@ Copyright <script>document.write(new Date().getFullYear());</script> Larry Volz
 			<section id="colorlib-hero" class="js-fullheight" data-section="home">
 				<div class="flexslider js-fullheight">
 					<ul class="slides">
-				   	<li style="background-image: url({{ departed.hero1 }});">
+				   	<li style="background-image: url(http://127.0.0.1:5000/static/images/img_bg_1.jpg);">
 				   		<div class="overlay"></div>
 				   		<div class="container-fluid">
 				   			<div class="row">
 					   			<div class="col-md-6 col-md-offset-3 col-md-pull-3 col-sm-12 col-xs-12 js-fullheight slider-text">
 					   				<div class="slider-text-inner js-fullheight">
 					   					<div class="desc">
-											   <h2>In Loving Memory of</h2>
-						   					<h1>{{ departed.fname }} {{ departed.lname }}</h1>
-
-										</div>
+						   					<h1>Hi! <br>I'm Jackson</h1>
+						   					<h2>100% html5 bootstrap templates Made by <a href="https://colorlib.com/" target="_blank">colorlib.com</a></h2>
+												<p><a class="btn btn-primary btn-learn">Download CV <i class="icon-download4"></i></a></p>
+											</div>
 					   				</div>
 					   			</div>
 					   		</div>
 				   		</div>
 				   	</li>
-				   	<li style="background-image: url({{ departed.hero2 }});">
+				   	<li style="background-image: url(http://127.0.0.1:5000/static/images/img_bg_2.jpg);">
 				   		<div class="overlay"></div>
 				   		<div class="container-fluid">
 				   			<div class="row">
 					   			<div class="col-md-6 col-md-offset-3 col-md-pull-3 col-sm-12 col-xs-12 js-fullheight slider-text">
 					   				<div class="slider-text-inner">
 					   					<div class="desc">
-						   					<h1>{{ departed.headline }}</h1>
-												
+						   					<h1>I am <br>a Designer</h1>
+												<h2>100% html5 bootstrap templates Made by <a href="https://colorlib.com/" target="_blank">colorlib.com</a></h2>
+												<p><a class="btn btn-primary btn-learn">View Portfolio <i class="icon-briefcase3"></i></a></p>
 											</div>
 					   				</div>
 					   			</div>
@@ -131,21 +130,21 @@ Copyright <script>document.write(new Date().getFullYear());</script> Larry Volz
 			  	</div>
 			</section>
 
-			<section class="colorlib-memorial" data-section="memorial">
+			<section class="colorlib-about" data-section="about">
 				<div class="colorlib-narrow-content">
 					<div class="row">
 						<div class="col-md-12">
 							<div class="row row-bottom-padded-sm animate-box" data-animate-effect="fadeInLeft">
 								<div class="col-md-12">
-									<div class="memorial-desc">
-										<span class="heading-meta">Memorial Services</span>
-										<h2 class="colorlib-heading">{{ departed.fname }}</h2>
-										{{ departed.biography }}
-
+									<div class="about-desc">
+										<span class="heading-meta">About Us</span>
+										<h2 class="colorlib-heading">Who Am I?</h2>
+										<p><strong>Hi I'm Jackson Ford</strong> On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country.</p>
+										<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
 									</div>
 								</div>
 							</div>
-							<!-- <div class="row">
+							<div class="row">
 								<div class="col-md-3 animate-box" data-animate-effect="fadeInLeft">
 									<div class="services color-1">
 										<span class="icon2"><i class="icon-bulb"></i></span>
@@ -170,15 +169,15 @@ Copyright <script>document.write(new Date().getFullYear());</script> Larry Volz
 										<h3>Application</h3>
 									</div>
 								</div>
-							</div> -->
-							<!-- <div class="row">
+							</div>
+							<div class="row">
 								<div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
 									<div class="hire">
 										<h2>I am happy to know you <br>that 300+ projects done sucessfully!</h2>
 										<a href="#" class="btn-hire">Hire me</a>
 									</div>
 								</div>
-							</div> -->
+							</div>
 						</div>
 					</div>
 				</div>
@@ -186,18 +185,17 @@ Copyright <script>document.write(new Date().getFullYear());</script> Larry Volz
 
 
 			
-			<section class="colorlib-biography" data-section="biography">
+			<section class="colorlib-services" data-section="services">
 				<div class="colorlib-narrow-content">
 					<div class="row">
 						<div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
-							<span class="heading-meta">Life Story</span>
-							<h2 class="colorlib-heading">{{ departed.fname }} {{ departed.fname }}</h2>
-										{{ departed.biography }}
+							<span class="heading-meta">What I do?</span>
+							<h2 class="colorlib-heading">Here are some of my expertise</h2>
 						</div>
 					</div>
-					<div class="row row-pt-md biography">
-						<!-- <div class="col-md-4 text-center animate-box">
-							<div class="biography color-1">
+					<div class="row row-pt-md">
+						<div class="col-md-4 text-center animate-box">
+							<div class="services color-1">
 								<span class="icon">
 									<i class="icon-bulb"></i>
 								</span>
@@ -208,7 +206,7 @@ Copyright <script>document.write(new Date().getFullYear());</script> Larry Volz
 							</div>
 						</div>
 						<div class="col-md-4 text-center animate-box">
-							<div class="biography color-2">
+							<div class="services color-2">
 								<span class="icon">
 									<i class="icon-data"></i>
 								</span>
@@ -219,7 +217,7 @@ Copyright <script>document.write(new Date().getFullYear());</script> Larry Volz
 							</div>
 						</div>
 						<div class="col-md-4 text-center animate-box">
-							<div class="biography color-3">
+							<div class="services color-3">
 								<span class="icon">
 									<i class="icon-phone3"></i>
 								</span>
@@ -230,7 +228,7 @@ Copyright <script>document.write(new Date().getFullYear());</script> Larry Volz
 							</div>
 						</div>
 						<div class="col-md-4 text-center animate-box">
-							<div class="biography color-4">
+							<div class="services color-4">
 								<span class="icon">
 									<i class="icon-layers2"></i>
 								</span>
@@ -241,7 +239,7 @@ Copyright <script>document.write(new Date().getFullYear());</script> Larry Volz
 							</div>
 						</div>
 						<div class="col-md-4 text-center animate-box">
-							<div class="biography color-5">
+							<div class="services color-5">
 								<span class="icon">
 									<i class="icon-data"></i>
 								</span>
@@ -252,7 +250,7 @@ Copyright <script>document.write(new Date().getFullYear());</script> Larry Volz
 							</div>
 						</div>
 						<div class="col-md-4 text-center animate-box">
-							<div class="biography color-6">
+							<div class="services color-6">
 								<span class="icon">
 									<i class="icon-phone3"></i>
 								</span>
@@ -261,12 +259,12 @@ Copyright <script>document.write(new Date().getFullYear());</script> Larry Volz
 									<p>Separated they live in Bookmarksgrove right at the coast of the Semantics</p>
 								</div>
 							</div>
-						</div> -->
+						</div>
 					</div>
 				</div>
 			</section>
 			
-			<!-- <div id="colorlib-counter" class="colorlib-counters" style="background-image: url(/static/images/cover_bg_1.jpg);" data-stellar-background-ratio="0.5">
+			<div id="colorlib-counter" class="colorlib-counters" style="background-image: url(http://127.0.0.1:5000/static/images/cover_bg_1.jpg);" data-stellar-background-ratio="0.5">
 				<div class="overlay"></div>
 				<div class="colorlib-narrow-content">
 					<div class="row">
@@ -290,20 +288,17 @@ Copyright <script>document.write(new Date().getFullYear());</script> Larry Volz
 						</div>
 					</div>
 				</div>
-			</div> -->
+			</div>
 
-			<section class="colorlib-gallery" data-section="gallery">
+			<section class="colorlib-skills" data-section="skills">
 				<div class="colorlib-narrow-content">
 					<div class="row">
 						<div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
-							<span class="heading-meta">Special Moments</span>
-							<h2 class="colorlib-heading animate-box">Gallery</h2>
+							<span class="heading-meta">My Specialty</span>
+							<h2 class="colorlib-heading animate-box">My Skills</h2>
 						</div>
 					</div>
 					<div class="row">
-						PUT PICTURES HERE
-					</div>
-					<!-- <div class="row">
 						<div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
 							<p>The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen. She packed her seven versalia, put her initial into the belt and made herself on the way.</p>
 						</div>
@@ -373,7 +368,7 @@ Copyright <script>document.write(new Date().getFullYear());</script> Larry Volz
 								</div>
 							</div>
 						</div>
-					</div> -->
+					</div>
 				</div>
 			</section>
 
@@ -575,7 +570,7 @@ Copyright <script>document.write(new Date().getFullYear());</script> Larry Volz
 					</div>
 					<div class="row">
 						<div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
-							<div class="project" style="background-image: url(/static/images/img-1.jpg);">
+							<div class="project" style="background-image: url(http://127.0.0.1:5000/static/images/img-1.jpg);">
 								<div class="desc">
 									<div class="con">
 										<h3><a href="work.html">Work 01</a></h3>
@@ -590,7 +585,7 @@ Copyright <script>document.write(new Date().getFullYear());</script> Larry Volz
 							</div>
 						</div>
 						<div class="col-md-6 animate-box" data-animate-effect="fadeInRight">
-							<div class="project" style="background-image: url(/static/images/img-2.jpg);">
+							<div class="project" style="background-image: url(http://127.0.0.1:5000/static/images/img-2.jpg);">
 								<div class="desc">
 									<div class="con">
 										<h3><a href="work.html">Work 02</a></h3>
@@ -605,7 +600,7 @@ Copyright <script>document.write(new Date().getFullYear());</script> Larry Volz
 							</div>
 						</div>
 						<div class="col-md-6 animate-box" data-animate-effect="fadeInTop">
-							<div class="project" style="background-image: url(/static/images/img-3.jpg);">
+							<div class="project" style="background-image: url(http://127.0.0.1:5000/static/images/img-3.jpg);">
 								<div class="desc">
 									<div class="con">
 										<h3><a href="work.html">Work 03</a></h3>
@@ -620,7 +615,7 @@ Copyright <script>document.write(new Date().getFullYear());</script> Larry Volz
 							</div>
 						</div>
 						<div class="col-md-6 animate-box" data-animate-effect="fadeInBottom">
-							<div class="project" style="background-image: url(/static/images/img-4.jpg);">
+							<div class="project" style="background-image: url(http://127.0.0.1:5000/static/images/img-4.jpg);">
 								<div class="desc">
 									<div class="con">
 										<h3><a href="work.html">Work 04</a></h3>
@@ -635,7 +630,7 @@ Copyright <script>document.write(new Date().getFullYear());</script> Larry Volz
 							</div>
 						</div>
 						<div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
-							<div class="project" style="background-image: url(/static/images/img-5.jpg);">
+							<div class="project" style="background-image: url(http://127.0.0.1:5000/static/images/img-5.jpg);">
 								<div class="desc">
 									<div class="con">
 										<h3><a href="work.html">Work 05</a></h3>
@@ -650,7 +645,7 @@ Copyright <script>document.write(new Date().getFullYear());</script> Larry Volz
 							</div>
 						</div>
 						<div class="col-md-6 animate-box" data-animate-effect="fadeInRight">
-							<div class="project" style="background-image: url(/static/images/img-6.jpg);">
+							<div class="project" style="background-image: url(http://127.0.0.1:5000/static/images/img-6.jpg);">
 								<div class="desc">
 									<div class="con">
 										<h3><a href="work.html">Work 06</a></h3>
@@ -684,7 +679,7 @@ Copyright <script>document.write(new Date().getFullYear());</script> Larry Volz
 					<div class="row">
 						<div class="col-md-4 col-sm-6 animate-box" data-animate-effect="fadeInLeft">
 							<div class="blog-entry">
-								<a href="blog.html" class="blog-img"><img src="/static/images/blog-1.jpg" class="img-responsive" alt="HTML5 Bootstrap Template by colorlib.com"></a>
+								<a href="blog.html" class="blog-img"><img src="http://127.0.0.1:5000/static/images/blog-1.jpg" class="img-responsive" alt="HTML5 Bootstrap Template by colorlib.com"></a>
 								<div class="desc">
 									<span><small>April 14, 2018 </small> | <small> Web Design </small> | <small> <i class="icon-bubble3"></i> 4</small></span>
 									<h3><a href="blog.html">Renovating National Gallery</a></h3>
@@ -694,7 +689,7 @@ Copyright <script>document.write(new Date().getFullYear());</script> Larry Volz
 						</div>
 						<div class="col-md-4 col-sm-6 animate-box" data-animate-effect="fadeInRight">
 							<div class="blog-entry">
-								<a href="blog.html" class="blog-img"><img src="/static/images/blog-2.jpg" class="img-responsive" alt="HTML5 Bootstrap Template by colorlib.com"></a>
+								<a href="blog.html" class="blog-img"><img src="http://127.0.0.1:5000/static/images/blog-2.jpg" class="img-responsive" alt="HTML5 Bootstrap Template by colorlib.com"></a>
 								<div class="desc">
 									<span><small>April 14, 2018 </small> | <small> Web Design </small> | <small> <i class="icon-bubble3"></i> 4</small></span>
 									<h3><a href="blog.html">Wordpress for a Beginner</a></h3>
@@ -704,7 +699,7 @@ Copyright <script>document.write(new Date().getFullYear());</script> Larry Volz
 						</div>
 						<div class="col-md-4 col-sm-6 animate-box" data-animate-effect="fadeInLeft">
 							<div class="blog-entry">
-								<a href="blog.html" class="blog-img"><img src="/static/images/blog-3.jpg" class="img-responsive" alt="HTML5 Bootstrap Template by colorlib.com"></a>
+								<a href="blog.html" class="blog-img"><img src="http://127.0.0.1:5000/static/images/blog-3.jpg" class="img-responsive" alt="HTML5 Bootstrap Template by colorlib.com"></a>
 								<div class="desc">
 									<span><small>April 14, 2018 </small> | <small> Inspiration </small> | <small> <i class="icon-bubble3"></i> 4</small></span>
 									<h3><a href="blog.html">Make website from scratch</a></h3>
@@ -807,7 +802,7 @@ Copyright <script>document.write(new Date().getFullYear());</script> Larry Volz
 	
 	
 	<!-- MAIN JS -->
-	<script src="../static/js/obituary.js"></script>
+	<script src="../static/js/main.js"></script>
 
 	</body>
 </html>

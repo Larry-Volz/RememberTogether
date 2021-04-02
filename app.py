@@ -12,10 +12,18 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['SECRET_KEY']='magic'
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
-debug = DebugToolbarExtension(app)
+# debug = DebugToolbarExtension(app)
 
 connect_db(app)
 db.create_all()
+
+@app.route('/index_jackson')
+def template_tester():
+    """ home page - should give login option and information about app"""
+    
+    departed = Departed.query.all()
+    return render_template("index_jackson.html", departed=departed)
+
 
 @app.route('/')
 def home():

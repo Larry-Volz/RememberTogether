@@ -121,7 +121,7 @@ class Departed(db.Model):
         'hero2':self.hero2,
         'biography':self.biography
     }
-    post = db.relationship('Post', backref="deceased")
+    post = db.relationship('Post', backref="deceased") 
 
     
 
