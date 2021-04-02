@@ -1,6 +1,6 @@
 from flask import Flask, request, render_template, redirect, flash, session, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
-from models import db, connect_db, User, Admin_user, Departed
+from models import db, connect_db, User, Admin_user, Departed, Post, Event, Departed_event
 from forms import User_registration
 
 #TODO:
@@ -12,7 +12,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['SECRET_KEY']='magic'
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
-# debug = DebugToolbarExtension(app)
+debug = DebugToolbarExtension(app)
 
 connect_db(app)
 db.create_all()

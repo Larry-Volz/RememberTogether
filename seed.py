@@ -12,13 +12,14 @@ Post.query.delete()
 
 #Add departed
 
-leonard = Departed(fname='Leonard', lname='Nimoy',born='1931-03-26', died='2015-02-17')
+leonard = Departed(fname='Leonard', lname='Nimoy',born='1931-03-26', died='2015-02-17', city_born='Boston', state_born='MA', headshot='http://127.0.0.1:5000/static/images/nimoy_headshot.jpg', hero1='http://127.0.0.1:5000/static/images/nimoy_hero3.jpg', hero2='http://127.0.0.1:5000/static/images/nimoy_hero1.jpg',biography="Despite a career that also embraced directing, writing and photography, he never managed to escape the character that came to define him.  At times it seemed the actor and character were becoming one and the same person and Nimoy battled with alcohol abuse as a result.  But he eventually derived great satisfaction from the role that dominated his life.")
+
 harry = Departed(fname='Harry',lname="Anderson", born='1952-10-14',died='2018-04-16',city_born='Newport',state_born='RI', headshot='http://127.0.0.1:5000/static/images/harry-anderson_face.jpg', hero1='http://127.0.0.1:5000/static/images/harry_anderson_hero1.jpeg',hero2='http://127.0.0.1:5000/static/images/harry_anderson_hero2.jpg',biography='Harry Anderson, the actor best known for playing an off-the-wall judge working the night shift of a Manhattan court room in the television comedy series "Night Court," was found dead in his North Carolina home Monday.Anderson was 65.A statement from the Asheville Police Department said officers responded to a call from Anderson''s home early Monday and found him dead. The statement said foul play is not suspected.On "Night Court," Anderson played Judge Harry T. Stone, a young jurist who professed his love for singer Mel Torme, actress Jean Harlow, magic tricks and his collection of art-deco ties."I am richer than Davy Crockett," Anderson said in the story. "I can settle back and do what I want to do. And what I want to do is card tricks and magic." That includes magic shows for corporate clients ("Fifty-five minutes with applause," says Anderson) at $20,000 a pop.')
 
-eddie = Departed(fname='Eddie',lname="VanHalen", born='1955-01-26', died='2020-10-06')
-roy = Departed(fname='Roy',lname='Horn', born='1944-10-3', died='2020-04-08')
-terry = Departed(fname='Terry',lname='Jones', born='1942-02-01', died='2020-01-21', city_born='Colwyn Bay', state_born='North Wales')
-carl = Departed(fname='Carl',lname='Reiner', born='1922-03-20', died='2020-06-29', city_born='the Bronx', state_born='NY')
+# eddie = Departed(fname='Eddie',lname="VanHalen", born='1955-01-26', died='2020-10-06')
+# roy = Departed(fname='Roy',lname='Horn', born='1944-10-3', died='2020-04-08')
+# terry = Departed(fname='Terry',lname='Jones', born='1942-02-01', died='2020-01-21', city_born='Colwyn Bay', state_born='North Wales')
+# carl = Departed(fname='Carl',lname='Reiner', born='1922-03-20', died='2020-06-29', city_born='the Bronx', state_born='NY')
 
 # david = Departed(fname='David',lname='Lander')
 # neil = Departed(fname='Neil',lname='Pert')
@@ -27,12 +28,15 @@ carl = Departed(fname='Carl',lname='Reiner', born='1922-03-20', died='2020-06-29
 # alex = Departed(fname='Alex',lname='Trebek')
 
 
-db.session.add(leonard)
 db.session.add(harry)
-db.session.add(eddie)
-db.session.add(roy)
-db.session.add(terry)
-db.session.add(carl)
+db.session.add(leonard)
+# db.session.add(eddie)
+# db.session.add(roy)
+# db.session.add(terry)
+# db.session.add(carl)
+
+db.session. commit()
+
 
 # db.session.add(prince)
 # db.session.add(ruth)
@@ -49,6 +53,9 @@ faniel = User(fname='Nathaniel', lname='Volz', email='faniel@gmail.com', passwor
 db.session.add(faniel)
 db.session.add(larry)
 db.session.add(zach)
+
+db.session. commit()
+
 
 #ADD POSTS - HARRY ANDERSON
 newpost1 = Post(text='Harry Anderson died much too young.  At just 65 he not only made us all laugh in Cheers, Night Court, Saturday Night Live and on stages around the world.  He also was a teacher and mentor to magicians and comedians everywhere.  ', file_url='http://127.0.0.1:5000/static/images/harry-anderson1.jpg', user_id = 1, departed_id = 2)

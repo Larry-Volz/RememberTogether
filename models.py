@@ -30,8 +30,8 @@ class Departed_event(db.Model):
     __tablename__ = 'departed_events'
 
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
-    departed_id = db.Column(db.Integer, db.ForeignKey('departed.id'), primary_key=True)
-    event_id = db.Column(db.Integer, db.ForeignKey('events.id'), primary_key=True)
+    departed_id = db.Column(db.Integer, db.ForeignKey('departed.id'))
+    event_id = db.Column(db.Integer, db.ForeignKey('events.id'))
 
     # event = db.relationship('Event', backref="departed_event")
     # deceased = db.relationship('Departed', backref="departed_event")
@@ -76,7 +76,7 @@ class Post(db.Model):
     file_url = db.Column(db.Text, nullable = True)
 
     user_id = db.Column(db.Integer, db.ForeignKey(
-        'users.id'), primary_key=True)
+        'users.id'))
 
     departed_id = db.Column(db.Integer, db.ForeignKey(
         'departed.id'), primary_key=True)
@@ -121,7 +121,7 @@ class Departed(db.Model):
         'hero2':self.hero2,
         'biography':self.biography
     }
-    # post = db.relationship('Post', backref="deceased")
+    post = db.relationship('Post', backref="deceased")
 
     
 
