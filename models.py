@@ -19,7 +19,7 @@ class Event(db.Model):
     
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
     when = db.Column(db.DateTime(timezone=True), nullable=False)
-    admin_id = db.Column(db.Integer, db.ForeignKey('admins.id'), primary_key=True)
+    admin_id = db.Column(db.Integer, db.ForeignKey('admins.id'))
     room = db.Column(db.String(30), nullable=True)
      
     # facility = db.relationship('Admin_user', backref="event")
