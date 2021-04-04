@@ -21,6 +21,10 @@
         - [ ] need memorial code to view and post.  Need admin code to edit
         - [ ] anyone w/name can view.  Need admin code to edit or post
         - [ ] anyone w/name can view or post.  Need admin code to edit.
+- [ ] make an "Add a post" link in menu that only shows up if someone is signed in
+- [ ] Make an "add a post" linke under each post when they are signed in
+- [ ] Make an "edit this post" link next to user's posts only when they are signed in and only for their own posts
+- [ ] Make a "delete post" with check on it to make sure they mean to do it
 
 # To Do before going live
 - [ ] Get back-up hard drive and set up chron jobs

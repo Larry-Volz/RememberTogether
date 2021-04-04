@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 
+{% block title %}Create a virtual memorial wall {% endblock %}
+{% block meta_content %}create an obituary {% endblock %}
+
 {% block control_panel %}
     {% for msg in get_flashed_messages() %} 
     <div class="bg-success m-4 text-center">
@@ -8,10 +11,10 @@
         <br>
     </div>
     {% endfor %}
-
+	<span class="menu-text">Search for Loved One</span>
     <div id = "zoom-game-area">
         <!-- AUTO-FILL EXPERIMENT -->
-        <form action="/api/departed/1"> 
+        <form action="/api/departed/1" class = "form-inline"> 
             <div class="ui-widget form-control">
                 <input id="departed-search" placeholder="Name or memorial id" style = "display: inline;">
 				<span id="departed-search-btn" class="badge badge-lg badge-primary">Go</div> 
@@ -24,6 +27,22 @@
     
 {% endblock %}
 
+{% block links %}
+	<li>
+		<a href="#" data-nav-section="memorial">Look up a Memorial Page</a>
+	</li>
+	<li>
+		<a href="/create" class="external">Create Memorial Page</a>
+	</li>
+	<li>
+		<a href="#" data-nav-section="contact">Manage A Memorial Page</a>
+	</li>
+	<br>
+	<hr style="border-top: 2px solid white;">
+	<li>
+		<a href="#" data-nav-section="admin">Funeral Directors</a>
+	</li>
+{% endblock%}
 
 {% block intro_section %}
 
@@ -77,8 +96,8 @@
     </div>
     {% endfor %}
 
-    <div id = "zoom-game-area">
-        <!-- AUTO-FILL EXPERIMENT -->
+    <div id = "auto-complete-area2">
+        Search for the memorial page for someone you love
         <form action="/api/departed/1"> 
             <div class="ui-widget form-control">
                 <input id="departed-search2" placeholder="Name or memorial id" style = "display: inline;">

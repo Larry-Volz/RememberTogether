@@ -1,18 +1,22 @@
 {% extends 'obituary_base.html' %}
 
+{% block title %}{{ departed.fname }} {{ departed.lname }} obituary{% endblock %}
+{% block meta_content %}
+	virtual memorial wall in loving memory of {{ departed.fname }} {{ departed.lname }}
+{% endblock %}
 
 {% block event %}
 
-<!-- TODO: FIX GRAMMAR SO IT dynamically says were held at or will be held at -->
+	<!-- TODO: FIX GRAMMAR SO IT dynamically says were held at or will be held at -->
 
-<!-- booked_yet= True,  -->
+	<!-- booked_yet= True,  -->
 
 
- {{ departed.funeral_home_name }} <br>
- On {{ event_times }} <br>
- at {{ departed.event_address }} {{ departed.room }} <br>
- {{ departed.event_city }}, {{ departed.event_state }} {{ departed.event_zip }} <br>
- {{ departed.event_phone }} {{ departed.event_url }}
+	{{ departed.funeral_home_name }} <br>
+	On {{ event_times }} <br>
+	at {{ departed.event_address }} {{ departed.room }} <br>
+	{{ departed.event_city }}, {{ departed.event_state }} {{ departed.event_zip }} <br>
+	{{ departed.event_phone }} {{ departed.event_url }}
 
 {% endblock %}
 

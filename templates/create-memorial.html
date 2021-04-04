@@ -9,8 +9,8 @@
     </div>
     {% endfor %}
 
-    <div id = "zoom-game-area">
-        <!-- AUTO-FILL EXPERIMENT -->
+    <!-- <div id = "zoom-game-area">
+		<div class="auto-fill">
         <form action="/api/departed/1"> 
             <div class="ui-widget form-control">
                 <input id="departed-search" placeholder="Name or memorial id" style = "display: inline;">
@@ -19,16 +19,36 @@
         </form>
 
         <div class="departed-display"></div>
+		</div>
+    </div> -->
 
-    </div>
     
 {% endblock %}
+
+
+{% block links %}
+<li>
+   <a href="/create" class="active">Create Memorial Page</a>
+</li>
+	<li class="text-center">
+		<a href="/" class="external">Return Home</a><br>
+		<em> SAVE YOUR WORK FIRST!</em>
+	</li>
+	<!--<li>
+		<a href="#" data-nav-section="contact">Manage A Memorial Page</a>
+	</li>
+	<br>
+	<hr style="border-top: 2px solid white;">
+	<li>
+		<a href="#" data-nav-section="admin">Funeral Directors</a>
+	</li> -->
+{% endblock%}
 
 
 {% block intro_section %}
 
 	
-<section id="virtual-memorial-hero" class="js-fullheight" data-section="home">
+<!-- <section id="virtual-memorial-hero" class="js-fullheight" data-section="home">
 	<div class="flexslider js-fullheight">
 		<ul class="slides">
 		   <li style="background-image: url(../static/images/family2.jpg);">
@@ -64,8 +84,16 @@
 		   </li>
 		  </ul>
 	  </div>
-</section>
+</section> -->
 
+<div class="form form-inline" action = "/create" method = "POST">
+	<div class="form-group">
+		<div class="input-group">
+			<label for="fname" class = "form-control form-inline">First Name</label>
+			<input type="text" id = "fname" name = "fname" class="form-control">
+		</div>
+	</div>
+</div>
 {% endblock %}
 
 {% block control_panel2 %}
@@ -77,8 +105,7 @@
     </div>
     {% endfor %}
 
-    <div id = "zoom-game-area">
-        <!-- AUTO-FILL EXPERIMENT -->
+    <!-- <div id = "auto-complete">
         <form action="/api/departed/1"> 
             <div class="ui-widget form-control">
                 <input id="departed-search2" placeholder="Name or memorial id" style = "display: inline;">
@@ -88,8 +115,16 @@
 
         <div class="departed-display"></div>
 
-    </div>
+    </div> -->
     
+	<div class="form form-inline" action = "/create" method = "POST">
+		<div class="form-group">
+			<div class="input-group">
+				<label for="fname" class = "form-control form-inline">First Name</label>
+				<input type="text" id = "fname" name = "fname" class="form-control">
+			</div>
+		</div>
+	</div>
 {% endblock %}
 
 
