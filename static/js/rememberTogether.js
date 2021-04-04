@@ -1,6 +1,6 @@
 $(function(){
     
-    alert("CONNECTED to static/rememberTogether.js!");
+    // alert("CONNECTED to ../static/js/rememberTogether.js!");
     
     let fnames=[];
     let lnames=[];

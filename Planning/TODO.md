@@ -2,8 +2,9 @@
 
 # To Do for capstone
 - [ ] Do main page for virtual memorials
-- [ ] Add link to go back to virtual-memorials
+- [ ] Change /dos to /
 - [ ] Do new gateway look-up/main page for memorials
+- [ ] Add link to go back to virtual-memorials
 - [ ] Set up server:
   - [ ] install linux on desktop
   - [ ] Re-set up Apache or Gunicorn
@@ -27,3 +28,5 @@
     - [ ] link to page -> enter password
     - [ ] set up flask password
 - [ ] Do crap-tons of testing
+- [ ] Set up a "contact us" page
+- [ ] Set up a donations page (?)

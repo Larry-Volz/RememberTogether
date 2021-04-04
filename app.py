@@ -18,6 +18,12 @@ app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 connect_db(app)
 db.create_all()
 
+@app.route('/dos')
+def home2():
+    """ home page - should give login option and information about app"""
+    
+    departed = Departed.query.all()
+    return render_template("index2.html", departed=departed)
 
 @app.route('/')
 def home():
