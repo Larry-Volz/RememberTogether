@@ -1,6 +1,6 @@
 from flask import Flask, request, render_template, redirect, flash, session, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
-from models import db, connect_db, User, Admin_user, Departed, Post, Event, Departed_event
+from models import db, connect_db, User, Admin_user, Departed, Post
 from forms import User_registration
 import datetime
 
@@ -17,13 +17,6 @@ app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 
 connect_db(app)
 db.create_all()
-
-@app.route('/index_jackson')
-def template_tester():
-    """ home page - should give login option and information about app"""
-    
-    departed = Departed.query.all()
-    return render_template("index_jackson.html", departed=departed)
 
 
 @app.route('/')
@@ -83,9 +76,14 @@ def memorial_page(id):
     #     render_template("zoom_memorial.html")
     # else:
     
-    today = datetime.datetime.now()
+    # utc = pytc.UTC
+    # today = utc.localize(datetime.datetime.now())
+
     departed = Departed.query.get_or_404(id)
     posts = Post.query.filter_by(departed_id=id).all()
+
+    event_times = departed.event_start.strftime("%B %d, %Y from %I:%M %p to ")
+    event_times += departed.event_end.strftime("%I:%M %p")
 
     
     #TODO: scaffolding - remove
@@ -97,6 +95,6 @@ def memorial_page(id):
     
 
     # event_room = departed.event.room
-    return render_template('obituary_full.html', departed=departed, posts=posts) 
+    return render_template('obituary_full.html', departed=departed, posts=posts, event_times=event_times) 
 
 

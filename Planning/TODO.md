@@ -22,6 +22,7 @@
 
 # To Do before going live
 - [ ] Get back-up hard drive and set up chron jobs
+- [ ] Create databases/relationships with participating (?) funeral homes? need for integration with streaming?
   - [ ] set up a "forget password" section that will email them a new password if needed.  and/or double security(?)
     - [ ] link to page -> enter password
     - [ ] set up flask password

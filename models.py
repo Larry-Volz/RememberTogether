@@ -10,32 +10,60 @@ def connect_db(app):
 '''NOTE: view departed as plural and deceased as singular for sqlalchemy relationship referencing'''
 
 
-class Event(db.Model):
-    '''table for individual events - connected to 1 or more departed through event-departed mapping table, also foreign key for admin (funeral home) '''
-    __tablename__ = 'events'
+class Departed(db.Model):
+    """ Sign-in/contact information for end user """
+    __tablename__ = 'departed'
 
     def __repr__(self):
-           return f"event id={self.id} fname={self.fname} lname={self.lname}"  #for better referencing
-    
-    id = db.Column(db.Integer, primary_key = True, autoincrement = True)
-    when_start = db.Column(db.DateTime(timezone=True), nullable=False)
-    when_end = db.Column(db.DateTime(timezone=True), nullable=False)
-    admin_id = db.Column(db.Integer, db.ForeignKey('admins.id'))
+           return f"departed id={self.id} fname={self.fname} lname={self.lname}"  #for better referencing
+
+    id = db.Column(db.Integer,
+    primary_key = True,
+    autoincrement = True)
+
+    fname = db.Column(db.Text, nullable = False)
+    lname = db.Column(db.Text, nullable = False)
+    city_born = db.Column(db.Text, nullable = True)
+    state_born = db.Column(db.Text, nullable = True)
+    born = db.Column(db.Date, nullable = False)
+    died = db.Column(db.Date, nullable = False)
+    headshot = db.Column(db.Text, nullable = True) #url for face picture
+    hero1 = db.Column(db.Text, nullable = True) #url for large picture 1
+    hero2 = db.Column(db.Text, nullable = True) #url for large picture 2
+    biography = db.Column(db.Text, nullable = False) #obituary
+    headline = db.Column(db.Text, nullable = True)
+    text_color = db.Column(db.Text, nullable = True, default = "white")
+
+    booked_yet = db.Column(db.Boolean, nullable=True, default=False)
+    funeral_home_name = db.Column(db.Text, nullable = True)
+    event_start = db.Column(db.DateTime(timezone=True), nullable=True)
+    event_end = db.Column(db.DateTime(timezone=True), nullable=True)
     room = db.Column(db.String(30), nullable=True)
-     
-    # facility = db.relationship('Admin_user', backref="event")
+    event_address = db.Column(db.String(100), nullable = True)
+    event_city = db.Column(db.String(60), nullable = True)
+    event_state = db.Column(db.String(2), nullable = True, default = 'VA')
+    event_zip = db.Column(db.String(10), nullable = True)
+    event_phone = db.Column(db.String(14), nullable = True)
+    event_url = db.Column(db.Text, nullable = True)
+    
+    #TODO: re-factor into additional table(s)
+    # event_id = db.Column(db.Integer, db.ForeignKey('admins.id'))
 
-
-class Departed_event(db.Model):
-    '''mapping table for when there is more than one departed being memorialized'''
-    __tablename__ = 'departed_events'
-
-    id = db.Column(db.Integer, primary_key = True, autoincrement = True)
-    departed_id = db.Column(db.Integer, db.ForeignKey('departed.id'))
-    event_id = db.Column(db.Integer, db.ForeignKey('events.id'))
-
-    event = db.relationship('Event', backref="departed_event")
-    deceased = db.relationship('Departed', backref="departed_event")
+    def serialize(self):
+        """turn model into a dictionary/JSON format"""
+        return {
+        'id':self.id,
+        'fname':self.fname,
+        'lname':self.lname,
+        'city_born':self.city_born,
+        'state_born':self.state_born,
+        'born':self.born,
+        'died':self.died,
+        'headshot':self.headshot,
+        'hero1':self.hero1,
+        'hero2':self.hero2,
+        'biography':self.biography
+    }
 
 
 
@@ -85,46 +113,6 @@ class Post(db.Model):
     departed = db.relationship('Departed')
     user = db.relationship('User')
 
-class Departed(db.Model):
-    """ Sign-in/contact information for end user """
-    __tablename__ = 'departed'
-
-    def __repr__(self):
-           return f"departed id={self.id} fname={self.fname} lname={self.lname}"  #for better referencing
-
-    id = db.Column(db.Integer,
-    primary_key = True,
-    autoincrement = True)
-
-    fname = db.Column(db.Text, nullable = False)
-    lname = db.Column(db.Text, nullable = False)
-    city_born = db.Column(db.Text, nullable = True)
-    state_born = db.Column(db.Text, nullable = True)
-    born = db.Column(db.Date, nullable = False)
-    died = db.Column(db.Date, nullable = False)
-    headshot = db.Column(db.Text, nullable = True) #url for face picture
-    hero1 = db.Column(db.Text, nullable = True) #url for large picture 1
-    hero2 = db.Column(db.Text, nullable = True) #url for large picture 2
-    biography = db.Column(db.Text, nullable = False) #obituary
-    headline = db.Column(db.Text, nullable = True)
-    text_color = db.Column(db.Text, nullable = True, default = "white")
-
-    def serialize(self):
-        """turn model into a dictionary/JSON format"""
-        return {
-        'id':self.id,
-        'fname':self.fname,
-        'lname':self.lname,
-        'city_born':self.city_born,
-        'state_born':self.state_born,
-        'born':self.born,
-        'died':self.died,
-        'headshot':self.headshot,
-        'hero1':self.hero1,
-        'hero2':self.hero2,
-        'biography':self.biography
-    }
-    # post = db.relationship('Post', backref="deceased") 
 
     
 
@@ -161,6 +149,32 @@ class Admin_user(db.Model):
 
 
 
+# class Event(db.Model):
+#     '''table for individual events - connected to 1 or more departed through event-departed mapping table, also foreign key for admin (funeral home) '''
+#     __tablename__ = 'events'
+
+#     def __repr__(self):
+#            return f"event id={self.id} fname={self.fname} lname={self.lname}"  #for better referencing
+    
+#     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
+#     when_start = db.Column(db.DateTime(timezone=True), nullable=False)
+#     when_end = db.Column(db.DateTime(timezone=True), nullable=False)
+#     admin_id = db.Column(db.Integer, db.ForeignKey('admins.id'))
+#     room = db.Column(db.String(30), nullable=True)
+     
+    # facility = db.relationship('Admin_user', backref="event")
+
+
+# class Departed_event(db.Model):
+#     '''mapping table for when there is more than one departed being memorialized'''
+#     __tablename__ = 'departed_events'
+
+    # id = db.Column(db.Integer, primary_key = True, autoincrement = True)
+    # departed_id = db.Column(db.Integer, db.ForeignKey('departed.id'))
+    # event_id = db.Column(db.Integer, db.ForeignKey('events.id'))
+
+    # event = db.relationship('Event', backref="departed_event")
+    # deceased = db.relationship('Departed', backref="departed_event")
 
 
 
