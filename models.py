@@ -18,7 +18,8 @@ class Event(db.Model):
            return f"event id={self.id} fname={self.fname} lname={self.lname}"  #for better referencing
     
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
-    when = db.Column(db.DateTime(timezone=True), nullable=False)
+    when_start = db.Column(db.DateTime(timezone=True), nullable=False)
+    when_end = db.Column(db.DateTime(timezone=True), nullable=False)
     admin_id = db.Column(db.Integer, db.ForeignKey('admins.id'))
     room = db.Column(db.String(30), nullable=True)
      
@@ -33,8 +34,8 @@ class Departed_event(db.Model):
     departed_id = db.Column(db.Integer, db.ForeignKey('departed.id'))
     event_id = db.Column(db.Integer, db.ForeignKey('events.id'))
 
-    # event = db.relationship('Event', backref="departed_event")
-    # deceased = db.relationship('Departed', backref="departed_event")
+    event = db.relationship('Event', backref="departed_event")
+    deceased = db.relationship('Departed', backref="departed_event")
 
 
 
@@ -81,8 +82,8 @@ class Post(db.Model):
     departed_id = db.Column(db.Integer, db.ForeignKey(
         'departed.id'), primary_key=True)
 
-
-
+    departed = db.relationship('Departed')
+    user = db.relationship('User')
 
 class Departed(db.Model):
     """ Sign-in/contact information for end user """
@@ -105,6 +106,8 @@ class Departed(db.Model):
     hero1 = db.Column(db.Text, nullable = True) #url for large picture 1
     hero2 = db.Column(db.Text, nullable = True) #url for large picture 2
     biography = db.Column(db.Text, nullable = False) #obituary
+    headline = db.Column(db.Text, nullable = True)
+    text_color = db.Column(db.Text, nullable = True, default = "white")
 
     def serialize(self):
         """turn model into a dictionary/JSON format"""
@@ -121,7 +124,7 @@ class Departed(db.Model):
         'hero2':self.hero2,
         'biography':self.biography
     }
-    post = db.relationship('Post', backref="deceased") 
+    # post = db.relationship('Post', backref="deceased") 
 
     
 

@@ -2,6 +2,7 @@ from flask import Flask, request, render_template, redirect, flash, session, jso
 from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db, User, Admin_user, Departed, Post, Event, Departed_event
 from forms import User_registration
+import datetime
 
 #TODO:
 # from forms import User_registration, User_login, Admin_registration, Admin_login
@@ -82,7 +83,20 @@ def memorial_page(id):
     #     render_template("zoom_memorial.html")
     # else:
     
+    today = datetime.datetime.now()
     departed = Departed.query.get_or_404(id)
-    return render_template('obituary_full.html', departed=departed, posts=departed.post) 
+    posts = Post.query.filter_by(departed_id=id).all()
+
+    
+    #TODO: scaffolding - remove
+    print('*****************POSTS:')
+    print("id:",id)
+    for ea in posts:
+        print('TEXT:',ea.text)
+    print('***********************')
+    
+
+    # event_room = departed.event.room
+    return render_template('obituary_full.html', departed=departed, posts=posts) 
 
 

@@ -375,7 +375,7 @@ body.offcanvas {
 .colorlib-experience,
 .colorlib-skills,
 .colorlib-education,
-.colorlib-blog,
+.colorlib-gallery,
 .colorlib-work,
 .colorlib-memorial,
 .colorlib-services,
@@ -389,7 +389,7 @@ body.offcanvas {
     .colorlib-experience,
     .colorlib-skills,
     .colorlib-education,
-    .colorlib-blog,
+    .colorlib-gallery,
     .colorlib-work,
     .colorlib-memorial,
     .colorlib-services,
@@ -858,22 +858,22 @@ body.offcanvas {
       .colorlib-feature.colorlib-feature-sm .colorlib-icon i {
         font-size: 28px; } }
 
-.blog-entry {
+.gallery-entry {
   width: 100%;
   float: left;
   background: #fff;
   margin-bottom: 3em; }
   @media screen and (max-width: 768px) {
-    .blog-entry {
+    .gallery-entry {
       margin-bottom: 3em; } }
-  .blog-entry .blog-img {
+  .gallery-entry .gallery-img {
     width: 100%;
     float: left;
     overflow: hidden;
     position: relative;
     z-index: 1;
     margin-bottom: 25px; }
-    .blog-entry .blog-img img {
+    .gallery-entry .gallery-img img {
       position: relative;
       max-width: 100%;
       -webkit-transform: scale(1);
@@ -884,7 +884,7 @@ body.offcanvas {
       -webkit-transition: 0.3s;
       -o-transition: 0.3s;
       transition: 0.3s; }
-  .blog-entry .desc h3 {
+  .gallery-entry .desc h3 {
     font-size: 16px;
     margin-bottom: 25px;
     line-height: auto;
@@ -892,10 +892,10 @@ body.offcanvas {
     text-transform: uppercase;
     letter-spacing: 1px;
     font-family: "Quicksand", Arial, sans-serif; }
-    .blog-entry .desc h3 a {
+    .gallery-entry .desc h3 a {
       color: #000;
       text-decoration: none; }
-  .blog-entry .desc span {
+  .gallery-entry .desc span {
     display: block;
     margin-bottom: 20px;
     font-size: 14px;
@@ -903,14 +903,14 @@ body.offcanvas {
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: 400; }
-    .blog-entry .desc span small i {
+    .gallery-entry .desc span small i {
       color: #999999; }
-  .blog-entry .desc .lead {
+  .gallery-entry .desc .lead {
     font-size: 14px;
     text-transform: uppercase;
     letter-spacing: 2px;
     color: #000; }
-  .blog-entry:hover .blog-img img {
+  .gallery-entry:hover .gallery-img img {
     -webkit-transform: scale(1.1);
     -moz-transform: scale(1.1);
     -ms-transform: scale(1.1);
@@ -1427,3 +1427,29 @@ body.offcanvas {
 
 .js .animate-box {
   opacity: 0; }
+
+/* 
+
+.card {
+  display: inline-flex; 
+}
+
+*/
+.card-img-top {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/*
+.card-title {
+  margin-bottom: 0.5rem !important;
+  margin-top: 0.5rem !important;
+}
+
+.departed-cards-holder {
+  display: flex;
+  position: absolute;
+  top: 375px;
+  left: 10px;
+}  */
