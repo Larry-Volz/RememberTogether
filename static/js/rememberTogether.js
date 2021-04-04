@@ -18,6 +18,13 @@ $(function(){
         window.location.href = url;
     })
 
+    $("#departed-search-btn2").on('click',()=>{
+        departed_id = $("#departed-search2").val();
+        // console.log("DEPARTED id:", departed_id)
+        url=`http://127.0.0.1:5000/memorial/${departed_id}`;
+        window.location.href = url;
+    })
+
     //get departed - collects all departed in db using home-made JSON API and formats it for jQuery-ui search box
     async function getDeparted() {
         /** GET ALL DEPARTED LIST FROM API then UPDATE DOM */
@@ -59,7 +66,7 @@ $(function(){
     }
 
     //AUTO-FILL using jQuery-ui
-    $( "#departed-search" ).autocomplete({
+    $( "#departed-search, #departed-search2" ).autocomplete({
         source: nameObjects,
         autoFocus: true
         // minLength: 3

@@ -1481,5 +1481,11 @@ body.offcanvas {
 .ui-autocomplete { 
   position: absolute; 
   cursor: default;
-  color: red;
+  color: black;
   z-index: 100 !important;} 
+
+.front-page-desc {
+  font-weight: bolder !important;
+  font-size: 24px !important;
+  color: white !important;
+}
