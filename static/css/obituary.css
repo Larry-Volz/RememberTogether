@@ -1453,3 +1453,7 @@ body.offcanvas {
   top: 375px;
   left: 10px;
 }  */
+
+.virtual-memorial-font {
+  font-family: 'Courgette', cursive !important;
+}
