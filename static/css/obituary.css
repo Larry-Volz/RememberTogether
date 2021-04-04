@@ -79,7 +79,7 @@ figure {
   width: 300px;
   position: fixed;
   overflow-y: scroll;
-  z-index: 1001;
+  z-index: 99;
   background: #f2f3f7;
   -webkit-transition: 0.5s;
   -o-transition: 0.5s;
@@ -252,7 +252,7 @@ figure {
         position: relative; }
     #virtual-memorial-hero .flexslider .flex-control-nav {
       bottom: 20px;
-      z-index: 1000;
+      z-index: 99;
       left: 20px;
       float: left;
       width: auto; }
@@ -352,7 +352,7 @@ body.offcanvas {
     transform: translateX(0);
     width: 300px;
     background: #f2f3f7;
-    z-index: 999;
+    z-index: 99;
     position: fixed; }
   body.offcanvas #virtual-memorial-main, body.offcanvas .virtual-memorial-nav-toggle {
     top: 0;
@@ -1383,7 +1383,7 @@ body.offcanvas {
   position: fixed;
   left: -5px;
   top: 0px;
-  z-index: 9999;
+  z-index: 99;
   cursor: pointer;
   opacity: 1;
   visibility: hidden;
@@ -1477,3 +1477,9 @@ body.offcanvas {
   background-color: white !important;
   color: #2c98f0;
 }
+
+.ui-autocomplete { 
+  position: absolute; 
+  cursor: default;
+  color: red;
+  z-index: 100 !important;} 

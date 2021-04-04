@@ -10,6 +10,7 @@
   - [ ] Re-set up Apache or Gunicorn
   - [ ] get dynamic IP address/domain name setup
 - [ ] Or do on Heroku
+- [ ] Set up upload image functionality
 
 # To Do before demo
 - [ ] Change memorial pages so it's just "virtual-memorial.net/firstname-lastname" so it searches by that instead of id and set up an intermediate page that makes sure it's the right one only if there is more than one person with that name
@@ -30,3 +31,5 @@
 - [ ] Do crap-tons of testing
 - [ ] Set up a "contact us" page
 - [ ] Set up a donations page (?)
+- [ ] Fix datetime so it works in every timezone
+- [ ] Set up an auto-resize system (through API/picresize?)

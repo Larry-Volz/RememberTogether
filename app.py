@@ -18,12 +18,6 @@ app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 connect_db(app)
 db.create_all()
 
-@app.route('/dos')
-def home2():
-    """ home page - should give login option and information about app"""
-    
-    departed = Departed.query.all()
-    return render_template("index2.html", departed=departed)
 
 @app.route('/')
 def home():
@@ -101,6 +95,6 @@ def memorial_page(id):
     
 
     # event_room = departed.event.room
-    return render_template('obituary_full.html', departed=departed, posts=posts, event_times=event_times) 
+    return render_template('obituary.html', departed=departed, posts=posts, event_times=event_times) 
 
 
