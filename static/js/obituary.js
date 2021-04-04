@@ -47,8 +47,8 @@
 
 
 	// var counterWayPoint = function() {
-	// 	if ($('#colorlib-counter').length > 0 ) {
-	// 		$('#colorlib-counter').waypoint( function( direction ) {
+	// 	if ($('#virtual-memorial-counter').length > 0 ) {
+	// 		$('#virtual-memorial-counter').waypoint( function( direction ) {
 										
 	// 			if( direction === 'down' && !$(this.element).hasClass('animated') ) {
 	// 				setTimeout( counter , 400);					
@@ -98,7 +98,7 @@
 
 	var burgerMenu = function() {
 
-		$('.js-colorlib-nav-toggle').on('click', function(event){
+		$('.js-virtual-memorial-nav-toggle').on('click', function(event){
 			event.preventDefault();
 			var $this = $(this);
 
@@ -119,13 +119,13 @@
 	var mobileMenuOutsideClick = function() {
 
 		$(document).click(function (e) {
-	    var container = $("#colorlib-aside, .js-colorlib-nav-toggle");
+	    var container = $("#virtual-memorial-aside, .js-virtual-memorial-nav-toggle");
 	    if (!container.is(e.target) && container.has(e.target).length === 0) {
 
 	    	if ( $('body').hasClass('offcanvas') ) {
 
     			$('body').removeClass('offcanvas');
-    			$('.js-colorlib-nav-toggle').removeClass('active');
+    			$('.js-virtual-memorial-nav-toggle').removeClass('active');
 			
 	    	}
 	    	
@@ -136,7 +136,7 @@
 			if ( $('body').hasClass('offcanvas') ) {
 
     			$('body').removeClass('offcanvas');
-    			$('.js-colorlib-nav-toggle').removeClass('active');
+    			$('.js-virtual-memorial-nav-toggle').removeClass('active');
 			
 	    	}
 		});
@@ -158,7 +158,7 @@
 		    if ( navbar.is(':visible')) {
 		    	navbar.removeClass('in');
 		    	navbar.attr('aria-expanded', 'false');
-		    	$('.js-colorlib-nav-toggle').removeClass('active');
+		    	$('.js-virtual-memorial-nav-toggle').removeClass('active');
 		    }
 
 		    event.preventDefault();
@@ -209,7 +209,7 @@
 
 	var sliderMain = function() {
 		
-	  	$('#colorlib-hero .flexslider').flexslider({
+	  	$('#virtual-memorial-hero .flexslider').flexslider({
 			animation: "fade",
 			slideshowSpeed: 5000,
 			directionNav: true,

@@ -55,16 +55,16 @@
 
 	</head>
 	<body>
-	<div id="colorlib-page">
+	<div id="virtual-memorial-page">
 		<div class="container-wrap">
-		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
-		<aside id="colorlib-aside" role="complementary" class="border js-fullheight">
+		<a href="#" class="js-virtual-memorial-nav-toggle virtual-memorial-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
+		<aside id="virtual-memorial-aside" role="complementary" class="border js-fullheight">
 			<div class="text-center">
 				<div class="author-img" style="background-image: url({{ departed.headshot }});"></div>
-				<h1 id="colorlib-logo"><a href="/memorial/{{ departed.id }}">{{ departed.fname }} {{ departed.lname }}</a></h1>
+				<h1 id="virtual-memorial-logo"><a href="/memorial/{{ departed.id }}">{{ departed.fname }} {{ departed.lname }}</a></h1>
 				<!-- <span class="position">{{ departed.headline }}</span> -->
 			</div>
-			<nav id="colorlib-main-menu" role="navigation" class="navbar">
+			<nav id="virtual-memorial-main-menu" role="navigation" class="navbar">
 				<div id="navbar" class="collapse">
 					<ul>
 						<li class="active"><a href="#" data-nav-section="home">Home</a></li>
@@ -77,7 +77,7 @@
 				</div>
 			</nav>
 
-			<div class="colorlib-footer">
+			<div class="virtual-memorial-footer">
 				<p><small>&copy;
 Copyright <script>document.write(new Date().getFullYear());</script> Larry Volz
 <br> All rights reserved. 
@@ -92,8 +92,8 @@ Copyright <script>document.write(new Date().getFullYear());</script> Larry Volz
 
 		</aside>
 
-		<div id="colorlib-main">
-			<section id="colorlib-hero" class="js-fullheight" data-section="home">
+		<div id="virtual-memorial-main">
+			<section id="virtual-memorial-hero" class="js-fullheight" data-section="home">
 				<div class="flexslider js-fullheight">
 					<ul class="slides">
 				   	<li style="background-image: url({{ departed.hero1 }});">
@@ -131,8 +131,8 @@ Copyright <script>document.write(new Date().getFullYear());</script> Larry Volz
 			  	</div>
 			</section>
 
-			<section class="colorlib-memorial" data-section="memorial">
-				<div class="colorlib-narrow-content">
+			<section class="virtual-memorial-memorial" data-section="memorial">
+				<div class="virtual-memorial-narrow-content">
 	
 							<div class="row row-bottom-padded-sm animate-box" data-animate-effect="fadeInLeft">
 								<div class="col-md-12">
@@ -149,12 +149,12 @@ Copyright <script>document.write(new Date().getFullYear());</script> Larry Volz
 
 
 			
-			<section class="colorlib-biography" data-section="biography">
-				<div class="colorlib-narrow-content">
+			<section class="virtual-memorial-biography" data-section="biography">
+				<div class="virtual-memorial-narrow-content">
 					<div class="row">
 						<div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
 							<span class="heading-meta">Life Story</span>
-							<h2 class="colorlib-heading">{{ departed.fname }} {{ departed.fname }}</h2>
+							<h2 class="virtual-memorial-heading">{{ departed.fname }} {{ departed.fname }}</h2>
 										{{ departed.biography|safe }}
 						</div>
 					</div>
@@ -163,13 +163,13 @@ Copyright <script>document.write(new Date().getFullYear());</script> Larry Volz
 			</section>
 			
 
-			<!-- <section class="colorlib-gallery" data-section="gallery">
-				<div class="colorlib-narrow-content">
+			<!-- <section class="virtual-memorial-gallery" data-section="gallery">
+				<div class="virtual-memorial-narrow-content">
 					<div class="row">
 						<br><br><br>
 						<div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
 							<span class="heading-meta">Gallery</span>
-							<h2 class="colorlib-heading animate-box">Loving Memories</h2>
+							<h2 class="virtual-memorial-heading animate-box">Loving Memories</h2>
 						</div>
 					</div>
 					<div class="row row-bottom-padded-sm animate-box" data-animate-effect="fadeInLeft">
@@ -277,12 +277,12 @@ Copyright <script>document.write(new Date().getFullYear());</script> Larry Volz
 				</div>
 			</section> -->
 		
-			<!-- <section class="colorlib-experience" data-section="experience">
-				<div class="colorlib-narrow-content">
+			<!-- <section class="virtual-memorial-experience" data-section="experience">
+				<div class="virtual-memorial-narrow-content">
 					<div class="row">
 						<div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
 							<span class="heading-meta">Experience</span>
-							<h2 class="colorlib-heading animate-box">Work Experience</h2>
+							<h2 class="virtual-memorial-heading animate-box">Work Experience</h2>
 						</div>
 					</div>
 					<div class="row">
@@ -365,12 +365,12 @@ Copyright <script>document.write(new Date().getFullYear());</script> Larry Volz
 
 
 
-			<section class="colorlib-gallery" data-section="gallery">
-				<div class="colorlib-narrow-content">
+			<section class="virtual-memorial-gallery" data-section="gallery">
+				<div class="virtual-memorial-narrow-content">
 					<div class="row">
 						<div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
 							<span class="heading-meta">A place to share memories</span>
-							<h2 class="colorlib-heading">Gallery & Tributes</h2>
+							<h2 class="virtual-memorial-heading">Gallery & Tributes</h2>
 						</div>
 					</div>
 
@@ -382,39 +382,39 @@ Copyright <script>document.write(new Date().getFullYear());</script> Larry Volz
 				</div>
 			</section>
 
-			<section class="colorlib-contact" data-section="contact">
-				<div class="colorlib-narrow-content">
+			<section class="virtual-memorial-contact" data-section="contact">
+				<div class="virtual-memorial-narrow-content">
 					<div class="row">
 						<div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
 							<span class="heading-meta">Get in Touch</span>
-							<h2 class="colorlib-heading">Contact</h2>
+							<h2 class="virtual-memorial-heading">Contact</h2>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-5">
-							<div class="colorlib-feature colorlib-feature-sm animate-box" data-animate-effect="fadeInLeft">
-								<div class="colorlib-icon">
+							<div class="virtual-memorial-feature virtual-memorial-feature-sm animate-box" data-animate-effect="fadeInLeft">
+								<div class="virtual-memorial-icon">
 									<i class="icon-globe-outline"></i>
 								</div>
-								<div class="colorlib-text">
+								<div class="virtual-memorial-text">
 									<p><a href="#">info@domain.com</a></p>
 								</div>
 							</div>
 
-							<div class="colorlib-feature colorlib-feature-sm animate-box" data-animate-effect="fadeInLeft">
-								<div class="colorlib-icon">
+							<div class="virtual-memorial-feature virtual-memorial-feature-sm animate-box" data-animate-effect="fadeInLeft">
+								<div class="virtual-memorial-icon">
 									<i class="icon-map"></i>
 								</div>
-								<div class="colorlib-text">
+								<div class="virtual-memorial-text">
 									<p>198 West 21th Street, Suite 721 New York NY 10016</p>
 								</div>
 							</div>
 
-							<div class="colorlib-feature colorlib-feature-sm animate-box" data-animate-effect="fadeInLeft">
-								<div class="colorlib-icon">
+							<div class="virtual-memorial-feature virtual-memorial-feature-sm animate-box" data-animate-effect="fadeInLeft">
+								<div class="virtual-memorial-icon">
 									<i class="icon-phone"></i>
 								</div>
-								<div class="colorlib-text">
+								<div class="virtual-memorial-text">
 									<p><a href="tel://">+123 456 7890</a></p>
 								</div>
 							</div>
@@ -447,9 +447,9 @@ Copyright <script>document.write(new Date().getFullYear());</script> Larry Volz
 				</div>
 			</section>
 
-		</div><!-- end:colorlib-main -->
+		</div><!-- end:virtual-memorial-main -->
 	</div><!-- end:container-wrap -->
-	</div><!-- end:colorlib-page -->
+	</div><!-- end:virtual-memorial-page -->
 
 	<!-- jQuery -->
 	<script src="../static/js/jquery.min.js"></script>
