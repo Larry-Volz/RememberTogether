@@ -13,16 +13,24 @@ $(function(){
 
     $("#departed-search-btn").on('click',()=>{
         departed_id = $("#departed-search").val();
-        // console.log("DEPARTED id:", departed_id)
-        url=`http://127.0.0.1:5000/memorial/${departed_id}`;
+        if (! $("#departed-search").val()){
+            $("#departed-search").val()="Please enter name or id";
+        } else {
+        url=`/memorial/${departed_id}`;
         window.location.href = url;
+        }
+        
     })
 
     $("#departed-search-btn2").on('click',()=>{
         departed_id = $("#departed-search2").val();
-        // console.log("DEPARTED id:", departed_id)
-        url=`http://127.0.0.1:5000/memorial/${departed_id}`;
-        window.location.href = url;
+        if (! $("#departed-search2").val()){
+            $("#departed-search2").val()="Please enter name or id";
+        } else {
+            url=`/memorial/${departed_id}`;
+            window.location.href = url;
+        }
+        
     })
 
     //get departed - collects all departed in db using home-made JSON API and formats it for jQuery-ui search box

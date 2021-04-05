@@ -1,16 +1,20 @@
 
 
 # To Do for capstone
-- [ ] Do main page for virtual memorials
-- [ ] Change /dos to /
-- [ ] Do new gateway look-up/main page for memorials
-- [ ] Add link to go back to virtual-memorials
+- [ ] Fix time and date fields so they are working
+  - [ ] Make sure they work in multiple time zones
+- [ ] If somone types in a non-existant departed.id in search box -> flash
+  - [ ] Set up css for a flash including dismissable and add flash to each page
 - [ ] Set up server:
   - [ ] install linux on desktop
   - [ ] Re-set up Apache or Gunicorn
   - [ ] get dynamic IP address/domain name setup
 - [ ] Or do on Heroku
-- [ ] Set up upload image functionality
+- [x] Do new gateway look-up/main page for memorials
+- [x] Change /dos to /
+- [x] Do main page for virtual memorials
+- [x] Add link to go back to virtual-memorials
+- [x] Set up upload image functionality
 
 # To Do before demo
 - [ ] Change memorial pages so it's just "virtual-memorial.net/firstname-lastname" so it searches by that instead of id and set up an intermediate page that makes sure it's the right one only if there is more than one person with that name
@@ -27,6 +31,7 @@
 - [ ] Make a "delete post" with check on it to make sure they mean to do it
 
 # To Do before going live
+- [ ] Create ability to upload picture from facebook
 - [ ] Get back-up hard drive and set up chron jobs
 - [ ] Have another address/contact info for the wake and/or reception if not at the funeral home
 - [ ] add e-mail to the funeral home data

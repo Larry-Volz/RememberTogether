@@ -16,8 +16,8 @@
         <!-- AUTO-FILL EXPERIMENT -->
         <form action="/api/departed/1" class = "form-inline"> 
             <div class="ui-widget form-control">
-                <input id="departed-search" placeholder="Name or memorial id" style = "display: inline;">
-				<span id="departed-search-btn" class="badge badge-lg badge-primary">Go</div> 
+                <input id="departed-search" placeholder="Name or memorial id" >
+				<span id="departed-search-btn" class="btn btn-sm btn-primary mt-3">Go</div> 
             </div>
         </form>
 
@@ -28,19 +28,18 @@
 {% endblock %}
 
 {% block links %}
-	<li>
+	<!-- <li>
 		<a href="#" data-nav-section="memorial">Look up a Memorial Page</a>
-	</li>
+	</li> -->
+	<hr>
+	<!-- <br> -->
 	<li>
 		<a href="/create" class="external">Create Memorial Page</a>
 	</li>
+			<!-- <br> -->
+
 	<li>
-		<a href="#" data-nav-section="contact">Manage A Memorial Page</a>
-	</li>
-	<br>
-	<hr style="border-top: 2px solid white;">
-	<li>
-		<a href="#" data-nav-section="admin">Funeral Directors</a>
+		<a href="#" data-nav-section="admin">Funeral Director Resources</a>
 	</li>
 {% endblock%}
 
