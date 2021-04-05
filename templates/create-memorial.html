@@ -9,19 +9,6 @@
     </div>
     {% endfor %}
 
-    <!-- <div id = "zoom-game-area">
-		<div class="auto-fill">
-        <form action="/api/departed/1"> 
-            <div class="ui-widget form-control">
-                <input id="departed-search" placeholder="Name or memorial id" style = "display: inline;">
-				<span id="departed-search-btn" class="badge badge-lg badge-primary">Go</div> 
-            </div>
-        </form>
-
-        <div class="departed-display"></div>
-		</div>
-    </div> -->
-
     
 {% endblock %}
 
@@ -61,10 +48,12 @@
 
 	<div class="col-md-8">
 		<h2 class="display-1 ml-5"><strong>Add a Memorial Page</strong></h2>
-		<form action="/create" method="POST">
+		<form action="/create" method="POST" enctype="multipart/form-data">
 			{{ form.hidden_tag() }}
 	
 			{% for field in form if field.widget.input_type != 'hidden' %}
+
+
 				
 				<div class="form-group">
 					{{ field.label }}

@@ -2,14 +2,10 @@ from flask import Flask, request, render_template, redirect, flash, session, jso
 from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db, User, Admin_user, Departed, Post
 from forms import User_registration, Create_memorial_form
+from flask_uploads import configure_uploads, IMAGES, UploadSet
 import datetime
 
-#for uploading files
-import os 
-from werkzeug.utils import secure_filename
-
-UPLOAD_FOLDER = '/static/images/'
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+# ****NEED TO ALSO INSTALL Flask-Reloaded TO FIX BUGS IN flask_uploads!!!
 
 
 
@@ -22,8 +18,13 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['SECRET_KEY']='magic'
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
+app.config['UPLOADED_IMAGES_DEST'] = 'static/images'
 
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+images = UploadSet('images', IMAGES)
+configure_uploads(app, images)
+
+
+# app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # debug = DebugToolbarExtension(app)
 
 # WTF_CSRF_SECRET_KEY = 'magic'
@@ -68,14 +69,6 @@ def memorial_page(id):
 
     event_times = departed.event_start.strftime("%B %d, %Y from %I:%M %p to ")
     event_times += departed.event_end.strftime("%I:%M %p")
-
-    
-    #TODO: scaffolding - remove
-    print('*****************POSTS:')
-    print("id:",id)
-    for ea in posts:
-        print('TEXT:',ea.text)
-    print('***********************')
     
 
     # event_room = departed.event.room
@@ -102,14 +95,21 @@ def create_obituary():
         city_born = form.city_born.data
         state_born = form.state_born.data
 
-        headshot = form.headshot.data  
-        post_photo(headshot)
+        headshot = images.save(form.headshot.data)
+        hero1 = images.save(form.hero1.data)
+        hero2 = images.save(form.hero2.data)
 
-        hero1 = form.hero1.data
-        post_photo(hero1)
 
-        hero2 = form.hero2.data
-        post_photo(hero2)
+         #TODO: scaffolding - remove
+        print('*****************POSTS:')
+        print("HEADSHOT:",headshot)
+        print("hero1:",hero1)
+        print("hero2:",hero2)
+        print('***********************')
+
+        # post_photo(headshot)
+        # post_photo(hero1)
+        # post_photo(hero2)
 
 
         biography = form.biography.data
@@ -182,10 +182,10 @@ def user_sign_in():
 #     return render_template('admin_sign_in.html')
 
 
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+# def allowed_file(filename):
+#     return '.' in filename and \
+#            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-def post_photo(photo):
-    filename = secure_filename(photo.filename)
-    photo.save(os.path.join(app.instance_path, '/static/images', filename))
+# def post_photo(photo):
+    # filename = secure_filename(photo.filename)
+    # photo.save(os.path.join(app.instance_path, '/static/images', filename))
