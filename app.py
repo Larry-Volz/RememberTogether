@@ -1,8 +1,17 @@
-from flask import Flask, request, render_template, redirect, flash, session, jsonify
+from flask import Flask, request, render_template, redirect, flash, session, jsonify, url_for
 from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db, User, Admin_user, Departed, Post
 from forms import User_registration, Create_memorial_form
 import datetime
+
+#for uploading files
+import os 
+from werkzeug.utils import secure_filename
+
+UPLOAD_FOLDER = '/static/images/'
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+
+
 
 #TODO:
 # from forms import User_registration, User_login, Admin_registration, Admin_login
@@ -13,10 +22,16 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['SECRET_KEY']='magic'
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
+
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # debug = DebugToolbarExtension(app)
+
+# WTF_CSRF_SECRET_KEY = 'magic'
+
 
 connect_db(app)
 db.create_all()
+
 
 
 @app.route('/')
@@ -86,9 +101,17 @@ def create_obituary():
 
         city_born = form.city_born.data
         state_born = form.state_born.data
-        headshot = form.headshot.data   
+
+        headshot = form.headshot.data  
+        post_photo(headshot)
+
         hero1 = form.hero1.data
+        post_photo(hero1)
+
         hero2 = form.hero2.data
+        post_photo(hero2)
+
+
         biography = form.biography.data
         text_color = form.text_color.data
         headline = form.headline.data
@@ -159,4 +182,10 @@ def user_sign_in():
 #     return render_template('admin_sign_in.html')
 
 
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+def post_photo(photo):
+    filename = secure_filename(photo.filename)
+    photo.save(os.path.join(app.instance_path, '/static/images', filename))

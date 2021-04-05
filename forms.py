@@ -1,4 +1,5 @@
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileRequired
 from wtforms import StringField, FloatField, DateField, DateTimeField, IntegerField, StringField, TextAreaField, BooleanField
 from wtforms.validators import InputRequired, Optional, Email, NumberRange, AnyOf, URL,  EqualTo, DataRequired
 #TODO: add PasswordField?
@@ -19,10 +20,9 @@ class Create_memorial_form(FlaskForm):
     # died = DateField("Date this person passed away", 
     # validators = [InputRequired(message = "cannot be blank (if you aren't sure you can change it later)")])
 
-    headshot = StringField("Link to face picture for left side of memorial page",  
-    validators = [InputRequired(message = "cannot be blank")])
-    hero1 = StringField("Link to first big picture for memorial page", validators = [InputRequired(message = "cannot be blank")])
-    hero2 = StringField("Link to first big picture for memorial page", validators = [InputRequired(message = "cannot be blank")])
+    headshot = FileField(validators =[FileRequired()])
+    hero1 = FileField(validators =[FileRequired()])
+    hero2 = FileField(validators =[FileRequired()])
 
 
 

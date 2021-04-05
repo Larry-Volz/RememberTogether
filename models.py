@@ -34,8 +34,10 @@ class Departed(db.Model):
     # died = datetime.datetime.now()
 
     headshot = db.Column(db.Text, nullable = True) #url for face picture
+
     hero1 = db.Column(db.Text, nullable = True) #url for large picture 1
     hero2 = db.Column(db.Text, nullable = True) #url for large picture 2
+    
     biography = db.Column(db.Text, nullable = False) #obituary
     headline = db.Column(db.Text, nullable = True)
     text_color = db.Column(db.Text, nullable = True, default = "white")
