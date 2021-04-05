@@ -25,8 +25,14 @@ class Departed(db.Model):
     lname = db.Column(db.Text, nullable = False)
     city_born = db.Column(db.Text, nullable = True)
     state_born = db.Column(db.Text, nullable = True)
+
+    #TODO:  FIX!
     born = db.Column(db.Date, nullable = False)
     died = db.Column(db.Date, nullable = False)
+
+    # born = datetime.datetime.now()
+    # died = datetime.datetime.now()
+
     headshot = db.Column(db.Text, nullable = True) #url for face picture
     hero1 = db.Column(db.Text, nullable = True) #url for large picture 1
     hero2 = db.Column(db.Text, nullable = True) #url for large picture 2
@@ -36,8 +42,13 @@ class Departed(db.Model):
 
     booked_yet = db.Column(db.Boolean, nullable=True, default=False)
     funeral_home_name = db.Column(db.Text, nullable = True)
+
+    #TODO: FIX!
     event_start = db.Column(db.DateTime(timezone=True), nullable=True)
     event_end = db.Column(db.DateTime(timezone=True), nullable=True)
+
+
+
     room = db.Column(db.String(30), nullable=True)
     event_address = db.Column(db.String(100), nullable = True)
     event_city = db.Column(db.String(60), nullable = True)

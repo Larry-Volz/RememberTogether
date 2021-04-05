@@ -28,6 +28,8 @@
 
 # To Do before going live
 - [ ] Get back-up hard drive and set up chron jobs
+- [ ] Have another address/contact info for the wake and/or reception if not at the funeral home
+- [ ] add e-mail to the funeral home data
 - [ ] Change lookup form to be onsubmit rather than on button click
 - [ ] Create databases/relationships with participating (?) funeral homes? need for integration with streaming?
   - [ ] set up a "forget password" section that will email them a new password if needed.  and/or double security(?)

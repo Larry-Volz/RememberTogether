@@ -47,53 +47,7 @@
 
 {% block intro_section %}
 
-	
-<!-- <section id="virtual-memorial-hero" class="js-fullheight" data-section="home">
-	<div class="flexslider js-fullheight">
-		<ul class="slides">
-		   <li style="background-image: url(../static/images/family2.jpg);">
-			   <div class="overlay"></div>
-			   <div class="container-fluid">
-				   <div class="row">
-					   <div class="col-md-6 col-md-offset-3 col-md-pull-3 col-sm-12 col-xs-12 js-fullheight slider-text">
-						   <div class="slider-text-inner js-fullheight">
-							   <div class="desc">
-								   <h2 class="front-page-desc">Remember them TOGETHER forever with virtual memorial walls</h2>
-							</div>
-						   </div>
-					   </div>
-				   </div>
-			   </div>
-		   </li>
-		   <li style="background-image: url(../static/images/older_couple1.jpg);">
-			   <div class="overlay"></div>
-			   <div class="container-fluid">
-				   <div class="row">
-					   <div class="col-md-6 col-md-offset-3 col-md-pull-3 col-sm-12 col-xs-12 js-fullheight slider-text">
-						   <div class="slider-text-inner">
-							   <div class="desc">
-								<div class="desc">
-									<h2 class="front-page-desc">Celebrate their life TOGETHER even if some are miles away</h2>
-							 </div>
-									
-								</div>
-						   </div>
-					   </div>
-				   </div>
-			   </div>
-		   </li>
-		  </ul>
-	  </div>
-</section> -->
 
-<div class="form form-inline" action = "/create" method = "POST">
-	<div class="form-group">
-		<div class="input-group">
-			<label for="fname" class = "form-control form-inline">First Name</label>
-			<input type="text" id = "fname" name = "fname" class="form-control">
-		</div>
-	</div>
-</div>
 {% endblock %}
 
 {% block control_panel2 %}
@@ -105,25 +59,29 @@
     </div>
     {% endfor %}
 
-    <!-- <div id = "auto-complete">
-        <form action="/api/departed/1"> 
-            <div class="ui-widget form-control">
-                <input id="departed-search2" placeholder="Name or memorial id" style = "display: inline;">
-				<span id="departed-search-btn2" class="btn btn-primary border rounded-pill form-control-small mt-2">Go</div> 
-            </div>
-        </form>
+	<div class="col-md-8">
+		<h2 class="display-1 ml-5"><strong>Add a Memorial Page</strong></h2>
+		<form action="/create" method="POST">
+			{{ form.hidden_tag() }}
+	
+			{% for field in form if field.widget.input_type != 'hidden' %}
+				
+				<div class="form-group">
+					{{ field.label }}
+					{{field(class_="form-control-small")}}
 
-        <div class="departed-display"></div>
-
-    </div> -->
-    
-	<div class="form form-inline" action = "/create" method = "POST">
-		<div class="form-group">
-			<div class="input-group">
-				<label for="fname" class = "form-control form-inline">First Name</label>
-				<input type="text" id = "fname" name = "fname" class="form-control">
-			</div>
-		</div>
+					{% for error in field.errors %} 
+					<br>
+					<small class="form-text text-danger">
+						{{ error }} 
+					</small>
+					{% endfor %} 
+				</div>
+					
+			{% endfor %}
+	
+			<button class="btn btn-primary" type="submit">Create Memorial Page</button>
+		</form>
 	</div>
 {% endblock %}
 

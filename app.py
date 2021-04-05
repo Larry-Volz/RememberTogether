@@ -1,7 +1,7 @@
 from flask import Flask, request, render_template, redirect, flash, session, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db, User, Admin_user, Departed, Post
-from forms import User_registration
+from forms import User_registration, Create_memorial_form
 import datetime
 
 #TODO:
@@ -46,7 +46,7 @@ def memorial_page(id):
     # else:
     
     # utc = pytc.UTC
-    # today = utc.localize(datetime.datetime.now())
+    # today = datetime.datetime.now()
 
     departed = Departed.query.get_or_404(id)
     posts = Post.query.filter_by(departed_id=id).all()
@@ -67,11 +67,61 @@ def memorial_page(id):
     return render_template('obituary.html', departed=departed, posts=posts, event_times=event_times) 
 
 
-@app.route('/create')
+@app.route('/create', methods=["GET","POST"])
 def create_obituary():
     """ renders form to create a new obituary """
+    form = Create_memorial_form()
 
-    return render_template('create-memorial.html')
+    if form.validate_on_submit(): #csrf & is POST
+        
+        fname = form.fname.data   
+        lname = form.lname.data
+
+        #TODO: FIX!
+        # born = form.born.data
+        # died = form.died.data
+
+        born= datetime.datetime.now()
+        died=datetime.datetime.now()
+
+        city_born = form.city_born.data
+        state_born = form.state_born.data
+        headshot = form.headshot.data   
+        hero1 = form.hero1.data
+        hero2 = form.hero2.data
+        biography = form.biography.data
+        text_color = form.text_color.data
+        headline = form.headline.data
+        booked_yet = form.booked_yet.data
+        funeral_home_name = form.funeral_home_name.data
+        
+        #TODO: FIX!
+        # event_start = form.event_start.data
+        # event_end = form.event_end.data  
+
+        event_start = datetime.datetime.now()
+        event_end = datetime.datetime.now()
+
+        room = form.room.data
+        event_address = form.event_address.data
+        event_city = form.event_city.data
+        event_state = form.event_state.data
+        event_zip = form.event_zip.data
+        event_phone = form.event_phone.data
+        event_url = form.event_url.data
+
+
+        departed =  Departed(fname=fname, lname=lname, born=born, died=died, city_born=city_born, state_born=state_born, headshot=headshot, hero1=hero1, hero2=hero2, biography=biography, text_color=text_color, headline=headline, booked_yet=booked_yet , funeral_home_name=funeral_home_name, event_start=event_start, event_end=event_end, room=room, event_address=event_address, event_city=event_city, event_state=event_state, event_zip=event_zip, event_phone=event_phone, event_url=event_url)
+
+        db.session.add(departed)
+        db.session.commit()
+
+        flash(f"Successfully created a memorial page for {fname} {lname}.  You can visit their page by typing their name in the search box in the menu")
+        return redirect('/')
+
+    else:
+        return render_template("create-memorial.html", form=form)
+
 
 
 
