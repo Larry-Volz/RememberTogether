@@ -89,8 +89,8 @@ def create_obituary():
         # born = form.born.data
         # died = form.died.data
 
-        born= datetime.datetime.now()
-        died=datetime.datetime.now()
+        born= form.born.data
+        died=form.died.data
 
         city_born = form.city_born.data
         state_born = form.state_born.data
@@ -118,12 +118,20 @@ def create_obituary():
         booked_yet = form.booked_yet.data
         funeral_home_name = form.funeral_home_name.data
         
-        #TODO: FIX!
-        # event_start = form.event_start.data
-        # event_end = form.event_end.data  
+        #TODO: event start date & time from form combine to -> event_start -> into model & db
+        #TODO: A method to take event_start and break into a date and time
+        event_start_date = form.event_start_date.data
+        event_start_time = form.event_start_time.data
+        event_end = form.event_end.data
+        #convert timestamp to time
+        # event_end = datetime.datetime.fromtimestamp(event_end).isoformat()
+        # event_end = event_end.replace(tzinfo=None)
+        print("+++++++++++++++++++++++++++++++++++++++++++++++")
+        print(f'event_end: {event_end}')
+        print("+++++++++++++++++++++++++++++++++++++++++++++++")
 
-        event_start = datetime.datetime.now()
-        event_end = datetime.datetime.now()
+        event_start = merge_into_DateTime(event_start_date, event_start_time)
+        event_end = merge_into_DateTime(event_start_date, event_end)
 
         room = form.room.data
         event_address = form.event_address.data
@@ -189,3 +197,20 @@ def user_sign_in():
 # def post_photo(photo):
     # filename = secure_filename(photo.filename)
     # photo.save(os.path.join(app.instance_path, '/static/images', filename))
+
+def merge_into_DateTime(date_var, time_var):
+    """take a date_time object andextract the date and a time object from a form and add the time to the date to make a new, complete date_time object that can be passed into sqlalchemy"""
+    # (year, month, day)
+    # start_date = date_var.date()
+    # (hours, minutes)
+    # start_time = time_var.time()
+    # Create a datetime object
+    # merged_datetime = datetime.datetime.combine(
+    #     date_var, time_var)
+    merged_datetime = datetime.datetime.combine(date_var,time_var)
+    merged_datetime = merged_datetime.replace(tzinfo=None)
+    print(f'************************************************************************')
+    print(f'date_var: {date_var}, time_var: {time_var}')
+    print(f'Merged_datetime: {merged_datetime}')
+    print(f'************************************************************************')
+    return merged_datetime

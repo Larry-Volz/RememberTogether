@@ -56,8 +56,18 @@
 
 				
 				<div class="form-group">
-					{{ field.label }}
-					{{field(class_="form-control-small")}}
+
+					{% if field.name == "born":  %}
+
+						{{ field.label }}
+						{{ field(class="datepicker")}}
+
+					{% else: %}
+
+						{{ field.label }}
+						{{field(class_="form-control-small")}}
+
+					{% endif %}
 
 					{% for error in field.errors %} 
 					<br>

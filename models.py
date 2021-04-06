@@ -46,8 +46,8 @@ class Departed(db.Model):
     funeral_home_name = db.Column(db.Text, nullable = True)
 
     #TODO: FIX!
-    event_start = db.Column(db.DateTime(timezone=True), nullable=True)
-    event_end = db.Column(db.DateTime(timezone=True), nullable=True)
+    event_start = db.Column(db.DateTime(timezone=False), nullable=True)
+    event_end = db.Column(db.DateTime(timezone=False), nullable=True)
 
 
 

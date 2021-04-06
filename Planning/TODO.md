@@ -2,7 +2,6 @@
 
 # To Do for capstone
 - [ ] Fix time and date fields so they are working
-  - [ ] Make sure they work in multiple time zones
 - [ ] If somone types in a non-existant departed.id in search box -> flash
   - [ ] Set up css for a flash including dismissable and add flash to each page
 - [ ] Set up server:
@@ -27,6 +26,7 @@
         - [ ] anyone w/name can view or post.  Need admin code to edit.
 - [ ] make an "Add a post" link in menu that only shows up if someone is signed in
 - [ ] Make an "add a post" linke under each post when they are signed in
+- [ ] Fix datetime so it works in every timezone
 - [ ] Make an "edit this post" link next to user's posts only when they are signed in and only for their own posts
 - [ ] Make a "delete post" with check on it to make sure they mean to do it
 
@@ -43,5 +43,10 @@
 - [ ] Do crap-tons of testing
 - [ ] Set up a "contact us" page
 - [ ] Set up a donations page (?)
-- [ ] Fix datetime so it works in every timezone
 - [ ] Set up an auto-resize system (through API/picresize?)
+
+# Later functionality
+- [ ] Add ability to upload videos or youtube videos
+- [ ] Add ability to measure how much data is uploaded
+- [ ] Learn about AWS for lots of content/etc.
+- [ ] 

@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired
-from wtforms import StringField, FloatField, DateField, DateTimeField, IntegerField, StringField, TextAreaField, BooleanField
+from wtforms.fields.html5 import DateField, DateTimeField, TimeField
+from wtforms import StringField, FloatField,IntegerField, StringField, TextAreaField, BooleanField, SubmitField, validators
 from wtforms.validators import InputRequired, Optional, Email, NumberRange, AnyOf, URL,  EqualTo, DataRequired
 #TODO: add PasswordField?
 
@@ -20,9 +21,12 @@ class Create_memorial_form(FlaskForm):
     # died = DateField("Date this person passed away", 
     # validators = [InputRequired(message = "cannot be blank (if you aren't sure you can change it later)")])
 
-    headshot = FileField(validators =[FileRequired()])
-    hero1 = FileField(validators =[FileRequired()])
-    hero2 = FileField(validators =[FileRequired()])
+    born = DateField('Date of birth', format='%Y-%m-%d', validators=(validators.DataRequired(),))
+    died = DateField('Date passed away', format='%Y-%m-%d', validators=(validators.DataRequired(),))
+
+    headshot = FileField("Face picture", validators =[FileRequired()])
+    hero1 = FileField("Big picture for top of screen",validators =[FileRequired()])
+    hero2 = FileField("Another big picture for top of screen",validators =[FileRequired()])
 
 
 
@@ -39,8 +43,9 @@ class Create_memorial_form(FlaskForm):
     # event_start = DateTimeField("Date & time services will begin")
     # event_end = DateTimeField("Date & time services will end (an estimate is okay)")
 
-    event_start = StringField("Date & time services will begin")
-    event_end = StringField("Date & time services will end (an estimate is okay)")
+    event_start_date = DateField("Date of the memorial service")
+    event_start_time = TimeField("Time service will begin")
+    event_end = TimeField("Date & time services will end (an estimate is okay)")
 
     room = StringField("In what room at the facility will the services be held (ok to leave blank if unknown)")
     event_address = StringField("Street address of the funeral home")
