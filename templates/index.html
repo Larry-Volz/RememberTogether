@@ -4,13 +4,7 @@
 {% block meta_content %}create an obituary {% endblock %}
 
 {% block control_panel %}
-    {% for msg in get_flashed_messages() %} 
-    <div class="bg-success m-4 text-center">
-    <br>
-        <h3 class="display-3 text-center">{{msg}}</h3>
-        <br>
-    </div>
-    {% endfor %}
+    
 	<span class="menu-text">Search for Loved One</span>
     <div id = "zoom-game-area">
         <!-- AUTO-FILL EXPERIMENT -->
@@ -44,7 +38,13 @@
 {% endblock%}
 
 {% block intro_section %}
-
+{% for msg in get_flashed_messages() %} 
+    <div class="bg-success m-4 text-center">
+    <br>
+        <h3 class="display-3 text-center">{{msg}}</h3>
+        <br>
+    </div>
+    {% endfor %}
 	
 <section id="virtual-memorial-hero" class="js-fullheight" data-section="home">
 	<div class="flexslider js-fullheight">

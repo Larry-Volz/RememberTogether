@@ -75,7 +75,7 @@
 						<li><a href="#" data-nav-section="biography">Life Story</a></li>
 						<li><a href="#" data-nav-section="gallery">Gallery & Tributes</a></li>
 						<li><a href="#" data-nav-section="post">Post Something</a></li>
-						<li><a href="#" data-nav-section="contact">Manage This Memorial</a></li>
+						<li><a href="/edit/{{departed.id}}" data-nav-section="manage" class="external">Edit This Memorial</a></li>
 					</ul>
 				</div>
 			</nav>
@@ -123,7 +123,7 @@ Copyright <script>document.write(new Date().getFullYear());</script> Larry Volz
 					   			<div class="col-md-6 col-md-offset-3 col-md-pull-3 col-sm-12 col-xs-12 js-fullheight slider-text">
 					   				<div class="slider-text-inner">
 					   					<div class="desc">
-						   					<h2 style="color: {{ departed.text_color }};">{{ departed.headline }}</h2>
+						   					<h1 style="color: {{ departed.text_color }};">{{ departed.headline }}</h1>
 												
 											</div>
 					   				</div>
@@ -190,49 +190,24 @@ Copyright <script>document.write(new Date().getFullYear());</script> Larry Volz
 				<div class="virtual-memorial-narrow-content">
 					<div class="row">
 						<div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
-							<span class="heading-meta">Life Story</span>
-							<h2>POSTING FORM HERE</h2>
+							<form action="/edit/{{departed.id}}" class="form-inline text-center">
+								<button type="submit" class="btn btn-info ">Add a Memory</button>
+							</form>
 						</div>
 					</div>
 	
 				</div>
 			</section>
-
-			<!-- <section class="virtual-memorial-contact" data-section="contact">
+			<br><br>
+			<section class="virtual-memorial-manage" data-section="manage">
 				<div class="virtual-memorial-narrow-content">
 					<div class="row">
-						<div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
-							<span class="heading-meta">Get in Touch</span>
-							<h2 class="virtual-memorial-heading">Contact</h2>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-5">
-							<div class="virtual-memorial-feature virtual-memorial-feature-sm animate-box" data-animate-effect="fadeInLeft">
-								<div class="virtual-memorial-icon">
-									<i class="icon-globe-outline"></i>
-								</div>
-								<div class="virtual-memorial-text">
-									<p><a href="#">info@domain.com</a></p>
-								</div>
-							</div>
 
 							<div class="virtual-memorial-feature virtual-memorial-feature-sm animate-box" data-animate-effect="fadeInLeft">
-								<div class="virtual-memorial-icon">
-									<i class="icon-map"></i>
-								</div>
-								<div class="virtual-memorial-text">
-									<p>198 West 21th Street, Suite 721 New York NY 10016</p>
-								</div>
-							</div>
 
-							<div class="virtual-memorial-feature virtual-memorial-feature-sm animate-box" data-animate-effect="fadeInLeft">
-								<div class="virtual-memorial-icon">
-									<i class="icon-phone"></i>
-								</div>
-								<div class="virtual-memorial-text">
-									<p><a href="tel://">+123 456 7890</a></p>
-								</div>
+								<form action="/edit/{{departed.id}}" class="form-inline text-center">
+									<button type="submit" class="btn btn-success">Edit this memorial page</button>
+								</form>
 							</div>
 						</div>
 						<div class="col-md-7 col-md-push-1">
@@ -240,19 +215,7 @@ Copyright <script>document.write(new Date().getFullYear());</script> Larry Volz
 								<div class="col-md-10 col-md-offset-1 col-md-pull-1 animate-box" data-animate-effect="fadeInRight">
 									<form action="">
 										<div class="form-group">
-											<input type="text" class="form-control" placeholder="Name">
-										</div>
-										<div class="form-group">
-											<input type="text" class="form-control" placeholder="Email">
-										</div>
-										<div class="form-group">
-											<input type="text" class="form-control" placeholder="Subject">
-										</div>
-										<div class="form-group">
-											<textarea name="" id="message" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
-										</div>
-										<div class="form-group">
-											<input type="submit" class="btn btn-primary btn-send-message" value="Send Message">
+											
 										</div>
 									</form>
 								</div>
@@ -261,7 +224,7 @@ Copyright <script>document.write(new Date().getFullYear());</script> Larry Volz
 						</div>
 					</div>
 				</div>
-			</section> -->
+			</section>
 
 		</div><!-- end:virtual-memorial-main -->
 	</div><!-- end:container-wrap -->

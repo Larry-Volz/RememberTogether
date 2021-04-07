@@ -1,22 +1,25 @@
 
 
 # To Do for capstone
-- [ ] Fix time and date fields so they are working
 - [ ] If somone types in a non-existant departed.id in search box -> flash
-  - [ ] Set up css for a flash including dismissable and add flash to each page
+- [ ] Fix it so Date and time start and pictures re-populate for edit_memorial
+- [ ] Set up css for a flash including dismissable and add flash to each page
 - [ ] Set up server:
   - [ ] install linux on desktop
   - [ ] Re-set up Apache or Gunicorn
   - [ ] get dynamic IP address/domain name setup
 - [ ] Or do on Heroku
+- [x] Fix time and date fields so they are working
 - [x] Do new gateway look-up/main page for memorials
 - [x] Change /dos to /
 - [x] Do main page for virtual memorials
 - [x] Add link to go back to virtual-memorials
 - [x] Set up upload image functionality
+- [x] Make an edit memorial sequence
 
 # To Do before demo
 - [ ] Change memorial pages so it's just "virtual-memorial.net/firstname-lastname" so it searches by that instead of id and set up an intermediate page that makes sure it's the right one only if there is more than one person with that name
+- [ ] Add a "are you sure you want to cancel your changes and go back" confirmation box with the edit -> 'cancel' button
 - [ ] Make admin page
     - [ ] Have to sign into it
     - [ ] offer 3 levels
@@ -32,6 +35,7 @@
 
 # To Do before going live
 - [ ] Create ability to upload picture from facebook
+- [ ] Fix it so it does not duplicate a picture in the files - if there is another of the same name maybe give opportunity to rename it?
 - [ ] Get back-up hard drive and set up chron jobs
 - [ ] Have another address/contact info for the wake and/or reception if not at the funeral home
 - [ ] add e-mail to the funeral home data

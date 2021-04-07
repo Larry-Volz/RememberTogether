@@ -85,10 +85,6 @@ def create_obituary():
         fname = form.fname.data   
         lname = form.lname.data
 
-        #TODO: FIX!
-        # born = form.born.data
-        # died = form.died.data
-
         born= form.born.data
         died=form.died.data
 
@@ -99,39 +95,21 @@ def create_obituary():
         hero1 = images.save(form.hero1.data)
         hero2 = images.save(form.hero2.data)
 
-
-         #TODO: scaffolding - remove
-        print('*****************POSTS:')
-        print("HEADSHOT:",headshot)
-        print("hero1:",hero1)
-        print("hero2:",hero2)
-        print('***********************')
-
-        # post_photo(headshot)
-        # post_photo(hero1)
-        # post_photo(hero2)
-
-
         biography = form.biography.data
         text_color = form.text_color.data
         headline = form.headline.data
         booked_yet = form.booked_yet.data
         funeral_home_name = form.funeral_home_name.data
         
-        #TODO: event start date & time from form combine to -> event_start -> into model & db
-        #TODO: A method to take event_start and break into a date and time
-        event_start_date = form.event_start_date.data
-        event_start_time = form.event_start_time.data
-        event_end = form.event_end.data
-        #convert timestamp to time
-        # event_end = datetime.datetime.fromtimestamp(event_end).isoformat()
-        # event_end = event_end.replace(tzinfo=None)
-        print("+++++++++++++++++++++++++++++++++++++++++++++++")
-        print(f'event_end: {event_end}')
-        print("+++++++++++++++++++++++++++++++++++++++++++++++")
 
+        event_start_date = form.event_start_date.data  #date field
+        event_start_time = form.event_start_time.data  #time field
+        event_end = form.event_end.data  #time field
+
+        #convert timestamp to time
         event_start = merge_into_DateTime(event_start_date, event_start_time)
         event_end = merge_into_DateTime(event_start_date, event_end)
+
 
         room = form.room.data
         event_address = form.event_address.data
@@ -141,19 +119,81 @@ def create_obituary():
         event_phone = form.event_phone.data
         event_url = form.event_url.data
 
+    
 
         departed =  Departed(fname=fname, lname=lname, born=born, died=died, city_born=city_born, state_born=state_born, headshot=headshot, hero1=hero1, hero2=hero2, biography=biography, text_color=text_color, headline=headline, booked_yet=booked_yet , funeral_home_name=funeral_home_name, event_start=event_start, event_end=event_end, room=room, event_address=event_address, event_city=event_city, event_state=event_state, event_zip=event_zip, event_phone=event_phone, event_url=event_url)
 
         db.session.add(departed)
         db.session.commit()
 
-        flash(f"Successfully created a memorial page for {fname} {lname}.  You can visit their page by typing their name in the search box in the menu")
+        flash(f"Successfully created {fname} {lname}.  You can enter their name in search bar to view their memorial")
         return redirect('/')
 
     else:
         return render_template("create-memorial.html", form=form)
 
 
+@app.route('/edit/<int:departed_id>',methods=["GET","POST"])
+def edit_obituary(departed_id):
+    """form and functionality to edit a pet"""
+    departed = Departed.query.get_or_404(departed_id)
+    form = Create_memorial_form(obj=departed)
+
+    if form.validate_on_submit(): #csrf & is POST
+        # pet.name = form.name.data  
+        # pet.species = form.species.data
+        # pet.photo_url = form.photo_url.data
+        # pet.age = form.age.data
+        # pet.notes = form.notes.data
+        # pet.available = form.available.data
+
+        departed.fname = form.fname.data   
+        departed.lname = form.lname.data
+
+        departed.born= form.born.data
+        departed.died=form.died.data
+
+        departed.city_born = form.city_born.data
+        departed.state_born = form.state_born.data
+
+        departed.headshot = form.headshot.data
+        departed.hero1 = form.hero1.data
+        departed.hero2 = form.hero2.data
+
+
+        departed.biography = form.biography.data
+        departed.text_color = form.text_color.data
+        departed.headline = form.headline.data
+        departed.booked_yet = form.booked_yet.data
+        departed.funeral_home_name = form.funeral_home_name.data
+        
+        #convert back to 
+        departed.event_start_date = form.event_start_date.data  #date field
+        departed.event_start_time = form.event_start_time.data  #time field
+        departed.event_end = form.event_end.data  #time field
+
+        #convert timestamp to time
+        # departed.event_start = merge_into_DateTime(event_start_date, event_start_time)
+        # departed.event_end = merge_into_DateTime(event_start_date, event_end)
+
+
+        departed.room = form.room.data
+        departed.event_address = form.event_address.data
+        departed.event_city = form.event_city.data
+        departed.event_state = form.event_state.data
+        departed.event_zip = form.event_zip.data
+        departed.event_phone = form.event_phone.data
+        departed.event_url = form.event_url.data
+
+
+        # db.session.add(pet)
+        db.session.commit()
+
+        flash(f"Successfully edited {departed.fname} {departed.lname}")
+        return redirect(f'/memorial/{departed_id}')
+
+    else:
+        return render_template("edit-memorial.html", form=form, departed=departed)
 
 
 @app.route('/add',methods=["GET","POST"])
@@ -200,17 +240,9 @@ def user_sign_in():
 
 def merge_into_DateTime(date_var, time_var):
     """take a date_time object andextract the date and a time object from a form and add the time to the date to make a new, complete date_time object that can be passed into sqlalchemy"""
-    # (year, month, day)
-    # start_date = date_var.date()
-    # (hours, minutes)
-    # start_time = time_var.time()
-    # Create a datetime object
-    # merged_datetime = datetime.datetime.combine(
-    #     date_var, time_var)
+
     merged_datetime = datetime.datetime.combine(date_var,time_var)
+    #remove timezone info (do on client-side)
     merged_datetime = merged_datetime.replace(tzinfo=None)
-    print(f'************************************************************************')
-    print(f'date_var: {date_var}, time_var: {time_var}')
-    print(f'Merged_datetime: {merged_datetime}')
-    print(f'************************************************************************')
+
     return merged_datetime
