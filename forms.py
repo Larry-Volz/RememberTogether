@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired
 from wtforms.fields.html5 import DateField, DateTimeField, TimeField
-from wtforms import StringField, FloatField,IntegerField, StringField, TextAreaField, BooleanField, SubmitField, validators
+from wtforms import StringField, FloatField,IntegerField, StringField, TextAreaField, BooleanField, SubmitField, validators, HiddenField
 from wtforms.validators import InputRequired, Optional, Email, NumberRange, AnyOf, URL,  EqualTo, DataRequired
 #TODO: add PasswordField?
 
@@ -55,6 +55,18 @@ class Create_memorial_form(FlaskForm):
     event_phone = StringField("Phone number of the funeral home")
     #TODO: figure out how to use URL field/validations
     event_url = StringField("Website of the funeral home")
+
+class Post_form(FlaskForm):
+    """For making a memorial post"""
+
+
+    text = StringField("Share a memory or tell us about a picture you are contributing", 
+    validators = [InputRequired(message = "cannot be blank")])
+    file_url = FileField("Share a picture if you like")
+    #TODO: remember to cast this to integer in app.py
+    user_id = HiddenField()
+    departed_id = HiddenField()
+
 
 class User_registration(FlaskForm):
     """For loved ones to sign up to use the service"""

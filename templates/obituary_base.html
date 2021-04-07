@@ -190,7 +190,7 @@ Copyright <script>document.write(new Date().getFullYear());</script> Larry Volz
 				<div class="virtual-memorial-narrow-content">
 					<div class="row">
 						<div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
-							<form action="/edit/{{departed.id}}" class="form-inline text-center">
+							<form action="/post/create/{{ departed.id }}" class="form-inline text-center">
 								<button type="submit" class="btn btn-info ">Add a Memory</button>
 							</form>
 						</div>
@@ -231,7 +231,10 @@ Copyright <script>document.write(new Date().getFullYear());</script> Larry Volz
 	</div><!-- end:virtual-memorial-page -->
 
 	<!-- jQuery -->
-	<script src="../static/js/jquery.min.js"></script>
+	<!-- <script src="../static/js/jquery.min.js"></script> -->
+	<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+
 	<!-- jQuery Easing -->
 	<script src="../static/js/jquery.easing.1.3.js"></script>
 	<!-- Bootstrap -->

@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+
+{% block control_panel %}
+    {% for msg in get_flashed_messages() %} 
+    <div class="bg-success m-4 text-center">
+    <br>
+        <h3 class="display-3 text-center">{{msg}}</h3>
+        <br>
+    </div>
+    {% endfor %}
+
+    
+{% endblock %}
+
+
+{% block links %}
+<li>
+   <a href="/create" class="active">Create Memorial Page</a>
+</li>
+	<li class="text-center">
+		<a href="/" class="external">Return Home</a><br>
+		<em> SAVE YOUR WORK FIRST!</em>
+	</li>
+	<!--<li>
+		<a href="#" data-nav-section="contact">Manage A Memorial Page</a>
+	</li>
+	<br>
+	<hr style="border-top: 2px solid white;">
+	<li>
+		<a href="#" data-nav-section="admin">Funeral Directors</a>
+	</li> -->
+{% endblock%}
+
+
+{% block intro_section %}
+
+
+{% endblock %}
+
+{% block control_panel2 %}
+    {% for msg in get_flashed_messages() %} 
+    <div class="bg-success m-4 text-center">
+    <br>
+        <h3 class="display-3 text-center">{{msg}}</h3>
+        <br>
+    </div>
+    {% endfor %}
+
+	<div class="col-md-8">
+		<h2 class="display-1 ml-5"><strong>Add a Memorial Page</strong></h2>
+		<form action="/create" method="POST" enctype="multipart/form-data">
+			{{ form.hidden_tag() }}
+	
+			{% for field in form if field.widget.input_type != 'hidden' %}
+
+
+				
+				<div class="form-group">
+
+					{% if field.name == "born":  %}
+
+						{{ field.label }}
+						{{ field(class="datepicker")}}
+
+					{% else: %}
+
+						{{ field.label }}
+						{{field(class_="form-control-small")}}
+
+					{% endif %}
+
+					{% for error in field.errors %} 
+					<br>
+					<small class="form-text text-danger">
+						{{ error }} 
+					</small>
+					{% endfor %} 
+				</div>
+					
+			{% endfor %}
+	
+			<button class="btn btn-primary" type="submit">Create Memorial Page</button>
+		</form>
+	</div>
+{% endblock %}
+
+
+{% block event %}
+
+<!-- TODO: FIX GRAMMAR SO IT dynamically says were held at or will be held at -->
+
+<!-- booked_yet= True,  -->
+
+
+ {{ departed.funeral_home_name }} <br>
+ On {{ event_times }} <br>
+ at {{ departed.event_address }} {{ departed.room }} <br>
+ {{ departed.event_city }}, {{ departed.event_state }} {{ departed.event_zip }} <br>
+ {{ departed.event_phone }} {{ departed.event_url }}
+
+{% endblock %}
+
+
+
+{% block gallery %}
+
+<!-- <div class="align-items-start departed-cards-holder"> -->
+<!-- {{ departed.fname }}: {{  departed.post }} -->
+
+<div class="container">
+	{% for ea in posts %}
+									
+	<!-- <div class="card departed-card col-sm-12 col-md-6 col-lg-4">
+		<img src="{{ea.file_url}}" alt="picture of {{ departed.fname}} {{departed.lname}}" class="card-img-top">
+		<div class="card-text">
+			{{ ea.text}}
+			<hr>
+			<p>Contributed by: {{ ea.user.fname }} {{ ea.user.lname }}</p>
+		</div>
+	</div> -->
+
+	<div class="col">
+		<div class="card" style="max-width: 70%;" >
+			<img class="card-img-top" src=" {{ ea.file_url }}" alt="picture of {{ departed.fname}} {{departed.lname}}">
+			<div class="card-body">
+			  <p class="card-text">{{ ea. text }}</p>
+			  <hr>
+			  <p class="card-text">Contributed by: {{ ea.user.fname }} {{ ea.user.lname }}</p>
+			</div>
+		  </div>
+	</div>
+	
+
+	{% endfor %}
+</div>
+	<!-- </div> -->
+
+{% endblock %}

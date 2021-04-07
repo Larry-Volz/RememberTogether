@@ -1,7 +1,7 @@
 from flask import Flask, request, render_template, redirect, flash, session, jsonify, url_for
 from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db, User, Admin_user, Departed, Post
-from forms import User_registration, Create_memorial_form
+from forms import User_registration, Create_memorial_form, Post_form
 from flask_uploads import configure_uploads, IMAGES, UploadSet
 import datetime
 
@@ -194,6 +194,40 @@ def edit_obituary(departed_id):
 
     else:
         return render_template("edit-memorial.html", form=form, departed=departed)
+
+
+@app.route('/post/create/<int:departed_id>', methods = ["GET","POST"])
+def create_post(departed_id):
+    '''Create a post linked to a specific departed person'''
+    #TODO: only allow signed-in person to do it
+    #TODO: send notice to moderator to approve if wanted
+
+    form = Post_form()
+    departed = Departed.query.get_or_404(departed_id)
+
+    if form.validate_on_submit(): #csrf & is POST
+        
+        text = form.text.data   
+
+        #TODO: SET UP PHOTO FILE DOWNLOAD LIKE IN Create_memorial_form
+        file_url = form.file_url.data
+
+        #TODO: FIX THIS - SEE IF HIDDEN FIELD SHOWS FIRST THEN FIX IN FORMS TO PASS
+        #TODO: THEN ADD THE SIGN-IN AND USER INFO TO PASS IN SESSION
+        user_id = 1
+
+        post =  Post(text=text, departed_id=departed_id, file_url=file_url, user_id=user_id)
+        
+
+        db.session.add(departed)
+        db.session.commit()
+
+        flash(f"Successfully created {fname} {lname}.  You can enter their name in search bar to view their memorial")
+        return redirect(f'/memorial/{departed_id}')
+
+    else:
+        return render_template("create-post.html", form=form,departed=departed)
+
 
 
 @app.route('/add',methods=["GET","POST"])

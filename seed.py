@@ -144,7 +144,11 @@ db.session.commit()
 
 
 #ADD POSTS - HARRY ANDERSON
-newpost1 = Post(text='Harry Anderson died much too young.  At just 65 he not only made us all laugh in Cheers, Night Court, Saturday Night Live and on stages around the world.  He also was a teacher and mentor to magicians and comedians everywhere.  ', file_url='harry-anderson1.jpg', user_id = 1, departed_id = 1)
+newpost1 = Post(text='Harry Anderson died much too young.  At just 65 he not only made us all laugh in Cheers, Night Court, Saturday Night Live and on stages around the world.  He also was a teacher and mentor to magicians and comedians everywhere.  ', 
+file_url='harry-anderson1.jpg', 
+user_id = 1, 
+departed_id = 1)
+
 
 newpost2 = Post(text='Harry Anderson was also a family man - survived by his wife and son.  Both of whom are adorable.', file_url='harry-anderson2.jpg', user_id = 2, departed_id = 1)
 
