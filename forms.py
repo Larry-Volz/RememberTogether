@@ -64,7 +64,7 @@ class Post_form(FlaskForm):
     validators = [InputRequired(message = "cannot be blank")])
     file_url = FileField("Share a picture if you like")
     #TODO: remember to cast this to integer in app.py
-    # user_id = HiddenField()
+    # user_id = HiddenField()  <- actually just get both of these in app.py
     # departed_id = HiddenField()
 
 

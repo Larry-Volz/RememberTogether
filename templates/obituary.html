@@ -35,11 +35,16 @@
 
 	<div class="col">
 		<div class="card" style="max-width: 70%;" >
+			{% if ea.file_url: %}
 			<img class="card-img-top" src=" ../static/images/{{ ea.file_url }}" alt="picture of {{ departed.fname}} {{departed.lname}}">
+			{% else: %} 
+			<br><br>
+			{% endif %}
 			<div class="card-body">
-			  <p class="card-text">{{ ea. text }}</p>
-			  <hr>
-			  <p class="card-text">Contributed by: {{ ea.user.fname }} {{ ea.user.lname }}</p>
+			  <div class="card-text">{{ ea. text }}</div>
+
+			  <div class="card-text"><em> -- Shared by: {{ ea.user.fname }} {{ ea.user.lname }}</em></div>
+			  <br>
 			</div>
 		  </div>
 	</div>
