@@ -121,7 +121,7 @@ class Post(db.Model):
         'users.id'))
 
     departed_id = db.Column(db.Integer, db.ForeignKey(
-        'departed.id'), primary_key=True)
+        'departed.id'))
 
     departed = db.relationship('Departed')
     user = db.relationship('User')

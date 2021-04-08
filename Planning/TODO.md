@@ -1,7 +1,9 @@
 
 
 # To Do for capstone
+- [ ] Do delete post route
 - [ ] If somone types in a non-existant departed.id in search box -> flash
+- [ ] Do delete mrmorial route
 - [ ] Fix it so Date and time start and pictures re-populate for edit_memorial
 - [ ] Set up css for a flash including dismissable and add flash to each page
 - [ ] Set up server:

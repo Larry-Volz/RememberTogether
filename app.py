@@ -140,12 +140,6 @@ def edit_obituary(departed_id):
     form = Create_memorial_form(obj=departed)
 
     if form.validate_on_submit(): #csrf & is POST
-        # pet.name = form.name.data  
-        # pet.species = form.species.data
-        # pet.photo_url = form.photo_url.data
-        # pet.age = form.age.data
-        # pet.notes = form.notes.data
-        # pet.available = form.available.data
 
         departed.fname = form.fname.data   
         departed.lname = form.lname.data
@@ -230,6 +224,30 @@ def create_post(departed_id):
 
     else:
         return render_template("create_post.html", form=form,departed=departed)
+
+
+@app.route('/editpost/<int:post_id>',methods=["GET","POST"])
+def edit_post(post_id):
+    """form and functionality to edit an memory/post"""
+    post = Post.query.get_or_404(post_id)
+    departed = Departed.query.get_or_404(post.departed_id)
+
+    form = Post_form(obj=post)
+
+    if form.validate_on_submit(): #csrf & is POST
+
+        post.id = post_id
+        post.departed_id = departed_id 
+        post.text = form.text.data   
+        post.file_url = form.file_url.data
+
+        db.session.commit()
+
+        flash(f"Successfully edited your shared memory")
+        return redirect(f'/memorial/{post.departed_id}')
+
+    else:
+        return render_template(f"edit-post.html", form=form, departed=departed, post=post)
 
 
 
