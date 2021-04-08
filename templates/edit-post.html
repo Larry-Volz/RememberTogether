@@ -5,8 +5,9 @@
 	<div class = "virtual-memorial-font"><a href="/">Virtual-Memorials.net</a></div>
 </div>
 <div class="text-center">
+	<a href="/memorial/{{ departed.id }}">
 	<div class="author-img" style="background-image: url(../static/images/{{ departed.headshot }});"></div>
-	<h1 id="virtual-memorial-logo"><a href="/memorial/{{ departed.id }}">{{ departed.fname }} {{ departed.lname }}</a></h1>
+	<h1 id="virtual-memorial-logo">{{ departed.fname }} {{ departed.lname }}</a></h1>
 </div>
 
 {% endblock %}
@@ -48,7 +49,7 @@
 
 
 						{{ field.label }}
-						{{field(class_="form-control-small")}}
+						{{field(class_="form-control")}}
 
 
 					{% for error in field.errors %} 
@@ -62,7 +63,10 @@
 			{% endfor %}
 			
 	
-			<button class="btn btn-warning" type="submit">Make changes to this memory</button>
+			<button class="btn btn-success" type="submit">Make changes to this memory</button>
+		</form>
+		<form action="/memorial/{{departed.id}}">
+			<button class="btn btn-danger" type="submit">Cancel</button>
 		</form>
 	</div>
 {% endblock %}

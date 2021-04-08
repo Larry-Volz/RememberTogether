@@ -1,15 +1,14 @@
 {% extends 'base.html' %}
 
 {% block control_panel %}
-    {% for msg in get_flashed_messages() %} 
-    <div class="bg-success m-4 text-center">
-    <br>
-        <h3 class="display-3 text-center">{{msg}}</h3>
-        <br>
-    </div>
-    {% endfor %}
-
-    
+<div class="text-center">
+	<div class = "virtual-memorial-font"><a href="/">Virtual-Memorials.net</a></div>
+</div>
+<div class="text-center">
+	<a href="/memorial/{{ departed.id }}">
+	<div class="author-img" style="background-image: url(../static/images/{{ departed.headshot }});"></div>
+	<h1 id="virtual-memorial-logo">{{ departed.fname }} {{ departed.lname }}</a></h1>
+</div>
 {% endblock %}
 
 
@@ -66,7 +65,7 @@
 					{% else: %}
 
 						{{ field.label }}
-						{{field(class_="form-control-small")}}
+						{{field(class_="form-control")}}
 
 					{% endif %}
 
@@ -80,10 +79,10 @@
 					
 			{% endfor %}
 	
-			<button class="btn btn-primary" type="submit">Create Memorial Page</button>
+			<button class="btn btn-success" type="submit">Create Memorial Page</button>
 		</form>
 		<form action="/memorial/{{departed.id}}">
-			<button class="btn btn-warning" type="submit">Cancel</button>
+			<button class="btn btn-danger" type="submit">Cancel</button>
 		</form>
 	</div>
 {% endblock %}

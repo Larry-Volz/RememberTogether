@@ -1,15 +1,9 @@
 {% extends 'base.html' %}
 
 {% block control_panel %}
-    {% for msg in get_flashed_messages() %} 
-    <div class="bg-success m-4 text-center">
-    <br>
-        <h3 class="display-3 text-center">{{msg}}</h3>
-        <br>
-    </div>
-    {% endfor %}
-
-    
+<div class="text-center">
+	<div class = "virtual-memorial-font"><a href="/">Virtual-Memorials.net</a></div>
+</div>
 {% endblock %}
 
 
@@ -65,7 +59,7 @@
 					{% else: %}
 
 						{{ field.label }}
-						{{field(class_="form-control-small")}}
+						{{field(class_="form-control")}}
 
 					{% endif %}
 
@@ -79,7 +73,10 @@
 					
 			{% endfor %}
 	
-			<button class="btn btn-primary" type="submit">Create Memorial Page</button>
+			<button class="btn btn-success" type="submit">Create Memorial Page</button>
+		</form>
+		<form action="/" method="GET">
+		<button class="btn btn-danger" type="submit">Cancel</button>
 		</form>
 	</div>
 {% endblock %}
@@ -104,35 +101,6 @@
 
 {% block gallery %}
 
-<!-- <div class="align-items-start departed-cards-holder"> -->
-<!-- {{ departed.fname }}: {{  departed.post }} -->
 
-<div class="container">
-	{% for ea in posts %}
-									
-	<!-- <div class="card departed-card col-sm-12 col-md-6 col-lg-4">
-		<img src="{{ea.file_url}}" alt="picture of {{ departed.fname}} {{departed.lname}}" class="card-img-top">
-		<div class="card-text">
-			{{ ea.text}}
-			<hr>
-			<p>Contributed by: {{ ea.user.fname }} {{ ea.user.lname }}</p>
-		</div>
-	</div> -->
-
-	<div class="col">
-		<div class="card" style="max-width: 70%;" >
-			<img class="card-img-top" src=" {{ ea.file_url }}" alt="picture of {{ departed.fname}} {{departed.lname}}">
-			<div class="card-body">
-			  <p class="card-text">{{ ea. text }}</p>
-			  <hr>
-			  <p class="card-text">Contributed by: {{ ea.user.fname }} {{ ea.user.lname }}</p>
-			</div>
-		  </div>
-	</div>
-	
-
-	{% endfor %}
-</div>
-	<!-- </div> -->
 
 {% endblock %}
