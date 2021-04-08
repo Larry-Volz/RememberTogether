@@ -196,7 +196,7 @@ def edit_obituary(departed_id):
         return render_template("edit-memorial.html", form=form, departed=departed)
 
 
-@app.route('/post/create/<int:departed_id>', methods = ["GET","POST"])
+@app.route('/createpost/<int:departed_id>', methods = ["GET","POST"])
 def create_post(departed_id):
     '''Create a post linked to a specific departed person'''
     #TODO: only allow signed-in person to do it

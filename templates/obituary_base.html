@@ -74,7 +74,7 @@
 						<li><a href="#" data-nav-section="memorial">Memorial Services</a></li>
 						<li><a href="#" data-nav-section="biography">Life Story</a></li>
 						<li><a href="#" data-nav-section="gallery">Gallery & Tributes</a></li>
-						<li><a href="/post/create/{{departed.id}}" class="external" data-nav-section="post">Post Something</a></li>
+						<li><a href="/createpost/{{departed.id}}" class="external" data-nav-section="post">Post Something</a></li>
 						<li><a href="/edit/{{departed.id}}" data-nav-section="manage" class="external">Edit This Memorial</a></li>
 					</ul>
 				</div>
@@ -190,7 +190,7 @@ Copyright <script>document.write(new Date().getFullYear());</script> Larry Volz
 				<div class="virtual-memorial-narrow-content">
 					<div class="row">
 						<div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
-							<form action="/post/create/{{ departed.id }}" class="form-inline text-center">
+							<form action="/createpost/{{ departed.id }}" class="form-inline text-center">
 								<button type="submit" class="btn btn-info ">Add a Memory</button>
 							</form>
 						</div>
