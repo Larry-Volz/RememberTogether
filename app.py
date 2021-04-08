@@ -226,7 +226,7 @@ def create_post(departed_id):
         return redirect(f'/memorial/{departed_id}')
 
     else:
-        return render_template("create-post.html", form=form,departed=departed)
+        return render_template("create_post.html", form=form,departed=departed)
 
 
 

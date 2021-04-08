@@ -29,13 +29,13 @@
 	<li>
 		<a href="#" data-nav-section="admin">Funeral Directors</a>
 	</li> -->
-{% endblock%}
-
-
-{% block intro_section %}
-
-
 {% endblock %}
+
+
+<!-- {% block intro_section %}
+
+
+{% endblock %} -->
 
 {% block control_panel2 %}
     {% for msg in get_flashed_messages() %} 
@@ -84,7 +84,7 @@
 	</div>
 {% endblock %}
 
-
+<p>TEST</p>
 {% block event %}
 
 <!-- TODO: FIX GRAMMAR SO IT dynamically says were held at or will be held at -->
@@ -121,9 +121,9 @@
 
 	<div class="col">
 		<div class="card" style="max-width: 70%;" >
-			<img class="card-img-top" src=" {{ ea.file_url }}" alt="picture of {{ departed.fname}} {{departed.lname}}">
+			<img class="card-img-top" src="{{ ea.file_url }}" alt="picture of {{ departed.fname}} {{departed.lname}}">
 			<div class="card-body">
-			  <p class="card-text">{{ ea. text }}</p>
+			  <p class="card-text">{{ ea.text }}</p>
 			  <hr>
 			  <p class="card-text">Contributed by: {{ ea.user.fname }} {{ ea.user.lname }}</p>
 			</div>
