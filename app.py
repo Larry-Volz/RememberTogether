@@ -135,7 +135,7 @@ def create_obituary():
 
 @app.route('/edit/<int:departed_id>',methods=["GET","POST"])
 def edit_obituary(departed_id):
-    """form and functionality to edit a pet"""
+    """form and functionality to edit an obituary/memorial"""
     departed = Departed.query.get_or_404(departed_id)
     form = Create_memorial_form(obj=departed)
 
@@ -206,23 +206,26 @@ def create_post(departed_id):
     departed = Departed.query.get_or_404(departed_id)
 
     if form.validate_on_submit(): #csrf & is POST
-        
         text = form.text.data   
 
-        #TODO: SET UP PHOTO FILE DOWNLOAD LIKE IN Create_memorial_form
-        file_url = form.file_url.data
+        file_url=""
+        picture = form.file_url.data
+        #IMPORTANT: SYNTAX FOR PHOTO FILE DOWNLOAD
+        try:
+            file_url = images.save(picture)
+        except:
+            print("****PICTURE NOT INCLUDED IN POST****")
 
-        #TODO: FIX THIS - SEE IF HIDDEN FIELD SHOWS FIRST THEN FIX IN FORMS TO PASS
-        #TODO: THEN ADD THE SIGN-IN AND USER INFO TO PASS IN SESSION
+        #TODO: FIX THIS - from SIGN-IN GET USER INFO from SESSION
         user_id = 1
 
         post =  Post(text=text, departed_id=departed_id, file_url=file_url, user_id=user_id)
         
 
-        db.session.add(departed)
+        db.session.add(post)
         db.session.commit()
 
-        flash(f"Successfully created {fname} {lname}.  You can enter their name in search bar to view their memorial")
+        flash(f"Thanks for sharing your memory!")
         return redirect(f'/memorial/{departed_id}')
 
     else:
