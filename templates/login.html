@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block control_panel %} <!-- area above links in left panel-->
+<div class="text-center">
+	<div class = "virtual-memorial-font"><a href="/">Virtual-Memorials.net</a></div>
+</div>
+<!-- <div class="text-center">
+	<div class="author-img" style="background-image: url(../static/images/{{ departed.headshot }});"></div>
+	<h1 id="virtual-memorial-logo"><a href="/memorial/{{ departed.id }}">{{ departed.fname }} {{ departed.lname }}</a></h1>
+</div> -->
+
+{% endblock %}
+
+{% block links %}
+
+	<li class="text-center">
+		<a href="/" class="external">Return Home</a><br>
+		<em> SAVE YOUR WORK FIRST!</em>
+	</li>
+
+{% endblock %}
+
+
+<!-- {% block intro_section %}
+
+
+{% endblock %} -->
+
+{% block control_panel2 %}
+    {% for msg in get_flashed_messages() %} 
+    <div class="bg-success m-4 text-center">
+    <br>
+        <h3 class="display-3 text-center">{{msg}}</h3>
+        <br>
+    </div>
+    {% endfor %}
+
+	<div class="col-md-8">
+		<h2 class="display-1 ml-5"><strong>Login</strong></h2>
+		<form action="/login" method="POST" enctype="multipart/form-data">
+			{{ form.hidden_tag() }}
+	
+			{% for field in form if field.widget.input_type != 'hidden' %}
+				
+				<div class="form-group">
+
+						{{ field.label }}
+						{{field(class="form-control")}}
+
+					{% for error in field.errors %} 
+					<br>
+					<small class="form-text text-danger">
+						{{ error }} 
+					</small>
+					{% endfor %} 
+				</div>
+					
+			{% endfor %}
+			
+	
+			<button class="btn btn-success" type="submit">Login</button>
+		</form>
+	</div>
+{% endblock %}
