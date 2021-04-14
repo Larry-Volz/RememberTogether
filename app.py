@@ -14,7 +14,7 @@ import datetime
 
 app=Flask(__name__)
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///remembertogether'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://ncewshwz:cY4ePyxBbMXu1j-PoeCx1ngNaM8bDAuB@queenie.db.elephantsql.com:5432/ncewshwz'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://ncewshwz:cY4ePyxBbMXu1j-PoeCx1ngNaM8bDAuB@queenie.db.elephantsql.com:5432/ncewshwz'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
