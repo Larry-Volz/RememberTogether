@@ -87,19 +87,15 @@ class User(db.Model):
     def __repr__(self):
            return f"loved one id={self.id} fname={self.fname} lname={self.lname}"  #for better referencing
 
-    id = db.Column(db.Integer,
-    primary_key = True,
-    autoincrement = True)
+    id = db.Column(db.Integer,primary_key = True, autoincrement = True)
 
     fname = db.Column(db.Text, nullable = False)
     lname = db.Column(db.Text, nullable = False)
-    email = db.Column(db.Text, nullable = False)
 
+    email = db.Column(db.Text, nullable = False)
     password = db.Column(db.Text, nullable = False)
-    # salt = db.Column(db.Text, nullable = True)
 
     # accept_tos = db.Column(db.Boolean, nullable = False)
-
     # post = db.relationship('Post', backref="user")
 
 

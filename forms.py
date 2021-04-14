@@ -85,8 +85,8 @@ class User_registration(FlaskForm):
 
     confirm = TextAreaField('Repeat Password')
     
-    accept_tos = BooleanField('I accept the TOS', 
-    validators = [DataRequired("required to register")])
+    # accept_tos = BooleanField('I accept the TOS', 
+    # validators = [DataRequired("required to register")])
 
 # class User_login(Flaskform):
 #     """For loved ones to login"""
