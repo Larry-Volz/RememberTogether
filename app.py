@@ -13,8 +13,9 @@ import datetime
 # from forms import User_registration, User_login, Admin_registration, Admin_login
 
 app=Flask(__name__)
-#postgres://ncewshwz:cY4ePyxBbMXu1j-PoeCx1ngNaM8bDAuB@queenie.db.elephantsql.com:5432/ncewshwz
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///remembertogether'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///remembertogether'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://ncewshwz:cY4ePyxBbMXu1j-PoeCx1ngNaM8bDAuB@queenie.db.elephantsql.com:5432/ncewshwz'
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['SECRET_KEY']='magic'
