@@ -1,6 +1,7 @@
 ascii-art-cli==1.2.0
 backcall==0.2.0
 blinker==1.4
+flask_bcrypt==0.5
 certifi==2020.12.5
 chardet==4.0.0
 click==7.1.2
