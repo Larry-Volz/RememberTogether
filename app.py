@@ -69,8 +69,12 @@ def memorial_page(id):
     departed = Departed.query.get_or_404(id)
     posts = Post.query.filter_by(departed_id=id).all()
 
-    event_times = departed.event_start.strftime("%B %d, %Y from %I:%M %p to ")
-    event_times += departed.event_end.strftime("%I:%M %p")
+    if departed.event_start:
+        event_times = departed.event_start.strftime("%B %d, %Y from %I:%M %p")
+        if departed.event_end:
+            event_times += departed.event_end.strftime(" to %I:%M %p")
+    else:
+        event_times = ''
     
 
     # event_room = departed.event.room
@@ -108,9 +112,20 @@ def create_obituary():
         event_start_time = form.event_start_time.data  #time field
         event_end = form.event_end.data  #time field
 
+
         #convert timestamp to time
-        event_start = merge_into_DateTime(event_start_date, event_start_time)
-        event_end = merge_into_DateTime(event_start_date, event_end)
+        #logic for case = not entered
+        if event_start_date and event_start_time:
+            event_start = merge_into_DateTime(event_start_date, event_start_time)
+        elif event_start_date and (not event_start_time):
+            event_start = event_start_date
+        else:
+            event_start = None
+
+        if  event_start_date and event_end:
+            event_end = merge_into_DateTime(event_start_date, event_end)
+        else:
+            event_end = None
 
 
         room = form.room.data
@@ -128,7 +143,9 @@ def create_obituary():
         db.session.add(departed)
         db.session.commit()
 
-        flash(f"Successfully created {fname} {lname}.  You can enter their name in search bar to view their memorial")
+        flash(f"Successfully created {fname} {lname}.")
+        flash("You can enter their name in search bar to view their memorial,")
+        flash("edit it and share memories.")
         return redirect('/')
 
     else:
