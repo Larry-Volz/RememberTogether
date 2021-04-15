@@ -4,6 +4,7 @@ from models import db, connect_db, User, Admin_user, Departed, Post
 from forms import User_registration, Create_memorial_form, Post_form, LoginForm
 from flask_uploads import configure_uploads, IMAGES, UploadSet
 import datetime
+from secrets import API_SECRET_KEY
 
 # ****NEED TO ALSO INSTALL Flask-Reloaded TO FIX BUGS IN flask_uploads!!!
 
@@ -18,7 +19,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://ncewshwz:cY4ePyxBbMXu1j-Po
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
-app.config['SECRET_KEY']='magic'
+app.config['SECRET_KEY']= API_SECRET_KEY
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 app.config['UPLOADED_IMAGES_DEST'] = 'static/images'
 
