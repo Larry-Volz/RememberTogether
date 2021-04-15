@@ -276,7 +276,8 @@ def user_sign_in():
 
         session["user_id"] = user.id
 
-        flash(f"Welcome {fname}, you have successfully registered.  You can create a memorial or post memories of someone you love now.")
+        flash(f"Welcome {fname}, you have successfully registered.")
+        flash("You can create a memorial or post memories of someone you love now.")
         #TODO - route to departed-specific page - every post needs to go to that specific person's file
         return redirect('/')
 

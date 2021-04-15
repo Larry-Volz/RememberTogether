@@ -23,7 +23,7 @@
 {% block intro_section %}
 
 <div class="col-md-8">
-    <h2 class="display-1 ml-5"><strong>Add a User</strong></h2>
+    <h2 class="display-1 ml-5"><strong>Register</strong></h2>
     <form action="/register" method="POST">
         {{ form.hidden_tag() }}
 
@@ -51,13 +51,16 @@
 
 {% block control_panel2 %}
     {% for msg in get_flashed_messages() %} 
-    <div class="bg-success m-4 text-center">
-    <br>
-        <h3 class="display-3 text-center">{{msg}}</h3>
-        <br>
+
+    <div class="col-6">
+        <div class="bg-success m-4 text-center">
+                <p class="display-3 text-center">{{msg}}</p>
+        </div>
     </div>
+
+
     {% endfor %}
-    
+
 {% endblock %}
 
 
