@@ -253,7 +253,7 @@ def edit_post(post_id):
 
 
 
-@app.route('/add',methods=["GET","POST"])
+@app.route('/register',methods=["GET","POST"])
 def user_sign_in():
     """displays app sign-in form for USERS"""
     form = User_registration()
@@ -264,17 +264,19 @@ def user_sign_in():
         lname = form.lname.data 
 
         email = form.email.data 
-        password = form.password.data
-        accept_tos = form.accept_tos.data
+        pwd = form.password.data
+        # accept_tos = form.accept_tos.data
 
         #TODO - departed lookup/id 
 
-        user = User(fname=fname, lname=lname, email=email, password=password, accept_tos=accept_tos)
+        user = User.register(fname, lname, email, pwd)
 
         db.session.add(user)
         db.session.commit()
 
-        flash(f"Successfully created {fname} {lname}")
+        session["user_id"] = user.id
+
+        flash(f"Welcome {fname}, you have successfully registered.  You can create a memorial or post memories of someone you love now.")
         #TODO - route to departed-specific page - every post needs to go to that specific person's file
         return redirect('/')
 

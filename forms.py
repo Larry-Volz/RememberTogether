@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired
 from wtforms.fields.html5 import DateField, DateTimeField, TimeField
-from wtforms import StringField, FloatField,IntegerField, StringField, TextAreaField, BooleanField, SubmitField, validators, HiddenField
+from wtforms import StringField, FloatField,IntegerField, StringField, TextAreaField, BooleanField, SubmitField, validators, HiddenField, PasswordField
 from wtforms.validators import InputRequired, Optional, Email, NumberRange, AnyOf, URL,  EqualTo, DataRequired
 #TODO: add PasswordField?
 
@@ -80,8 +80,10 @@ class User_registration(FlaskForm):
     email = StringField("Email Address",
     validators=[InputRequired("required field"), Email()])
 
-    password = TextAreaField("Password", 
-    validators = [DataRequired(message = "required field"), EqualTo('confirm', message="passwords must match") ])
+    password = PasswordField("Password", 
+    validators = [InputRequired(message = "required field"), EqualTo('confirm', message="passwords must match") ])
+
+    # password = PasswordField("Password", validators=[InputRequired()])
 
     confirm = TextAreaField('Repeat Password')
     

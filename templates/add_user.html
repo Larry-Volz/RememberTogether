@@ -1,15 +1,37 @@
 {% extends 'base.html' %}
-{% block content %} 
+
+{% block title %}Create a virtual memorial wall {% endblock %}
+{% block meta_content %}create an obituary {% endblock %}
+
+{% block control_panel %} 
+<div class="text-center">
+	<div class = "virtual-memorial-font"><a href="/">Virtual-Memorials.net</a></div>
+</div>
+
+    <div class="departed-display"></div>
+    
+{% endblock %}
+
+{% block links %}
+
+	<li>
+		<a href="/" class="external">Back</a>
+	</li>
+
+{% endblock%}
+
+{% block intro_section %}
+
 <div class="col-md-8">
     <h2 class="display-1 ml-5"><strong>Add a User</strong></h2>
-    <form action="/add" method="POST">
+    <form action="/register" method="POST">
         {{ form.hidden_tag() }}
 
         {% for field in form if field.widget.input_type != 'hidden' %}
             
             <div class="form-group">
                 {{ field.label }}
-                {{field(class_="form-control-small")}}
+                {{field(class="form-control")}}
                 {% for error in field.errors %} 
                 <br>
                 <small class="form-text text-danger">
@@ -20,7 +42,22 @@
                 
         {% endfor %}
 
-        <button class="btn btn-primary" type="submit">Add</button>
+        <button class="btn btn-success" type="submit">Add</button>
+        <a href="/"><button class="btn btn-danger" >Cancel</button></a>
     </form>
 </div>
+
 {% endblock %}
+
+{% block control_panel2 %}
+    {% for msg in get_flashed_messages() %} 
+    <div class="bg-success m-4 text-center">
+    <br>
+        <h3 class="display-3 text-center">{{msg}}</h3>
+        <br>
+    </div>
+    {% endfor %}
+    
+{% endblock %}
+
+

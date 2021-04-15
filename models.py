@@ -1,8 +1,12 @@
 from flask_sqlalchemy import SQLAlchemy
+from flask_bcrypt import Bcrypt
 import datetime
 """Models for RememberTogether"""
 
 db=SQLAlchemy()
+
+bcrypt = Bcrypt() 
+
 def connect_db(app):
     db.app = app 
     db.init_app(app)
@@ -92,11 +96,24 @@ class User(db.Model):
     fname = db.Column(db.Text, nullable = False)
     lname = db.Column(db.Text, nullable = False)
 
-    email = db.Column(db.Text, nullable = False)
+    email = db.Column(db.Text, nullable = False, unique = True)
     password = db.Column(db.Text, nullable = False)
 
     # accept_tos = db.Column(db.Boolean, nullable = False)
     # post = db.relationship('Post', backref="user")
+
+    # start_register
+    @classmethod
+    def register(cls, fname, lname, email, pwd):
+        """Register user w/hashed password & return user."""
+
+        hashed = bcrypt.generate_password_hash(pwd)
+        # turn bytestring into normal (unicode utf8) string
+        hashed_utf8 = hashed.decode("utf8")
+
+        # return instance of user w/email and hashed pwd - CHANGED THIS
+        return cls(fname=fname, lname=lname, email=email, password=hashed_utf8)
+    # end_register
 
 
 class Post(db.Model):
