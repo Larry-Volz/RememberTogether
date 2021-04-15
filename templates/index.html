@@ -29,10 +29,16 @@
 		<a href="#" data-nav-section="memorial">Look up a Memorial Page</a>
 	</li> -->
 	<hr>
-	<!-- <br> -->
-	<li>
-		<a href="/register" class="external">Register</a>/<a href="#" class="external">Login</a>
-	</li>
+
+	{% if 'user_id' in session %}
+    	<li><a href="/logout" class="external">Logout</a></li>
+	{% else %}
+		<li>
+			<a href="/register" class="external">Register</a>/<a href="/login" class="external">Login</a>
+		</li>
+  	{% endif %}
+
+
 	<li>
 		<a href="/create" class="external">Create Memorial Page</a>
 	</li>
@@ -45,9 +51,9 @@
 
 {% block intro_section %}
 	<div class="col-6">
-		<div class="bg-success m-4 text-center">
+		<div class="bg-warning m-4 text-center">
 			{% for msg in get_flashed_messages() %} 
-				<p class="display-3 text-center">{{msg}}</p>
+				<span class="display-3 text-center">{{msg}}</span><br>
 			{% endfor %}
 		</div>
 	</div>

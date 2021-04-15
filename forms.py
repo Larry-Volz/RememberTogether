@@ -99,6 +99,13 @@ class User_registration(FlaskForm):
 #     password = PasswordField("Password", 
 #     validators = [DataRequired(message = "required field")])
 
+class LoginForm(FlaskForm):
+    """Form for registering a user."""
+
+    email = StringField("email", validators=[InputRequired()])
+    password = PasswordField("Password", validators=[InputRequired()])
+
+
 
 # class Admin_registration(Flaskform):
     #TODO

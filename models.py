@@ -115,6 +115,23 @@ class User(db.Model):
         return cls(fname=fname, lname=lname, email=email, password=hashed_utf8)
     # end_register
 
+    # start_authenticate
+    @classmethod
+    def authenticate(cls, email, pwd):
+        """Validate that user exists & password is correct.
+
+        Return user if valid; else return False.
+        """
+
+        u = User.query.filter_by(email=email).first()
+
+        if u and bcrypt.check_password_hash(u.password, pwd):
+            # return user instance
+            return u
+        else:
+            return False
+    # end_authenticate    
+
 
 class Post(db.Model):
     """posts by users about specific departed 

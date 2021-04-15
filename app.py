@@ -1,7 +1,7 @@
 from flask import Flask, request, render_template, redirect, flash, session, jsonify, url_for
 from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db, User, Admin_user, Departed, Post
-from forms import User_registration, Create_memorial_form, Post_form
+from forms import User_registration, Create_memorial_form, Post_form, LoginForm
 from flask_uploads import configure_uploads, IMAGES, UploadSet
 import datetime
 
@@ -283,6 +283,42 @@ def user_sign_in():
 
     else:
         return render_template("add_user.html", form=form)
+
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    """Produce login form or handle login."""
+
+    form = LoginForm()
+
+    if form.validate_on_submit():
+        email = form.email.data
+        pwd = form.password.data
+
+        # authenticate will return a user or False
+        user = User.authenticate(email, pwd)
+
+        if user:
+            session["user_id"] = user.id  # keep logged in
+            flash("You are logged in successfully.")
+            return redirect("/")
+
+        else:
+            form.email.errors = ["Bad email/password"]
+
+    return render_template("login.html", form=form)
+# end-login
+
+@app.route("/logout")
+def logout():
+    """Logs user out and redirects to homepage."""
+
+    session.pop("user_id")
+
+    return redirect("/")
+
+
 
 # @app.route('/admin')
 # def admin_sign_in():
