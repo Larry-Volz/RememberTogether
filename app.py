@@ -200,7 +200,6 @@ def edit_obituary(departed_id):
         departed.event_url = form.event_url.data
 
 
-        # db.session.add(pet)
         db.session.commit()
 
         flash(f"Successfully edited {departed.fname} {departed.lname}")
