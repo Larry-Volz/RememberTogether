@@ -279,13 +279,6 @@ def edit_post(post_id):
 
 
 
-
-@app.route('/sendflowers/<int:departed_id>')
-def send_flowers(departed_id):
-    departed = Departed.query.get_or_404(departed_id)
-
-    return render_template("send-flowers.html", departed=departed)
-
 @app.route('/register',methods=["GET","POST"])
 def user_register():
     """registration for new users (family members)"""
