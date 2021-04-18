@@ -33,7 +33,13 @@
 
 	<div class="col-md-8">
 		<h2 class="display-1 ml-5"><strong>Login</strong></h2>
-		<form action="/login" method="POST" enctype="multipart/form-data">
+
+		{% if departed %}
+			<form action="/login/{{departed.id}}" method="POST" enctype="multipart/form-data">
+		{% else %}
+			<form action="/login" method="POST" enctype="multipart/form-data">
+		{% endif %}
+		
 			{{ form.hidden_tag() }}
 	
 			{% for field in form if field.widget.input_type != 'hidden' %}

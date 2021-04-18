@@ -83,9 +83,14 @@ def memorial_page(id):
 
 
 @app.route('/create', methods=["GET","POST"])
-def create_obituary():
+def create_obituary(user_id):
     """ renders form to create a new obituary """
     form = Create_memorial_form()
+    user = User.query.get(user_id)
+
+    if "user_id" not in session:
+        flash("You must login or register to create a memorial.")
+        return redirect("/")
 
     if form.validate_on_submit(): #csrf & is POST
         
@@ -139,7 +144,7 @@ def create_obituary():
 
     
 
-        departed =  Departed(fname=fname, lname=lname, born=born, died=died, city_born=city_born, state_born=state_born, headshot=headshot, hero1=hero1, hero2=hero2, biography=biography, text_color=text_color, headline=headline, booked_yet=booked_yet , funeral_home_name=funeral_home_name, event_start=event_start, event_end=event_end, room=room, event_address=event_address, event_city=event_city, event_state=event_state, event_zip=event_zip, event_phone=event_phone, event_url=event_url)
+        departed =  Departed(fname=fname, lname=lname, born=born, died=died, city_born=city_born, state_born=state_born, headshot=headshot, hero1=hero1, hero2=hero2, biography=biography, text_color=text_color, headline=headline, booked_yet=booked_yet , funeral_home_name=funeral_home_name, event_start=event_start, event_end=event_end, room=room, event_address=event_address, event_city=event_city, event_state=event_state, event_zip=event_zip, event_phone=event_phone, event_url=event_url, created_by=user_id)
 
         db.session.add(departed)
         db.session.commit()
@@ -218,6 +223,10 @@ def create_post(departed_id):
     form = Post_form()
     departed = Departed.query.get_or_404(departed_id)
 
+    if "user_id" not in session:
+        flash(f"Please register or login first to share a memory")
+        return redirect(f'/memorial/{departed_id}')
+
     if form.validate_on_submit(): #csrf & is POST
         text = form.text.data   
 
@@ -278,8 +287,8 @@ def send_flowers(departed_id):
     return render_template("send-flowers.html", departed=departed)
 
 @app.route('/register',methods=["GET","POST"])
-def user_sign_in():
-    """displays app sign-in form for USERS"""
+def user_register():
+    """registration for new users (family members)"""
     form = User_registration()
 
     if form.validate_on_submit(): #csrf & is POST
@@ -304,6 +313,37 @@ def user_sign_in():
         flash("You can create a memorial or post memories of someone you love now.")
         #TODO - route to departed-specific page - every post needs to go to that specific person's file
         return redirect('/')
+
+    else:
+        return render_template("add_user.html", form=form)
+
+@app.route('/register/<int:departed_id>',methods=["GET","POST"])
+def user_register_from_departed(departed_id):
+    """registration for new users (family members)"""
+    form = User_registration()
+
+    if form.validate_on_submit(): #csrf & is POST
+        
+        fname = form.fname.data  
+        lname = form.lname.data 
+
+        email = form.email.data 
+        pwd = form.password.data
+        # accept_tos = form.accept_tos.data
+
+        #TODO - departed lookup/id 
+
+        user = User.register(fname, lname, email, pwd)
+
+        db.session.add(user)
+        db.session.commit()
+
+        session["user_id"] = user.id
+
+        flash(f"Welcome {fname}, you have successfully registered.")
+        flash("You can create a memorial or post memories of someone you love now.")
+        #TODO - route to departed-specific page - every post needs to go to that specific person's file
+        return redirect(f'/memorial/{departed_id}')
 
     else:
         return render_template("add_user.html", form=form)
@@ -333,6 +373,34 @@ def login():
 
     return render_template("login.html", form=form)
 # end-login
+
+
+@app.route("/login/<int:departed_id>", methods=["GET", "POST"])
+def login_from_departed(departed_id):
+    """Produce login form or handle login."""
+
+    form = LoginForm()
+    departed = Departed.query.get(departed_id)
+
+    if form.validate_on_submit():
+        email = form.email.data
+        pwd = form.password.data
+
+        # authenticate will return a user or False
+        user = User.authenticate(email, pwd)
+
+        if user:
+            session["user_id"] = user.id  # keep logged in
+            flash("You are logged in and can share memories and more now.")
+            return redirect(f"/memorial/{departed_id}")
+
+        else:
+            form.email.errors = ["Bad email/password"]
+
+    return render_template("login.html", form=form, departed=departed)
+# end-login
+
+
 
 @app.route("/logout")
 def logout():

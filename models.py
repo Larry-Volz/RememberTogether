@@ -62,6 +62,12 @@ class Departed(db.Model):
     event_zip = db.Column(db.String(10), nullable = True)
     event_phone = db.Column(db.String(14), nullable = True)
     event_url = db.Column(db.Text, nullable = True)
+
+    #which user created this memorial - only they can edit or delete it
+    #it can be a family member or a funeral home staff member
+    created_by = db.Column(db.Integer, db.ForeignKey('users.id'), nullable = False)
+
+    created_by = db.relationship('User', backref='departed')
     
     #TODO: re-factor into additional table(s)
     # event_id = db.Column(db.Integer, db.ForeignKey('admins.id'))
