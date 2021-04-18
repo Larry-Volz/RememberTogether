@@ -1,98 +1,97 @@
-$ heroku logs --tail
-2021-04-16T20:26:16.597619+00:00 app[web.1]: worker.init_process()
-2021-04-16T20:26:16.597619+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/workers/base.py", line 134, in init_process
-2021-04-16T20:26:16.597619+00:00 app[web.1]: self.load_wsgi()
-2021-04-16T20:26:16.597620+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/workers/base.py", line 146, in load_wsgi
-2021-04-16T20:26:16.597620+00:00 app[web.1]: self.wsgi = self.app.wsgi()
-2021-04-16T20:26:16.597621+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/app/base.py", line 67, in wsgi
-2021-04-16T20:26:16.597621+00:00 app[web.1]: self.callable = self.load()
-2021-04-16T20:26:16.597621+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/app/wsgiapp.py", line 58, in load
-2021-04-16T20:26:16.597622+00:00 app[web.1]: return self.load_wsgiapp()
-2021-04-16T20:26:16.597622+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/app/wsgiapp.py", line 48, in load_wsgiapp
-2021-04-16T20:26:16.597623+00:00 app[web.1]: return util.import_app(self.app_uri)
-2021-04-16T20:26:16.597623+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/util.py", line 359, in import_app
-2021-04-16T20:26:16.597623+00:00 app[web.1]: mod = importlib.import_module(module)
-2021-04-16T20:26:16.597624+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/importlib/__init__.py", line 127, in import_module
-2021-04-16T20:26:16.597624+00:00 app[web.1]: return _bootstrap._gcd_import(name[level:], package, level)       
-2021-04-16T20:26:16.597625+00:00 app[web.1]: File "<frozen importlib._bootstrap>", line 1030, in _gcd_import   
-2021-04-16T20:26:16.597625+00:00 app[web.1]: File "<frozen importlib._bootstrap>", line 1007, in _find_and_load2021-04-16T20:26:16.597625+00:00 app[web.1]: File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
-2021-04-16T20:26:16.597626+00:00 app[web.1]: File "<frozen importlib._bootstrap>", line 680, in _load_unlocked 
-2021-04-16T20:26:16.597626+00:00 app[web.1]: File "<frozen importlib._bootstrap_external>", line 790, in exec_module
-2021-04-16T20:26:16.597627+00:00 app[web.1]: File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
-2021-04-16T20:26:16.597627+00:00 app[web.1]: File "/app/app.py", line 7, in <module>
-2021-04-16T20:26:16.597627+00:00 app[web.1]: from secrets import API_SECRET_KEY
-2021-04-16T20:26:16.597628+00:00 app[web.1]: ImportError: cannot import name 'API_SECRET_KEY' from 'secrets' (/app/.heroku/python/lib/python3.9/secrets.py)
-2021-04-16T20:26:16.598063+00:00 app[web.1]: [2021-04-16 20:26:16 +0000] [8] [INFO] Worker exiting (pid: 8)    
-2021-04-16T20:26:18.000000+00:00 app[api]: Build succeeded
-2021-04-16T20:26:46.754854+00:00 app[web.1]: [2021-04-16 20:26:46 +0000] [4] [INFO] Shutting down: Master      
-2021-04-16T20:26:46.754998+00:00 app[web.1]: [2021-04-16 20:26:46 +0000] [4] [INFO] Reason: Worker failed to boot.
-2021-04-16T20:26:46.850322+00:00 heroku[web.1]: Process exited with status 3
-2021-04-16T20:26:46.928321+00:00 heroku[web.1]: State changed from starting to crashed
-2021-04-16T20:26:46.949856+00:00 heroku[web.1]: State changed from crashed to starting
-2021-04-16T20:26:51.606227+00:00 heroku[web.1]: Starting process with command `gunicorn -b :55171 app:app`     
-2021-04-16T20:26:54.785948+00:00 app[web.1]: [2021-04-16 20:26:54 +0000] [4] [INFO] Starting gunicorn 20.1.0   
-2021-04-16T20:26:54.786387+00:00 app[web.1]: [2021-04-16 20:26:54 +0000] [4] [INFO] Listening at: http://0.0.0.0:55171 (4)
-2021-04-16T20:26:54.786461+00:00 app[web.1]: [2021-04-16 20:26:54 +0000] [4] [INFO] Using worker: sync
-2021-04-16T20:26:54.789970+00:00 app[web.1]: [2021-04-16 20:26:54 +0000] [7] [INFO] Booting worker with pid: 7 
-2021-04-16T20:26:54.867375+00:00 app[web.1]: [2021-04-16 20:26:54 +0000] [8] [INFO] Booting worker with pid: 8 
-2021-04-16T20:26:55.312907+00:00 app[web.1]: [2021-04-16 20:26:55 +0000] [7] [ERROR] Exception in worker process
-2021-04-16T20:26:55.312951+00:00 app[web.1]: Traceback (most recent call last):
-2021-04-16T20:26:55.312960+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/arbiter.py", line 589, in spawn_worker
-2021-04-16T20:26:55.312961+00:00 app[web.1]: worker.init_process()
-2021-04-16T20:26:55.312962+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/workers/base.py", line 134, in init_process
-2021-04-16T20:26:55.312962+00:00 app[web.1]: self.load_wsgi()
-2021-04-16T20:26:55.312962+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/workers/base.py", line 146, in load_wsgi
-2021-04-16T20:26:55.312963+00:00 app[web.1]: self.wsgi = self.app.wsgi()
-2021-04-16T20:26:55.312963+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/app/base.py", line 67, in wsgi
-2021-04-16T20:26:55.312963+00:00 app[web.1]: self.callable = self.load()
-2021-04-16T20:26:55.312964+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/app/wsgiapp.py", line 58, in load
-2021-04-16T20:26:55.312964+00:00 app[web.1]: return self.load_wsgiapp()
-2021-04-16T20:26:55.312964+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/app/wsgiapp.py", line 48, in load_wsgiapp
-2021-04-16T20:26:55.312965+00:00 app[web.1]: return util.import_app(self.app_uri)
-2021-04-16T20:26:55.312965+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/util.py", line 359, in import_app
-2021-04-16T20:26:55.312965+00:00 app[web.1]: mod = importlib.import_module(module)
-2021-04-16T20:26:55.312965+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/importlib/__init__.py", line 127, in import_module
-2021-04-16T20:26:55.312966+00:00 app[web.1]: return _bootstrap._gcd_import(name[level:], package, level)
-2021-04-16T20:26:55.312967+00:00 app[web.1]: File "<frozen importlib._bootstrap>", line 1030, in _gcd_import   
-2021-04-16T20:26:55.312967+00:00 app[web.1]: File "<frozen importlib._bootstrap>", line 1007, in _find_and_load2021-04-16T20:26:55.312967+00:00 app[web.1]: File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
-2021-04-16T20:26:55.312968+00:00 app[web.1]: File "<frozen importlib._bootstrap>", line 680, in _load_unlocked 
-2021-04-16T20:26:55.312968+00:00 app[web.1]: File "<frozen importlib._bootstrap_external>", line 790, in exec_module
-2021-04-16T20:26:55.312969+00:00 app[web.1]: File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
-2021-04-16T20:26:55.312969+00:00 app[web.1]: File "/app/app.py", line 7, in <module>
-2021-04-16T20:26:55.312969+00:00 app[web.1]: from secrets import API_SECRET_KEY
-2021-04-16T20:26:55.312969+00:00 app[web.1]: ImportError: cannot import name 'API_SECRET_KEY' from 'secrets' (/app/.heroku/python/lib/python3.9/secrets.py)
-2021-04-16T20:26:55.312970+00:00 app[web.1]: [2021-04-16 20:26:55 +0000] [8] [ERROR] Exception in worker process
-2021-04-16T20:26:55.312970+00:00 app[web.1]: Traceback (most recent call last):
-2021-04-16T20:26:55.312970+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/arbiter.py", line 589, in spawn_worker
-2021-04-16T20:26:55.312971+00:00 app[web.1]: worker.init_process()
-2021-04-16T20:26:55.312971+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/workers/base.py", line 134, in init_process
-2021-04-16T20:26:55.312971+00:00 app[web.1]: self.load_wsgi()
-2021-04-16T20:26:55.312971+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/workers/base.py", line 146, in load_wsgi
-2021-04-16T20:26:55.312972+00:00 app[web.1]: self.wsgi = self.app.wsgi()
-2021-04-16T20:26:55.312972+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/app/base.py", line 67, in wsgi
-2021-04-16T20:26:55.312972+00:00 app[web.1]: self.callable = self.load()
-2021-04-16T20:26:55.312972+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/app/wsgiapp.py", line 58, in load
-2021-04-16T20:26:55.312973+00:00 app[web.1]: return self.load_wsgiapp()
-2021-04-16T20:26:55.312973+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/app/wsgiapp.py", line 48, in load_wsgiapp
-2021-04-16T20:26:55.312973+00:00 app[web.1]: return util.import_app(self.app_uri)
-2021-04-16T20:26:55.312973+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/util.py", line 359, in import_app
-2021-04-16T20:26:55.312974+00:00 app[web.1]: mod = importlib.import_module(module)
-2021-04-16T20:26:55.312974+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/importlib/__init__.py", line 127, in import_module
-2021-04-16T20:26:55.312974+00:00 app[web.1]: return _bootstrap._gcd_import(name[level:], package, level)       
-2021-04-16T20:26:55.312975+00:00 app[web.1]: File "<frozen importlib._bootstrap>", line 1030, in _gcd_import   
-2021-04-16T20:26:55.312975+00:00 app[web.1]: File "<frozen importlib._bootstrap>", line 1007, in _find_and_load2021-04-16T20:26:55.312975+00:00 app[web.1]: File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
-2021-04-16T20:26:55.312976+00:00 app[web.1]: File "<frozen importlib._bootstrap>", line 680, in _load_unlocked 
-2021-04-16T20:26:55.312976+00:00 app[web.1]: File "<frozen importlib._bootstrap_external>", line 790, in exec_module
-2021-04-16T20:26:55.312976+00:00 app[web.1]: File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
-2021-04-16T20:26:55.312977+00:00 app[web.1]: File "/app/app.py", line 7, in <module>
-2021-04-16T20:26:55.312977+00:00 app[web.1]: from secrets import API_SECRET_KEY
-2021-04-16T20:26:55.312977+00:00 app[web.1]: ImportError: cannot import name 'API_SECRET_KEY' from 'secrets' (/app/.heroku/python/lib/python3.9/secrets.py)
-2021-04-16T20:26:55.313102+00:00 app[web.1]: [2021-04-16 20:26:55 +0000] [8] [INFO] Worker exiting (pid: 8)    
-2021-04-16T20:26:55.313106+00:00 app[web.1]: [2021-04-16 20:26:55 +0000] [7] [INFO] Worker exiting (pid: 7)    
-2021-04-16T20:26:55.396954+00:00 app[web.1]: [2021-04-16 20:26:55 +0000] [4] [WARNING] Worker with pid 7 was terminated due to signal 15
-2021-04-16T20:26:55.493418+00:00 app[web.1]: [2021-04-16 20:26:55 +0000] [4] [INFO] Shutting down: Master
-2021-04-16T20:26:55.493545+00:00 app[web.1]: [2021-04-16 20:26:55 +0000] [4] [INFO] Reason: Worker failed to boot.
-2021-04-16T20:26:55.573234+00:00 heroku[web.1]: Process exited with status 3
-2021-04-16T20:26:55.697367+00:00 heroku[web.1]: State changed from starting to crashed
-2021-04-16T20:26:56.600522+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/" host=virtual-memorials.herokuapp.com request_id=21d13c35-7ac5-4ec9-9fbf-7baa31ce9b27 fwd="73.147.70.17" dyno= connect= service= status=503 bytes= protocol=https
-2021-04-16T20:26:57.841785+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/favicon.ico" host=virtual-memorials.herokuapp.com request_id=09b27ffc-ac54-4693-a738-c10624603690 fwd="73.147.70.17" dyno= connect= service= status=503 bytes= protocol=https
+2021-04-16T21:10:50.467904+00:00 app[web.1]: self.load_wsgi()
+2021-04-16T21:10:50.467904+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/workers/base.py", line 146, in load_wsgi
+2021-04-16T21:10:50.467904+00:00 app[web.1]: self.wsgi = self.app.wsgi()
+2021-04-16T21:10:50.467905+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/app/base.py", line 67, in wsgi
+2021-04-16T21:10:50.467905+00:00 app[web.1]: self.callable = self.load()
+2021-04-16T21:10:50.467905+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/app/wsgiapp.py", line 58, in load
+2021-04-16T21:10:50.467906+00:00 app[web.1]: return self.load_wsgiapp()
+2021-04-16T21:10:50.467906+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/app/wsgiapp.py", line 48, in load_wsgiapp
+2021-04-16T21:10:50.467906+00:00 app[web.1]: return util.import_app(self.app_uri)
+2021-04-16T21:10:50.467906+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/util.py", line 359, in import_app
+2021-04-16T21:10:50.467907+00:00 app[web.1]: mod = importlib.import_module(module)
+2021-04-16T21:10:50.467907+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/importlib/__init__.py", line 127, in import_module
+2021-04-16T21:10:50.467907+00:00 app[web.1]: return _bootstrap._gcd_import(name[level:], package, level)       
+2021-04-16T21:10:50.467907+00:00 app[web.1]: File "<frozen importlib._bootstrap>", line 1030, in _gcd_import   
+2021-04-16T21:10:50.467908+00:00 app[web.1]: File "<frozen importlib._bootstrap>", line 1007, in _find_and_load2021-04-16T21:10:50.467908+00:00 app[web.1]: File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+2021-04-16T21:10:50.467908+00:00 app[web.1]: File "<frozen importlib._bootstrap>", line 680, in _load_unlocked 
+2021-04-16T21:10:50.467908+00:00 app[web.1]: File "<frozen importlib._bootstrap_external>", line 790, in exec_module
+2021-04-16T21:10:50.467909+00:00 app[web.1]: File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+2021-04-16T21:10:50.467909+00:00 app[web.1]: File "/app/app.py", line 7, in <module>
+2021-04-16T21:10:50.467909+00:00 app[web.1]: from secrets import API_SECRET_KEY
+2021-04-16T21:10:50.467909+00:00 app[web.1]: ImportError: cannot import name 'API_SECRET_KEY' from 'secrets' (/app/.heroku/python/lib/python3.9/secrets.py)
+2021-04-16T21:10:50.468086+00:00 app[web.1]: [2021-04-16 21:10:50 +0000] [8] [INFO] Worker exiting (pid: 8)    
+2021-04-16T21:10:50.543502+00:00 heroku[router]: at=error code=H13 desc="Connection closed without response" method=GET path="/" host=virtual-memorials.herokuapp.com request_id=74910387-10c0-49ee-8be5-29db796e4cda fwd="73.147.70.17" dyno=web.1 connect=0ms service=136ms status=503 bytes=0 protocol=https
+2021-04-16T21:10:50.548884+00:00 app[web.1]: [2021-04-16 21:10:50 +0000] [4] [WARNING] Worker with pid 8 was terminated due to signal 15
+2021-04-16T21:10:50.643440+00:00 app[web.1]: [2021-04-16 21:10:50 +0000] [4] [INFO] Shutting down: Master      
+2021-04-16T21:10:50.643513+00:00 app[web.1]: [2021-04-16 21:10:50 +0000] [4] [INFO] Reason: Worker failed to boot.
+2021-04-16T21:10:50.695291+00:00 heroku[web.1]: Process exited with status 3
+2021-04-16T21:10:50.773174+00:00 heroku[web.1]: State changed from up to crashed
+2021-04-16T21:10:50.780934+00:00 heroku[web.1]: State changed from crashed to starting
+2021-04-16T21:10:53.000000+00:00 app[api]: Build succeeded
+2021-04-16T21:10:56.999298+00:00 heroku[web.1]: Starting process with command `gunicorn -b :3216 app:app`      
+2021-04-16T21:11:01.081079+00:00 app[web.1]: [2021-04-16 21:11:01 +0000] [4] [INFO] Starting gunicorn 20.1.0
+2021-04-16T21:11:01.081831+00:00 app[web.1]: [2021-04-16 21:11:01 +0000] [4] [INFO] Listening at: http://0.0.0.0:3216 (4)
+2021-04-16T21:11:01.081991+00:00 app[web.1]: [2021-04-16 21:11:01 +0000] [4] [INFO] Using worker: sync
+2021-04-16T21:11:01.088548+00:00 app[web.1]: [2021-04-16 21:11:01 +0000] [7] [INFO] Booting worker with pid: 7 
+2021-04-16T21:11:01.200106+00:00 app[web.1]: [2021-04-16 21:11:01 +0000] [8] [INFO] Booting worker with pid: 8 
+2021-04-16T21:11:01.601622+00:00 heroku[web.1]: State changed from starting to up
+2021-04-16T21:11:08.841545+00:00 app[web.1]: [2021-04-16 21:11:08 +0000] [8] [ERROR] Exception in worker process
+2021-04-16T21:11:08.841569+00:00 app[web.1]: Traceback (most recent call last):
+2021-04-16T21:11:08.841571+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/arbiter.py", line 589, in spawn_worker
+2021-04-16T21:11:08.841572+00:00 app[web.1]: worker.init_process()
+2021-04-16T21:11:08.841572+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/workers/base.py", line 134, in init_process
+2021-04-16T21:11:08.841572+00:00 app[web.1]: self.load_wsgi()
+2021-04-16T21:11:08.841573+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/workers/base.py", line 146, in load_wsgi
+2021-04-16T21:11:08.841573+00:00 app[web.1]: self.wsgi = self.app.wsgi()
+2021-04-16T21:11:08.841574+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/app/base.py", line 67, in wsgi
+2021-04-16T21:11:08.841574+00:00 app[web.1]: self.callable = self.load()
+2021-04-16T21:11:08.841575+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/app/wsgiapp.py", line 58, in load
+2021-04-16T21:11:08.841575+00:00 app[web.1]: return self.load_wsgiapp()
+2021-04-16T21:11:08.841575+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/app/wsgiapp.py", line 48, in load_wsgiapp
+2021-04-16T21:11:08.841576+00:00 app[web.1]: return util.import_app(self.app_uri)
+2021-04-16T21:11:08.841576+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/util.py", line 359, in import_app
+2021-04-16T21:11:08.841576+00:00 app[web.1]: mod = importlib.import_module(module)
+2021-04-16T21:11:08.841577+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/importlib/__init__.py", line 127, in import_module
+2021-04-16T21:11:08.841578+00:00 app[web.1]: return _bootstrap._gcd_import(name[level:], package, level)       
+2021-04-16T21:11:08.841578+00:00 app[web.1]: File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+2021-04-16T21:11:08.841578+00:00 app[web.1]: File "<frozen importlib._bootstrap>", line 1007, in _find_and_load2021-04-16T21:11:08.841579+00:00 app[web.1]: File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+2021-04-16T21:11:08.841579+00:00 app[web.1]: File "<frozen importlib._bootstrap>", line 680, in _load_unlocked 
+2021-04-16T21:11:08.841579+00:00 app[web.1]: File "<frozen importlib._bootstrap_external>", line 790, in exec_module
+2021-04-16T21:11:08.841580+00:00 app[web.1]: File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+2021-04-16T21:11:08.841580+00:00 app[web.1]: File "/app/app.py", line 7, in <module>
+2021-04-16T21:11:08.841580+00:00 app[web.1]: from secrets import API_SECRET_KEY
+2021-04-16T21:11:08.841581+00:00 app[web.1]: ImportError: cannot import name 'API_SECRET_KEY' from 'secrets' (/app/.heroku/python/lib/python3.9/secrets.py)
+2021-04-16T21:11:08.842223+00:00 app[web.1]: [2021-04-16 21:11:08 +0000] [8] [INFO] Worker exiting (pid: 8)    
+2021-04-16T21:11:08.927243+00:00 app[web.1]: [2021-04-16 21:11:08 +0000] [7] [ERROR] Exception in worker process
+2021-04-16T21:11:08.927245+00:00 app[web.1]: Traceback (most recent call last):
+2021-04-16T21:11:08.927246+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/arbiter.py", line 589, in spawn_worker
+2021-04-16T21:11:08.927246+00:00 app[web.1]: worker.init_process()
+2021-04-16T21:11:08.927247+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/workers/base.py", line 134, in init_process
+2021-04-16T21:11:08.927247+00:00 app[web.1]: self.load_wsgi()
+2021-04-16T21:11:08.927248+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/workers/base.py", line 146, in load_wsgi
+2021-04-16T21:11:08.927248+00:00 app[web.1]: self.wsgi = self.app.wsgi()
+2021-04-16T21:11:08.927249+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/app/base.py", line 67, in wsgi
+2021-04-16T21:11:08.927249+00:00 app[web.1]: self.callable = self.load()
+2021-04-16T21:11:08.927249+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/app/wsgiapp.py", line 58, in load
+2021-04-16T21:11:08.927250+00:00 app[web.1]: return self.load_wsgiapp()
+2021-04-16T21:11:08.927250+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/app/wsgiapp.py", line 48, in load_wsgiapp
+2021-04-16T21:11:08.927254+00:00 app[web.1]: return util.import_app(self.app_uri)
+2021-04-16T21:11:08.927255+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/util.py", line 359, in import_app
+2021-04-16T21:11:08.927255+00:00 app[web.1]: mod = importlib.import_module(module)
+2021-04-16T21:11:08.927256+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/importlib/__init__.py", line 127, in import_module
+2021-04-16T21:11:08.927256+00:00 app[web.1]: return _bootstrap._gcd_import(name[level:], package, level)       
+2021-04-16T21:11:08.927257+00:00 app[web.1]: File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+2021-04-16T21:11:08.927258+00:00 app[web.1]: File "<frozen importlib._bootstrap>", line 1007, in _find_and_load2021-04-16T21:11:08.927258+00:00 app[web.1]: File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+2021-04-16T21:11:08.927258+00:00 app[web.1]: File "<frozen importlib._bootstrap>", line 680, in _load_unlocked 
+2021-04-16T21:11:08.927259+00:00 app[web.1]: File "<frozen importlib._bootstrap_external>", line 790, in exec_module
+2021-04-16T21:11:08.927259+00:00 app[web.1]: File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+2021-04-16T21:11:08.927259+00:00 app[web.1]: File "/app/app.py", line 7, in <module>
+2021-04-16T21:11:08.927260+00:00 app[web.1]: from secrets import API_SECRET_KEY
+2021-04-16T21:11:08.927260+00:00 app[web.1]: ImportError: cannot import name 'API_SECRET_KEY' from 'secrets' (/app/.heroku/python/lib/python3.9/secrets.py)
+2021-04-16T21:11:08.945421+00:00 app[web.1]: [2021-04-16 21:11:08 +0000] [7] [INFO] Worker exiting (pid: 7)    
+2021-04-16T21:11:09.291805+00:00 heroku[router]: at=error code=H13 desc="Connection closed without response" method=GET path="/favicon.ico" host=virtual-memorials.herokuapp.com request_id=77ebcc8a-cb8b-4c40-a674-26993fa80a71 fwd="73.147.70.17" dyno=web.1 connect=0ms service=6583ms status=503 bytes=0 protocol=https
+2021-04-16T21:11:09.326938+00:00 app[web.1]: [2021-04-16 21:11:09 +0000] [4] [WARNING] Worker with pid 7 was terminated due to signal 15
+2021-04-16T21:11:09.389259+00:00 app[web.1]: [2021-04-16 21:11:09 +0000] [4] [INFO] Shutting down: Master      
+2021-04-16T21:11:09.389479+00:00 app[web.1]: [2021-04-16 21:11:09 +0000] [4] [INFO] Reason: Worker failed to boot.
+2021-04-16T21:11:09.520694+00:00 heroku[web.1]: Process exited with status 3
+2021-04-16T21:11:09.599067+00:00 heroku[web.1]: State changed from up to crashed

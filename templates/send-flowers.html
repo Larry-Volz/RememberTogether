@@ -1,0 +1,63 @@
+{% extends 'flowers_base.html' %}
+
+{% block title %}{{ departed.fname }} {{ departed.lname }} obituary{% endblock %}
+{% block meta_content %}
+	virtual memorial wall in loving memory of {{ departed.fname }} {{ departed.lname }}
+{% endblock %}
+
+{% block event %}
+
+	<!-- TODO: FIX GRAMMAR SO IT dynamically says were held at or will be held at -->
+
+	<!-- booked_yet= True,  -->
+
+
+	{{ departed.funeral_home_name }} <br>
+
+	{% if event_times %}
+		On {{ event_times }} <br>
+	{% endif %}
+
+	{% if departed.event_address: %}
+		at {{ departed.event_address }} {{ departed.room }} <br>
+		{{ departed.event_city }}, {{ departed.event_state }} {{ departed.event_zip }} <br>
+	{% endif %}
+	
+	{{ departed.event_phone }} {{ departed.event_url }}
+
+{% endblock %}
+
+
+
+{% block gallery %}
+
+<!-- <div class="align-items-start departed-cards-holder"> -->
+<!-- {{ departed.fname }}: {{  departed.post }} -->
+
+<div class="container">
+	{% for ea in posts %}
+
+
+	<div class="col">
+		<div class="card" style="max-width: 70%;" >
+			{% if ea.file_url: %}
+			<img class="card-img-top" src=" ../static/images/{{ ea.file_url }}" alt="picture of {{ departed.fname}} {{departed.lname}}">
+			{% else: %} 
+			<br><br>
+			{% endif %}
+			<div class="card-body">
+			  <div class="card-text">{{ ea. text }}</div>
+
+			  <div class="card-text"><em> -- Shared by: {{ ea.user.fname }} {{ ea.user.lname }}</em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="/editpost/{{ea.id}}"><i class="fas fa-pencil-alt"></i><small> Edit</small></a>&nbsp;&nbsp;<i class="fas fa-trash-alt"></i><small> Delete</small></div>
+			  <br>
+			</div>
+		  </div>
+	</div>
+	
+
+	{% endfor %}
+</div>
+	<!-- </div> -->
+
+{% endblock %}

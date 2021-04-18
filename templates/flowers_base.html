@@ -69,12 +69,13 @@ href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
 					<ul>
 						<!-- <li class="active"><a href="#" data-nav-section="home">Home</a></li> -->
 						<br>
-						<li><a href="#" data-nav-section="memorial">Memorial Services</a></li>
+						<!-- <li><a href="#" data-nav-section="memorial">Memorial Services</a></li>
 						<li><a href="#" data-nav-section="biography">Life Story</a></li>
-						<li><a href="#" data-nav-section="gallery">Gallery & Tributes</a></li>
+						<li><a href="#" data-nav-section="gallery">Gallery & Tributes</a></li> -->
 						<li><a href="/sendflowers/{{departed.id}}" class="external" data-nav-section="post">Send Flowers</a></li>
-						<li><a href="/createpost/{{departed.id}}" class="external" data-nav-section="post">Post Something</a></li>
-						<li><a href="/edit/{{departed.id}}" data-nav-section="manage" class="external">Edit This Memorial</a></li>
+						<!-- <li><a href="/createpost/{{departed.id}}" class="external" data-nav-section="post">Post Something</a></li>
+						<li><a href="/edit/{{departed.id}}" data-nav-section="manage" class="external">Edit This Memorial</a></li> -->
+						<li><a href="/memorial/{{departed.id}}" class="external" data-nav-section="post">Go Back</a></li>
 					</ul>
 				</div>
 			</nav>
@@ -98,39 +99,17 @@ Copyright <script>document.write(new Date().getFullYear());</script> Larry Volz
 		<div id="virtual-memorial-main">
 			<section id="virtual-memorial-hero" class="js-fullheight" data-section="home">
 				<div class="flexslider js-fullheight">
-					<ul class="slides">
-				   	<li style="background-image: url(../static/images/{{ departed.hero1 }});">
-				   		<div class="overlay"></div>
-				   		<div class="container-fluid">
-				   			<div class="row">
-					   			<div class="col-md-6 col-md-offset-3 col-md-pull-3 col-sm-12 col-xs-12 js-fullheight slider-text">
-					   				<div class="slider-text-inner js-fullheight">
-					   					<div class="desc">
-											   <h2 style="color: {{ departed.text_color }};">In Loving Memory of</h2>
-						   					<h1 style="color: {{ departed.text_color }};">{{ departed.fname }} {{ departed.lname }}</h1>
+					<div class="container-fluid">
+						<div class="jumbotron">
+							<div class="row ">
+								<div class="col-9 text-center">
+									<h1 class="mt-4 ">Remember Forever</h1>
+									<h3>And share what beauty and peace you can in this moment</h3>
+								</div>
+						</div>
+						</div>
+					</div>
 
-										</div>
-					   				</div>
-					   			</div>
-					   		</div>
-				   		</div>
-				   	</li>
-				   	<li style="background-image: url(../static/images/{{ departed.hero2 }});">
-				   		<div class="overlay"></div>
-				   		<div class="container-fluid">
-				   			<div class="row">
-					   			<div class="col-md-6 col-md-offset-3 col-md-pull-3 col-sm-12 col-xs-12 js-fullheight slider-text">
-					   				<div class="slider-text-inner">
-					   					<div class="desc">
-						   					<h1 style="color: {{ departed.text_color }};">{{ departed.headline }}</h1>
-												
-											</div>
-					   				</div>
-					   			</div>
-					   		</div>
-				   		</div>
-				   	</li>
-				  	</ul>
 			  	</div>
 			</section>
 
