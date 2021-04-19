@@ -1,6 +1,15 @@
 from models import Departed, db, User, Post, Admin_user
 from app import app
 
+#added to make cascade happen with drop table
+from sqlalchemy.schema import DropTable
+from sqlalchemy.ext.compiler import compiles
+
+@compiles(DropTable, "postgresql")
+def _compile_drop_table(element, compiler, **kwargs):
+    return compiler.visit_drop_table(element) + " CASCADE"
+
+
 # Create all tables
 db.drop_all()
 db.create_all()
@@ -31,8 +40,7 @@ event_city='Washington',
 event_state='DC', 
 event_zip='23999', 
 event_phone='804-227-1111', 
-event_url='testingurl.com',
-created_by=1)
+event_url='testingurl.com')
 
 
 
@@ -47,8 +55,7 @@ event_city='Boston',
 event_state='MA', 
 event_zip='32185', 
 event_phone='800-299-1991', 
-event_url='anotherfuneralhome.com',
-created_by=1)
+event_url='anotherfuneralhome.com')
 
 
 harry = Departed(fname='Harry',lname="Anderson", 
@@ -70,8 +77,7 @@ event_city='Los Angeles',
 event_state='CA', 
 event_zip='90210', 
 event_phone='555-867-5309', 
-event_url='afuneralhome.com',
-created_by=1
+event_url='afuneralhome.com'
 )
 
 
