@@ -20,6 +20,7 @@ app=Flask(__name__)
 #secure variables
 app.config['SQLALCHEMY_DATABASE_URI'] = getenv('SQL_CONNECTION_STRING')
 app.config['SECRET_KEY']= getenv('API_SECRET_KEY')
+
 app.config['FLORIST_ONE_KEY']= getenv('FLORIST_ONE_KEY')
 app.config['FLORIST_ONE_PASSWORD']= getenv('FLORIST_ONE_PASSWORD')
 
