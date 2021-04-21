@@ -18,6 +18,7 @@
 - [x] Add link to go back to virtual-memorials
 - [x] Set up upload image functionality
 - [x] Make an edit memorial sequence
+- [ ] Make register or login and return to where started: pass through starting URL and then send back to there (via ginger and python) once form is finished
 
 # To Do before demo
 - [ ] Change memorial pages so it's just "virtual-memorial.net/firstname-lastname" so it searches by that instead of id and set up an intermediate page that makes sure it's the right one only if there is more than one person with that name

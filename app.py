@@ -5,6 +5,7 @@ from forms import User_registration, Create_memorial_form, Post_form, LoginForm
 from flask_uploads import configure_uploads, IMAGES, UploadSet
 import datetime
 from secrets import API_SECRET_KEY
+from os import getenv
 
 # ****NEED TO ALSO INSTALL Flask-Reloaded TO FIX BUGS IN flask_uploads!!!
 
@@ -19,7 +20,12 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://ncewshwz:cY4ePyxBbMXu1j-Po
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
-app.config['SECRET_KEY']= API_SECRET_KEY
+
+#CHANGED THIS
+app.config['SECRET_KEY']= getenv('API_SECRET_KEY')
+
+# print(getenv('API_SECRET_KEY'))
+
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 app.config['UPLOADED_IMAGES_DEST'] = 'static/images'
 
@@ -81,6 +87,13 @@ def memorial_page(id):
     # event_room = departed.event.room
     return render_template('obituary.html', departed=departed, posts=posts, event_times=event_times) 
 
+
+@app.route('/logintocreate')
+def login_or_register_to_create():
+    login_form = LoginForm()
+    registration_form=User_registration()
+    '''registers or logs in a person to create a new obituary'''
+    return render_template('login_or_register_to_create.html', login_form=login_form, registration_form=registration_form)
 
 @app.route('/create', methods=["GET","POST"])
 def create_obituary(user_id):
