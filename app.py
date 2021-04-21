@@ -90,19 +90,19 @@ def memorial_page(id):
     return render_template('obituary.html', departed=departed, posts=posts, event_times=event_times) 
 
 
-@app.route('/logintocreate')
-def login_or_register_to_create():
+@app.route('/reg_login')
+def reg_login(): 
     login_form = LoginForm()
     registration_form=User_registration()
     '''registers or logs in a person to create a new obituary'''
-    return render_template('login_or_register_to_create.html', login_form=login_form, registration_form=registration_form)
+    return render_template('reg_login.html', login_form=login_form, registration_form=registration_form)
 
 #TODO: FIX GREYED-OUT 'LOGIN FIRST'
 @app.route('/create', methods=["GET","POST"])
-def create_obituary(user_id):
+def create_obituary():
     """ renders form to create a new obituary """
     form = Create_memorial_form()
-    user = User.query.get(user_id)
+    # user = User.query.get(user_id)
 
     if "user_id" not in session:
         flash("You must login or register to create a memorial.")
