@@ -4,7 +4,7 @@ from models import db, connect_db, User, Admin_user, Departed, Post
 from forms import User_registration, Create_memorial_form, Post_form, LoginForm
 from flask_uploads import configure_uploads, IMAGES, UploadSet
 import datetime
-from secrets import API_SECRET_KEY
+# from secrets import API_SECRET_KEY
 from os import getenv
 
 # ****NEED TO ALSO INSTALL Flask-Reloaded TO FIX BUGS IN flask_uploads!!!
