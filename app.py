@@ -4,30 +4,24 @@ from models import db, connect_db, User, Admin_user, Departed, Post
 from forms import User_registration, Create_memorial_form, Post_form, LoginForm
 from flask_uploads import configure_uploads, IMAGES, UploadSet
 import datetime
-# from secrets import API
-# _SECRET_KEY
 from os import getenv
 
 # ****NEED TO ALSO INSTALL Flask-Reloaded TO FIX BUGS IN flask_uploads!!!
-
 
 
 #TODO:
 # from forms import User_registration, User_login, Admin_registration, Admin_login
 
 app=Flask(__name__)
+
+# original local postgresql db
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///remembertogether'
 
-#CHANGED THIS
 app.config['SQLALCHEMY_DATABASE_URI'] = getenv('SQL_CONNECTION_STRING')
+app.config['SECRET_KEY']= getenv('API_SECRET_KEY')
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
-
-#CHANGED THIS
-app.config['SECRET_KEY']= getenv('API_SECRET_KEY')
-
-# print(getenv('API_SECRET_KEY'))
 
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 app.config['UPLOADED_IMAGES_DEST'] = 'static/images'
@@ -46,13 +40,18 @@ connect_db(app)
 db.create_all()
 
 
-
 @app.route('/')
 def home():
     """ home page - should give login option and information about app"""
     
     departed = Departed.query.all()
     return render_template("index.html", departed=departed)
+
+
+#ADMINISTRATE FACILITY & SUBDOMAIN
+#create_facility
+#edit_facility
+#delete_facility
 
 @app.route('/api/departed')
 def list_departed():
@@ -98,6 +97,7 @@ def login_or_register_to_create():
     '''registers or logs in a person to create a new obituary'''
     return render_template('login_or_register_to_create.html', login_form=login_form, registration_form=registration_form)
 
+#TODO: FIX GREYED-OUT 'LOGIN FIRST'
 @app.route('/create', methods=["GET","POST"])
 def create_obituary(user_id):
     """ renders form to create a new obituary """

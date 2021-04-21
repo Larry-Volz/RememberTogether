@@ -1,0 +1,68 @@
+@startuml Remember Together - use cases 
+skinparam actorStyle Hollow
+
+"Funeral director" as Admin
+"Administrate facility/subdomains" as (admin_facility)
+Admin --> (admin_facility)
+
+ 
+"Loved ones" as LO
+"Funeral director or Immediate family" as mod 
+
+package Memorial {
+usecase "Create Memorial" as (create_obituary)
+usecase "Edit Memorial" as (edit_obituary)
+usecase "Delete Memorial" as (delete_obituary)
+}
+
+package Security {
+usecase "Login/reg check?" as (reg_login)
+usecase "Login" as (login)
+usecase "Register" as (register)
+}
+
+package Posts {
+usecase "Create Post" as (create_post)
+usecase "Edit Post" as (edit_post)
+usecase "Delete Post" as (delete_post)
+}
+
+
+"Home page" as (home)
+(admin_facility) --> (home)
+
+LO --> (home)
+mod --> (home)
+
+"Memorial board" as (memorial_page)
+"Flowers API" as (flowers_api)
+"Send flowers" as (flowers)
+(home) -> (memorial_page)
+(memorial_page) --> (reg_login)
+(memorial_page) -> (flowers)
+(flowers) -> (flowers_api)
+(flowers) <- (flowers_api)
+
+' login_or_register_to_create():
+
+
+
+
+
+(reg_login) --> (register)
+(reg_login) <-- (register)
+(reg_login) --> (login)
+(reg_login) <-- (login)
+
+(home) -> (reg_login)
+
+(reg_login) --> Memorial 
+Posts <-- (reg_login)
+
+
+
+
+
+
+
+@enduml
