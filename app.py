@@ -4,7 +4,8 @@ from models import db, connect_db, User, Admin_user, Departed, Post
 from forms import User_registration, Create_memorial_form, Post_form, LoginForm
 from flask_uploads import configure_uploads, IMAGES, UploadSet
 import datetime
-# from secrets import API_SECRET_KEY
+# from secrets import API
+# _SECRET_KEY
 from os import getenv
 
 # ****NEED TO ALSO INSTALL Flask-Reloaded TO FIX BUGS IN flask_uploads!!!
@@ -16,7 +17,9 @@ from os import getenv
 
 app=Flask(__name__)
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///remembertogether'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://ncewshwz:cY4ePyxBbMXu1j-PoeCx1ngNaM8bDAuB@queenie.db.elephantsql.com:5432/ncewshwz'
+
+#CHANGED THIS
+app.config['SQLALCHEMY_DATABASE_URI'] = getenv('SQL_CONNECTION_STRING')
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
