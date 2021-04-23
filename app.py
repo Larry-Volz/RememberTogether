@@ -454,11 +454,13 @@ def merge_into_DateTime(date_var, time_var):
 ################################################################################
 @app.route("/sendflowers/<int:departed_id>")
 def send_flowers(departed_id):
+    flower_user = getenv('FLORIST_ONE_KEY')
+    flower_pass = getenv('FLORIST_ONE_PASSWORD')
 
     departed=Departed.query.get_or_404(departed_id)
 
 
-    resp = requests.get('https://www.floristone.com/api/rest/flowershop/getproducts', auth=('602512', 'o0pJ59'))
+    resp = requests.get('https://www.floristone.com/api/rest/flowershop/getproducts', auth=(flower_user, flower_pass))
 
 
 
