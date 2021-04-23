@@ -26,6 +26,12 @@
 	{{ departed.event_phone }} {{ departed.event_url }} -->
 
 	PUT FLOWER SHOP DATA HERE!
+	{% for product in best_sellers["PRODUCTS"] %}
+		<img src="{{ product['SMALL'] }}" alt=""><br>
+		{{ product["NAME"] }}
+		<br><br>
+
+	{% endfor %}
 
 {% endblock %}
 
@@ -37,23 +43,19 @@
 <!-- {{ departed.fname }}: {{  departed.post }} -->
 
 <div class="container">
-	{% for ea in posts %}
+	{% for product in best_sellers["PRODUCTS"] %}
 
 
 	<div class="col">
 		<div class="card" style="max-width: 70%;" >
 			{% if ea.file_url: %}
-			<img class="card-img-top" src=" ../static/images/{{ ea.file_url }}" alt="picture of {{ departed.fname}} {{departed.lname}}">
+			<img class="card-img-top" src="{{ product['SMALL'] }}" alt="{{ product['NAME'] }} flower arrangement">
 			{% else: %} 
 			<br><br>
 			{% endif %}
 			<div class="card-body">
-			  <div class="card-text">{{ ea. text }}</div>
+			  <div class="card-text">{{ product['NAME'] }}</div>
 
-			  <div class="card-text"><em> -- Shared by: {{ ea.user.fname }} {{ ea.user.lname }}</em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<a href="/editpost/{{ea.id}}"><i class="fas fa-pencil-alt"></i><small> Edit</small></a>&nbsp;&nbsp;<i class="fas fa-trash-alt"></i><small> Delete</small></div>
-			  <br>
-			</div>
 		  </div>
 	</div>
 	

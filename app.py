@@ -7,6 +7,7 @@ import datetime
 from os import getenv
 import requests, base64
 
+
 # ****NEED TO ALSO INSTALL Flask-Reloaded TO FIX BUGS IN flask_uploads!!!
 
 
@@ -459,14 +460,54 @@ def send_flowers(departed_id):
 
     departed=Departed.query.get_or_404(departed_id)
 
+    # fbs - Funeral Best Sellers
+    # fa - Funeral Table Arrangements
+    # fb - Funeral Baskets
+    # fs - Funeral Sprays
+    # fp - Funeral Plants
+    # fl - Funeral Inside Casket
+    # fw - Funeral Wreaths
+    # fh - Funeral Hearts
+    # fx - Funeral Crosses
+    # fc - Funeral Casket sprays
+    # fu - Funeral Urn Arrangements
 
-    resp = requests.get('https://www.floristone.com/api/rest/flowershop/getproducts', auth=(flower_user, flower_pass))
+    #fu60 - Funeral Flowers Under $60
+    #f60t80 - Funeral Flowers between $60 and $80
+    #f80t100 - Funeral Flowers between $80 and $100
+    #fa100 - Funeral Flowers above $100
+
+    funeral_best_sellers = requests.get('https://www.floristone.com/api/rest/flowershop/getproducts', params={"category": "fbs"}, auth=(flower_user, flower_pass))
+    funeral_best_sellers = funeral_best_sellers.json()
+
+    funeral_under_60 = requests.get('https://www.floristone.com/api/rest/flowershop/getproducts', params={"category": "fu60"}, auth=(flower_user, flower_pass))
+    funeral_under_60 = funeral_under_60.json()
+
+    funeral_60to80 = requests.get('https://www.floristone.com/api/rest/flowershop/getproducts', params={"category": "f60t80"}, auth=(flower_user, flower_pass))
+    funeral_60to80 = funeral_60to80.json()
+
+    funeral_60to80 = requests.get('https://www.floristone.com/api/rest/flowershop/getproducts', params={"category": "f60t80"}, auth=(flower_user, flower_pass))
+    funeral_60to80 = funeral_60to80.json()
+
+    funeral_80to100 = requests.get('https://www.floristone.com/api/rest/flowershop/getproducts', params={"category": "f80t100"}, auth=(flower_user, flower_pass))
+    funeral_80to100 = funeral_80to100.json()
+
+    funeral_100 = requests.get('https://www.floristone.com/api/rest/flowershop/getproducts', params={"category": "fa100"}, auth=(flower_user, flower_pass))
+    funeral_100 = funeral_100.json()
 
 
 
-    print("##################################")
-    print(resp.json())
-    print("##################################")
+    #scaffolding - DELETE
+    # print("##################################")
+    # print("Funeral Best Sellers")
+    # print(funeral_best_sellers)
+    # print("##################################")
+    # print("Funeral Under $60")
+    # print(funeral_under_60)
+    # print("##################################")
+    # print("Funeral $60 - $80")
+    # print(funeral_60to80)
+    # print("##################################")
     # print(resp.json())  #converts the json string into python dictionary
 
-    return render_template("flowers.html", departed=departed)
+    return render_template("flowers.html", departed=departed, best_sellers=funeral_best_sellers)
