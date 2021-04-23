@@ -5,6 +5,7 @@ from forms import User_registration, Create_memorial_form, Post_form, LoginForm
 from flask_uploads import configure_uploads, IMAGES, UploadSet
 import datetime
 from os import getenv
+import requests, base64
 
 # ****NEED TO ALSO INSTALL Flask-Reloaded TO FIX BUGS IN flask_uploads!!!
 
@@ -447,3 +448,23 @@ def merge_into_DateTime(date_var, time_var):
     merged_datetime = merged_datetime.replace(tzinfo=None)
 
     return merged_datetime
+
+
+
+################################################################################
+@app.route("/sendflowers/<int:departed_id>")
+def send_flowers(departed_id):
+
+    departed=Departed.query.get_or_404(departed_id)
+
+
+    resp = requests.get('https://www.floristone.com/api/rest/flowershop/getproducts', auth=('602512', 'o0pJ59'))
+
+
+
+    print("##################################")
+    print(resp.json())
+    print("##################################")
+    # print(resp.json())  #converts the json string into python dictionary
+
+    return render_template("flowers.html", departed=departed)
