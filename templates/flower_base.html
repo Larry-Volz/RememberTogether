@@ -3,10 +3,10 @@
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>{{ departed.fname }} {{ departed.lname }} obituary</title>
+	<title>Flowers in memory of {{ departed.fname }} {{ departed.lname }}</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="virtual memorial wall in loving memory of {{ departed.fname }} {{ departed.lname }}" />
-	<meta name="keywords" content="virtual memorial, zoom funeral, memorial website" />
+	<meta name="keywords" content="virtual memorial, zoom funeral, memorial website, funeral flowers, flower shop, buy flowers, buy floral arrangement" />
 	<meta name="author" content="Larry Volz https://www.larry-volz.com" />
 
   <!-- Facebook and Twitter integration -->
@@ -69,14 +69,14 @@ href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
 					<ul>
 						<!-- <li class="active"><a href="#" data-nav-section="home">Home</a></li> -->
 						<br>
-						<li><a href="#" data-nav-section="memorial">Memorial Services</a></li>
-						<li><a href="#" data-nav-section="biography">Life Story</a></li>
-						<li><a href="#" data-nav-section="gallery">Gallery & Tributes</a></li>
+						<li><a href="/memorial/{{departed.id}}" class="external">Back to Memorial Page</a></li>
 						<hr>
+						<li><a href="#" data-nav-section="checkout">Checkout</a></li>
+						<!-- <li><a href="#" data-nav-section="gallery">Gallery & Tributes</a></li>
 						<li><a href="/register/{{departed.id}}" class="external">Register</a>/<a href="/login/{{departed.id}}" class="external">Login</a> to:</li>
 						<li><a href="/sendflowers/{{departed.id}}" class="external" data-nav-section="post">Send Flowers</a></li>
 						<li><a href="/createpost/{{departed.id}}" class="external" data-nav-section="post">Post Something</a></li>
-						<li><a href="/edit/{{departed.id}}" data-nav-section="manage" class="external">Edit This Memorial</a></li>
+						<li><a href="/edit/{{departed.id}}" data-nav-section="manage" class="external">Edit This Memorial</a></li> -->
 					</ul>
 				</div>
 			</nav>

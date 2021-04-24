@@ -7,29 +7,22 @@
 
 {% block event %}
 
-	<!-- TODO: FIX GRAMMAR SO IT dynamically says were held at or will be held at -->
+{% for product in best_sellers["PRODUCTS"] %}
 
-	<!-- booked_yet= True,  -->
-
-
-	<!-- {{ departed.funeral_home_name }} <br>
-
-	{% if event_times %}
-		On {{ event_times }} <br>
-	{% endif %}
-
-	{% if departed.event_address: %}
-		at {{ departed.event_address }} {{ departed.room }} <br>
-		{{ departed.event_city }}, {{ departed.event_state }} {{ departed.event_zip }} <br>
-	{% endif %}
-	
-	{{ departed.event_phone }} {{ departed.event_url }} -->
-
-	PUT FLOWER SHOP DATA HERE!
-	{% for product in best_sellers["PRODUCTS"] %}
-		<img src="{{ product['SMALL'] }}" alt=""><br>
-		{{ product["NAME"] }}
-		<br><br>
+<div class="col-sm-6 justify-content-center">
+	<div class="card flower-card text-center mb-2" style="width: 18rem;">
+		<h3 class="card-title">{{ product["NAME"] }}</h3>
+		<img class="card-img-top flower-card-image mb-1" src="{{ product['SMALL'] }}" alt="{{ product['NAME'] }} for {{ departed.fname }} {{ departed.lname }}">
+		<div class="card-body">
+			<div class="flower-description hidden">
+			  <p class="card-text">{{ product["DESCRIPTION"] }}</p>
+		  	</div>
+			<a href="#" class="btn btn-primary">See Description</a>
+			<a href="#" class="btn btn-success">Add to Cart</a>
+		</div>
+	  </div>
+</div>
+ 
 
 	{% endfor %}
 
