@@ -212,11 +212,22 @@ Copyright <script>document.write(new Date().getFullYear());</script> Larry Volz
 
 							<div class="virtual-memorial-feature virtual-memorial-feature-sm animate-box" data-animate-effect="fadeInLeft">
 
-								<form action="/edit/{{departed.id}}" class="form-inline text-center">
-									<button type="submit" class="btn btn-success">Edit this memorial page</button>
+								<form action="/sendflowers/{{departed.id}}" class="form-inline text-center">
+									<button type="submit" class="btn btn-success">Send Flowers</button>
 								</form>
 							</div>
 						</div>
+
+						<div class="row">
+
+							<div class="virtual-memorial-feature virtual-memorial-feature-sm animate-box" data-animate-effect="fadeInLeft">
+
+								<form action="/edit/{{departed.id}}" class="form-inline text-center">
+									<button type="submit" class="btn btn-warning">Edit this memorial page</button>
+								</form>
+							</div>
+						</div>
+
 						<div class="col-md-7 col-md-push-1">
 							<div class="row">
 								<div class="col-md-10 col-md-offset-1 col-md-pull-1 animate-box" data-animate-effect="fadeInRight">

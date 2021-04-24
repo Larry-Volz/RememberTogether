@@ -1450,6 +1450,10 @@ body.offcanvas {
 .flower-card-image {
   margin-bottom: 2rem !important;
 }
+.flower-column {
+  margin: 2rem !important;
+  display: flex;
+}
 
 /*
 .virtual-memorial-font {

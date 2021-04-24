@@ -476,8 +476,8 @@ def send_flowers(departed_id):
     #f60t80 - Funeral Flowers between $60 and $80
     #f80t100 - Funeral Flowers between $80 and $100
     #fa100 - Funeral Flowers above $100
-
-    funeral_best_sellers = requests.get('https://www.floristone.com/api/rest/flowershop/getproducts', params={"category": "fbs"}, auth=(flower_user, flower_pass))
+    
+    funeral_best_sellers = requests.get('https://www.floristone.com/api/rest/flowershop/getproducts', params={"category": "fbs", "count":1000}, auth=(flower_user, flower_pass))
     funeral_best_sellers = funeral_best_sellers.json()
 
     funeral_under_60 = requests.get('https://www.floristone.com/api/rest/flowershop/getproducts', params={"category": "fu60"}, auth=(flower_user, flower_pass))
