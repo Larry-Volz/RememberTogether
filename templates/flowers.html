@@ -14,12 +14,12 @@
 		<h3 class="card-title">{{ product["NAME"] }}</h3>
 		<img class="card-img-top flower-card-image mb-1 " src="{{ product['SMALL'] }}" alt="{{ product['NAME'] }} for {{ departed.fname }} {{ departed.lname }}">
 		<div class="card-body">
+			<p class="card-text text-start">{{ product["PRICE"] }}</p>
+			<p><a class="flower-description-link" href="" >See Description</a></p>
 			<div class="flower-description hidden">
 			  <p class="card-text text-start">{{ product["DESCRIPTION"] }}</p>
 			</div>
-			<p class="card-text text-start">{{ product["PRICE"] }}</p>
-			<p><a href="#" >See Description</a></p>
-			<p><a href="#" >Add to Cart</a></p>
+			<p><a href="" >Add to Cart</a></p>
 			<!-- <br><br> -->
 		</div>
 	  </div>
