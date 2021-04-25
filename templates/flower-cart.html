@@ -1,0 +1,40 @@
+{% extends 'flower_base.html' %}
+
+{% block title %}{{ departed.fname }} {{ departed.lname }} obituary{% endblock %}
+{% block meta_content %}
+	virtual memorial wall in loving memory of {{ departed.fname }} {{ departed.lname }}
+{% endblock %}
+
+{% block event %}
+
+
+<div class="col-sm-5 flower-column  m-1 text-start justify-content-center" style=" background-color: #F2F3F7;">
+	<div class="card flower-card text-start " style="width: 24rem;">
+		<h3 class="card-title">{{ flower["NAME"] }}</h3>
+		<img class="card-img-top flower-card-image mb-1 " src="{{ flower['SMALL'] }}" alt="{{ flower['NAME'] }} for {{ departed.fname }} {{ departed.lname }}">
+		<div class="card-body">
+		</div>
+	  </div>
+</div>
+
+<div class="col-sm-5 flower-column  m-1 text-start justify-content-center" style=" background-color: #F2F3F7;">
+	<div class="card flower-card text-start " style="width: 24rem;">
+		<div class="card-body">			
+			<p>Pick a Delivery Date:</p>
+			<p><a href="/purchase-flowers/{{ flower ['CODE'] }}" >Purchase</a></p>
+			<!-- <br><br> -->
+		</div>
+	  </div>
+</div>
+ 
+
+
+{% endblock %}
+
+
+
+{% block gallery %}
+
+
+
+{% endblock %}

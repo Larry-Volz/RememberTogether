@@ -7,22 +7,24 @@
 
 {% block event %}
 
-{% for product in best_sellers["PRODUCTS"] %}
+{% for product in all_flowers["PRODUCTS"] %}
 
 <div class="col-sm-5 flower-column  m-1 text-start justify-content-center" style=" background-color: #F2F3F7;">
-	<div class="card flower-card text-start " style="width: 24rem;">
-		<h3 class="card-title">{{ product["NAME"] }}</h3>
-		<img class="card-img-top flower-card-image mb-1 " src="{{ product['SMALL'] }}" alt="{{ product['NAME'] }} for {{ departed.fname }} {{ departed.lname }}">
-		<div class="card-body">
-			<p class="card-text text-start">{{ product["PRICE"] }}</p>
-			<p><a class="flower-description-link" href="" >See Description</a></p>
-			<div class="flower-description ">
-			  <p class="card-text text-start">{{ product["DESCRIPTION"] }}</p>
+		<div class="card flower-card text-start " style="width: 24rem;">
+			<h3 class="card-title">{{ product["NAME"] }}</h3>
+			<img class="card-img-top flower-card-image mb-1 " src="{{ product['SMALL'] }}" alt="{{ product['NAME'] }} for {{ departed.fname }} {{ departed.lname }}">
+			<div class="card-body">
+				<p class="card-text text-start">{{ product["PRICE"] }}</p>
+				<p><a class="flower-description-link" href="" >See Description</a></p>
+				<div class="flower-description ">
+				  <p class="card-text text-start">{{ product["DESCRIPTION"] }}</p>
+				</div>
+				<p><a href="/flower-cart/{{ product['CODE'] }}">Add to Cart</a></p>
+				<!-- <br><br> -->
 			</div>
-			<p><a href="" >Add to Cart</a></p>
-			<!-- <br><br> -->
-		</div>
-	  </div>
+		  </div>
+	</a>
+	
 </div>
  
 
@@ -38,7 +40,7 @@
 <!-- {{ departed.fname }}: {{  departed.post }} -->
 
 <div class="container">
-	{% for product in best_sellers["PRODUCTS"] %}
+	{% for product in all_flowers["PRODUCTS"] %}
 
 
 	<div class="col">

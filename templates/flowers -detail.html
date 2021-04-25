@@ -1,4 +1,4 @@
-{% extends 'flower_base.html' %}
+{% extends 'flower_base.html' %} 
 
 {% block title %}{{ departed.fname }} {{ departed.lname }} obituary{% endblock %}
 {% block meta_content %}
@@ -7,7 +7,7 @@
 
 {% block event %}
 
-{% for product in best_sellers["PRODUCTS"] %}
+{% for product in all_flowers["PRODUCTS"] %}
 
 <div class="col-sm-5 flower-column  m-1 text-start justify-content-center" style=" background-color: #F2F3F7;">
 	<div class="card flower-card text-start " style="width: 24rem;">
@@ -38,7 +38,7 @@
 <!-- {{ departed.fname }}: {{  departed.post }} -->
 
 <div class="container">
-	{% for product in best_sellers["PRODUCTS"] %}
+	{% for product in all_flowers["PRODUCTS"] %}
 
 
 	<div class="col">

@@ -464,6 +464,7 @@ def send_flowers(departed_id):
     flower_pass = getenv('FLORIST_ONE_PASSWORD')
 
     departed=Departed.query.get_or_404(departed_id)
+    session['departed_id']=departed_id
 
     # fbs - Funeral Best Sellers
     # fa - Funeral Table Arrangements
@@ -476,47 +477,51 @@ def send_flowers(departed_id):
     # fx - Funeral Crosses
     # fc - Funeral Casket sprays
     # fu - Funeral Urn Arrangements
-
     #fu60 - Funeral Flowers Under $60
     #f60t80 - Funeral Flowers between $60 and $80
     #f80t100 - Funeral Flowers between $80 and $100
     #fa100 - Funeral Flowers above $100
     
     # TODO: Condense to one query and then manipulate using python or JS on front-end
-    funeral_best_sellers = requests.get('https://www.floristone.com/api/rest/flowershop/getproducts', params={"category": "fbs", "count":1000}, auth=(flower_user, flower_pass))
-    funeral_best_sellers = funeral_best_sellers.json()
-
-    funeral_under_60 = requests.get('https://www.floristone.com/api/rest/flowershop/getproducts', params={"category": "fu60"}, auth=(flower_user, flower_pass))
-    funeral_under_60 = funeral_under_60.json()
-
-    funeral_60to80 = requests.get('https://www.floristone.com/api/rest/flowershop/getproducts', params={"category": "f60t80"}, auth=(flower_user, flower_pass))
-    funeral_60to80 = funeral_60to80.json()
-
-    funeral_60to80 = requests.get('https://www.floristone.com/api/rest/flowershop/getproducts', params={"category": "f60t80"}, auth=(flower_user, flower_pass))
-    funeral_60to80 = funeral_60to80.json()
-
-    funeral_80to100 = requests.get('https://www.floristone.com/api/rest/flowershop/getproducts', params={"category": "f80t100"}, auth=(flower_user, flower_pass))
-    funeral_80to100 = funeral_80to100.json()
-
-    funeral_100 = requests.get('https://www.floristone.com/api/rest/flowershop/getproducts', params={"category": "fa100"}, auth=(flower_user, flower_pass))
-    funeral_100 = funeral_100.json()
-
+    all_flowers = requests.get('https://www.floristone.com/api/rest/flowershop/getproducts', params={"category": "sy", "count":10000}, auth=(flower_user, flower_pass))
+    all_flowers = all_flowers.json()
 
     # NOTE: resp.json() converts the json string into python dictionary
 
-    return render_template("flowers.html", departed=departed, best_sellers=funeral_best_sellers)
+    return render_template("flowers.html", departed=departed, all_flowers=all_flowers)
 
 
 #---------------------------------------------------------
 # TODO: ROUTES TO MAKE
 #---------------------------------------------------------
 
-""" flower_detail(product_id) Shows detail for one product offers option to add to cart or go back """
+@app.route('/flower-cart/<flower_id>')
+def flowers_cart(flower_id):
+    """ cart(product_id) shows item details and options in cart with ability to purchase, suggestions for add-on products or to continue shopping.  
+    (first time) creates cart in API, puts a session id in flask-session 
+    (not first time) updates flask-session
+    (every time) adds item in cart in API, store in db shopping history as having been carted"""
 
-""" cart(product_id) shows item details and options in cart with ability to purchase, suggestions for add-on products or to continue shopping.  
-(first time) creates cart in API, puts a session id in flask-session 
-(not first time) updates flask-session
-(every time) adds item in cart in API, store in db shopping history as having been carted"""
+    flower_user = getenv('FLORIST_ONE_KEY')
+    flower_pass = getenv('FLORIST_ONE_PASSWORD')
+
+    departed_id=session['departed_id']
+
+    departed=Departed.query.get_or_404(departed_id)
+
+    flower = requests.get('https://www.floristone.com/api/rest/flowershop/getproducts', params={"code": flower_id}, auth=(flower_user, flower_pass))
+    flower = flower.json()
+    flower = flower['PRODUCTS'][0]
+
+    print("################################################")
+    print(flower['NAME'])
+    print("################################################")
+
+    flash("Added to Cart")
+    return render_template("flower-cart.html", flower=flower, departed=departed)
+
+
+
 
 """ purchase(cart_id)  give form to fill in personal and credit card information.  Put cc info in flask-session(?) """
 
