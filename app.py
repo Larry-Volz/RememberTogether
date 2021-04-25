@@ -495,7 +495,7 @@ def send_flowers(departed_id):
 # TODO: ROUTES TO MAKE
 #---------------------------------------------------------
 
-@app.route('/flower-cart/<flower_id>')
+@app.route('/flower-cart/<flower_id>', methods=['POST'])
 def flowers_cart(flower_id):
     """ cart(product_id) shows item details and options in cart with ability to purchase, suggestions for add-on products or to continue shopping.  
     (first time) creates cart in API, puts a session id in flask-session 
@@ -513,13 +513,18 @@ def flowers_cart(flower_id):
     flower = flower.json()
     flower = flower['PRODUCTS'][0]
 
+    zip = request.form['zip']
+    dates = requests.get('https://www.floristone.com/api/rest/flowershop/checkdeliverydate', params={"zipcode": zip}, auth=(flower_user, flower_pass))
+    dates = dates.json()
+    dates = dates['DATES']
+
     print("################################################")
     print(flower['NAME'])
+    print(zip)
     print("################################################")
 
     flash("Added to Cart")
-    return render_template("flower-cart.html", flower=flower, departed=departed)
-
+    return render_template("flower-cart.html", flower=flower, departed=departed, dates=dates)
 
 
 

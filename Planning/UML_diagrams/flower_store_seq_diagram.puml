@@ -4,10 +4,12 @@
 sendflowers_pg -> getproducts_api : requests
 sendflowers_pg <-- getproducts_api : populates
 
-sendflowers_pg ->flowers_detail_pg: product clicked
+sendflowers_pg ->check_dates_pg: product clicked
 
-flowers_detail_pg --> sendflowers_pg: if keep shopping
-flowers_detail_pg -> cart_pg: add to cart
+check_dates_pg --> sendflowers_pg: if keep shopping
+check_dates_pg ->check_dates_api
+
+check_dates_api-> cart_pg: add to cart
 
 sendflowers_pg -> cart_pg: add to cart
 

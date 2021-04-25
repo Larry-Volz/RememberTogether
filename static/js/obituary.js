@@ -315,5 +315,14 @@
 
 	});
 
+	$("body").on('click', ".date-check-link", (evt)=> {
+		evt.preventDefault();
+		let $descriptionText2 = $(evt.target).closest("div").find(".zip-form");
+		// $descriptionText.toggleClass("hidden");
+		$descriptionText2.slideToggle();
+		console.log($descriptionText2)
+
+	});
+
 	
 }());

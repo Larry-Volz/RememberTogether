@@ -1499,3 +1499,11 @@ hr {
 .flower-description {
   display: none;
 }
+
+.zip-form {
+  display: none;
+}
+
+.date-check-link {
+  cursor: pointer;
+}

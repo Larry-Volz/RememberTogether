@@ -7,26 +7,27 @@
 
 {% block event %}
 
-{% for product in best_sellers["PRODUCTS"] %}
 
 <div class="col-sm-5 flower-column  m-1 text-start justify-content-center" style=" background-color: #F2F3F7;">
 	<div class="card flower-card text-start " style="width: 24rem;">
-		<h3 class="card-title">{{ product["NAME"] }}</h3>
-		<img class="card-img-top flower-card-image mb-1 " src="{{ product['SMALL'] }}" alt="{{ product['NAME'] }} for {{ departed.fname }} {{ departed.lname }}">
+		<h3 class="card-title">{{ flower["NAME"] }}</h3>
+		<img class="card-img-top flower-card-image mb-1 " src="{{ flower['SMALL'] }}" alt="{{ flower['NAME'] }} for {{ departed.fname }} {{ departed.lname }}">
 		<div class="card-body">
-			<p class="card-text text-start">{{ product["PRICE"] }}</p>
-			<p><a class="flower-description-link" href="" >See Description</a></p>
-			<div class="flower-description ">
-			  <p class="card-text text-start">{{ product["DESCRIPTION"] }}</p>
-			</div>
-			<p><a href="" >Add to Cart</a></p>
+		</div>
+	  </div>
+</div>
+
+<div class="col-sm-5 flower-column  m-1 text-start justify-content-center" style=" background-color: #F2F3F7;">
+	<div class="card flower-card text-start " style="width: 24rem;">
+		<div class="card-body">			
+			<p>Pick a Delivery Date:</p>
+			<p><a href="/purchase-flowers/{{ flower ['CODE'] }}" >Purchase</a></p>
 			<!-- <br><br> -->
 		</div>
 	  </div>
 </div>
  
 
-	{% endfor %}
 
 {% endblock %}
 
@@ -34,29 +35,6 @@
 
 {% block gallery %}
 
-<!-- <div class="align-items-start departed-cards-holder"> -->
-<!-- {{ departed.fname }}: {{  departed.post }} -->
 
-<div class="container">
-	{% for product in best_sellers["PRODUCTS"] %}
-
-
-	<div class="col">
-		<div class="card" style="max-width: 70%;" >
-			{% if ea.file_url: %}
-			<img class="card-img-top" src="{{ product['SMALL'] }}" alt="{{ product['NAME'] }} flower arrangement">
-			{% else: %} 
-			<br><br>
-			{% endif %}
-			<div class="card-body">
-			  <div class="card-text">{{ product['NAME'] }}</div>
-
-		  </div>
-	</div>
-	
-
-	{% endfor %}
-</div>
-	<!-- </div> -->
 
 {% endblock %}

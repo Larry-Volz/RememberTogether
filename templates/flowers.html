@@ -19,8 +19,18 @@
 				<div class="flower-description ">
 				  <p class="card-text text-start">{{ product["DESCRIPTION"] }}</p>
 				</div>
-				<p><a href="/flower-cart/{{ product['CODE'] }}">Add to Cart</a></p>
-				<!-- <br><br> -->
+					<p><a class="date-check-link">Check Dates/Add to Cart</a></p>
+				<div>
+
+					<form action="/flower-cart/{{ product['CODE'] }}" method="POST" class="zip-form">
+						<div class="form-group">
+							<label for="zip" class="form-control text-center">Zip Code:</label>
+  							<input type="text" class="form-control" id="zip" name="zip" style="background-color: white;">
+							<button class="btn btn-primary form-control" style="color: blue;"><strong>Go</strong></button>
+						  <br>
+						</div>
+					</form>
+				</div>
 			</div>
 		  </div>
 	</a>

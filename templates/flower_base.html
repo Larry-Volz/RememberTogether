@@ -98,10 +98,18 @@ Copyright <script>document.write(new Date().getFullYear());</script> Larry Volz
 
 		</aside>
 		<div class="row">
-			<div class="col-6 text-center">
-				{% for msg in get_flashed_messages() %}
-        			<div class="alert alert-warning">{{ msg }} 
-      			{% endfor %} 
+			<br>
+		</div>
+		<div class="row justify-content-center">
+			<div class="col">
+				<div class="col-sm-4"></div>
+				<div class="col-sm-8">
+					<div class="col text-center">
+						{% for msg in get_flashed_messages() %}
+							<div class="alert alert-success">{{ msg }} 
+						  {% endfor %} 
+					</div>
+				</div>
 			</div>
 		</div> 
 		<div id="virtual-memorial-main">
