@@ -515,15 +515,20 @@ def flowers_cart(flower_id):
     flower = flower.json()
     flower = flower['PRODUCTS'][0]
 
+    #CREATE SHOPPING CART
+    #TODO: CHECK-IN WITH TABLE TO CONTINUE PAST SHOPPING CART OR START A NEW ONE
     shopping_cart=requests.post('https://www.floristone.com/api/rest/shoppingcart',  auth=(flower_user, flower_pass))
     shopping_cart = shopping_cart.json()
 
-    #TODO:  if NOT then (so it's not changed repeatedly)
-    #DELETE - FOR TEMPORARY TESTING
-    session.pop('shopping_cart_id')
     if session.get('shopping_cart_id') is None:
         session['shopping_cart_id']=shopping_cart['SESSIONID']
     
+    cart_session_id = session['shopping_cart_id']
+    
+    requests.put(f"https://www.floristone.com/api/rest/shoppingcart?sessionid={cart_session_id}&action=add&productcode={flower_id}",  auth=(flower_user, flower_pass))
+    
+    #TO DELETE A SESSION
+    # session.pop('shopping_cart_id')
 
     zip = request.form['zip']
     dates = requests.get('https://www.floristone.com/api/rest/flowershop/checkdeliverydate', params={"zipcode": zip}, auth=(flower_user, flower_pass))
@@ -536,7 +541,7 @@ def flowers_cart(flower_id):
 
     print("################################################")
     print(flower['NAME'])
-    print(zip)
+    print("flower id:", flower_id)
     print("shopping_cart_id:")
     print(session['shopping_cart_id'])
     print("################################################")
