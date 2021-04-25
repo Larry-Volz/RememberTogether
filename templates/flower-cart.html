@@ -8,7 +8,7 @@
 {% block event %}
 
 
-<div class="col-sm-5 flower-column  m-1 text-start justify-content-center" style=" background-color: #F2F3F7;">
+<div class="col-sm-5 flower-column text-start justify-content-center" style=" background-color: #F2F3F7;">
 	<div class="card flower-card text-start " style="width: 24rem;">
 		<h3 class="card-title">{{ flower["NAME"] }}</h3>
 		<img class="card-img-top flower-card-image mb-1 " src="{{ flower['SMALL'] }}" alt="{{ flower['NAME'] }} for {{ departed.fname }} {{ departed.lname }}">
@@ -29,7 +29,7 @@
 						 {% endfor %}
 					</select>
 					<div class="input-group-append">
-					  <button class="btn btn-success" type="button">Order</button>
+					  <button class="btn btn-success" type="button">Checkout</button>
 					</div>
 				  </div>
 			</form>

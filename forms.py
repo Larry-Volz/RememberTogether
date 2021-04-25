@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired
 from wtforms.fields.html5 import DateField, DateTimeField, TimeField
 from wtforms import StringField, FloatField,IntegerField, StringField, TextAreaField, BooleanField, SubmitField, validators, HiddenField, PasswordField
-from wtforms.validators import InputRequired, Optional, Email, NumberRange, AnyOf, URL,  EqualTo, DataRequired
+from wtforms.validators import InputRequired, Optional, Email, NumberRange, AnyOf, URL,  EqualTo, DataRequired, Length
 #TODO: add PasswordField?
 
 
@@ -107,6 +107,9 @@ class LoginForm(FlaskForm):
 
 # class Admin_login(Flaskform):
     #TODO
+
+class ZipForm(FlaskForm):
+    zip = StringField("Zip code", validators=[InputRequired(),  Length(min=5, message="must be at least 5 digits")])
 
 
 

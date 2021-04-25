@@ -6,6 +6,7 @@
 {% endblock %}
 
 {% block event %}
+<span class="heading-meta">Send a Gift of Flowers</span>
 
 {% for product in all_flowers["PRODUCTS"] %}
 
@@ -22,10 +23,26 @@
 					<p><a class="date-check-link">Check Dates/Add to Cart</a></p>
 				<div>
 
-					<form action="/flower-cart/{{ product['CODE'] }}" method="POST" class="zip-form">
+					<form action="/flower-cart/{{ product['CODE'] }}" method="POST" class="zip-form" enctype="multipart/form-data">
+						{{ form.hidden_tag() }}
+	
+						{% for field in form if field.widget.input_type != 'hidden' %}
 						<div class="form-group">
-							<label for="zip" class="form-control text-center">Zip Code:</label>
-  							<input type="text" class="form-control" id="zip" name="zip" style="background-color: white;">
+							{{ field.label }}
+						{{field(class="form-control", style="background-color:white;")}}
+
+
+					{% for error in field.errors %} 
+					<br>
+					<small class="form-text text-danger">
+						{{ error }} 
+					</small>
+					{% endfor %} 
+				</div>
+					
+			{% endfor %}
+							<!-- <label for="zip" class="form-control text-center">Zip Code:</label> -->
+  							<!-- <input type="text" class="form-control" id="zip" name="zip" style="background-color: white;"> -->
 							<button class="btn btn-primary form-control" style="color: blue;"><strong>Go</strong></button>
 						  <br>
 						</div>

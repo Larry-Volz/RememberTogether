@@ -6,11 +6,14 @@
 - [ ] Do delete mrmorial route
 - [ ] Fix it so Date and time start and pictures re-populate for edit_memorial
 - [ ] Set up css for a flash including dismissable and add flash to each page
-- [ ] Set up server:
-  - [ ] install linux on desktop
-  - [ ] Re-set up Apache or Gunicorn
-  - [ ] get dynamic IP address/domain name setup
-- [ ] Or do on Heroku
+- [ ] For orders:
+  - [ ] Create table for user flower orders
+  - [ ] create object for flower orders
+  - [ ] create page for tracking orders/getting info
+  - [ ] when clicking to open zipcode scroll up slightly
+  - [ ] also scroll up slightly on page to show available dates when first arriving at cart page
+
+- [x] Deploy on Heroku
 - [x] Fix time and date fields so they are working
 - [x] Do new gateway look-up/main page for memorials
 - [x] Change /dos to /
@@ -56,4 +59,10 @@
 - [ ] Add ability to upload videos or youtube videos
 - [ ] Add ability to measure how much data is uploaded
 - [ ] Learn about AWS for lots of content/etc.
-- [ ] 
+- [ ] Change zip code flash to red or fix system from wtforms end
+
+# Optional
+- [ ] Set up server:
+  - [ ] install linux on desktop
+  - [ ] Re-set up Apache or Gunicorn
+  - [ ] get dynamic IP address/domain name setup

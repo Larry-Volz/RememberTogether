@@ -1,7 +1,7 @@
 from flask import Flask, request, render_template, redirect, flash, session, jsonify, url_for
 from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db, User, Admin_user, Departed, Post
-from forms import User_registration, Create_memorial_form, Post_form, LoginForm
+from forms import User_registration, Create_memorial_form, Post_form, LoginForm, ZipForm
 from flask_uploads import configure_uploads, IMAGES, UploadSet
 import datetime
 from os import getenv
@@ -486,9 +486,11 @@ def send_flowers(departed_id):
     all_flowers = requests.get('https://www.floristone.com/api/rest/flowershop/getproducts', params={"category": "sy", "count":10000}, auth=(flower_user, flower_pass))
     all_flowers = all_flowers.json()
 
+    form=ZipForm()
+
     # NOTE: resp.json() converts the json string into python dictionary
 
-    return render_template("flowers.html", departed=departed, all_flowers=all_flowers)
+    return render_template("flowers.html", departed=departed, all_flowers=all_flowers, form=form)
 
 
 #---------------------------------------------------------
@@ -513,14 +515,24 @@ def flowers_cart(flower_id):
     flower = flower.json()
     flower = flower['PRODUCTS'][0]
 
+    # shopping_cart=requests.get('https://www.floristone.com/api/rest/shoppingcart',  auth=(flower_user, flower_pass))
+    # shopping_cart = shopping_cart.json()
+    
+
     zip = request.form['zip']
     dates = requests.get('https://www.floristone.com/api/rest/flowershop/checkdeliverydate', params={"zipcode": zip}, auth=(flower_user, flower_pass))
     dates = dates.json()
-    dates = dates['DATES']
+    try:
+        dates = dates['DATES']
+    except:
+        flash("Must enter a valid zip code")
+        return redirect (f"/sendflowers/{departed_id}")
 
     print("################################################")
     print(flower['NAME'])
     print(zip)
+    print("sessionstatus:")
+    # print(shopping_cart['STATUS'])
     print("################################################")
 
     flash("Added to Cart")
