@@ -309,8 +309,8 @@
 	$("body").on('click', ".flower-description-link", (evt)=> {
 		evt.preventDefault();
 		let $descriptionText = $(evt.target).closest("div").find(".flower-description");
-		$descriptionText.toggleClass("hidden");
-
+		// $descriptionText.toggleClass("hidden");
+		$descriptionText.slideToggle();
 		console.log($descriptionText)
 
 	});

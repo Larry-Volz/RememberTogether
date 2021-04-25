@@ -451,10 +451,15 @@ def merge_into_DateTime(date_var, time_var):
     return merged_datetime
 
 
+#######################################################
+#                     FLOWER SHOP                     #
+#######################################################
 
-################################################################################
 @app.route("/sendflowers/<int:departed_id>")
 def send_flowers(departed_id):
+
+    """ Main Page for flower shop """
+
     flower_user = getenv('FLORIST_ONE_KEY')
     flower_pass = getenv('FLORIST_ONE_PASSWORD')
 
@@ -477,6 +482,7 @@ def send_flowers(departed_id):
     #f80t100 - Funeral Flowers between $80 and $100
     #fa100 - Funeral Flowers above $100
     
+    # TODO: Condense to one query and then manipulate using python or JS on front-end
     funeral_best_sellers = requests.get('https://www.floristone.com/api/rest/flowershop/getproducts', params={"category": "fbs", "count":1000}, auth=(flower_user, flower_pass))
     funeral_best_sellers = funeral_best_sellers.json()
 
@@ -496,18 +502,29 @@ def send_flowers(departed_id):
     funeral_100 = funeral_100.json()
 
 
-
-    #scaffolding - DELETE
-    # print("##################################")
-    # print("Funeral Best Sellers")
-    # print(funeral_best_sellers)
-    # print("##################################")
-    # print("Funeral Under $60")
-    # print(funeral_under_60)
-    # print("##################################")
-    # print("Funeral $60 - $80")
-    # print(funeral_60to80)
-    # print("##################################")
-    # print(resp.json())  #converts the json string into python dictionary
+    # NOTE: resp.json() converts the json string into python dictionary
 
     return render_template("flowers.html", departed=departed, best_sellers=funeral_best_sellers)
+
+
+#---------------------------------------------------------
+# TODO: ROUTES TO MAKE
+#---------------------------------------------------------
+
+""" flower_detail(product_id) Shows detail for one product offers option to add to cart or go back """
+
+""" cart(product_id) shows item details and options in cart with ability to purchase, suggestions for add-on products or to continue shopping.  
+(first time) creates cart in API, puts a session id in flask-session 
+(not first time) updates flask-session
+(every time) adds item in cart in API, store in db shopping history as having been carted"""
+
+""" purchase(cart_id)  give form to fill in personal and credit card information.  Put cc info in flask-session(?) """
+
+""" confirm_info(cart_info)  get auth key and price from api's, get order confirmation click"""
+
+""" place_order(cart_info) place_order_api, getorderinfo_api, destroy cart, destroy auth token, store order in order history table in db, create post for memorial wall, send receipt, return Order Confirmation page """
+
+
+""" Tracking form page """
+
+""" Tracking info return page """
