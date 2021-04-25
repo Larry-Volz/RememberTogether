@@ -40,6 +40,12 @@
 - [ ] Make a "delete post" with check on it to make sure they mean to do it
 
 # To Do before going live
+- [ ] MONEY TRACKING AND MOVING:
+  - [ ] Track orders, order numbers and totals
+  - [ ] Track amounts that should be distributed
+  - [ ] do payouts automatically through stripe/square/etc.
+  - [ ] Check/verify we are getting paid automatically
+  - [ ] Send email alerts when needed
 - [ ] Create ability to upload picture from facebook
 - [ ] Fix it so it does not duplicate a picture in the files - if there is another of the same name maybe give opportunity to rename it?
 - [ ] Get back-up hard drive and set up chron jobs
