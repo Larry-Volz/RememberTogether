@@ -515,8 +515,14 @@ def flowers_cart(flower_id):
     flower = flower.json()
     flower = flower['PRODUCTS'][0]
 
-    # shopping_cart=requests.get('https://www.floristone.com/api/rest/shoppingcart',  auth=(flower_user, flower_pass))
-    # shopping_cart = shopping_cart.json()
+    shopping_cart=requests.post('https://www.floristone.com/api/rest/shoppingcart',  auth=(flower_user, flower_pass))
+    shopping_cart = shopping_cart.json()
+
+    #TODO:  if NOT then (so it's not changed repeatedly)
+    #DELETE - FOR TEMPORARY TESTING
+    session.pop('shopping_cart_id')
+    if session.get('shopping_cart_id') is None:
+        session['shopping_cart_id']=shopping_cart['SESSIONID']
     
 
     zip = request.form['zip']
@@ -531,8 +537,8 @@ def flowers_cart(flower_id):
     print("################################################")
     print(flower['NAME'])
     print(zip)
-    print("sessionstatus:")
-    # print(shopping_cart['STATUS'])
+    print("shopping_cart_id:")
+    print(session['shopping_cart_id'])
     print("################################################")
 
     flash("Added to Cart")
