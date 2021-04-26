@@ -20,7 +20,7 @@ virtual memorial wall in loving memory of {{ departed.fname }} {{ departed.lname
 						<br><div class="tiny"><a href="/deletefromcart/{{item['CODE']}}">Remove from cart</a></div>
 					</p>
 			
-						<!-- <img class="card-img-top flower-card-image mb-1 " src="{{ flower['SMALL'] }}" alt="{{ flower['NAME'] }} for {{ departed.fname }} {{ departed.lname }}"> -->
+
 			
 					<div class="card-body">
 				</div>
@@ -32,20 +32,8 @@ virtual memorial wall in loving memory of {{ departed.fname }} {{ departed.lname
 			<div class="col flower-column  m-1 text-start justify-content-center" style=" background-color: #F2F3F7;">
 				<div class="card flower-card text-start " style="width: 24rem;">
 					<div class="card-body">			
-						<h3>Available Delivery Dates:</h3>
-						<form action="/purchase-flowers/{{ flower['CODE'] }}" method="POST">
-							<div class="input-group">
-								<select class="custom-select" id="inputGroupSelect04">
-									{% for date in dates %}
-									<option value="{{ date }}">{{ date }}</option>
-									{% endfor %}
-								</select>
-								
-								<div class="input-group-append">
-									<button class="btn btn-success" type="button">Checkout</button>
-								</div>
-							</div>
-						</form>
+						<h3>PUT ZIP CODE FORM HERE:</h3>
+
 						
 					</div>
 				</div>

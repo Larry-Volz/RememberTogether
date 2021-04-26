@@ -20,38 +20,16 @@
 				<div class="flower-description ">
 				  <p class="card-text text-start">{{ product["DESCRIPTION"] }}</p>
 				</div>
-					<p><a class="date-check-link">Check Dates/Add to Cart</a></p>
-				<div>
 
-					<form action="/flower-cart/{{ product['CODE'] }}" method="POST" class="zip-form" enctype="multipart/form-data">
-						{{ form.hidden_tag() }}
-	
-						{% for field in form if field.widget.input_type != 'hidden' %}
+					<form action="/flower-cart" method="POST" class="	" enctype="multipart/form-data">
 						<div class="form-group">
-							{{ field.label }}
-						{{field(class="form-control", style="background-color:white;")}}
-
-
-					{% for error in field.errors %} 
-					<br>
-					<small class="form-text text-danger">
-						{{ error }} 
-					</small>
-					{% endfor %} 
-				</div>
-					
-			{% endfor %}
-							<!-- <label for="zip" class="form-control text-center">Zip Code:</label> -->
-  							<!-- <input type="text" class="form-control" id="zip" name="zip" style="background-color: white;"> -->
-							<button class="btn btn-primary form-control" style="color: blue;"><strong>Go</strong></button>
-						  <br>
+								<!-- TODO: Double-check the security on this method -->
+							<input type="hidden" id="flower_id" name="flower_id" value="{{product['CODE']}}">
+							<button class="btn btn-primary form-control" style="color: blue;"><strong>Add to Cart</strong></button>
 						</div>
 					</form>
-				</div>
 			</div>
-		  </div>
-	</a>
-	
+		  </div>	
 </div>
  
 
@@ -62,30 +40,5 @@
 
 
 {% block gallery %}
-
-<!-- <div class="align-items-start departed-cards-holder"> -->
-<!-- {{ departed.fname }}: {{  departed.post }} -->
-
-<div class="container">
-	{% for product in all_flowers["PRODUCTS"] %}
-
-
-	<div class="col">
-		<div class="card" style="max-width: 70%;" >
-			{% if ea.file_url: %}
-			<img class="card-img-top" src="{{ product['SMALL'] }}" alt="{{ product['NAME'] }} flower arrangement">
-			{% else: %} 
-			<br><br>
-			{% endif %}
-			<div class="card-body">
-			  <div class="card-text">{{ product['NAME'] }}</div>
-
-		  </div>
-	</div>
-	
-
-	{% endfor %}
-</div>
-	<!-- </div> -->
 
 {% endblock %}

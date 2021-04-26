@@ -111,6 +111,22 @@ class LoginForm(FlaskForm):
 class ZipForm(FlaskForm):
     zip = StringField("Zip code", validators=[InputRequired(),  Length(min=5, message="must be at least 5 digits")])
 
+class FlowerOrderForm(FlaskForm):
+    """
+        name - 100 character maximum
+        email - valid email address, 100 character maximum
+        address1 - 100 character maximum
+        address2 - not required
+        city - 100 character maximum
+        state - 2 character state code
+        country - 2 character country code
+        phone - 10 digits
+        zipcode - 10 character maximum
+        ip - valid ipv4 / ipv6 ip address of user
+    """
+    #can get name and email from user log in - or combine the two forms on page if not already logged in
+    
+
 
 
 
