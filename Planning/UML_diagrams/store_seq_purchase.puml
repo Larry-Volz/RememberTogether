@@ -1,0 +1,51 @@
+@startuml
+
+
+sendflowers_pg -> getproducts_api : requests
+sendflowers_pg <-- getproducts_api : populates
+
+sendflowers_pg ->check_dates_pg: product clicked
+
+check_dates_pg --> sendflowers_pg: if keep shopping
+check_dates_pg ->check_dates_api
+
+check_dates_api-> cart_pg: add to cart
+
+sendflowers_pg -> cart_pg: add to cart
+
+cart_pg -> shoppingcart_api : creates cart
+cart_pg <-- shoppingcart_api : rtns sess id
+
+cart_pg -> shoppingcart_api: add item to cart
+cart_pg <-- shoppingcart_api
+
+cart_pg -> db: store in shopping hist - cart code
+cart_pg <-- db
+cart_pg --> sendflowers_pg: if keep shopping
+
+cart_pg -> purchase_pg: clicked to purchase
+
+purchase_pg -> info_confirmation_pg: form submit to
+
+info_confirmation_pg -> gettotal_api
+info_confirmation_pg <-- gettotal_api
+
+info_confirmation_pg -> getauthorizenetkey_api
+info_confirmation_pg <-- getauthorizenetkey_api:
+
+info_confirmation_pg -> place_order_api:place order
+
+place_order_api -> getorderinfo_api
+
+
+getorderinfo_api --> info_confirmation_pg
+
+getorderinfo_api --> db: store order data
+
+getorderinfo_api ->  purchase_confirm_pg
+
+purchase_confirm_pg -> follow_up_route:send reciept, post on wall
+
+
+
+@enduml

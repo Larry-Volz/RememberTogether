@@ -1,0 +1,30 @@
+@startuml
+
+
+flowers.html -> getproducts_api : requests
+flowers.html <-- getproducts_api : populates
+
+flowers.html -> flower_cart1: clicks direct to cart
+note left: ALL requests
+
+flower_cart1 -> create_cart_api: if session=None
+flower_cart1 <-- create_cart_api: cart # in flask ssn
+
+flowers.html -> flower_cart1:product clicked
+note left: POST request
+flower_cart1 -> add_to_cart_api: if POST add select to api
+flower_cart1 <-- add_to_cart_api
+
+flower_cart1 -> get_cart_api:get all carted
+note left: ALL requests
+flower_cart1 <-- get_cart_api
+
+flower_cart1 -> flowercart.html: display all + ZipForm 
+flowercart.html -> PURCHASE_SEQ: get dates and do purchase
+
+
+
+
+
+
+@enduml

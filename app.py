@@ -498,7 +498,7 @@ def send_flowers(departed_id):
 #---------------------------------------------------------
 
 @app.route('/flower-cart/<flower_id>', methods=['POST'])
-def flowers_cart(flower_id):
+def flower_cart1(flower_id):
     """ cart(product_id) is for when user has JUST added an item to cart
     TODO: make another route for going directly to the cart
     This shows item details and options in cart with ability to purchase, suggestions for add-on products or to continue shopping.  
@@ -570,7 +570,104 @@ def flowers_cart(flower_id):
     # flash("Added to Cart")
     return render_template("flower-cart.html", flower=flower, departed=departed, dates=dates, cart_contents=cart_contents)
 
+@app.route('/flower-cart', methods=['GET', 'POST'])
+def flower_cart2():
+    """ for going directly to the cart
+    This shows item details and options in cart with ability to purchase, suggestions for add-on products or to continue shopping.  
+    (first time) creates cart in API, puts a session id in flask-session 
+    (not first time) updates flask-session
+    (every time) adds item in cart in API, store in db shopping history as having been carted"""
 
+    flower_user = getenv('FLORIST_ONE_KEY')
+    flower_pass = getenv('FLORIST_ONE_PASSWORD')
+
+    departed_id=session['departed_id']
+    departed=Departed.query.get_or_404(departed_id)
+
+    #Get individual flower
+    # flower = requests.get('https://www.floristone.com/api/rest/flowershop/getproducts', params={"code": flower_id}, auth=(flower_user, flower_pass))
+    # flower = flower.json()
+    # flower = flower['PRODUCTS'][0]
+
+    #CREATE SHOPPING CART
+    #TODO: CHECK-IN WITH TABLE TO CONTINUE PAST SHOPPING CART OR START A NEW ONE
+    if session.get('shopping_cart_id') is None:
+        #create shopping cart
+        shopping_cart=requests.post('https://www.floristone.com/api/rest/shoppingcart',  auth=(flower_user, flower_pass))
+        shopping_cart = shopping_cart.json()
+        
+        session['shopping_cart_id']=shopping_cart['SESSIONID']
+    
+    #more readable variable for api calls
+    cart_session_id = session['shopping_cart_id']
+
+    #add to cart at API
+    # requests.put(f"https://www.floristone.com/api/rest/shoppingcart?sessionid={cart_session_id}&action=add&productcode={flower_id}",  auth=(flower_user, flower_pass))
+
+    #get cart contents from API
+    cart_contents = requests.get(f'https://www.floristone.com/api/rest/shoppingcart?sessionid={cart_session_id}', auth=(flower_user, flower_pass))
+    cart_contents = cart_contents.json()
+    # cart_contents = cart_contents['products']
+
+    #FUTURE REF/REMINDER: TO DELETE A SESSION
+    # session.pop('shopping_cart_id')
+
+
+    #zip form to retrieve list of available dates
+    # zip = request.form['zip']
+    # dates = requests.get('https://www.floristone.com/api/rest/flowershop/checkdeliverydate', params={"zipcode": zip}, auth=(flower_user, flower_pass))
+    # dates = dates.json()
+    # try:
+    #     dates = dates['DATES']
+    # except:
+    #     flash("Must enter a valid zip code")
+    #     return redirect (f"/sendflowers/{departed_id}")
+
+
+
+    #scaffolding
+    print("################################################")
+    # print(flower['NAME'])
+    # print("flower id:", flower_id)
+    print("shopping_cart_id:")
+    print(session['shopping_cart_id'])
+    print("################################################")
+    print("CART CONTENTS:")
+    for ea in cart_contents['products']:
+        print(ea['NAME'])
+    print("################################################")
+
+
+
+    # flash("Added to Cart")
+    return render_template("flower-cart.html", departed=departed, dates=dates, cart_contents=cart_contents)
+
+
+
+@app.route('/deletefromcart/<product_code>')
+def delete_from_cart(product_code):
+
+    flower_user = getenv('FLORIST_ONE_KEY')
+    flower_pass = getenv('FLORIST_ONE_PASSWORD')
+
+    SESSIONID = session['shopping_cart_id']
+
+    requests.put(f'https://www.floristone.com/api/rest/shoppingcart?sessionid={SESSIONID}&action=remove&productcode={product_code}', auth=(flower_user, flower_pass))
+    
+    return redirect('/flower-cart')
+
+
+
+
+
+
+
+
+
+
+
+
+#TODO:  BUILD
 
 """ purchase(cart_id)  give form to fill in personal and credit card information.  Put cc info in flask-session(?) """
 

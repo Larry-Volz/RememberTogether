@@ -1507,3 +1507,7 @@ hr {
 .date-check-link {
   cursor: pointer;
 }
+
+.tiny {
+  font-size: 8px;
+}

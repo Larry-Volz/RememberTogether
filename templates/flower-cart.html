@@ -2,46 +2,61 @@
 
 {% block title %}{{ departed.fname }} {{ departed.lname }} obituary{% endblock %}
 {% block meta_content %}
-	virtual memorial wall in loving memory of {{ departed.fname }} {{ departed.lname }}
+virtual memorial wall in loving memory of {{ departed.fname }} {{ departed.lname }}
 {% endblock %}
 
 {% block event %}
 <h1>Shopping Cart</h1>
-
-<div class="col-sm-5 flower-column text-start justify-content-center" style=" background-color: #F2F3F7;">
-	<div class="card flower-card text-start " style="width: 24rem;">
-		{% for item in cart_contents['products'] %}
-		<h3 class="card-title">{{ item["NAME"] }} {{ item['PRICE'] }}</h3>
-		
-		<!-- <img class="card-img-top flower-card-image mb-1 " src="{{ flower['SMALL'] }}" alt="{{ flower['NAME'] }} for {{ departed.fname }} {{ departed.lname }}"> -->
-		
-		{% endfor %}
-		<div class="card-body">
-		</div>
-	</div>
-</div>
-
-<div class="col-sm-5 flower-column  m-1 text-start justify-content-center" style=" background-color: #F2F3F7;">
-	<div class="card flower-card text-start " style="width: 24rem;">
-		<div class="card-body">			
-			<h3>Available Delivery Dates:</h3>
-			<form action="/purchase-flowers/{{ flower['CODE'] }}" method="POST">
-				<div class="input-group">
-					<select class="custom-select" id="inputGroupSelect04">
-						{% for date in dates %}
-						<option value="{{ date }}">{{ date }}</option>
-						{% endfor %}
-					</select>
+<div class="row">
+	<div class="col">
+		<div class="col-sm-6">
+			{% for item in cart_contents['products'] %}
+				<div class="col flower-column text-start justify-content-center" >
+					<!-- style=" background-color: #F2F3F7;" -->
 					
-					<div class="input-group-append">
-						<button class="btn btn-success" type="button">Checkout</button>
+					<div class="card flower-card text-start " style="width: 24rem;">
+						<p class="card-title">{{ item["NAME"] }} <br>
+							<small>${{ item['PRICE'] }}</small>
+						<br><div class="tiny"><a href="/deletefromcart/{{item['CODE']}}">Remove from cart</a></div>
+					</p>
+			
+						<!-- <img class="card-img-top flower-card-image mb-1 " src="{{ flower['SMALL'] }}" alt="{{ flower['NAME'] }} for {{ departed.fname }} {{ departed.lname }}"> -->
+			
+					<div class="card-body">
+				</div>
+			</div>
+		</div>
+	{% endfor %}
+		</div>
+		<div class="col-sm-6">
+			<div class="col flower-column  m-1 text-start justify-content-center" style=" background-color: #F2F3F7;">
+				<div class="card flower-card text-start " style="width: 24rem;">
+					<div class="card-body">			
+						<h3>Available Delivery Dates:</h3>
+						<form action="/purchase-flowers/{{ flower['CODE'] }}" method="POST">
+							<div class="input-group">
+								<select class="custom-select" id="inputGroupSelect04">
+									{% for date in dates %}
+									<option value="{{ date }}">{{ date }}</option>
+									{% endfor %}
+								</select>
+								
+								<div class="input-group-append">
+									<button class="btn btn-success" type="button">Checkout</button>
+								</div>
+							</div>
+						</form>
+						
 					</div>
 				</div>
-			</form>
-			
+			</div>
 		</div>
 	</div>
 </div>
+
+
+
+
 
 
 

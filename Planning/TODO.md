@@ -40,6 +40,7 @@
 - [ ] Make a "delete post" with check on it to make sure they mean to do it
 
 # To Do before going live
+- [ ] In cart -> make cards clickable to delete from cart
 - [ ] MONEY TRACKING AND MOVING:
   - [ ] Track orders, order numbers and totals
   - [ ] Track amounts that should be distributed
@@ -60,6 +61,9 @@
 - [ ] Set up a "contact us" page
 - [ ] Set up a donations page (?)
 - [ ] Set up an auto-resize system (through API/picresize?)
+- [ ] Time/Date resolutions
+  - [ ] make sure time zones are taken into account for funerals especially Zoom funerals and live-streaming
+  - [ ] get available dates for multiple items in a cart and make sure only the dates common to all are shown on the date-picker
 
 # Later functionality
 - [ ] Add ability to upload videos or youtube videos
