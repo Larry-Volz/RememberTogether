@@ -524,16 +524,8 @@ def flower_cart1():
 
     
     # zip form to retrieve list of available dates
-
-    # form=ZipForm()
-    # zip = request.form['zip']
-    # dates = requests.get('https://www.floristone.com/api/rest/flowershop/checkdeliverydate', params={"zipcode": zip}, auth=(flower_user, flower_pass))
-    # dates = dates.json()
-    # try:
-    #     dates = dates['DATES']
-    # except:
-    #     flash("Must enter a valid zip code")
-    #     return redirect (f"/sendflowers/{departed_id}")
+    form=ZipForm()
+    
 
     #scaffolding
     print("################################################")
@@ -543,11 +535,11 @@ def flower_cart1():
     print("################################################")
 
     # flash("Added to Cart")
-    return render_template("flower-cart.html", departed=departed, cart_contents=cart_contents)
+    return render_template("flower-cart.html", departed=departed, cart_contents=cart_contents, form=form)
 
 
 
-@app.route('/flower-cart', methods=['POST'])
+@app.route('/flower-cart2', methods=['POST'])
 def flower_cart2():
     """ cart(product_id) is for when user has JUST added an item to cart
     TODO: make another route for going directly to the cart
@@ -556,7 +548,7 @@ def flower_cart2():
     (not first time) updates flask-session
     (every time) adds item in cart in API, store in db shopping history as having been carted"""
 
-    flower_id = request.form['flower_id']
+    # flower_id = request.form['flower_id']
     
     flower_user = getenv('FLORIST_ONE_KEY')
     flower_pass = getenv('FLORIST_ONE_PASSWORD')
@@ -565,24 +557,24 @@ def flower_cart2():
     departed=Departed.query.get_or_404(departed_id)
 
     #Get individual flower
-    flower = requests.get('https://www.floristone.com/api/rest/flowershop/getproducts', params={"code": flower_id}, auth=(flower_user, flower_pass))
-    flower = flower.json()
-    flower = flower['PRODUCTS'][0]
+    # flower = requests.get('https://www.floristone.com/api/rest/flowershop/getproducts', params={"code": flower_id}, auth=(flower_user, flower_pass))
+    # flower = flower.json()
+    # flower = flower['PRODUCTS'][0]
 
     #CREATE SHOPPING CART
     #TODO: CHECK-IN WITH TABLE TO CONTINUE PAST SHOPPING CART OR START A NEW ONE
-    if session.get('shopping_cart_id') is None:
-        #create shopping cart
-        shopping_cart=requests.post('https://www.floristone.com/api/rest/shoppingcart',  auth=(flower_user, flower_pass))
-        shopping_cart = shopping_cart.json()
+    # if session.get('shopping_cart_id') is None:
+    #     #create shopping cart
+    #     shopping_cart=requests.post('https://www.floristone.com/api/rest/shoppingcart',  auth=(flower_user, flower_pass))
+    #     shopping_cart = shopping_cart.json()
         
-        session['shopping_cart_id']=shopping_cart['SESSIONID']
+    #     session['shopping_cart_id']=shopping_cart['SESSIONID']
     
     #more readable variable for api calls
     cart_session_id = session['shopping_cart_id']
 
     #add to cart at API
-    requests.put(f"https://www.floristone.com/api/rest/shoppingcart?sessionid={cart_session_id}&action=add&productcode={flower_id}",  auth=(flower_user, flower_pass))
+    # requests.put(f"https://www.floristone.com/api/rest/shoppingcart?sessionid={cart_session_id}&action=add&productcode={flower_id}",  auth=(flower_user, flower_pass))
 
     #get cart contents from API
     cart_contents = requests.get(f'https://www.floristone.com/api/rest/shoppingcart?sessionid={cart_session_id}', auth=(flower_user, flower_pass))
@@ -595,21 +587,20 @@ def flower_cart2():
     
     # zip form to retrieve list of available dates
 
-    # form=ZipForm()
-    # zip = request.form['zip']
-    # dates = requests.get('https://www.floristone.com/api/rest/flowershop/checkdeliverydate', params={"zipcode": zip}, auth=(flower_user, flower_pass))
-    # dates = dates.json()
-    # try:
-    #     dates = dates['DATES']
-    # except:
-    #     flash("Must enter a valid zip code")
-    #     return redirect (f"/sendflowers/{departed_id}")
+    zip = request.form['zip']
+    dates = requests.get('https://www.floristone.com/api/rest/flowershop/checkdeliverydate', params={"zipcode": zip}, auth=(flower_user, flower_pass))
+    dates = dates.json()
+    try:
+        dates = dates['DATES']
+    except:
+        flash("Must enter a valid zip code")
+        return redirect (f"/sendflowers")
 
     #scaffolding
     print("################################################")
-    print("FLOWER POSTED")
-    print(flower['NAME'])
-    print("flower id:", flower_id)
+    # print("FLOWER POSTED")
+    # print(flower['NAME'])
+    # print("flower id:", flower_id)
     print("shopping_cart_id:")
     print(session['shopping_cart_id'])
     print("################################################")
@@ -621,9 +612,11 @@ def flower_cart2():
 
 
     # flash("Added to Cart")
-    return render_template("flower-cart.html", flower=flower, departed=departed,cart_contents=cart_contents)
+    return render_template("flower-cart2.html",  departed=departed,cart_contents=cart_contents, dates=dates)
 
-
+@app.route('/flower-cart3')
+def flowercart3():
+    return render_template("flower-cart3.html")
 
 
 @app.route('/deletefromcart/<product_code>')

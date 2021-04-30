@@ -41,6 +41,10 @@ href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
 	<link rel="stylesheet" href="../static/css/owl.theme.default.min.css">
 	<!-- Theme style  -->
 	<link rel="stylesheet" href="../static/css/obituary.css">
+	<!-- jquery-UI css -->
+	<link rel="stylesheet" href="../static/jqueryui/jquery-ui.css">
+	<link rel="stylesheet" href="../static/jqueryui/jquery-ui.structure.css">
+	<link rel="stylesheet" href="../static/jqueryui/jquery-ui.theme.css">
 
 	<!-- Modernizr JS -->
 	<script src="../static/js/modernizr-2.6.2.min.js"></script>
@@ -48,23 +52,25 @@ href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
 	<!--[if lt IE 9]>
 	<script src="../static/js/respond.min.js"></script>
 	<![endif]-->
-	
 
+	<!-- jQ-UI for datepicker, etc. -->
+	
+	
 	<!-- DYNAMIC CSS FROM DB -->
 	
-
-	</head>
-	<body>
+	
+</head>
+<body>
 	<div id="virtual-memorial-page">
 		<div class="container-wrap">
-		<a href="#" class="js-virtual-memorial-nav-toggle virtual-memorial-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
-		<aside id="virtual-memorial-aside" role="complementary" class="border js-fullheight">
-			<div class="text-center">
-				<div class="author-img" style="background-image: url(../static/images/{{ departed.headshot }});"></div>
-				<h1 id="virtual-memorial-logo"><a href="/memorial/{{ departed.id }}">{{ departed.fname }} {{ departed.lname }}</a></h1>
-				<!-- <span class="position">{{ departed.headline }}</span> -->
-			</div>
-			<nav id="virtual-memorial-main-menu" role="navigation" class="navbar">
+			<a href="#" class="js-virtual-memorial-nav-toggle virtual-memorial-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
+			<aside id="virtual-memorial-aside" role="complementary" class="border js-fullheight">
+				<div class="text-center">
+					<div class="author-img" style="background-image: url(../static/images/{{ departed.headshot }});"></div>
+					<h1 id="virtual-memorial-logo"><a href="/memorial/{{ departed.id }}">{{ departed.fname }} {{ departed.lname }}</a></h1>
+					<!-- <span class="position">{{ departed.headline }}</span> -->
+				</div>
+				<nav id="virtual-memorial-main-menu" role="navigation" class="navbar">
 				<div id="navbar" class="collapse">
 					<ul>
 						<!-- <li class="active"><a href="#" data-nav-section="home">Home</a></li> -->
@@ -75,7 +81,7 @@ href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
 						<li><a href="/flower-cart" data-nav-section="cart" class="external">View Cart</a></li>
 						<li><a href="#" data-nav-section="checkout" class="external">Checkout</a></li>
 						<!-- <li><a href="#" data-nav-section="gallery">Gallery & Tributes</a></li>
-						<li><a href="/register/{{departed.id}}" class="external">Register</a>/<a href="/login/{{departed.id}}" class="external">Login</a> to:</li>
+							<li><a href="/register/{{departed.id}}" class="external">Register</a>/<a href="/login/{{departed.id}}" class="external">Login</a> to:</li>
 						<li><a href="/sendflowers/{{departed.id}}" class="external" data-nav-section="post">Send Flowers</a></li>
 						<li><a href="/createpost/{{departed.id}}" class="external" data-nav-section="post">Post Something</a></li>
 						<li><a href="/edit/{{departed.id}}" data-nav-section="manage" class="external">Edit This Memorial</a></li> -->
@@ -89,27 +95,27 @@ href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
 Copyright <script>document.write(new Date().getFullYear());</script> Larry Volz
 <br> All rights reserved. 
 
-				<ul>
-					<li><a href="#"><i class="icon-facebook2"></i></a></li>
-					<li><a href="#"><i class="icon-twitter2"></i></a></li>
-					<li><a href="#"><i class="icon-instagram"></i></a></li>
-					<li><a href="#"><i class="icon-linkedin2"></i></a></li>
-				</ul>
-			</div>
+<ul>
+	<li><a href="#"><i class="icon-facebook2"></i></a></li>
+	<li><a href="#"><i class="icon-twitter2"></i></a></li>
+	<li><a href="#"><i class="icon-instagram"></i></a></li>
+	<li><a href="#"><i class="icon-linkedin2"></i></a></li>
+</ul>
+</div>
 
-		</aside>
-		<div class="row">
-			<br>
-		</div>
+</aside>
+<div class="row">
+	<br>
+</div>
 		<div class="row justify-content-center">
 			<div class="col">
 				<div class="col-sm-4"></div>
 				<div class="col-sm-8">
 					<div class="col text-center">
 						{% for msg in get_flashed_messages() %}
-							<div class="alert alert-success">{{ msg }} 
-						  {% endfor %} 
-					</div>
+						<div class="alert alert-success">{{ msg }} 
+							{% endfor %} 
+						</div>
 				</div>
 			</div>
 		</div> 
@@ -120,65 +126,65 @@ Copyright <script>document.write(new Date().getFullYear());</script> Larry Volz
 				   	<li style="background-image: url(../static/images/{{ departed.hero1 }});">
 				   		<div class="overlay"></div>
 				   		<div class="container-fluid">
-				   			<div class="row">
-					   			<div class="col-md-6 col-md-offset-3 col-md-pull-3 col-sm-12 col-xs-12 js-fullheight slider-text">
-					   				<div class="slider-text-inner js-fullheight">
-					   					<div class="desc">
+							   <div class="row">
+								   <div class="col-md-6 col-md-offset-3 col-md-pull-3 col-sm-12 col-xs-12 js-fullheight slider-text">
+									   <div class="slider-text-inner js-fullheight">
+										   <div class="desc">
 											   <h2 style="color: {{ departed.text_color }};">In Loving Memory of</h2>
 						   					<h1 style="color: {{ departed.text_color }};">{{ departed.fname }} {{ departed.lname }}</h1>
-
+											   
 										</div>
-					   				</div>
-					   			</div>
+									</div>
+								</div>
 					   		</div>
-				   		</div>
-				   	</li>
-				   	<li style="background-image: url(../static/images/{{ departed.hero2 }});">
-				   		<div class="overlay"></div>
+						</div>
+					</li>
+					<li style="background-image: url(../static/images/{{ departed.hero2 }});">
+						<div class="overlay"></div>
 				   		<div class="container-fluid">
-				   			<div class="row">
+							   <div class="row">
 					   			<div class="col-md-6 col-md-offset-3 col-md-pull-3 col-sm-12 col-xs-12 js-fullheight slider-text">
-					   				<div class="slider-text-inner">
-					   					<div class="desc">
-						   					<h1 style="color: {{ departed.text_color }};">{{ departed.headline }}</h1>
-												
+									   <div class="slider-text-inner">
+										   <div class="desc">
+											   <h1 style="color: {{ departed.text_color }};">{{ departed.headline }}</h1>
+											   
 											</div>
-					   				</div>
-					   			</div>
-					   		</div>
+										</div>
+									</div>
+								</div>
 				   		</div>
 				   	</li>
-				  	</ul>
+				</ul>
 			  	</div>
 			</section> -->
 
 			<section class="virtual-memorial-memorial" data-section="memorial">
 				<div class="virtual-memorial-narrow-content">
-	
+					
 							<div class="row row-bottom-padded-sm animate-box" data-animate-effect="fadeInLeft">
 								<div class="col-md-12">
 									<div class="memorial-desc">
 										
 											{% block event %}
 											{% endblock %}
-					
+											
+										</div>
 									</div>
-								</div>
 							</div>
 				</div>
 			</section>
-
-
-
+			
+			
+			
 		</div><!-- end:virtual-memorial-main -->
 	</div><!-- end:container-wrap -->
-	</div><!-- end:virtual-memorial-page -->
+</div><!-- end:virtual-memorial-page -->
 
 	<!-- jQuery -->
 	<!-- <script src="../static/js/jquery.min.js"></script> -->
 	<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
   crossorigin="anonymous"></script>
-
+  
 	<!-- jQuery Easing -->
 	<script src="../static/js/jquery.easing.1.3.js"></script>
 	<!-- Bootstrap -->
@@ -191,11 +197,12 @@ Copyright <script>document.write(new Date().getFullYear());</script> Larry Volz
 	<script src="../static/js/owl.carousel.min.js"></script>
 	<!-- Counters -->
 	<script src="../static/js/jquery.countTo.js"></script>
+	<script src ='../static/jqueryui/jquery-ui.js' type='text/javascript'></script>
 	
 	
 	<!-- MAIN JS -->
 	<script src="../static/js/obituary.js"></script>
-
-	</body>
+	
+</body>
 </html>
 

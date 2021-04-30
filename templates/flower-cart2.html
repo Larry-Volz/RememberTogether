@@ -32,29 +32,13 @@ virtual memorial wall in loving memory of {{ departed.fname }} {{ departed.lname
 			<div class="col flower-column  m-1 text-start justify-content-center" style=" background-color: #F2F3F7;">
 				<div class="card flower-card text-start " style="width: 24rem;">
 					<div class="card-body">			
-						<h3>Check Available Dates:</h3>
-						<form action="/flower-cart2" method= "POST", enctype="multipart/form-data">
+						<h3>Available Delivery Dates:</h3>
+						<form action="/flower-cart3" method= "POST", enctype="multipart/form-data">
+							<input type='text' id='datepicker'>
+							
 
-							{{ form.hidden_tag() }}
 							
-							{% for field in form 
-								  if field.widget.input_type != 'hidden' %}
-							
-									<p> {{ field.label }} 
-										<!-- add bootstrap class to form field -->
-										{{ field(class="form-control", style="background-color:white; border: 1px solid black; border-radius: 5px;") }}
-									 </p>
-							
-									{% for error in field.errors %} {{ error }} 
-									{% endfor %} 
-							
-							{% endfor %}
-							
-							{% for msg in get_flashed_messages() %} 
-								 {{msg}}
-							{% endfor %}
-							<input type="submit" value="submit" class="btn btn-primary">
-							</form>
+						</form>
 						
 					</div>
 				</div>

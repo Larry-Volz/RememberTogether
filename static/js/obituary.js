@@ -324,5 +324,9 @@
 
 	});
 
+		//datepicker for flower-cart2 route
+		$('#datepicker').datepicker();
+	  
+
 	
 }());

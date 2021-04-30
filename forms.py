@@ -109,7 +109,7 @@ class LoginForm(FlaskForm):
     #TODO
 
 class ZipForm(FlaskForm):
-    zip = StringField("Zip code", validators=[InputRequired(),  Length(min=5, message="must be at least 5 digits")])
+    zip = StringField("Enter zip code", validators=[InputRequired(),  Length(min=5, message="must be at least 5 digits")])
 
 class FlowerOrderForm(FlaskForm):
     """
