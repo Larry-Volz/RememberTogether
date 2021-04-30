@@ -324,8 +324,25 @@
 
 	});
 
-		//datepicker for flower-cart2 route
-		$('#datepicker').datepicker();
+//TODO: GOOD EXPERIMENT - COULDN'T GET IT TO WORK.  COME BACK TO IT
+// let eventDates = {};
+// eventDates[ new Date( '04/29/2021' )] = new Date( '04/29/2021' );
+// eventDates[ new Date( '05/01/2021' )] = new Date( '05/01/2021' );
+// eventDates[ new Date( '05/03/2021' )] = new Date( '05/03/2021' );
+// eventDates[ new Date('05/05/2021')] = new Date( '08/23/2016' );
+// eventDates[ new Date('05/05/2021')] = new Date( '05/05/2021' );
+
+
+// 	 $('#datepicker').datepicker({
+//         beforeShowDay: function( date ) {
+//             var highlight = eventDates[date];
+//             if( highlight ) {
+//                  return [true, "event", 'Tooltip text'];
+//             } else {
+//                  return [true, '', ''];
+//             }
+//         }
+//     });
 	  
 
 	

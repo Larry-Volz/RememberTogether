@@ -596,6 +596,7 @@ def flower_cart2():
         flash("Must enter a valid zip code")
         return redirect (f"/sendflowers")
 
+    
     #scaffolding
     print("################################################")
     # print("FLOWER POSTED")
