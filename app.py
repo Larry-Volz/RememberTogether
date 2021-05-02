@@ -482,7 +482,7 @@ def send_flowers():
 
 
 @app.route('/flower-cart', methods=['POST'])
-def flower_cart1():
+def flower_cart_post():
     """ 
     GET for going directly to the cart
     POST for coming from a clicked flower
@@ -546,11 +546,27 @@ def flower_cart1():
         #     # #TRY again
         # requests.put(f"https://www.floristone.com/api/rest/shoppingcart?sessionid={cart_session_id}&action=add&productcode={flower_id}",  auth=(flower_user, flower_pass))
 
-
     #get cart contents from API
     cart_contents = requests.get(f'https://www.floristone.com/api/rest/shoppingcart?sessionid={cart_session_id}', auth=(flower_user, flower_pass))
     cart_contents = cart_contents.json()
     # cart_contents = cart_contents['products']
+
+    print("___________________________FLOWER URLS_________________________________")
+    flower_urls=[]
+    for item in cart_contents['products']:
+        flower_code=item['CODE']
+
+        flower_detail = requests.get(f'https://www.floristone.com/api/rest/flowershop/getproducts?code={flower_code}', auth=(flower_user, flower_pass))
+        flower_detail=flower_detail.json()
+
+        flower_urls.append({item['CODE']:flower_detail['PRODUCTS'][0]['SMALL']})
+        print(flower_detail['PRODUCTS'][0]['SMALL'])
+
+    print('flower_urls:', flower_urls)
+
+    #TODO: experiment - make accessible throughout site visit
+    # session['cart_contents']=cart_contents
+    # session['flower_urls']=flower_urls    
 
     #FUTURE REF/REMINDER: TO DELETE A SESSION
     # session.pop('shopping_cart_id')
@@ -572,7 +588,7 @@ def flower_cart1():
     print("################################################")
 
     # flash("Added to Cart")
-    return render_template("flower-cart.html", departed=departed, cart_contents=cart_contents, form=form)
+    return render_template("flower-cart.html", flower_urls = flower_urls, departed=departed, form=form, cart_contents=cart_contents )
 
 
 
