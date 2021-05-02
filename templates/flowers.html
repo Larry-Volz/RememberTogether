@@ -20,14 +20,18 @@
 				<div class="flower-description ">
 				  <p class="card-text text-start">{{ product["DESCRIPTION"] }}</p>
 				</div>
+				
 
-					<form action="/flower-cart" method="POST" class="	" enctype="multipart/form-data">
+					<form action="/flower-cart" method="POST" enctype="multipart/form-data">
 						<div class="form-group">
 								<!-- TODO: Double-check the security on this method -->
+								
+							
 							<input type="hidden" id="flower_id" name="flower_id" value="{{product['CODE']}}">
 							<button class="btn btn-primary form-control" style="color: blue;"><strong>Add to Cart</strong></button>
 						</div>
 					</form>
+
 			</div>
 		  </div>	
 </div>

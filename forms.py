@@ -108,24 +108,76 @@ class LoginForm(FlaskForm):
 # class Admin_login(Flaskform):
     #TODO
 
+################################ FLOWER SHOP FORMS ##################################
+
+class AddFlowerToCart(FlaskForm):
+    flower_id = HiddenField("")
+
 class ZipForm(FlaskForm):
     zip = StringField("Enter zip code", validators=[InputRequired(),  Length(min=5, message="must be at least 5 digits")])
 
 class FlowerOrderForm(FlaskForm):
     """
-        name - 100 character maximum
-        email - valid email address, 100 character maximum
-        address1 - 100 character maximum
-        address2 - not required
-        city - 100 character maximum
-        state - 2 character state code
-        country - 2 character country code
-        phone - 10 digits
-        zipcode - 10 character maximum
-        ip - valid ipv4 / ipv6 ip address of user
+        To Create data to make a JSON request in the following format:
+        {  
+   "customer": "{  
+      \"ZIPCODE\":11779,
+      \"PHONE\":1234567890,
+      \"ADDRESS2\":\" \",
+      \"STATE\":\"DE\",
+      \"ADDRESS1\":\"123 Big St\",
+      \"NAME\":\"John Doe\",
+      \"COUNTRY\":\"US\",
+      \"IP\":\"1.1.1.1\",
+      \"EMAIL\":\"phil@floristone.com\",
+      \"CITY\":\"Wilmington\"
+   }",
+   "products": "[  
+      {  
+         \"PRICE\":39.95,
+         \"CARDMESSAGE\":\"This is a card message\",
+         \"RECIPIENT\":{  
+            \"ZIPCODE\":11779,
+            \"PHONE\":1234567890,
+            \"ADDRESS2\":\" \",
+            \"STATE\":\"DE\",
+            \"ADDRESS1\":\"123 Big St\",
+            \"NAME\":\"Phil FloristOne\",
+            \"COUNTRY\":\"US\",
+            \"INSTITUTION\":\" \",
+            \"CITY\":\"Wilmington\"
+         },
+         \"DELIVERYDATE\":\"2016-02-29\",
+         \"CODE\":\"F1-509\"
+      }
+   ]",
+   "ccinfo": "{  
+      \"AUTHORIZENET_TOKEN\":\"****\"
+   }",
+   "ordertotal":58.79
+}
     """
-    #can get name and email from user log in - or combine the two forms on page if not already logged in
-    
+    #CUSTOMER
+    #retrieve name from log in and concat into one variable: name
+    #get email from login
+    address1 = StringField("Street address", 
+    validators = [InputRequired(message = "cannot be blank"), Length(max=100)])
+    address2 = StringField("PO Box or Apt. number")
+    city = StringField("City", 
+    validators = [InputRequired(message = "cannot be blank"), Length(max=100)])
+    state = StringField("State", 
+    validators = [InputRequired(message = "cannot be blank"), Length(max=2)])
+    #retrieve zipcode from earlier form
+    country = StringField("Country", 
+    validators = [InputRequired(message = "cannot be blank"), Length(max=2)])
+    phone = StringField("Phone", 
+    validators = [InputRequired(message = "cannot be blank"), Length(max=10)])
+    ip = HiddenField() #auto-detect
+
+    #PRODUCTS (AN ARRAY)
+    #code - get from cart
+    #prices - get from inquiry
+
 
 
 
