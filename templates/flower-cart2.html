@@ -32,7 +32,7 @@ virtual memorial wall in loving memory of {{ departed.fname }} {{ departed.lname
 			<div class="col flower-column  m-1 text-start justify-content-center" style=" background-color: #F2F3F7;">
 				<div class="card flower-card text-start " style="width: 24rem;">
 					<div class="card-body">			
-						<h3>Pick Delivery Date:</h3>
+						<h3>Availagle Delivery Dates:</h3>
 						<form action="/flower-cart3" method= "POST", enctype="multipart/form-data">
 							<!-- <input type='text' id='datepicker' placeholder="Click to select date"> -->
 							<select name="delivery-date" id="delivery-date">
@@ -40,7 +40,8 @@ virtual memorial wall in loving memory of {{ departed.fname }} {{ departed.lname
 								{% for date in dates %}
 								<option value="{{date}}">{{date}}</option>
 								{% endfor %}
-								<input type="submit" value="Send Flowers" class="btn btn-primary">
+								<!-- TODO: ADD FACEBOOK VS GUEST CHECKOUT HERE -->
+								<input type="submit" value="Pick Date & Continue to Checkout" class="btn btn-primary">
 							</select>
 						</form>
 						

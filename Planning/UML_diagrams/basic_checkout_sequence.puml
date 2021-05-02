@@ -1,0 +1,11 @@
+@startuml
+
+
+flowershop -> flowercart : click on choice
+flowercart -> flowercart2: get zip code
+flowercart2 -> flowercart3: show zip+date+total/get Delivery & card msg
+flowercart3 -> flowercart4: Get payment info
+flowercart4 -> confirmation_pg1: Confirm want to buy
+confirmation_pg1 -> receipt: thanks and set up email
+
+@enduml

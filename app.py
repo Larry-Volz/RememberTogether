@@ -6,6 +6,7 @@ from flask_uploads import configure_uploads, IMAGES, UploadSet
 import datetime
 from os import getenv
 import requests, base64
+import json 
 
 
 # ****NEED TO ALSO INSTALL Flask-Reloaded TO FIX BUGS IN flask_uploads!!!
@@ -628,15 +629,8 @@ def flower_cart1_get():
 
 @app.route('/flower-cart2', methods=['POST'])
 def flower_cart2():
-    """ cart(product_id) is for when user has JUST added an item to cart
-    TODO: make another route for going directly to the cart
-    This shows item details and options in cart with ability to purchase, suggestions for add-on products or to continue shopping.  
-    (first time) creates cart in API, puts a session id in flask-session 
-    (not first time) updates flask-session
-    (every time) adds item in cart in API, store in db shopping history as having been carted"""
+    """ Zip code processed -> gives date opetions to pick form"""
 
-    # flower_id = request.form['flower_id']
-    
     flower_user = getenv('FLORIST_ONE_KEY')
     flower_pass = getenv('FLORIST_ONE_PASSWORD')
 
@@ -648,52 +642,20 @@ def flower_cart2():
     cart_contents = requests.get(f'https://www.floristone.com/api/rest/shoppingcart?sessionid={cart_session_id}', auth=(flower_user, flower_pass))
     cart_contents = cart_contents.json()
 
-
-
-    #Get individual flower
-    # flower = requests.get('https://www.floristone.com/api/rest/flowershop/getproducts', params={"code": flower_id}, auth=(flower_user, flower_pass))
-    # flower = flower.json()
-    # flower = flower['PRODUCTS'][0]
-
-    # requests.put(f"https://www.floristone.com/api/rest/shoppingcart?sessionid={cart_session_id}&action=add&productcode={flower_id}",  auth=(flower_user, flower_pass))
-    #CREATE SHOPPING CART
-    #TODO: CHECK-IN WITH TABLE TO CONTINUE PAST SHOPPING CART OR START A NEW ONE
-    # if session.get('shopping_cart_id') is None:
-    #     #create shopping cart
-    #     shopping_cart=requests.post('https://www.floristone.com/api/rest/shoppingcart',  auth=(flower_user, flower_pass))
-    #     shopping_cart = shopping_cart.json()
-        
-    #     session['shopping_cart_id']=shopping_cart['SESSIONID']
-    
-    #more readable variable for api calls
-
-    #add to cart at API
-
-    #get cart contents from API
-    # cart_contents = cart_contents['products']
-
-    #FUTURE REF/REMINDER: TO DELETE A SESSION
-    # session.pop('shopping_cart_id')
-
-    
-    # zip form to retrieve list of available dates
-
     zip = request.form['zip']
     session['zip'] = zip
+
     dates = requests.get('https://www.floristone.com/api/rest/flowershop/checkdeliverydate', params={"zipcode": zip}, auth=(flower_user, flower_pass))
     dates = dates.json()
+
     try:
         dates = dates['DATES']
     except:
         flash("Must enter a valid zip code")
         return redirect (f"/sendflowers")
-
     
     #scaffolding
     print("################################################")
-    # print("FLOWER POSTED")
-    # print(flower['NAME'])
-    # print("flower id:", flower_id)
     print("shopping_cart_id:")
     print(session['shopping_cart_id'])
     print("################################################")
@@ -702,13 +664,14 @@ def flower_cart2():
         print(ea['NAME'])
     print("################################################")
 
-
-
     # flash("Added to Cart")
     return render_template("flower-cart2.html", departed=departed,cart_contents=cart_contents, dates=dates)
 
+
+
 @app.route('/flower-cart3', methods=['POST'])
 def flowercart3():
+    """ """
 
     flower_user = getenv('FLORIST_ONE_KEY')
     flower_pass = getenv('FLORIST_ONE_PASSWORD')
@@ -720,7 +683,36 @@ def flowercart3():
 
     cart_contents = requests.get(f'https://www.floristone.com/api/rest/shoppingcart?sessionid={cart_session_id}', auth=(flower_user, flower_pass))
     cart_contents = cart_contents.json()
-    return render_template("flower-cart3.html", departed=departed, cart_contents=cart_contents, date=date, zip=zip)
+
+    #DONE(?): format json as needed to get cost back
+    complete_order = [ {"PRICE":item['PRICE'], "RECIPIENT":{"ZIPCODE":zip}, "CODE":item['CODE']} for item in cart_contents['products']]
+
+    #attempting to stringify it to work in API call
+    complete_order = json.dumps(complete_order)
+
+    #TODO: 
+    #TYPES APPEAR TO BE CORRECT
+    # print("ZIP is type:", type(zip))
+    # for ea in cart_contents['products']:
+    #     print("ea['PRICE'] is type:", type(ea['PRICE']))
+    #     print("ea['NAME'] is type:", type(ea['NAME']))
+    #     print("ea['CODE'] is type:", type(ea['CODE']))
+    #     print("---------------------------------------")
+
+    total_cost = requests.get('https://www.floristone.com/api/rest/flowershop/gettotal', params={"products":complete_order}, auth=(flower_user, flower_pass))
+    total_cost = total_cost.json()
+    
+
+    # TESTED IT SUCCESSFULLY IN INSOMNIA WITH: [{"PRICE":84.95,"RECIPIENT":{"ZIPCODE":"23111"},"CODE":"FA302"}]
+
+    #NOTE: ALWAYS PRINT OUT THE OUTPUT WITHOUT KEYS TO CHECK FOR ERRORS
+    # GOT THIS: total_cost {'errors': ['at least one product is required']}
+    # helped me realize that it needed to be json.dump(x) 'd (stringified) into text for API to be able to read it
+    print("---------------------------------------")
+    print("total_cost", total_cost)
+    print("---------------------------------------")
+
+    return render_template("flower-cart3.html", departed=departed, cart_contents=cart_contents, date=date, zip=zip, cost=total_cost)
 
 
 
