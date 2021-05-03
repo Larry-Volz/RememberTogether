@@ -716,7 +716,7 @@ def flowercart3():
     print("total_cost", total_cost)
     print("---------------------------------------")
 
-    return render_template("flower-cart3.html", flower_urls=flower_urls, departed=departed, cart_contents=cart_contents, date=date, zip=zip, cost=total_cost)
+    return render_template("flower-cart3.html", flower_urls=flower_urls,departed=departed, cart_contents=cart_contents, date=date, zip=zip, cost=total_cost)
 
 
 
