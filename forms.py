@@ -160,6 +160,8 @@ class FlowerOrderForm(FlaskForm):
     #CUSTOMER
     #retrieve name from log in and concat into one variable: name
     #get email from login
+    name = StringField("First & last name", 
+    validators = [InputRequired(message = "cannot be blank"), Length(max=100)])
     address1 = StringField("Street address", 
     validators = [InputRequired(message = "cannot be blank"), Length(max=100)])
     address2 = StringField("PO Box or Apt. number")
@@ -167,12 +169,12 @@ class FlowerOrderForm(FlaskForm):
     validators = [InputRequired(message = "cannot be blank"), Length(max=100)])
     state = StringField("State", 
     validators = [InputRequired(message = "cannot be blank"), Length(max=2)])
-    #retrieve zipcode from earlier form
+    zip_cust = StringField("Zip code", 
+    validators = [InputRequired(message = "cannot be blank"), Length(max=12)])
     country = StringField("Country", 
     validators = [InputRequired(message = "cannot be blank"), Length(max=2)])
     phone = StringField("Phone", 
     validators = [InputRequired(message = "cannot be blank"), Length(max=10)])
-    ip = HiddenField() #auto-detect
 
     #PRODUCTS (AN ARRAY)
     #code - get from cart

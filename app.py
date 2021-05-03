@@ -1,12 +1,13 @@
+import datetime
 from flask import Flask, request, render_template, redirect, flash, session, jsonify, url_for
 from flask_debugtoolbar import DebugToolbarExtension
-from models import db, connect_db, User, Admin_user, Departed, Post
-from forms import User_registration, Create_memorial_form, Post_form, LoginForm, ZipForm, AddFlowerToCart
 from flask_uploads import configure_uploads, IMAGES, UploadSet
-import datetime
+from forms import User_registration, Create_memorial_form, Post_form, LoginForm, ZipForm, AddFlowerToCart, FlowerOrderForm
+import json 
+from models import db, connect_db, User, Admin_user, Departed, Post
 from os import getenv
 import requests, base64
-import json 
+import socket
 
 
 # ****NEED TO ALSO INSTALL Flask-Reloaded TO FIX BUGS IN flask_uploads!!!
@@ -671,7 +672,7 @@ def flower_cart2():
 
 
 
-@app.route('/flower-cart3', methods=['POST'])
+@app.route('/flower-cart3', methods=['GET', 'POST'])
 def flowercart3():
     """ """
 
@@ -682,6 +683,7 @@ def flowercart3():
     cart_session_id = session['shopping_cart_id']
     zip = session['zip'] 
     date = request.form['delivery-date']
+    session['delivery-date']=date
 
     cart_contents = requests.get(f'https://www.floristone.com/api/rest/shoppingcart?sessionid={cart_session_id}', auth=(flower_user, flower_pass))
     cart_contents = cart_contents.json()
@@ -712,14 +714,102 @@ def flowercart3():
     #NOTE: ALWAYS PRINT OUT THE OUTPUT WITHOUT KEYS TO CHECK FOR ERRORS
     # GOT THIS: total_cost {'errors': ['at least one product is required']}
     # helped me realize that it needed to be json.dump(x) 'd (stringified) into text for API to be able to read it
-    print("---------------------------------------")
-    print("total_cost", total_cost)
-    print("---------------------------------------")
+    
 
-    return render_template("flower-cart3.html", flower_urls=flower_urls,departed=departed, cart_contents=cart_contents, date=date, zip=zip, cost=total_cost)
+    form = FlowerOrderForm()
+    
+    return render_template("flower-cart3.html", flower_urls=flower_urls,departed=departed, cart_contents=cart_contents, date=date, zip=zip, cost=total_cost, form=form)
 
 
+@app.route('/flower-cart4', methods= ['GET', 'POST'])
+def flowercart4():
+    """ processing the customer order form"""
 
+    flower_user = getenv('FLORIST_ONE_KEY')
+    flower_pass = getenv('FLORIST_ONE_PASSWORD')
+    departed_id=session['departed_id']
+    departed=Departed.query.get_or_404(departed_id)
+    cart_session_id = session['shopping_cart_id']
+    zip = session['zip'] 
+    date = session['delivery-date']
+
+    cart_contents = requests.get(f'https://www.floristone.com/api/rest/shoppingcart?sessionid={cart_session_id}', auth=(flower_user, flower_pass))
+    cart_contents = cart_contents.json()
+
+    flower_urls = get_flower_urls(cart_contents)
+
+    #DONE(?): format json as needed to get cost back
+    complete_order = [ {"PRICE":item['PRICE'], "RECIPIENT":{"ZIPCODE":zip}, "CODE":item['CODE']} for item in cart_contents['products']]
+
+    #attempting to stringify it to work in API call
+    complete_order = json.dumps(complete_order)
+
+    #TODO: 
+    #TYPES APPEAR TO BE CORRECT
+    # print("ZIP is type:", type(zip))
+    # for ea in cart_contents['products']:
+    #     print("ea['PRICE'] is type:", type(ea['PRICE']))
+    #     print("ea['NAME'] is type:", type(ea['NAME']))
+    #     print("ea['CODE'] is type:", type(ea['CODE']))
+    #     print("---------------------------------------")
+
+    total_cost = requests.get('https://www.floristone.com/api/rest/flowershop/gettotal', params={"products":complete_order}, auth=(flower_user, flower_pass))
+    total_cost = total_cost.json()
+    
+
+    # TESTED IT SUCCESSFULLY IN INSOMNIA WITH: [{"PRICE":84.95,"RECIPIENT":{"ZIPCODE":"23111"},"CODE":"FA302"}]
+
+    #NOTE: ALWAYS PRINT OUT THE OUTPUT WITHOUT KEYS TO CHECK FOR ERRORS
+    # GOT THIS: total_cost {'errors': ['at least one product is required']}
+    # helped me realize that it needed to be json.dump(x) 'd (stringified) into text for API to be able to read it
+    
+
+    form = FlowerOrderForm()
+    ############################################### customer form ##################
+    ## getting the hostname by socket.gethostname() method
+    hostname = socket.gethostname()
+    ## getting the IP address using socket.gethostbyname() method
+    ip_address = socket.gethostbyname(hostname)
+    
+    #will get name separately as anyone can buy flowers, - using mom's card, etc.
+    # user_id = session["user_id"]
+    # user = User.query.get_or_404(user_id)
+    # name = f"{user.fname} {user.lname}"
+
+    if form.validate_on_submit(): #csrf & is POST
+        
+        name = form.name.data   
+        address1 = form.address1.data   
+        address2 = form.address2.data
+        city = form.city.data   
+        state = form.state.data
+        zip_cust = form.zip_cust.data
+        country = form.country.data   
+        phone = form.phone.data
+
+        print("---------------------------------------")
+        print("name", name)
+        print("address1", address1)
+        print("address2",address2)
+        print("city", city)
+        print("state", state)
+        print("zip", zip_cust)
+        print("country", country)
+        print("phone", phone)
+        print("---------------------------------------")
+
+        return redirect('/flower-cart5')
+
+    else:
+        return render_template("flower-cart4.html", flower_urls=flower_urls,departed=departed, cart_contents=cart_contents, date=date, zip=zip, cost=total_cost, form=form)
+
+
+    return render_template('flower-cart4.html')
+
+@app.route('/flower-cart5', methods= ['GET','POST'])
+def flower_cart5():
+
+    return render_template('flower-cart5.html')
 
 @app.route('/deletefromcart/<product_code>')
 def delete_from_cart(product_code):
