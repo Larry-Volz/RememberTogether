@@ -506,7 +506,7 @@ def flower_cart_post():
     #CREATE SHOPPING CART
     #TODO: FIND OUT IF STILL AN ACTIVE SHOPPING CART AT API OR START A NEW ONE
     
-    #In meantime and we know it's a firt-timer...
+    #In meantime and we know it's a first-timer...
     if session.get('shopping_cart_id') is None:
         #create shopping cart
         session['shopping_cart_id'] = create_shopping_cart(flower_user, flower_pass)
@@ -530,7 +530,6 @@ def flower_cart_post():
     #add to cart at API
     # TODO: OUGHTA BE ABLE TO FIND IF NO SESSION AT API HERE
     # JSON atAT API responds:  {errors: {'invalid sessionid'}} - ish...
-
     resp = requests.put(f"https://www.floristone.com/api/rest/shoppingcart?sessionid={cart_session_id}&action=add&productcode={flower_id}",  auth=(flower_user, flower_pass))
     # resp=resp.json()
 
@@ -551,26 +550,9 @@ def flower_cart_post():
     cart_contents = cart_contents.json()
     # cart_contents = cart_contents['products']
 
-    print("___________________________FLOWER URLS_________________________________")
-    flower_urls=[]
-    for item in cart_contents['products']:
-        flower_code=item['CODE']
-
-        flower_detail = requests.get(f'https://www.floristone.com/api/rest/flowershop/getproducts?code={flower_code}', auth=(flower_user, flower_pass))
-        flower_detail=flower_detail.json()
-
-        flower_urls.append({item['CODE']:flower_detail['PRODUCTS'][0]['SMALL']})
-        print(flower_detail['PRODUCTS'][0]['SMALL'])
-
-    print('flower_urls:', flower_urls)
-
-    #TODO: experiment - make accessible throughout site visit
-    # session['cart_contents']=cart_contents
-    # session['flower_urls']=flower_urls    
-
-    #FUTURE REF/REMINDER: TO DELETE A SESSION
-    # session.pop('shopping_cart_id')
-
+    
+    flower_urls = get_flower_urls(cart_contents)
+    
     
     # zip form to retrieve list of available dates
     form=ZipForm()
@@ -627,6 +609,8 @@ def flower_cart1_get():
     cart_contents = requests.get(f'https://www.floristone.com/api/rest/shoppingcart?sessionid={cart_session_id}', auth=(flower_user, flower_pass))
     cart_contents = cart_contents.json()
 
+    flower_urls = get_flower_urls(cart_contents)
+
     # zip form to retrieve list of available dates
     form=ZipForm()
     #scaffolding
@@ -639,7 +623,7 @@ def flower_cart1_get():
     print("################################################")
 
     # flash("Added to Cart")
-    return render_template("flower-cart.html", departed=departed, cart_contents=cart_contents, form=form)
+    return render_template("flower-cart.html", flower_urls = flower_urls, departed=departed, cart_contents=cart_contents, form=form)
 
 
 
@@ -657,6 +641,8 @@ def flower_cart2():
 
     cart_contents = requests.get(f'https://www.floristone.com/api/rest/shoppingcart?sessionid={cart_session_id}', auth=(flower_user, flower_pass))
     cart_contents = cart_contents.json()
+
+    flower_urls = get_flower_urls(cart_contents)
 
     zip = request.form['zip']
     session['zip'] = zip
@@ -681,7 +667,7 @@ def flower_cart2():
     print("################################################")
 
     # flash("Added to Cart")
-    return render_template("flower-cart2.html", departed=departed,cart_contents=cart_contents, dates=dates)
+    return render_template("flower-cart2.html", flower_urls=flower_urls, departed=departed,cart_contents=cart_contents, dates=dates)
 
 
 
@@ -699,6 +685,8 @@ def flowercart3():
 
     cart_contents = requests.get(f'https://www.floristone.com/api/rest/shoppingcart?sessionid={cart_session_id}', auth=(flower_user, flower_pass))
     cart_contents = cart_contents.json()
+
+    flower_urls = get_flower_urls(cart_contents)
 
     #DONE(?): format json as needed to get cost back
     complete_order = [ {"PRICE":item['PRICE'], "RECIPIENT":{"ZIPCODE":zip}, "CODE":item['CODE']} for item in cart_contents['products']]
@@ -728,7 +716,7 @@ def flowercart3():
     print("total_cost", total_cost)
     print("---------------------------------------")
 
-    return render_template("flower-cart3.html", departed=departed, cart_contents=cart_contents, date=date, zip=zip, cost=total_cost)
+    return render_template("flower-cart3.html", flower_urls=flower_urls, departed=departed, cart_contents=cart_contents, date=date, zip=zip, cost=total_cost)
 
 
 
@@ -783,3 +771,22 @@ def create_shopping_cart(flower_user, flower_pass):
     shopping_cart = shopping_cart.json()
 
     return shopping_cart['SESSIONID']
+
+def get_flower_urls(cart_contents):
+    flower_urls=[]
+    flower_user = getenv('FLORIST_ONE_KEY')
+    flower_pass = getenv('FLORIST_ONE_PASSWORD')
+    for item in cart_contents['products']:
+        flower_code=item['CODE']
+
+        flower_detail = requests.get(f'https://www.floristone.com/api/rest/flowershop/getproducts?code={flower_code}', auth=(flower_user, flower_pass))
+        flower_detail=flower_detail.json()
+
+        flower_urls.append({item['CODE']:flower_detail['PRODUCTS'][0]['SMALL']})
+        print("___________________________FLOWER URLS_________________________________")
+
+        print(flower_detail['PRODUCTS'][0]['SMALL'])
+
+    print('flower_urls:', flower_urls)
+
+    return flower_urls 
