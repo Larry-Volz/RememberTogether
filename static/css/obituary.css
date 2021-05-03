@@ -1509,5 +1509,9 @@ hr {
 }
 
 .tiny {
-  font-size: 8px;
+  font-size: 10px;
+}
+
+.flower-box {
+  line-height: .3rem !important;
 }

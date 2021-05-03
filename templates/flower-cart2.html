@@ -12,20 +12,20 @@ virtual memorial wall in loving memory of {{ departed.fname }} {{ departed.lname
 		<div class="col-sm-6">
 			{% set count = namespace(value=0) %}
 			{% for item in cart_contents['products'] %}
-				<div class="col flower-column text-start justify-content-center" >
-					<!-- style=" background-color: #F2F3F7;" -->
-					<img class="card-img-top flower-card-image mb-1 " src="{{ flower_urls[count.value][item ['CODE']] }}" alt="{{ item['NAME'] }} for {{ departed.fname }} {{ departed.lname }}">
-					<div class="card flower-card text-start " style="width: 24rem;">
-						<p class="card-title">{{ item["NAME"] }} <br>
-							<small>item#: {{ item ['CODE']}}</small> <br>
-							<small>${{ item['PRICE'] }}</small>
-						<br><div class="tiny"><a href="/deletefromcart/{{item['CODE']}}">Remove from cart</a></div>
-					</p>
-
-					<div class="card-body">
+			<div class="col flower-column text-start justify-content-center" >
+				<div class="card flower-card text-start " style="width: 24rem;">
+				<!-- style=" background-color: #F2F3F7;" -->
+				<img class="card-img-top flower-card-image mb-1 " src="{{ flower_urls[count.value][item ['CODE']] }}" alt="{{ item['NAME'] }} for {{ departed.fname }} {{ departed.lname }}">
+				<div class="row">
+						<p class="flower-box">{{ item["NAME"] }}</p>
+						<p class="flower-box"><small >item#: {{ item ['CODE']}}</small></p>	
+						<p class="flower-box"><small>${{ item['PRICE'] }}</small></p>
+						<div class="tiny">
+						<p class="flower-box"><a href="/deletefromcart/{{item['CODE']}}">Remove from cart</a></p>
+							</div>
+					</div>
 				</div>
 			</div>
-		</div>
 		{% set count.value = count.value + 1 %}
 	{% endfor %}
 		</div>

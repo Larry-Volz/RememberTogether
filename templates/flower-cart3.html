@@ -18,13 +18,12 @@ virtual memorial wall in loving memory of {{ departed.fname }} {{ departed.lname
 				<!-- style=" background-color: #F2F3F7;" -->
 				<img class="card-img-top flower-card-image mb-1 " src="{{ flower_urls[count.value][item ['CODE']] }}" alt="{{ item['NAME'] }} for {{ departed.fname }} {{ departed.lname }}">
 				<div class="row">
-						<p class="card-title">{{ item["NAME"] }} <br>
-							<small>item#: {{ item ['CODE']}}</small> <br>
-							<small>${{ item['PRICE'] }}</small><br>
-							<div class="tiny">
-								<a href="/deletefromcart/{{item['CODE']}}">Remove from cart</a>
+						<p class="flower-box">{{ item["NAME"] }}</p>
+						<p class="flower-box"><small >item#: {{ item ['CODE']}}</small></p>	
+						<p class="flower-box"><small>${{ item['PRICE'] }}</small></p>
+						<div class="tiny">
+						<p class="flower-box"><a href="/deletefromcart/{{item['CODE']}}">Remove from cart</a></p>
 							</div>
-						</p>
 					</div>
 				</div>
 			</div>
