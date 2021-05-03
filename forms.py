@@ -1,10 +1,16 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired
 from wtforms.fields.html5 import DateField, DateTimeField, TimeField
-from wtforms import StringField, FloatField,IntegerField, StringField, TextAreaField, BooleanField, SubmitField, validators, HiddenField, PasswordField
+from wtforms import StringField, FloatField,IntegerField, StringField, TextAreaField, BooleanField, SubmitField, validators, HiddenField, PasswordField, SelectField
 from wtforms.validators import InputRequired, Optional, Email, NumberRange, AnyOf, URL,  EqualTo, DataRequired, Length
 #TODO: add PasswordField?
 
+
+states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DC", "DE", "FL", "GA",
+          "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD",
+          "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ",
+          "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC",
+          "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"]
 
 class Create_memorial_form(FlaskForm):
     """To create a memorial wall for a dearly departed"""
@@ -114,7 +120,10 @@ class AddFlowerToCart(FlaskForm):
     flower_id = HiddenField("")
 
 class ZipForm(FlaskForm):
-    zip = StringField("Enter zip code", validators=[InputRequired(),  Length(min=5, message="must be at least 5 digits")])
+    zip = StringField("Enter zip code where flowers are GOING", validators=[InputRequired(),  Length(min=5, message="must be at least 5 digits")])
+
+class FlowerMessage(FlaskForm):
+    message = StringField("Your card message")
 
 class FlowerOrderForm(FlaskForm):
     """
@@ -167,8 +176,7 @@ class FlowerOrderForm(FlaskForm):
     address2 = StringField("PO Box or Apt. number")
     city = StringField("City", 
     validators = [InputRequired(message = "cannot be blank"), Length(max=100)])
-    state = StringField("State", 
-    validators = [InputRequired(message = "cannot be blank"), Length(max=2)])
+    state = SelectField("state", choices = [(st, st) for st in states])  
     zip_cust = StringField("Zip code", 
     validators = [InputRequired(message = "cannot be blank"), Length(max=12)])
     country = StringField("Country", 

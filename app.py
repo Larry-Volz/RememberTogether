@@ -834,26 +834,7 @@ def delete_from_cart(product_code):
     return redirect('/flower-cart')
 
 
-
-
-
-#---------------------------------------------------------
-# TODO: ROUTES TO MAKE
-#---------------------------------------------------------
-
-""" purchase(cart_id)  give form to fill in personal and credit card information.  Put cc info in flask-session(?) """
-
-
-
-""" confirm_info(cart_info)  get auth key and price from api's, get order confirmation click"""
-
-""" place_order(cart_info) place_order_api, getorderinfo_api, destroy cart, destroy auth token, store order in order history table in db, create post for memorial wall, send receipt, return Order Confirmation page """
-
-
-""" Tracking form page """
-
-""" Tracking info return page """
-
+#------------------------------------ FUNCTIONS -------------------------------------
 
 def create_shopping_cart(flower_user, flower_pass):
 
@@ -873,10 +854,29 @@ def get_flower_urls(cart_contents):
         flower_detail=flower_detail.json()
 
         flower_urls.append({item['CODE']:flower_detail['PRODUCTS'][0]['SMALL']})
-        print("___________________________FLOWER URLS_________________________________")
 
-        print(flower_detail['PRODUCTS'][0]['SMALL'])
+        # print("___________________________FLOWER URLS_________________________________")
+        # print(flower_detail['PRODUCTS'][0]['SMALL'])
 
-    print('flower_urls:', flower_urls)
+    # print('flower_urls:', flower_urls)
 
     return flower_urls 
+
+
+
+#---------------------------------------------------------
+# TODO: ROUTES TO MAKE
+#---------------------------------------------------------
+
+""" purchase(cart_id)  give form to fill in personal and credit card information.  Put cc info in flask-session(?) """
+
+
+
+""" confirm_info(cart_info)  get auth key and price from api's, get order confirmation click"""
+
+""" place_order(cart_info) place_order_api, getorderinfo_api, destroy cart, destroy auth token, store order in order history table in db, create post for memorial wall, send receipt, return Order Confirmation page """
+
+
+""" Tracking form page """
+
+""" Tracking info return page """
