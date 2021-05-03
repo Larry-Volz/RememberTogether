@@ -70,6 +70,7 @@ virtual memorial wall in loving memory of {{ departed.fname }} {{ departed.lname
 							<h3>Enter Delivery Information</h3>
 						<form action="/flower-cart4" method= "POST", enctype="multipart/form-data">
 							{{ form.hidden_tag() }}
+							{{ form.csrf_token }}
 							{% for field in form if field.widget.input_type != 'hidden' %}
 								<div class="form-group">
 									{{ field.label }}
@@ -81,7 +82,7 @@ virtual memorial wall in loving memory of {{ departed.fname }} {{ departed.lname
 										</small>
 									{% endfor %} 
 								</div>
-							{% endfor %}
+							{% endfor %} 
 
 							<!-- <input type='text' id='datepicker' placeholder="Click to select date"> -->
 							<!-- <select name="delivery-date" id="delivery-date">

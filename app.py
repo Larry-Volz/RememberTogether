@@ -682,8 +682,11 @@ def flowercart3():
     departed=Departed.query.get_or_404(departed_id)
     cart_session_id = session['shopping_cart_id']
     zip = session['zip'] 
-    date = request.form['delivery-date']
-    session['delivery-date']=date
+    if session.get('delivery-date') is None:
+        date = request.form['delivery-date']
+        session['delivery-date']=date
+    else:
+        date = session['delivery-date']
 
     cart_contents = requests.get(f'https://www.floristone.com/api/rest/shoppingcart?sessionid={cart_session_id}', auth=(flower_user, flower_pass))
     cart_contents = cart_contents.json()
@@ -766,15 +769,22 @@ def flowercart4():
 
     form = FlowerOrderForm()
     ############################################### customer form ##################
-    ## getting the hostname by socket.gethostname() method
+    ## getting ip address for floristone API
     hostname = socket.gethostname()
-    ## getting the IP address using socket.gethostbyname() method
     ip_address = socket.gethostbyname(hostname)
     
     #will get name separately as anyone can buy flowers, - using mom's card, etc.
     # user_id = session["user_id"]
     # user = User.query.get_or_404(user_id)
     # name = f"{user.fname} {user.lname}"
+    if form.is_submitted():
+        print( "____________________________submitted______________")
+
+    if form.validate():
+        print("_______________________________valid_________________")
+
+    print("_________________________FORM ERRORS:",form.errors)
+
 
     if form.validate_on_submit(): #csrf & is POST
         
@@ -801,7 +811,7 @@ def flowercart4():
         return redirect('/flower-cart5')
 
     else:
-        return render_template("flower-cart4.html", flower_urls=flower_urls,departed=departed, cart_contents=cart_contents, date=date, zip=zip, cost=total_cost, form=form)
+        return render_template("flower-cart3.html", flower_urls=flower_urls,departed=departed, cart_contents=cart_contents, date=date, zip=zip, cost=total_cost, form=form)
 
 
     return render_template('flower-cart4.html')
@@ -827,21 +837,11 @@ def delete_from_cart(product_code):
 
 
 
-
-
-
-
-
-
-
-
 #---------------------------------------------------------
 # TODO: ROUTES TO MAKE
 #---------------------------------------------------------
 
 """ purchase(cart_id)  give form to fill in personal and credit card information.  Put cc info in flask-session(?) """
-
-
 
 
 

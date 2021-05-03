@@ -172,7 +172,7 @@ class FlowerOrderForm(FlaskForm):
     zip_cust = StringField("Zip code", 
     validators = [InputRequired(message = "cannot be blank"), Length(max=12)])
     country = StringField("Country", 
-    validators = [InputRequired(message = "cannot be blank"), Length(max=2)])
+    validators = [InputRequired(message = "cannot be blank"), Length(max=30)])
     phone = StringField("Phone", 
     validators = [InputRequired(message = "cannot be blank"), Length(max=10)])
 
