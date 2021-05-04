@@ -67,21 +67,74 @@ virtual memorial wall in loving memory of {{ departed.fname }} {{ departed.lname
 
 						<div class="row">
 							<br><br>
-							<h3>Enter Delivery Information</h3>
-						<form action="/flower-cart4" method= "POST", enctype="multipart/form-data">
+
+							<form action="/flower-cart4" method= "POST", enctype="multipart/form-data">
 							{{ form.hidden_tag() }}
 							{{ form.csrf_token }}
-							{% for field in form if field.widget.input_type != 'hidden' %}
-								<div class="form-group">
-									{{ field.label }}
-									{{field(class="form-control")}}
-									{% for error in field.errors %} 
-										<br>
-										<small class="form-text text-danger">
-										{{ error }} 
-										</small>
-									{% endfor %} 
+
+							{% set count2 = namespace(value=0) %}
+								{% for field in form if field.widget.input_type != 'hidden' %}
+
+								{% if count2.value == 0: %}
+
+								<div id="msg-area">
+									MESSAGE AREA
+									<div class="form-group">
+										{{ field.label }}
+										{{field(class="form-control")}}
+										{% for error in field.errors %} 
+											<br>
+											<small class="form-text text-danger">
+											{{ error }} 
+											</small>
+										{% endfor %} 
+									</div>
 								</div>
+								{% endif %}
+
+								{% if count2.value == 1: %}
+								<div id="recipient">
+									RECIPIENT DATA DIV
+								{% endif %}
+								{% if count2.value > 0 and count2.value < 10: %}
+									<div class="form-group">
+										{{ field.label }}
+										{{field(class="form-control")}}
+										{% for error in field.errors %} 
+											<br>
+											<small class="form-text text-danger">
+											{{ error }} 
+											</small>
+										{% endfor %} 
+									</div>
+								</div>
+								{% endif%}
+
+								{% if count2.value == 9: %}
+								END RECIPIENT DIV
+								{% endif %}
+
+								{% if count2.value == 10: %}
+								<div id="recipient">
+									SENDER DATA DIV
+								{% endif %}
+
+								{% if count2.value >= 10: %}
+									<div class="form-group">
+										{{ field.label }}
+										{{field(class="form-control")}}
+										{% for error in field.errors %} 
+											<br>
+											<small class="form-text text-danger">
+											{{ error }} 
+											</small>
+										{% endfor %} 
+									</div>
+									{% endif%}
+
+
+
+								{% set count2.value = count2.value + 1 %}
 							{% endfor %} 
 
 							<!-- <input type='text' id='datepicker' placeholder="Click to select date"> -->
@@ -93,11 +146,7 @@ virtual memorial wall in loving memory of {{ departed.fname }} {{ departed.lname
 								<input type="submit" value="Send Flowers" class="btn btn-primary">
 							</select> -->
 							<br><br>
-							<h3>Add a Gift Message</h3>
 
-							Message:
-							From:
-							[ ] Use this as my billing address (add later)
 							<button class="btn btn-success" type="submit">Place Order</button>
 						</form>
 						</div>

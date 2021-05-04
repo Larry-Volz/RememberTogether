@@ -3,8 +3,7 @@ from flask_wtf.file import FileField, FileRequired
 from wtforms.fields.html5 import DateField, DateTimeField, TimeField
 from wtforms import StringField, FloatField,IntegerField, StringField, TextAreaField, BooleanField, SubmitField, validators, HiddenField, PasswordField, SelectField
 from wtforms.validators import InputRequired, Optional, Email, NumberRange, AnyOf, URL,  EqualTo, DataRequired, Length
-#TODO: add PasswordField?
-
+from wtforms.fields.html5 import EmailField
 
 states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DC", "DE", "FL", "GA",
           "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD",
@@ -121,9 +120,7 @@ class AddFlowerToCart(FlaskForm):
 
 class ZipForm(FlaskForm):
     zip = StringField("Enter zip code where flowers are GOING", validators=[InputRequired(),  Length(min=5, message="must be at least 5 digits")])
-
-class FlowerMessage(FlaskForm):
-    message = StringField("Your card message")
+    
 
 class FlowerOrderForm(FlaskForm):
     """
@@ -166,22 +163,55 @@ class FlowerOrderForm(FlaskForm):
    "ordertotal":58.79
 }
     """
+    message = StringField("Write a message for your gift card")
+
+    #RECIPIENT
+    to_name = StringField("First & last name", 
+    validators = [InputRequired(message = "cannot be blank"), Length(max=100)])
+    
+    to_institution = StringField("Institution", 
+    validators = [Length(max=100)])
+    
+    to_address1 = StringField("Street address", 
+    validators = [InputRequired(message = "cannot be blank"), Length(max=100)])
+    
+    to_address2 = StringField("PO Box or Apt. number")
+    
+    to_city = StringField("City", 
+    validators = [InputRequired(message = "cannot be blank"), Length(max=100)])
+    
+    to_state = SelectField("state", choices = [(st, st) for st in states])  
+    
+    to_zipcode = StringField("Zip code", 
+    validators = [InputRequired(message = "cannot be blank"), Length(max=5)])
+    
+    to_country = StringField("Country", validators = [Length(max=2)], default="US")
+    
+    to_phone = StringField("Phone", 
+    validators = [InputRequired(message = "cannot be blank"), Length(max=10)])
+
     #CUSTOMER
-    #retrieve name from log in and concat into one variable: name
-    #get email from login
-    name = StringField("First & last name", 
+    from_name = StringField("First & last name", 
     validators = [InputRequired(message = "cannot be blank"), Length(max=100)])
-    address1 = StringField("Street address", 
+
+    from_email = EmailField('Email address', [validators.DataRequired("Please enter your email address."), Length(max=100), validators.Email()])
+    
+    from_address1 = StringField("Street address", 
     validators = [InputRequired(message = "cannot be blank"), Length(max=100)])
-    address2 = StringField("PO Box or Apt. number")
-    city = StringField("City", 
+    
+    from_address2 = StringField("PO Box or Apt. number")
+    
+    from_city = StringField("City", 
     validators = [InputRequired(message = "cannot be blank"), Length(max=100)])
-    state = SelectField("state", choices = [(st, st) for st in states])  
-    zip_cust = StringField("Zip code", 
-    validators = [InputRequired(message = "cannot be blank"), Length(max=12)])
-    country = StringField("Country", 
-    validators = [InputRequired(message = "cannot be blank"), Length(max=30)])
-    phone = StringField("Phone", 
+    
+    from_state = SelectField("state", choices = [(st, st) for st in states])  
+    
+    from_zipcode = StringField("Zip code", 
+    validators = [InputRequired(message = "cannot be blank"), Length(max=5)])
+    
+    from_country = StringField("Country",validators = [Length(max=2)], default="US")
+    
+    from_phone = StringField("Phone", 
     validators = [InputRequired(message = "cannot be blank"), Length(max=10)])
 
     #PRODUCTS (AN ARRAY)

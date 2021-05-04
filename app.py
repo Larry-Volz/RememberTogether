@@ -693,7 +693,7 @@ def flowercart3():
 
     flower_urls = get_flower_urls(cart_contents)
 
-    #DONE(?): format json as needed to get cost back
+    #to get quote
     complete_order = [ {"PRICE":item['PRICE'], "RECIPIENT":{"ZIPCODE":zip}, "CODE":item['CODE']} for item in cart_contents['products']]
 
     #attempting to stringify it to work in API call
