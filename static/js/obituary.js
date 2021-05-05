@@ -315,6 +315,36 @@
 
 	});
 
+	$("body").on('click', ".next-arrow", (evt)=> {
+		// evt.preventDefault();
+		let $group = $(evt.target).closest("div").data("group") ;
+		let $currentGroupId = "#input-group"+ ($group);
+		let $nextGroupId = "#input-group"+ ($group+1);
+		// $($nextGroupId).toggleClass("hidden");
+		$($currentGroupId).hide();
+		$($nextGroupId).slideToggle();
+		//scroll back up
+    	$("html, body").animate({
+        scrollTop: 0 
+	}, 1000);   
+
+	});
+
+	$("body").on('click', ".prev-arrow", (evt)=> {
+		// evt.preventDefault();
+		let $group = $(evt.target).closest("div").data("group") ;
+		let $currentGroupId = "#input-group"+ ($group);
+		let $prevGroupId = "#input-group"+ ($group-1);
+		// $($nextGroupId).toggleClass("hidden");
+		$($currentGroupId).hide();
+		$($prevGroupId).slideToggle();
+		//scroll back up
+		$("html, body").animate({
+			scrollTop: 0
+		}, 1000);   
+
+	});
+
 	$("body").on('click', ".date-check-link", (evt)=> {
 		evt.preventDefault();
 		let $descriptionText2 = $(evt.target).closest("div").find(".zip-form");
@@ -323,6 +353,8 @@
 		console.log($descriptionText2)
 
 	});
+
+
 
 //TODO: GOOD EXPERIMENT - COULDN'T GET IT TO WORK.  COME BACK TO IT
 // let eventDates = {};
@@ -337,7 +369,7 @@
 //         beforeShowDay: function( date ) {
 //             var highlight = eventDates[date];
 //             if( highlight ) {
-//                  return [true, "event", 'Tooltip text'];
+//                  return [true, "event", 'Tooltip text']; 
 //             } else {
 //                  return [true, '', ''];
 //             }
