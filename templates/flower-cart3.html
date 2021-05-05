@@ -77,7 +77,7 @@ virtual memorial wall in loving memory of {{ departed.fname }} {{ departed.lname
 
 								{% if count2.value == 0: %}
 
-								<div id="msg-area">
+								<div id="msg-input">
 									MESSAGE AREA
 									<div class="form-group">
 										{{ field.label }}
@@ -93,7 +93,7 @@ virtual memorial wall in loving memory of {{ departed.fname }} {{ departed.lname
 								{% endif %}
 
 								{% if count2.value == 1: %}
-								<div id="recipient">
+								<div id="recipient-input">
 									RECIPIENT DATA DIV
 								{% endif %}
 								{% if count2.value > 0 and count2.value < 10: %}
@@ -107,19 +107,19 @@ virtual memorial wall in loving memory of {{ departed.fname }} {{ departed.lname
 											</small>
 										{% endfor %} 
 									</div>
-								</div>
-								{% endif%}
-
+									{% endif%}
+									
 								{% if count2.value == 9: %}
 								END RECIPIENT DIV
+								</div>
 								{% endif %}
 
 								{% if count2.value == 10: %}
-								<div id="recipient">
+								<div id="sender-input">
 									SENDER DATA DIV
 								{% endif %}
 
-								{% if count2.value >= 10: %}
+								{% if count2.value >= 10 and count2.value < 19: %}
 									<div class="form-group">
 										{{ field.label }}
 										{{field(class="form-control")}}
@@ -131,8 +131,30 @@ virtual memorial wall in loving memory of {{ departed.fname }} {{ departed.lname
 										{% endfor %} 
 									</div>
 									{% endif%}
-
-
+								{% if count2.value == 18: %}
+								END SENDER DIV
+								</div>
+								{% endif %}
+								{% if count2.value == 19: %}
+								<div id="special-instructions-input">
+									SPECIAL INSTRUCTIONS DATA DIV
+								{% endif %}
+								{% if count2.value == 19: %}
+									<div class="form-group">
+										{{ field.label }}
+										{{field(class="form-control")}}
+										{% for error in field.errors %} 
+											<br>
+											<small class="form-text text-danger">
+											{{ error }} 
+											</small>
+										{% endfor %} 
+									</div>
+									{% endif%}
+								{% if count2.value == 19: %}
+								END SPECIAL INSTRUCTIONS DIV
+								</div>
+							{% endif %}
 
 								{% set count2.value = count2.value + 1 %}
 							{% endfor %} 

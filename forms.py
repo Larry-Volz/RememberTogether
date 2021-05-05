@@ -163,7 +163,7 @@ class FlowerOrderForm(FlaskForm):
    "ordertotal":58.79
 }
     """
-    message = StringField("Write a message for your gift card")
+    cardmessage = StringField("Write a message for your gift card")
 
     #RECIPIENT
     to_name = StringField("First & last name", 
@@ -213,6 +213,9 @@ class FlowerOrderForm(FlaskForm):
     
     from_phone = StringField("Phone", 
     validators = [InputRequired(message = "cannot be blank"), Length(max=10)])
+
+    specialinstructions = StringField("Any special instructions?", 
+    validators = [InputRequired(message = "cannot be blank"), Length(max=100)])
 
     #PRODUCTS (AN ARRAY)
     #code - get from cart
