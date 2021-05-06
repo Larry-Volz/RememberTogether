@@ -167,6 +167,8 @@ class FlowerOrderForm(FlaskForm):
 }
     """
     
+    delivery_date =  SelectField("Pick a delivery date",
+                       choices= [])
     cardmessage = StringField("Write a message for your gift card")
 
     #RECIPIENT

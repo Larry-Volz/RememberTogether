@@ -106,7 +106,6 @@ def reg_login():
     '''registers or logs in a person to create a new obituary'''
     return render_template('reg_login.html', login_form=login_form, registration_form=registration_form)
 
-#TODO: FIX GREYED-OUT 'LOGIN FIRST'
 @app.route('/create', methods=["GET","POST"])
 def create_obituary():
     """ renders form to create a new obituary """
@@ -628,58 +627,11 @@ def flower_cart1_get():
     return render_template("flower-cart.html", flower_urls = flower_urls, departed=departed, cart_contents=cart_contents, form=form)
 
 
-
-# @app.route('/flower-cart2', methods=['POST'])
-# def flower_cart2():
-#     """ Zip code processed -> gives date opetions to pick form"""
-
-#     flower_user = getenv('FLORIST_ONE_KEY')
-#     flower_pass = getenv('FLORIST_ONE_PASSWORD')
-
-#     departed_id=session['departed_id']
-#     departed=Departed.query.get_or_404(departed_id)
-
-#     cart_session_id = session['shopping_cart_id']
-
-#     cart_contents = requests.get(f'https://www.floristone.com/api/rest/shoppingcart?sessionid={cart_session_id}', auth=(flower_user, flower_pass))
-#     cart_contents = cart_contents.json()
-
-#     flower_urls = get_flower_urls(cart_contents)
-
-#     zip = request.form['zip']
-#     session['zip'] = zip
-
-#     dates = requests.get('https://www.floristone.com/api/rest/flowershop/checkdeliverydate', params={"zipcode": zip}, auth=(flower_user, flower_pass))
-#     dates = dates.json()
-
-#     try:
-#         dates = dates['DATES']
-#         session['dates'] = dates
-#     except:
-#         flash("Must enter a valid zip code")
-#         return redirect (f"/sendflowers")
-    
-    
-#     #scaffolding
-#     print("################################################")
-#     print("shopping_cart_id:")
-#     print(session['shopping_cart_id'])
-#     print("################################################")
-#     print("CART CONTENTS:")
-#     for ea in cart_contents['products']:
-#         print(ea['NAME'])
-#     print("################################################")
-
-#     # flash("Added to Cart")
-#     return render_template("flower-cart2.html", flower_urls=flower_urls, departed=departed,cart_contents=cart_contents, dates=dates)
-
-
-
-@app.route('/flower-cart3', methods=['GET', 'POST'])
-def flowercart3():
+@app.route('/flower-cart2', methods=['GET', 'POST'])
+def flowercart2():
     """ """
 
-    session['page_current']=3
+    session['page_current']=2
 
     flower_user = getenv('FLORIST_ONE_KEY')
     flower_pass = getenv('FLORIST_ONE_PASSWORD')
@@ -687,6 +639,7 @@ def flowercart3():
     departed=Departed.query.get_or_404(departed_id)
     cart_session_id = session['shopping_cart_id']
     # zip = session['zip'] 
+    form = FlowerOrderForm()
 
     if session.get('zip') is None: 
         zip = request.form['zip']
@@ -707,6 +660,9 @@ def flowercart3():
     try:
         dates = dates['DATES']
         session['dates'] = dates
+        #dynamically populate delivery_date field
+        form.delivery_date.choices = [(date,date) for date in dates]
+
     except:
         flash("Must enter a valid zip code")
         return redirect (f"/sendflowers")
@@ -717,42 +673,14 @@ def flowercart3():
 
     flower_urls = get_flower_urls(cart_contents)
 
-    #TODO: PUT IN NEXT FLOWER-CART to get quote
-    # complete_order = [ {"PRICE":item['PRICE'], "RECIPIENT":{"ZIPCODE":zip}, "CODE":item['CODE']} for item in cart_contents['products']]
 
-    #TODO: PUT IN NEXT FLOWER-CART to get quote
-    #attempting to stringify it to work in API call
-    # complete_order = json.dumps(complete_order)
-
-    #TODO: 
-    #TYPES APPEAR TO BE CORRECT
-    # print("ZIP is type:", type(zip))
-    # for ea in cart_contents['products']:
-    #     print("ea['PRICE'] is type:", type(ea['PRICE']))
-    #     print("ea['NAME'] is type:", type(ea['NAME']))
-    #     print("ea['CODE'] is type:", type(ea['CODE']))
-    #     print("---------------------------------------")
-
-    #TODO: PUT IN NEXT FLOWER-CART to get quote
-    # total_cost = requests.get('https://www.floristone.com/api/rest/flowershop/gettotal', params={"products":complete_order}, auth=(flower_user, flower_pass))
-    # total_cost = total_cost.json()
-    
-
-    # TESTED IT SUCCESSFULLY IN INSOMNIA WITH: [{"PRICE":84.95,"RECIPIENT":{"ZIPCODE":"23111"},"CODE":"FA302"}]
-
-    #NOTE: ALWAYS PRINT OUT THE OUTPUT WITHOUT KEYS TO CHECK FOR ERRORS
-    # GOT THIS: total_cost {'errors': ['at least one product is required']}
-    # helped me realize that it needed to be json.dump(x) 'd (stringified) into text for API to be able to read it
-    
-
-    form = FlowerOrderForm()
 
     #TODO: FORWARD INTO NEXT FLOWER-CART:  cost=total_cost, date = date, date2=date2,
-    return render_template("flower-cart3.html", flower_urls=flower_urls,departed=departed, cart_contents=cart_contents, zip=zip, form=form, dates=dates)
+    return render_template("flower-cart2.html", flower_urls=flower_urls,departed=departed, cart_contents=cart_contents, zip=zip, form=form, dates=dates)
 
 
-@app.route('/flower-cart4', methods= ['GET', 'POST'])
-def flowercart4():
+@app.route('/flower-cart3', methods= ['GET', 'POST'])
+def flowercart3():
     """ processing the customer order form"""
 
     flower_user = getenv('FLORIST_ONE_KEY')
@@ -768,20 +696,40 @@ def flowercart4():
 
     flower_urls = get_flower_urls(cart_contents)
 
-    #DONE(?): format json as needed to get cost back
+    #TODO: PUT IN NEXT FLOWER-CART to get quote
     complete_order = [ {"PRICE":item['PRICE'], "RECIPIENT":{"ZIPCODE":zip}, "CODE":item['CODE']} for item in cart_contents['products']]
 
+    #TODO: PUT IN NEXT FLOWER-CART to get quote
     #attempting to stringify it to work in API call
     complete_order = json.dumps(complete_order)
 
     #TODO: 
     #TYPES APPEAR TO BE CORRECT
-    # print("ZIP is type:", type(zip))
-    # for ea in cart_contents['products']:
-    #     print("ea['PRICE'] is type:", type(ea['PRICE']))
-    #     print("ea['NAME'] is type:", type(ea['NAME']))
-    #     print("ea['CODE'] is type:", type(ea['CODE']))
-    #     print("---------------------------------------")
+    print("ZIP is type:", type(zip))
+    for ea in cart_contents['products']:
+        print("---------------------------------------")
+        print("IN flowercart3()")
+        print("ea['PRICE'] is type:", type(ea['PRICE']))
+        print("ea['NAME'] is type:", type(ea['NAME']))
+        print("ea['CODE'] is type:", type(ea['CODE']))
+        print("---------------------------------------")
+
+    #TODO: PUT IN NEXT FLOWER-CART to get quote
+    total_cost = requests.get('https://www.floristone.com/api/rest/flowershop/gettotal', params={"products":complete_order}, auth=(flower_user, flower_pass))
+    total_cost = total_cost.json()
+    
+
+    # TESTED IT SUCCESSFULLY IN INSOMNIA WITH: [{"PRICE":84.95,"RECIPIENT":{"ZIPCODE":"23111"},"CODE":"FA302"}]
+
+    #NOTE: ALWAYS PRINT OUT THE OUTPUT WITHOUT KEYS TO CHECK FOR ERRORS
+    # GOT THIS: total_cost {'errors': ['at least one product is required']}
+    # helped me realize that it needed to be json.dump(x) 'd (stringified) into text for API to be able to read it
+
+    #DONE(?): format json as needed to get cost back
+    complete_order = [ {"PRICE":item['PRICE'], "RECIPIENT":{"ZIPCODE":zip}, "CODE":item['CODE']} for item in cart_contents['products']]
+
+    #attempting to stringify it to work in API call
+    complete_order = json.dumps(complete_order)
 
     total_cost = requests.get('https://www.floristone.com/api/rest/flowershop/gettotal', params={"products":complete_order}, auth=(flower_user, flower_pass))
     total_cost = total_cost.json()
@@ -814,34 +762,52 @@ def flowercart4():
 
 
     if form.validate_on_submit(): #csrf & is POST
-        
-        name = form.name.data   
-        address1 = form.address1.data   
-        address2 = form.address2.data
-        city = form.city.data   
-        state = form.state.data
-        zip_cust = form.zip_cust.data
-        country = form.country.data   
-        phone = form.phone.data
+        date = request.form['delivery_date']
 
-        print("---------------------------------------")
-        print("name", name)
-        print("address1", address1)
-        print("address2",address2)
-        print("city", city)
-        print("state", state)
-        print("zip", zip_cust)
-        print("country", country)
-        print("phone", phone)
-        print("---------------------------------------")
+        cardmessage = form.cardmessage.data
 
-        return redirect('/flower-cart5')
+        to_name = form.to_name.data 
+        to_institution = form.to_institution.data  
+        to_address1 = form.to_address1.data   
+        to_address2 = form.to_address2.data
+        to_city = form.to_city.data   
+        to_state = form.to_state.data
+        to_zipcode = form.to_zipcode.data
+        to_country = form.to_country.data   
+        to_phone = form.to_phone.data
+
+        date = form.date.data
+        cardmessage = form.cardmessage.data
+        from_name = form.from_name.data 
+        from_institution = form.from_institution.data  
+        from_address1 = form.from_address1.data   
+        from_address2 = form.from_address2.data
+        from_city = form.from_city.data   
+        from_state = form.from_state.data
+        from_zipcode = form.from_zipcode.data
+        from_country = form.from_country.data   
+        from_phone = form.from_phone.data
+
+        specialinstructions = form.specialinstructions.data
+
+        # print("---------------------------------------")
+        # print("name", name)
+        # print("address1", address1)
+        # print("address2",address2)
+        # print("city", city)
+        # print("state", state)
+        # print("zip", zip_cust)
+        # print("country", country)
+        # print("phone", phone)
+        # print("---------------------------------------")
+
+        return redirect('/flower-cart3')
 
     else:
-        return render_template("flower-cart3.html", flower_urls=flower_urls,departed=departed, cart_contents=cart_contents, date=date, zip=zip, cost=total_cost, form=form)
+        return render_template("flower-cart2.html", flower_urls=flower_urls,departed=departed, cart_contents=cart_contents, date=date, zip=zip, cost=total_cost, form=form)
 
 
-    return render_template('flower-cart4.html')
+    # return render_template('flower-cart2.html')
 
 @app.route('/flower-cart5', methods= ['GET','POST'])
 def flower_cart5():

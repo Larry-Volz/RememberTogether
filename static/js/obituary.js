@@ -343,7 +343,9 @@
 			scrollTop: 0
 		}, 1000);   
 	});
+
 	$("body").on('click', "#review-button", (evt)=> {
+		//for reviewing all the form fields in case of error
 		for (let i=0; i<5; i++){
 		let inputGroup = "#input-group"+i;
 		$(inputGroup).show();

@@ -5,149 +5,206 @@
 virtual memorial wall in loving memory of {{ departed.fname }} {{ departed.lname }}
 {% endblock %}
 
-{% block event %}
-<h1>Shopping Cart</h1>
-{% for msg in get_flashed_messages() %} 
-    <div class="bg-success m-4 text-center">
-    <br>
-        <h3 class="display-3 text-center">{{msg}}</h3>
-        <br>
-    </div>
-    {% endfor %}
-	
+{% block event %} 
+<h1>Shopping Cart - *** FLOWER CART 3 ***</h1>
+<div class="row">
+	<div class="col">
+		<div class="card flower-card text-start " style="width: 60rem;">
+			<div class="card-body">		
+
+				<div class="subtotal-output">
+					<div class="row">
+						Delivery Zip Code: {{zip}} <br>
+						Delivery Date: {{date}} <br><br>
+						<div class="col-sm-7">Subtotal:</div>
+						<div class="col sm-3">${{ "{:.2f}".format(cost['SUBTOTAL']) }}</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-7 ">Florist's delivery charge:</div>
+						<div class="col sm-3">${{ "{:.2f}".format(cost['DELIVERYCHARGETOTAL']) }}</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-7 ">Tax:</div>
+						<div class="col sm-3">${{ "{:.2f}".format(cost['TAXTOTAL']) }}</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-7 ">Order Total:</div>
+						<div class="col sm-3">${{ "{:.2f}".format(cost['ORDERTOTAL']) }}</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<br><br>
+
+					<form action="/flower-cart4" method= "POST", enctype="multipart/form-data">
+					{{ form.hidden_tag() }}
+					{{ form.csrf_token }}
+
+					{% set count2 = namespace(value=0) %}
+						{% for field in form if field.widget.input_type != 'hidden' %}
+
+						{% if count2.value == 0: %}
+						<div id="input-group0" class="input-group">
+							<!-- MESSAGE AREA -->
+							<div class="form-group">
+								{{ field.label }}
+								{{field(class="form-control")}}
+								{% for error in field.errors %} 
+									<br>
+									<small class="form-text text-danger">
+									{{ error }} 
+									</small>
+								{% endfor %} 
+							</div>
+							<div class="col-sm-6"></div>
+							<div class="col-sm-6 arrow next-arrow" data-group="0">Next <i class="fas fa-caret-square-right"></i></div>
+						</div>
+							{% endif %}
+
+						{% if count2.value == 1: %}
+						<div id="input-group1" class="input-group ">
+							<!-- RECIPIENT DATA DIV -->
+							<h3>Who are we sending this to?</h3>
+						{% endif %}
+						{% if count2.value > 0 and count2.value < 10: %}
+							<div class="form-group">
+								{{ field.label }}
+								{{field(class="form-control")}}
+								{% for error in field.errors %} 
+									<br>
+									<small class="form-text text-danger">
+									{{ error }} 
+									</small>
+								{% endfor %} 
+							</div>
+							{% endif %}
+						{% if count2.value == 9: %}
+						<!-- END RECIPIENT DIV -->
+						<div class="col-sm-6 arrow prev-arrow" data-group="1"><i class="fas fa-caret-square-left"></i> Previous </div>
+						<div class="col-sm-6 arrow next-arrow" data-group="1">Next <i class="fas fa-caret-square-right"></i></div>
+						</div>
+						{% endif %}
+
+						{% if count2.value == 10: %}
+						<div id="input-group2" class="input-group ">
+							<!-- SENDER DATA DIV -->
+							<h3>Sender information:</h3>
+						{% endif %}
+						{% if count2.value >= 10 and count2.value < 19: %}
+							<div class="form-group">
+								{{ field.label }}
+								{{field(class="form-control")}}
+								{% for error in field.errors %} 
+									<br>
+									<small class="form-text text-danger">
+									{{ error }} 
+									</small>
+								{% endfor %} 
+							</div>
+							{% endif%}
+						{% if count2.value == 18: %}
+						<!-- END SENDER DIV -->
+						<div class="col-sm-6 arrow prev-arrow" data-group="2"><i class="fas fa-caret-square-left"></i> Previous </div>
+						<div class="col-sm-6 arrow next-arrow" data-group="2">Next <i class="fas fa-caret-square-right"></i></div>
+						</div>
+						{% endif %}
+
+						{% if count2.value == 19: %}
+						<div id="input-group3" class="input-group ">
+							<!-- SPECIAL INSTRUCTIONS DATA DIV -->
+						{% endif %}
+						{% if count2.value == 19: %}
+							<div class="form-group">
+								{{ field.label }}
+								{{field(class="form-control")}}
+								{% for error in field.errors %} 
+									<br>
+									<small class="form-text text-danger">
+									{{ error }} 
+									</small>
+								{% endfor %} 
+							</div>
+							{% endif%}
+						{% if count2.value == 19: %}
+						<!-- END SPECIAL INSTRUCTIONS DIV -->
+						<div class="col-sm-6 arrow prev-arrow" data-group="3"><i class="fas fa-caret-square-left"></i> Previous </div>
+						<!-- <div class="col-sm-6 arrow next-arrow" data-group="3">Next <i class="fas fa-caret-square-right"></i></div> -->
+							<br><br><br>
+
+							<div class="justify-content-center">
+								<button class="btn btn-success" type="submit">Review and Send Your Gift</button>
+							</div>
+						</div>
+					{% endif %}
+
+						{% set count2.value = count2.value + 1 %}
+					{% endfor %} 
+
+					<!-- <input type='text' id='datepicker' placeholder="Click to select date"> -->
+					<!-- <select name="delivery-date" id="delivery-date">
+
+						{% for date in dates %}
+						<option value="{{date}}">{{date}}</option>
+						{% endfor %}
+						<input type="submit" value="Send Flowers" class="btn btn-primary">
+					</select> -->
+				</form>
+				</div>
+		<div class="col-sm-4">
+		{% set count = namespace(value=0) %}
+		{% for item in cart_contents['products'] %}
+			<div class="col flower-column text-start justify-content-center" >
+				<div class="card flower-card text-start " style="width: 24rem;">
+				<!-- style=" background-color: #F2F3F7;" -->
+				<img class="card-img-top flower-card-image mb-1 " src="{{ flower_urls[count.value][item ['CODE']] }}" alt="{{ item['NAME'] }} for {{ departed.fname }} {{ departed.lname }}">
+				<div class="row">
+						<p class="card-text">{{ item["NAME"] }}</p>
+						<p class="flower-box"><small >item#: {{ item ['CODE']}}</small></p>	
+						<p class="flower-box"><small>${{ item['PRICE'] }}</small></p>
+						<div class="tiny">
+						<p class="flower-box"><a href="/deletefromcart/{{item['CODE']}}">Remove from cart</a></p>
+							</div>
+					</div>
+				</div>
+			</div>
+			{% set count.value = count.value + 1 %}
+			{% endfor %}
+		</div>
+	</div>
 		<div class="col-sm-8">
 			<div class="col flower-column  pl-4 text-start justify-content-center" >
 
 				<div class="card flower-card text-start " style="width: 60rem;">
 					<div class="card-body">		
 
+						<div class="subtotal-output">
+							<div class="row">
+								<div class="col-sm-7">Subtotal:</div>
+								<div class="col sm-3">${{ "{:.2f}".format(cost['SUBTOTAL']) }}</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-7 ">Florist's delivery charge:</div>
+								<div class="col sm-3">${{ "{:.2f}".format(cost['DELIVERYCHARGETOTAL']) }}</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-7 ">Tax:</div>
+								<div class="col sm-3">${{ "{:.2f}".format(cost['TAXTOTAL']) }}</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-7 ">Order Total:</div>
+								<div class="col sm-3">${{ "{:.2f}".format(cost['ORDERTOTAL']) }}</div>
+							</div>
+						</div>
+
 						<div class="row">
 							<br><br>
+							<h3>Enter Delivery Information</h3>
+						<form action="/flower-cart3" method= "POST", enctype="multipart/form-data">
+							FORM HERE
+							Auto fill in zip and date
 
-							<form action="/flower-cart4" method= "POST", enctype="multipart/form-data">
-							{{ form.hidden_tag() }}
-							{{ form.csrf_token }}
-
-							{% set count2 = namespace(value=1) %}
-
-							<section id="DELIVERY DATE">	
-								<div id="input-group0" class="input-group">
-									<div class="form-group">
-										Pick a delivery date
-										<select name="delivery-date" id="delivery-date">
-											{% for date in dates %}
-											<option value="{{date}}">{{date}}</option>
-											{% endfor %}
-											<!-- TODO: ADD FACEBOOK VS GUEST CHECKOUT HERE -->
-										</select>
-									</div>
-									<div class="col-sm-6"></div>
-									<div class="col-sm-6 arrow next-arrow" data-group="0">Next <i class="fas fa-caret-square-right"></i></div>
-								</div>
-							</section>		
-								
-							{% for field in form if field.widget.input_type != 'hidden' %}
-							
-								{% if count2.value == 1: %}
-									<div id="input-group1" class="input-group">
-										<!-- MESSAGE AREA -->
-										<div class="form-group">
-											{{ field.label }}
-											{{field(class="form-control")}}
-												{% for error in field.errors %} 
-													<br>
-													<small class="form-text text-danger">
-													{{ error }} 
-													</small>
-												{% endfor %} 
-										</div>
-										<div class="col-sm-6"><div class="col-sm-6 arrow prev-arrow" data-group="1"><i class="fas fa-caret-square-left"></i> Previous </div></div>
-										<div class="col-sm-6 arrow next-arrow" data-group="1">Next <i class="fas fa-caret-square-right"></i></div>
-									<!-- END MESSAGE AREA -->
-									</div>
-								{% endif %}
-
-								{% if count2.value == 2: %}
-								<div id="input-group2" class="input-group ">
-										<!-- RECIPIENT DATA DIV -->
-										<br>
-										<h3>Who are we sending this to?</h3>
-								{% endif %}
-								{% if count2.value > 1 and count2.value < 11: %}
-									<div class="form-group">
-										{{ field.label }}
-										{{field(class="form-control")}}
-											{% for error in field.errors %} 
-												<br>
-												<small class="form-text text-danger">
-												{{ error }} 
-												</small>
-											{% endfor %} 
-									</div>
-									{% endif %}
-								{% if count2.value == 10: %}
-										<!-- END RECIPIENT DIV -->
-										<div class="col-sm-6 arrow prev-arrow" data-group="2"><i class="fas fa-caret-square-left"></i> Previous </div>
-										<div class="col-sm-6 arrow next-arrow" data-group="2">Next <i class="fas fa-caret-square-right"></i></div>
-								</div>
-								{% endif %}
-
-								{% if count2.value == 11: %}
-								<div id="input-group3" class="input-group ">
-									<!-- SENDER DATA DIV -->
-									<br>
-									<h3>Sender information:</h3>
-								{% endif %}
-								{% if count2.value >= 11 and count2.value < 20: %}
-									<div class="form-group">
-										{{ field.label }}
-										{{field(class="form-control")}}
-										{% for error in field.errors %} 
-											<br>
-											<small class="form-text text-danger">
-											{{ error }} 
-											</small>
-										{% endfor %} 
-									</div>
-									{% endif%}
-								{% if count2.value == 19: %}
-								<!--  SENDER DIV -->
-								<div class="col-sm-6 arrow prev-arrow" data-group="3"><i class="fas fa-caret-square-left"></i> Previous </div>
-								<div class="col-sm-6 arrow next-arrow" data-group="3">Next <i class="fas fa-caret-square-right"></i></div>
-								</div>
-								{% endif %}
-
-								{% if count2.value == 20: %}
-								<div id="input-group4" class="input-group ">
-									<!-- SPECIAL INSTRUCTIONS DATA DIV -->
-								{% endif %}
-								{% if count2.value == 20: %}
-									<div class="form-group">
-										{{ field.label }}
-										{{field(class="form-control")}}
-										{% for error in field.errors %} 
-											<br>
-											<small class="form-text text-danger">
-											{{ error }} 
-											</small>{{ field.label }}
-										{% endfor %} 
-									</div>
-									{% endif%}
-								{% if count2.value == 20: %}
-								<!-- END SPECIAL INSTRUCTIONS DIV -->
-								<div class="col-sm-6 arrow prev-arrow" data-group="4"><i class="fas fa-caret-square-left"></i> Previous </div>
-								<!-- <div class="col-sm-6 arrow next-arrow" data-group="3">Next <i class="fas fa-caret-square-right"></i></div> -->
-									<br><br><br>
-		
-									<div class="justify-content-center">
-										<button id = "review-button" class="btn btn-success" type="submit">Review and Send Your Gift</button>
-									</div>
-								</div>
-							{% endif %}
-
-								{% set count2.value = count2.value + 1 %}
-							{% endfor %} 
-
+							Delivery Zip Code: {{zip}} <br>
+							Delivery Date: {{date}}
 							<!-- <input type='text' id='datepicker' placeholder="Click to select date"> -->
 							<!-- <select name="delivery-date" id="delivery-date">
 
@@ -156,37 +213,21 @@ virtual memorial wall in loving memory of {{ departed.fname }} {{ departed.lname
 								{% endfor %}
 								<input type="submit" value="Send Flowers" class="btn btn-primary">
 							</select> -->
+							<br><br>
+							<h3>Add a Gift Message</h3>
+
+							Message:
+							From:
 						</form>
+
+						[ ] Use this as my billing address (add later)
 						</div>
 						
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="col">
-		
-			<div class="col-sm-4">
-			{% set count = namespace(value=0) %}
-			{% for item in cart_contents['products'] %}
-				<div class="col flower-column text-start justify-content-center" >
-					<div class="card flower-card text-start " style="width: 24rem;">
-					<!-- style=" background-color: #F2F3F7;" -->
-					<img class="card-img-top flower-card-image mb-1 " src="{{ flower_urls[count.value][item ['CODE']] }}" alt="{{ item['NAME'] }} for {{ departed.fname }} {{ departed.lname }}">
-					<div class="row">
-							<p class="card-text">{{ item["NAME"] }}</p>
-							<p class="flower-box"><small >item#: {{ item ['CODE']}}</small></p>	
-							<p class="flower-box"><small>${{ item['PRICE'] }}</small></p>
-							<div class="tiny">
-							<p class="flower-box"><a href="/deletefromcart/{{item['CODE']}}">Remove from cart</a></p>
-								</div>
-						</div>
-					</div>
-				</div>
-				{% set count.value = count.value + 1 %}
-				{% endfor %}
-			</div>
-		</div>
-
+</div>
 
 
 

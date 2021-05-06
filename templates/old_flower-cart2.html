@@ -1,0 +1,74 @@
+{% extends 'flower_base.html' %}
+
+{% block title %}{{ departed.fname }} {{ departed.lname }} obituary{% endblock %}
+{% block meta_content %}
+virtual memorial wall in loving memory of {{ departed.fname }} {{ departed.lname }}
+{% endblock %}
+
+{% block event %}
+<h1>Shopping Cart</h1>
+<div class="row">
+	<div class="col">
+		<div class="col-sm-6">
+			<div class="col flower-column  m-1 text-start justify-content-center" >
+				<div class="card flower-card text-start " style="width: 24rem;">
+					<div class="card-body">			
+						<h3>Available Delivery Dates:</h3>
+						<form action="/flower-cart3" method= "POST", enctype="multipart/form-data">
+							<!-- <input type='text' id='datepicker' placeholder="Click to select date"> -->
+							<select name="delivery-date" id="delivery-date">
+
+								{% for date in dates %}
+								<option value="{{date}}">{{date}}</option>
+								{% endfor %}
+								<!-- TODO: ADD FACEBOOK VS GUEST CHECKOUT HERE -->
+								<input type="submit" value="Pick Date & Continue to Checkout" class="btn btn-primary">
+							</select>
+						</form>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			{% set count = namespace(value=0) %}
+			{% for item in cart_contents['products'] %}
+			<div class="col flower-column text-start justify-content-center" >
+				<div class="card flower-card text-start " style="width: 24rem;">
+				<!-- style=" background-color: #F2F3F7;" -->
+				<img class="card-img-top flower-card-image mb-1 " src="{{ flower_urls[count.value][item ['CODE']] }}" alt="{{ item['NAME'] }} for {{ departed.fname }} {{ departed.lname }}">
+				<div class="row">
+						<p class="flower-box">{{ item["NAME"] }}</p>
+						<p class="flower-box"><small >item#: {{ item ['CODE']}}</small></p>	
+						<p class="flower-box"><small>${{ item['PRICE'] }}</small></p>
+						<div class="tiny">
+						<p class="flower-box"><a href="/deletefromcart/{{item['CODE']}}">Remove from cart</a></p>
+							</div>
+					</div>
+				</div>
+			</div>
+		{% set count.value = count.value + 1 %}
+	{% endfor %}
+		</div>
+
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+
+
+
+{% block gallery %}
+
+
+
+{% endblock %}
