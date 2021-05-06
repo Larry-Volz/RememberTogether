@@ -10,30 +10,7 @@ virtual memorial wall in loving memory of {{ departed.fname }} {{ departed.lname
 <div class="row">
 	<div class="col">
 		<div class="col-sm-6">
-			
-			{% set count = namespace(value=0) %}
-			{% for item in cart_contents['products'] %}
-
-				<div class="col flower-column text-start justify-content-center" >
-					<!-- style=" background-color: #F2F3F7;" -->
-					<div class="card flower-card text-start " style="width: 24rem;">
-						<img class="card-img-top flower-card-image mb-1 " src="{{ flower_urls[count.value][item ['CODE']] }}" alt="{{ item['NAME'] }} for {{ departed.fname }} {{ departed.lname }}">
-						<p class="card-text">{{ item["NAME"] }}</p>
-						<p class="flower-box"><small>item#: {{ item ['CODE']}}</small></p>
-						<p class="flower-box"><small>${{ item['PRICE'] }}</small></p>
-
-						<p class="flower-box"><div class="tiny"><a href="/deletefromcart/{{item['CODE']}}">Remove from cart</a></div></p>
-					
-			
-					<div class="card-body">
-				</div>
-			</div>
-		</div>
-		{% set count.value = count.value + 1 %}
-	{% endfor %}
-		</div>
-		<div class="col-sm-6">
-			<div class="col flower-column  m-1 text-start justify-content-center" style=" background-color: #F2F3F7;">
+			<div class="col flower-column  m-1 text-start justify-content-center">
 				<div class="card flower-card text-start " style="width: 24rem;">
 					<div class="card-body">			
 						<h3>Check Available Dates:</h3>
@@ -64,6 +41,30 @@ virtual memorial wall in loving memory of {{ departed.fname }} {{ departed.lname
 				</div>
 			</div>
 		</div>
+		<div class="col-sm-6">
+			
+			{% set count = namespace(value=0) %}
+			{% for item in cart_contents['products'] %}
+
+				<div class="col flower-column text-start justify-content-center" >
+					<!-- style=" background-color: #F2F3F7;" -->
+					<div class="card flower-card text-start " style="width: 24rem;">
+						<img class="card-img-top flower-card-image mb-1 " src="{{ flower_urls[count.value][item ['CODE']] }}" alt="{{ item['NAME'] }} for {{ departed.fname }} {{ departed.lname }}">
+						<p class="card-text">{{ item["NAME"] }}</p>
+						<p class="flower-box"><small>item#: {{ item ['CODE']}}</small></p>
+						<p class="flower-box"><small>${{ item['PRICE'] }}</small></p>
+
+						<p class="flower-box"><div class="tiny"><a href="/deletefromcart/{{item['CODE']}}">Remove from cart</a></div></p>
+					
+			
+					<div class="card-body">
+				</div>
+			</div>
+		</div>
+		{% set count.value = count.value + 1 %}
+	{% endfor %}
+		</div>
+
 	</div>
 </div>
 
