@@ -342,8 +342,15 @@
 		$("html, body").animate({
 			scrollTop: 0
 		}, 1000);   
-
 	});
+	$("body").on('click', "#review-button", (evt)=> {
+		for (let i=0; i<5; i++){
+		let inputGroup = "#input-group"+i;
+		$(inputGroup).show();
+		$(".arrow").hide();
+			}
+		});
+	
 
 	$("body").on('click', ".date-check-link", (evt)=> {
 		evt.preventDefault();
