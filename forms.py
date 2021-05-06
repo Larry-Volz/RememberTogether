@@ -11,6 +11,9 @@ states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DC", "DE", "FL", "GA",
           "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC",
           "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"]
 
+#hoping this will update when form is used 
+dates = []
+
 class Create_memorial_form(FlaskForm):
     """To create a memorial wall for a dearly departed"""
     fname = StringField("First name", 
@@ -163,6 +166,7 @@ class FlowerOrderForm(FlaskForm):
    "ordertotal":58.79
 }
     """
+    
     cardmessage = StringField("Write a message for your gift card")
 
     #RECIPIENT
