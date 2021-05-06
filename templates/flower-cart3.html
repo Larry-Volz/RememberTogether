@@ -52,7 +52,7 @@ virtual memorial wall in loving memory of {{ departed.fname }} {{ departed.lname
 									<div id="input-group1" class="input-group">
 										<!-- MESSAGE AREA -->
 										<div class="form-group">
-											{{ field.label }}
+											{{ count2.value }} {{ field.label }}
 											{{field(class="form-control")}}
 												{% for error in field.errors %} 
 													<br>
@@ -74,7 +74,7 @@ virtual memorial wall in loving memory of {{ departed.fname }} {{ departed.lname
 								{% endif %}
 								{% if count2.value > 1 and count2.value < 11: %}
 									<div class="form-group">
-										{{ field.label }}
+										{{ count2.value }} {{ field.label }}
 										{{field(class="form-control")}}
 											{% for error in field.errors %} 
 												<br>
@@ -98,7 +98,30 @@ virtual memorial wall in loving memory of {{ departed.fname }} {{ departed.lname
 								{% endif %}
 								{% if count2.value >= 11 and count2.value < 20: %}
 									<div class="form-group">
-										{{ field.label }}
+										{{ count2.value }} {{ field.label }}
+										{{field(class="form-control")}}
+										{% for error in field.errors %} 
+											<br>
+											<small class="form-text text-danger">
+											{{ error }} 
+											</small>
+										{% endfor %} 
+									</div>
+									{% endif%}
+								{% if count2.value == 19: %}
+								<!--  SENDER DIV -->
+								<div class="col-sm-6 arrow prev-arrow" data-group="3"><i class="fas fa-caret-square-left"></i> Previous </div>
+								<div class="col-sm-6 arrow next-arrow" data-group="3">Next <i class="fas fa-caret-square-right"></i></div>
+								</div>
+								{% endif %}
+
+								{% if count2.value == 20: %}
+								<div id="input-group4" class="input-group ">
+									<!-- SPECIAL INSTRUCTIONS DATA DIV -->
+								{% endif %}
+								{% if count2.value == 20: %}
+									<div class="form-group">
+										{{ count2.value }} {{ field.label }}
 										{{field(class="form-control")}}
 										{% for error in field.errors %} 
 											<br>
@@ -109,29 +132,6 @@ virtual memorial wall in loving memory of {{ departed.fname }} {{ departed.lname
 									</div>
 									{% endif%}
 								{% if count2.value == 20: %}
-								<!--  SENDER DIV -->
-								<div class="col-sm-6 arrow prev-arrow" data-group="3"><i class="fas fa-caret-square-left"></i> Previous </div>
-								<div class="col-sm-6 arrow next-arrow" data-group="3">Next <i class="fas fa-caret-square-right"></i></div>
-								</div>
-								{% endif %}
-
-								{% if count2.value == 21: %}
-								<div id="input-group4" class="input-group ">
-									<!-- SPECIAL INSTRUCTIONS DATA DIV -->
-								{% endif %}
-								{% if count2.value == 21: %}
-									<div class="form-group">
-										{{ field.label }}
-										{{field(class="form-control")}}
-										{% for error in field.errors %} 
-											<br>
-											<small class="form-text text-danger">
-											{{ error }} 
-											</small>
-										{% endfor %} 
-									</div>
-									{% endif%}
-								{% if count2.value == 21: %}
 								<!-- END SPECIAL INSTRUCTIONS DIV -->
 								<div class="col-sm-6 arrow prev-arrow" data-group="4"><i class="fas fa-caret-square-left"></i> Previous </div>
 								<!-- <div class="col-sm-6 arrow next-arrow" data-group="3">Next <i class="fas fa-caret-square-right"></i></div> -->
