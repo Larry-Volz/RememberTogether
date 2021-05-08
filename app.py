@@ -841,6 +841,7 @@ def flowercart3():
 
 @app.route('/flower-cart4', methods= ['GET','POST'])
 def flower_cart4():
+    """ Credit card form & purchase w/API"""
 
     return render_template('flower-cart4.html')
 

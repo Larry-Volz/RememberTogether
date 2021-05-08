@@ -8,36 +8,50 @@
 {% block event %}
 <span class="heading-meta">Send a Gift of Flowers</span>
 
+{% set count = namespace(value=0) %}
+
 {% for product in all_flowers["PRODUCTS"] %}
+{% set count.value = count.value + 1 %}
+	<!-- keep it 3 to a row  -->
+	{% if count.value > 3: %}
+		<div class="row">
+			<div class="col">
+	{% endif %}
 
-<div class="col-sm-5 flower-column  m-1 text-start justify-content-center" style=" background-color: #F2F3F7;">
-		<div class="card flower-card text-start " style="width: 24rem;">
-			<h3 class="card-title">{{ product["NAME"] }}</h3>
-			<img class="card-img-top flower-card-image mb-1 " src="{{ product['SMALL'] }}" alt="{{ product['NAME'] }} for {{ departed.fname }} {{ departed.lname }}">
-			<div class="card-body">
-				<p class="card-text text-start">{{ product["PRICE"] }}</p>
-				<p><a class="flower-description-link" href="" >See Description</a></p>
-				<div class="flower-description ">
-				  <p class="card-text text-start">{{ product["DESCRIPTION"] }}</p>
-				</div>
-				
-
-					<form action="/flower-cart" method="POST" enctype="multipart/form-data">
-						<div class="form-group">
-								<!-- TODO: Double-check the security on this method -->
+	<div class="col-sm-3 flower-column text-start justify-content-center" >
+			<div class="card flower-card text-start ">
+				<h3 class="card-title text-center">{{ product["NAME"] }}</h3>
+				<img class="card-img-top flower-card-image" src="{{ product['SMALL'] }}" alt="{{ product['NAME'] }} for {{ departed.fname }} {{ departed.lname }}">
+				<div class="card-body">
+					<p class="card-text text-center">{{ product["PRICE"] }}</p>
+					<p class="text-center"><a class="flower-description-link " href="" >See Description</a></p>
+					<div class="flower-description ">
+					<p class="card-text text-center">{{ product["DESCRIPTION"] }}</p>
+					</div>
+					
+						<form action="/flower-cart" method="POST" enctype="multipart/form-data">
+							<div class="form-group">
+									<!-- TODO: Double-check the security on this method -->
+									
 								
-							
-							<input type="hidden" id="flower_id" name="flower_id" value="{{product['CODE']}}">
-							<button class="btn btn-primary form-control" style="color: blue;"><strong>Add to Cart</strong></button>
-						</div>
-					</form>
+								<input type="hidden" id="flower_id" name="flower_id" value="{{product['CODE']}}">
+								<button class="btn btn-primary form-control" style="color: blue;"><strong>Add to Cart</strong></button>
+							</div>
+						</form>
 
-			</div>
-		  </div>	
-</div>
- 
+				</div>
+			</div>	
+	</div>
+		
+	{% if count.value > 3: %}
+	</div>
+	</div>
+	{% set count.value = 0 %}
+	{% endif %}
 
-	{% endfor %}
+
+
+{% endfor %}
 
 {% endblock %}
 
