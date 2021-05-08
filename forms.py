@@ -168,8 +168,8 @@ class FlowerOrderForm(FlaskForm):
 }
     """
     
-    delivery_date =  SelectField("Pick a delivery date",
-                       choices= [])
+    delivery_date =  SelectField("Pick a delivery date", validate_choice=False)
+
     cardmessage = StringField("Write a message for your gift card")
 
     #RECIPIENT
@@ -222,7 +222,7 @@ class FlowerOrderForm(FlaskForm):
     validators = [InputRequired(message = "cannot be blank"), Length(max=10)])
 
     specialinstructions = StringField("Any special instructions?", 
-    validators = [InputRequired(message = "cannot be blank"), Length(max=100)])
+    validators = [Length(max=100)])
 
     #PRODUCTS (AN ARRAY)
     #code - get from cart

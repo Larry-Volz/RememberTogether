@@ -806,10 +806,9 @@ def flowercart3():
         to_country = form.to_country.data   
         to_phone = form.to_phone.data
 
-        date = form.date.data
+        delivery_date = form.delivery_date.data
         cardmessage = form.cardmessage.data
         from_name = form.from_name.data 
-        from_institution = form.from_institution.data  
         from_address1 = form.from_address1.data   
         from_address2 = form.from_address2.data
         from_city = form.from_city.data   
