@@ -461,7 +461,6 @@ def merge_into_DateTime(date_var, time_var):
 #######################################################
 
 
-
 @app.route("/api_tester")
 def api_tester():
 
@@ -479,9 +478,10 @@ def api_tester():
     all_flowers = all_flowers.json()
 
     #get valid API session # -- also stored in session['cart_id']
+
+    #SCAFFOLDING FOR TESTING PURPOSES
     # session['cart_id'] = "junkyjunkjunknotrealjunkyjunkerson"
     cart_id = flowershop_get_session(flower_user, flower_pass)
-    print_test("cart_id", cart_id)
     
     #get cart contents from API
     cart_contents = get_cart_contents(cart_id, flower_user, flower_pass)
@@ -490,6 +490,37 @@ def api_tester():
     print_test("CART CONTENTS:", cart_contents)
 
     return "DONE!"
+
+
+@app.route("/sendflowers")
+def sendflowers():
+
+    added_form = AddFlowerToCart()
+
+    """ Main Page for flower shop """
+    departed_id = session['departed_id']
+    flower_user = getenv('FLORIST_ONE_KEY')
+    flower_pass = getenv('FLORIST_ONE_PASSWORD')
+
+    departed=Departed.query.get_or_404(departed_id)
+    session['departed_id']=departed_id
+    
+    all_flowers = requests.get('https://www.floristone.com/api/rest/flowershop/getproducts', params={"category": "sy", "count":10000}, auth=(flower_user, flower_pass))
+    all_flowers = all_flowers.json()
+
+    #get valid API session # -- also stored in session['cart_id']
+
+    #SCAFFOLDING FOR TESTING PURPOSES
+    # session['cart_id'] = "junkyjunkjunknotrealjunkyjunkerson"
+    cart_id = flowershop_get_session(flower_user, flower_pass)
+    
+    #get cart contents from API
+    cart_contents = get_cart_contents(cart_id, flower_user, flower_pass)
+
+    #scaffolding
+    print_test("CART CONTENTS:", cart_contents)
+
+    return render_template("flowers.html", departed=departed, all_flowers=all_flowers, )
 
 
 
@@ -515,17 +546,11 @@ def flower_cart_post():
 
     feedback=""
 
-    #CREATE SHOPPING CART
-    #TODO: FIND OUT IF STILL AN ACTIVE SHOPPING CART AT API OR START A NEW ONE
+    #get valid API cart session # -- also stored in session['cart_id']
+    cart_id = flowershop_get_session(flower_user, flower_pass)
     
-    #In meantime and we know it's a first-timer...
-    if session.get('cart_id') is None:
-        #create shopping cart
-        session['cart_id'] = create_cart(flower_user, flower_pass)
-    
-    #more readable variable for api calls
-    cart_id = session['cart_id']
-    print_cart_session()
+    #get cart contents from API
+    cart_contents = get_cart_contents(cart_id, flower_user, flower_pass)
 
     # get form info 
     flower_id = request.form['flower_id']
@@ -607,17 +632,9 @@ def flower_cart1_get():
 
     feedback=""
 
-    #CREATE SHOPPING CART
-    #TODO: FIND OUT IF STILL AN ACTIVE SHOPPING CART AT API OR START A NEW ONE
+    #get valid API session # -- also stored in session['cart_id']
+    cart_id = flowershop_get_session(flower_user, flower_pass)
     
-    #In meantime and we know it's a first-timer...
-    if session.get('cart_id') is None:
-        #create shopping cart
-        session['cart_id'] = create_cart(flower_user, flower_pass)
-    
-    #more readable variable for api calls
-    cart_id = session['cart_id']
-
     #get cart contents from API
     cart_contents = get_cart_contents(cart_id, flower_user, flower_pass)
 

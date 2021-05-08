@@ -1,6 +1,7 @@
 from flask import session
 import requests, base64
 import pdb
+from os import getenv
 
 
 def flowershop_get_session(flower_user, flower_pass):
