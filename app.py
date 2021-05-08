@@ -830,18 +830,21 @@ def flowercart3():
         # print("phone", phone)
         # print("---------------------------------------")
 
-        return redirect('/flower-cart3')
+        return render_template("flower-cart3.html", flower_urls=flower_urls,departed=departed, cart_contents=cart_contents, date=date, zip=to_zipcode, cost=total_cost, form=form, name=to_name, institution=to_institution, address=to_address1, address2=to_address2, city=to_city,state=to_state, cardmessage=cardmessage)
 
     else:
-        return render_template("flower-cart2.html", flower_urls=flower_urls,departed=departed, cart_contents=cart_contents, date=date, zip=zip, cost=total_cost, form=form)
+        return redirect('/flower-cart2')
+        
 
 
     # return render_template('flower-cart2.html')
 
-@app.route('/flower-cart5', methods= ['GET','POST'])
-def flower_cart5():
+@app.route('/flower-cart4', methods= ['GET','POST'])
+def flower_cart4():
 
-    return render_template('flower-cart5.html')
+    return render_template('flower-cart4.html')
+
+
 
 @app.route('/deletefromcart/<product_code>')
 def delete_from_cart(product_code):
