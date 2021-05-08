@@ -688,8 +688,10 @@ def flowercart2():
     try:
         dates = dates['DATES']
         session['dates'] = dates
+        #SCAFFOLDING - TEMPORARY - PUT BACK
         #dynamically populate delivery_date field
         form.delivery_date.choices = [(date,date) for date in dates]
+
 
     except:
         flash("Must enter a valid zip code")
