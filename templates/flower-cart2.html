@@ -35,7 +35,7 @@ virtual memorial wall in loving memory of {{ departed.fname }} {{ departed.lname
 								{% if count2.value == 0: %}
 									<div id="input-group0" class="input-group">
 										<div class="form-group">
-											{{count2.value}} {{ field.label }}
+											{{ field.label }}
 												{{field(class="form-control")}}
 													{% for error in field.errors %} 
 														<br>
@@ -53,7 +53,7 @@ virtual memorial wall in loving memory of {{ departed.fname }} {{ departed.lname
 									<div id="input-group1" class="input-group">
 										<!-- MESSAGE AREA -->
 										<div class="form-group">
-											{{count2.value}} {{ field.label }}
+											{{ field.label }}
 											{{field(class="form-control")}}
 												{% for error in field.errors %} 
 													<br>
@@ -76,7 +76,7 @@ virtual memorial wall in loving memory of {{ departed.fname }} {{ departed.lname
 								{% endif %}
 								{% if count2.value > 1 and count2.value < 11: %}
 									<div class="form-group">
-										{{count2.value}} {{ field.label }}
+										{{ field.label }}
 										{{field(class="form-control")}}
 											{% for error in field.errors %} 
 												<br>
@@ -101,7 +101,7 @@ virtual memorial wall in loving memory of {{ departed.fname }} {{ departed.lname
 								{% endif %}
 								{% if count2.value >= 11 and count2.value < 20: %}
 									<div class="form-group">
-										{{count2.value}} {{ field.label }}
+										{{ field.label }}
 										{{field(class="form-control")}}
 										{% for error in field.errors %} 
 											<br>
@@ -124,13 +124,13 @@ virtual memorial wall in loving memory of {{ departed.fname }} {{ departed.lname
 								{% endif %}
 								{% if count2.value == 20: %}
 									<div class="form-group">
-										{{count2.value}} {{ field.label }}
+										{{ field.label }}
 										{{field(class="form-control")}}
 										{% for error in field.errors %} 
 											<br>
 											<small class="form-text text-danger">
 											{{ error }} 
-											</small>{{count2.value}} {{ field.label }}
+											</small>{{ field.label }}
 										{% endfor %} 
 									</div>
 									{% endif%}

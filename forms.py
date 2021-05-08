@@ -4,6 +4,7 @@ from wtforms.fields.html5 import DateField, DateTimeField, TimeField
 from wtforms import StringField, FloatField,IntegerField, StringField, TextAreaField, BooleanField, SubmitField, validators, HiddenField, PasswordField, SelectField
 from wtforms.validators import InputRequired, Optional, Email, NumberRange, AnyOf, URL,  EqualTo, DataRequired, Length
 from wtforms.fields.html5 import EmailField
+from countryinfo import country_tuples
 
 states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DC", "DE", "FL", "GA",
           "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD",
@@ -191,7 +192,7 @@ class FlowerOrderForm(FlaskForm):
     to_zipcode = StringField("Zip code", 
     validators = [InputRequired(message = "cannot be blank"), Length(max=5)])
     
-    to_country = StringField("Country", validators = [Length(max=2)], default="US")
+    to_country =  SelectField("country", choices = country_tuples)
     
     to_phone = StringField("Phone", 
     validators = [InputRequired(message = "cannot be blank"), Length(max=10)])
@@ -215,7 +216,7 @@ class FlowerOrderForm(FlaskForm):
     from_zipcode = StringField("Zip code", 
     validators = [InputRequired(message = "cannot be blank"), Length(max=5)])
     
-    from_country = StringField("Country",validators = [Length(max=2)], default="US")
+    from_country =  SelectField("country", choices = country_tuples)
     
     from_phone = StringField("Phone", 
     validators = [InputRequired(message = "cannot be blank"), Length(max=10)])

@@ -8,9 +8,11 @@ from models import db, connect_db, User, Admin_user, Departed, Post
 from os import getenv
 import requests, base64
 import socket
+from flowershop import *
+import pdb
 
 
-# ****NEED TO ALSO INSTALL Flask-Reloaded TO FIX BUGS IN flask_uploads!!!
+# ****NEED TO ALSO INSTALL Flask-Reloaded in requirements TO FIX BUGS IN flask_uploads!!!
 
 
 #TODO:
@@ -458,8 +460,10 @@ def merge_into_DateTime(date_var, time_var):
 #                     FLOWER SHOP                     #
 #######################################################
 
-@app.route("/sendflowers")
-def send_flowers():
+
+
+@app.route("/api_tester")
+def api_tester():
 
     added_form = AddFlowerToCart()
 
@@ -474,10 +478,18 @@ def send_flowers():
     all_flowers = requests.get('https://www.floristone.com/api/rest/flowershop/getproducts', params={"category": "sy", "count":10000}, auth=(flower_user, flower_pass))
     all_flowers = all_flowers.json()
 
+    #get valid API session # -- also stored in session['cart_id']
+    # session['cart_id'] = "junkyjunkjunknotrealjunkyjunkerson"
+    cart_id = flowershop_get_session(flower_user, flower_pass)
+    print_test("cart_id", cart_id)
+    
+    #get cart contents from API
+    cart_contents = get_cart_contents(cart_id, flower_user, flower_pass)
 
-    # NOTE: resp.json() converts the json string into python dictionary
+    #scaffolding
+    print_test("CART CONTENTS:", cart_contents)
 
-    return render_template("flowers.html", departed=departed, all_flowers=all_flowers, form=added_form)
+    return "DONE!"
 
 
 
@@ -507,13 +519,13 @@ def flower_cart_post():
     #TODO: FIND OUT IF STILL AN ACTIVE SHOPPING CART AT API OR START A NEW ONE
     
     #In meantime and we know it's a first-timer...
-    if session.get('shopping_cart_id') is None:
+    if session.get('cart_id') is None:
         #create shopping cart
-        session['shopping_cart_id'] = create_shopping_cart(flower_user, flower_pass)
+        session['cart_id'] = create_cart(flower_user, flower_pass)
     
     #more readable variable for api calls
-    cart_session_id = session['shopping_cart_id']
-
+    cart_id = session['cart_id']
+    print_cart_session()
 
     # get form info 
     flower_id = request.form['flower_id']
@@ -530,23 +542,23 @@ def flower_cart_post():
     #add to cart at API
     # TODO: OUGHTA BE ABLE TO FIND IF NO SESSION AT API HERE
     # JSON atAT API responds:  {errors: {'invalid sessionid'}} - ish...
-    resp = requests.put(f"https://www.floristone.com/api/rest/shoppingcart?sessionid={cart_session_id}&action=add&productcode={flower_id}",  auth=(flower_user, flower_pass))
+    resp = requests.put(f"https://www.floristone.com/api/rest/shoppingcart?sessionid={cart_id}&action=add&productcode={flower_id}",  auth=(flower_user, flower_pass))
     # resp=resp.json()
 
     # if resp['errors'][0] == 'invalid sessionid'
     """ assuming the error is that the cart/session timed out at API"""
-        # session['shopping_cart_id'] = None
+        # session['cart_id'] = None
         # #start a new cart/session
-        # session['shopping_cart_id'] = create_shopping_cart(flower_user, flower_pass)
+        # session['cart_id'] = create_cart(flower_user, flower_pass)
         # print('**************************************************************')
         # print('INVALID SESSION ID AT API')
         # print(f"resp")
         # print('**************************************************************')
         #     # #TRY again
-        # requests.put(f"https://www.floristone.com/api/rest/shoppingcart?sessionid={cart_session_id}&action=add&productcode={flower_id}",  auth=(flower_user, flower_pass))
+        # requests.put(f"https://www.floristone.com/api/rest/shoppingcart?sessionid={cart_id}&action=add&productcode={flower_id}",  auth=(flower_user, flower_pass))
 
     #get cart contents from API
-    cart_contents = requests.get(f'https://www.floristone.com/api/rest/shoppingcart?sessionid={cart_session_id}', auth=(flower_user, flower_pass))
+    cart_contents = requests.get(f'https://www.floristone.com/api/rest/shoppingcart?sessionid={cart_id}', auth=(flower_user, flower_pass))
     cart_contents = cart_contents.json()
     # cart_contents = cart_contents['products']
 
@@ -565,8 +577,8 @@ def flower_cart_post():
     print("CART CONTENTS")
     for flower in cart_contents['products']:
         print(flower['NAME'])
-    print("shopping_cart_id:")
-    print(session['shopping_cart_id'])
+    print("cart_id:")
+    print(session['cart_id'])
     print("################################################")
 
     # flash("Added to Cart")
@@ -599,16 +611,15 @@ def flower_cart1_get():
     #TODO: FIND OUT IF STILL AN ACTIVE SHOPPING CART AT API OR START A NEW ONE
     
     #In meantime and we know it's a first-timer...
-    if session.get('shopping_cart_id') is None:
+    if session.get('cart_id') is None:
         #create shopping cart
-        session['shopping_cart_id'] = create_shopping_cart(flower_user, flower_pass)
+        session['cart_id'] = create_cart(flower_user, flower_pass)
     
     #more readable variable for api calls
-    cart_session_id = session['shopping_cart_id']
+    cart_id = session['cart_id']
 
     #get cart contents from API
-    cart_contents = requests.get(f'https://www.floristone.com/api/rest/shoppingcart?sessionid={cart_session_id}', auth=(flower_user, flower_pass))
-    cart_contents = cart_contents.json()
+    cart_contents = get_cart_contents(cart_id, flower_user, flower_pass)
 
     flower_urls = get_flower_urls(cart_contents)
 
@@ -619,8 +630,8 @@ def flower_cart1_get():
     print("CART CONTENTS")
     for flower in cart_contents['products']:
         print(flower['NAME'])
-    print("shopping_cart_id:")
-    print(session['shopping_cart_id'])
+    print("cart_id:")
+    print(session['cart_id'])
     print("################################################")
 
     # flash("Added to Cart")
@@ -637,7 +648,7 @@ def flowercart2():
     flower_pass = getenv('FLORIST_ONE_PASSWORD')
     departed_id=session['departed_id']
     departed=Departed.query.get_or_404(departed_id)
-    cart_session_id = session['shopping_cart_id']
+    cart_id = session['cart_id']
     # zip = session['zip'] 
     form = FlowerOrderForm()
 
@@ -668,7 +679,7 @@ def flowercart2():
         return redirect (f"/sendflowers")
     
 
-    cart_contents = requests.get(f'https://www.floristone.com/api/rest/shoppingcart?sessionid={cart_session_id}', auth=(flower_user, flower_pass))
+    cart_contents = requests.get(f'https://www.floristone.com/api/rest/shoppingcart?sessionid={cart_id}', auth=(flower_user, flower_pass))
     cart_contents = cart_contents.json()
 
     flower_urls = get_flower_urls(cart_contents)
@@ -687,11 +698,11 @@ def flowercart3():
     flower_pass = getenv('FLORIST_ONE_PASSWORD')
     departed_id=session['departed_id']
     departed=Departed.query.get_or_404(departed_id)
-    cart_session_id = session['shopping_cart_id']
+    cart_id = session['cart_id']
     zip = session['zip'] 
     date = session['delivery-date']
 
-    cart_contents = requests.get(f'https://www.floristone.com/api/rest/shoppingcart?sessionid={cart_session_id}', auth=(flower_user, flower_pass))
+    cart_contents = requests.get(f'https://www.floristone.com/api/rest/shoppingcart?sessionid={cart_id}', auth=(flower_user, flower_pass))
     cart_contents = cart_contents.json()
 
     flower_urls = get_flower_urls(cart_contents)
@@ -822,7 +833,7 @@ def delete_from_cart(product_code):
     flower_user = getenv('FLORIST_ONE_KEY')
     flower_pass = getenv('FLORIST_ONE_PASSWORD')
 
-    SESSIONID = session['shopping_cart_id']
+    SESSIONID = session['cart_id']
 
     requests.put(f'https://www.floristone.com/api/rest/shoppingcart?sessionid={SESSIONID}&action=remove&productcode={product_code}', auth=(flower_user, flower_pass))
     
@@ -834,31 +845,7 @@ def delete_from_cart(product_code):
 
 #------------------------------------ FUNCTIONS -------------------------------------
 
-def create_shopping_cart(flower_user, flower_pass):
 
-    shopping_cart=requests.post('https://www.floristone.com/api/rest/shoppingcart',  auth=(flower_user, flower_pass))
-    shopping_cart = shopping_cart.json()
-
-    return shopping_cart['SESSIONID']
-
-def get_flower_urls(cart_contents):
-    flower_urls=[]
-    flower_user = getenv('FLORIST_ONE_KEY')
-    flower_pass = getenv('FLORIST_ONE_PASSWORD')
-    for item in cart_contents['products']:
-        flower_code=item['CODE']
-
-        flower_detail = requests.get(f'https://www.floristone.com/api/rest/flowershop/getproducts?code={flower_code}', auth=(flower_user, flower_pass))
-        flower_detail=flower_detail.json()
-
-        flower_urls.append({item['CODE']:flower_detail['PRODUCTS'][0]['SMALL']})
-
-        # print("___________________________FLOWER URLS_________________________________")
-        # print(flower_detail['PRODUCTS'][0]['SMALL'])
-
-    # print('flower_urls:', flower_urls)
-
-    return flower_urls 
 
 
 
