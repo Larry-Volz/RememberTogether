@@ -158,14 +158,12 @@ class Post(db.Model):
 
     file_url = db.Column(db.Text, nullable = True)
 
-    user_id = db.Column(db.Integer, db.ForeignKey(
-        'users.id'))
-
-    departed_id = db.Column(db.Integer, db.ForeignKey(
-        'departed.id'))
-
-    departed = db.relationship('Departed')
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     user = db.relationship('User')
+
+    departed_id = db.Column(db.Integer, db.ForeignKey('departed.id'))
+    departed = db.relationship('Departed')
+
 
 
     
@@ -206,11 +204,26 @@ class Order(db.Model):
     __tablename__ = "orders"
 
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
+    api_cart_session = db.Column(db.String(100), nullable = True)
+    api_order_number = db.Column(db.String(100), nullable = True)
 
     #TODO: RELATE/LINK IT TO USERS
     # user_id = db.Column(db.Integer, db.ForeignKey(
     #     'users.id'), nullable = True )
     # user = db.relationship('User')
+
+    #hidden values - default to day ordered in app.py
+    when_placed = db.Column(db.DateTime, nullable = False)
+
+    #POSSIBLE ORDER STATUSES
+    #0 = created/form filled out
+    #1 = confirmed and applied
+    #2 = credit card entered
+    #3 = sale confirmed okay by API 
+    #4 = credit card denied?
+    #5 = abandoned cart (retarget market)
+    status = db.Column(db.Integer, nullable=False, default=0)
+
 
     delivery_date = db.Column(db.Date, nullable = False)
     cardmessage = db.Column(db.String(200), nullable = True)
@@ -219,36 +232,24 @@ class Order(db.Model):
     to_name = db.Column(db.String(100), nullable = False)
     
     to_institution = db.Column(db.String(100), nullable = False)
-    
     to_address1 = db.Column(db.String(100), nullable = False)
-    
     to_address2 = db.Column(db.String(100), nullable = True)
-    
     to_city = db.Column(db.String(100), nullable = False)
-    
     to_state = db.Column(db.String(2), nullable = False)
-    
     to_zipcode = db.Column(db.String(5), nullable = False)
-
     to_country = db.Column(db.String(100), nullable = False)
     
     to_phone = db.Column(db.String(10), nullable = False)
 
     #CUSTOMER
     from_name = db.Column(db.String(100), nullable = False)
-
     from_email = db.Column(db.String(100), nullable = False)
     
     from_address1 = db.Column(db.String(100), nullable = False)
-    
     from_address2 = db.Column(db.String(100), nullable = True)
-    
     from_city = db.Column(db.String(100), nullable = False)
-    
     from_state = db.Column(db.String(2), nullable = False) 
-    
     from_zipcode = db.Column(db.String(5), nullable = False) 
-    
     from_country =  db.Column(db.String(2), nullable = False) 
     
     from_phone = db.Column(db.String(10), nullable = False) 
@@ -260,16 +261,14 @@ class Order_item(db.Model):
     __tablename__ = 'order_items'
 
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
-    
-    #TODO: RELATE/LINK ITEMS TO ORDER
-    # order_id = db.Column(db.Integer, db.ForeignKey(
-    #     'orders.id'), nullable = False )
-    # order = db.relationship('Order')
 
-    item_num = db.Column(db.Text, nullable = False)
-    description = db.Column(db.String(200), nullable = False)
-    url = db.Column(db.String(200), nullable = False)
+    #from API
+    code = db.Column(db.Text, nullable = False) 
+    name = db.Column(db.String(100), nullable = False)
     price = db.Column(db.Float, nullable = False)
+
+    order_id = db.Column(db.Integer, db.ForeignKey('orders.id'))
+    order = db.relationship('Order')
 
 # class Event(db.Model):
 #     '''table for individual events - connected to 1 or more departed through event-departed mapping table, also foreign key for admin (funeral home) '''

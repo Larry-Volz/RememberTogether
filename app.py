@@ -4,12 +4,13 @@ from flask_debugtoolbar import DebugToolbarExtension
 from flask_uploads import configure_uploads, IMAGES, UploadSet
 from forms import User_registration, Create_memorial_form, Post_form, LoginForm, ZipForm, AddFlowerToCart, FlowerOrderForm
 import json 
-from models import db, connect_db, User, Admin_user, Departed, Post
+from models import db, connect_db, User, Admin_user, Departed, Post, Order, Order_item
 from os import getenv
 import requests, base64
 import socket
 from flowershop import *
 import pdb
+from date_and_time_functions import *
 
 
 # ****NEED TO ALSO INSTALL Flask-Reloaded in requirements TO FIX BUGS IN flask_uploads!!!
@@ -447,14 +448,7 @@ def logout():
     # filename = secure_filename(photo.filename)
     # photo.save(os.path.join(app.instance_path, '/static/images', filename))
 
-def merge_into_DateTime(date_var, time_var):
-    """take a date_time object andextract the date and a time object from a form and add the time to the date to make a new, complete date_time object that can be passed into sqlalchemy"""
 
-    merged_datetime = datetime.datetime.combine(date_var,time_var)
-    #remove timezone info (do on client-side)
-    merged_datetime = merged_datetime.replace(tzinfo=None)
-
-    return merged_datetime
 
 
 #######################################################
@@ -817,19 +811,57 @@ def flowercart3():
         from_zipcode = form.from_zipcode.data
         from_country = form.from_country.data   
         from_phone = form.from_phone.data
+        from_email = form.from_email.data
 
         specialinstructions = form.specialinstructions.data
 
-        # print("---------------------------------------")
-        # print("name", name)
-        # print("address1", address1)
-        # print("address2",address2)
-        # print("city", city)
-        # print("state", state)
-        # print("zip", zip_cust)
-        # print("country", country)
-        # print("phone", phone)
-        # print("---------------------------------------")
+
+        order = Order(
+            api_cart_session = cart_id, 
+            when_placed= get_now_for_sqlalchemy(),
+            status=0,
+            delivery_date = delivery_date,
+            cardmessage=cardmessage,
+            to_name =to_name,
+            to_institution=to_institution,
+            to_address1=to_address1,
+            to_address2=to_address2,
+            to_city=to_city,
+            to_state=to_state,
+            to_zipcode=to_zipcode,
+            to_country=to_country,
+            to_phone=to_phone,
+            from_name=from_name,
+            from_email=from_email,
+            from_address1=from_address1,
+            from_address2=from_address2,
+            from_city=from_city,
+            from_state=from_state,
+            from_zipcode=from_zipcode,
+            from_country=from_country,
+            from_phone=from_phone,
+            specialinstructions=specialinstructions)
+        
+        #TODO: Question for later - do I want to not commit so I can roll back?
+        #or commit, like it's basically a cart with a 0 status
+        # and then just update the status
+        db.session.add(order)
+        db.session.commit()
+
+
+        for item in cart_contents['products']:
+            order_item = Order_item(
+                code=item['CODE'],
+                name=item['NAME'],
+                price=item['PRICE'],
+                order_id = order.id
+            )
+            db.session.add(order_item)
+            db.session.commit()
+
+
+
+
 
         return render_template("flower-cart3.html", flower_urls=flower_urls,departed=departed, cart_contents=cart_contents, date=date, zip=to_zipcode, cost=total_cost, form=form, name=to_name, institution=to_institution, address=to_address1, address2=to_address2, city=to_city,state=to_state, cardmessage=cardmessage)
 
@@ -845,6 +877,14 @@ def flower_cart4():
     """ Credit card form & purchase w/API"""
 
     return render_template('flower-cart4.html')
+
+
+@app.route('/edit-flower-form', methods=['GET','POST'])
+def edit_flower_form():
+
+    return render_template('edit-flower-form.html')
+
+
 
 
 
