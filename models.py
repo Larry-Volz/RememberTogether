@@ -99,6 +99,11 @@ class User(db.Model):
 
     id = db.Column(db.Integer,primary_key = True, autoincrement = True)
 
+    # TODO: RELATE IT TO ORDERS
+    # order_id = db.Column(db.Integer, db.ForeignKey(
+    #     'orders.id'), nullable = True )
+    # order = db.relationship('Order')
+
     fname = db.Column(db.Text, nullable = False)
     lname = db.Column(db.Text, nullable = False)
 
@@ -196,7 +201,75 @@ class Admin_user(db.Model):
     zip = db.Column(db.Text, nullable = True)
     website = db.Column(db.Text, nullable = True)
 
+class Order(db.Model):
+    """flower orders made by users """
+    __tablename__ = "orders"
 
+    id = db.Column(db.Integer, primary_key = True, autoincrement = True)
+
+    #TODO: RELATE/LINK IT TO USERS
+    # user_id = db.Column(db.Integer, db.ForeignKey(
+    #     'users.id'), nullable = True )
+    # user = db.relationship('User')
+
+    delivery_date = db.Column(db.Date, nullable = False)
+    cardmessage = db.Column(db.String(200), nullable = True)
+
+    #RECIPIENT
+    to_name = db.Column(db.String(100), nullable = False)
+    
+    to_institution = db.Column(db.String(100), nullable = False)
+    
+    to_address1 = db.Column(db.String(100), nullable = False)
+    
+    to_address2 = db.Column(db.String(100), nullable = True)
+    
+    to_city = db.Column(db.String(100), nullable = False)
+    
+    to_state = db.Column(db.String(2), nullable = False)
+    
+    to_zipcode = db.Column(db.String(5), nullable = False)
+
+    to_country = db.Column(db.String(100), nullable = False)
+    
+    to_phone = db.Column(db.String(10), nullable = False)
+
+    #CUSTOMER
+    from_name = db.Column(db.String(100), nullable = False)
+
+    from_email = db.Column(db.String(100), nullable = False)
+    
+    from_address1 = db.Column(db.String(100), nullable = False)
+    
+    from_address2 = db.Column(db.String(100), nullable = True)
+    
+    from_city = db.Column(db.String(100), nullable = False)
+    
+    from_state = db.Column(db.String(2), nullable = False) 
+    
+    from_zipcode = db.Column(db.String(5), nullable = False) 
+    
+    from_country =  db.Column(db.String(2), nullable = False) 
+    
+    from_phone = db.Column(db.String(10), nullable = False) 
+
+    specialinstructions = db.Column(db.String(100), nullable = True) 
+
+class Order_item(db.Model):
+    """flower orders made by users """
+    __tablename__ = 'order_items'
+
+    id = db.Column(db.Integer, primary_key = True, autoincrement = True)
+    
+    #TODO: RELATE/LINK ITEMS TO ORDER
+    # order_id = db.Column(db.Integer, db.ForeignKey(
+    #     'orders.id'), nullable = False )
+    # order = db.relationship('Order')
+
+    item_num = db.Column(db.Text, nullable = False)
+    description = db.Column(db.String(200), nullable = False)
+    url = db.Column(db.String(200), nullable = False)
+    price = db.Column(db.Float, nullable = False)
 
 # class Event(db.Model):
 #     '''table for individual events - connected to 1 or more departed through event-departed mapping table, also foreign key for admin (funeral home) '''

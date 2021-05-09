@@ -21,10 +21,11 @@ import pdb
 app=Flask(__name__)
 
 # original local postgresql db
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///remembertogether'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///remembertogether'
 
 #secure variables
-app.config['SQLALCHEMY_DATABASE_URI'] = getenv('SQL_CONNECTION_STRING')
+#At ElephantSQL
+# app.config['SQLALCHEMY_DATABASE_URI'] = getenv('SQL_CONNECTION_STRING')
 app.config['SECRET_KEY']= getenv('API_SECRET_KEY')
 
 app.config['FLORIST_ONE_KEY']= getenv('FLORIST_ONE_KEY')

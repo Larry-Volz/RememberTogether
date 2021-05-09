@@ -170,7 +170,7 @@ class FlowerOrderForm(FlaskForm):
     
     delivery_date =  SelectField("Pick a delivery date", validate_choice=False)
 
-    cardmessage = StringField("Write a message for your gift card")
+    cardmessage = StringField("Write a message for your gift card", validators = [Length(max=100)])
 
     #RECIPIENT
     to_name = StringField("First & last name", 
