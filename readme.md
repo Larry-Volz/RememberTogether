@@ -8,8 +8,8 @@ The business concept is to offer it free to funeral directors and individuals.  
 The API I have chosen to work with is FloristOne.  They are rated 4+ stars and are very reliable vendors.  It is a JSON API with good documentation at https://florist.one/api/documentation/.  This API connects the user to their entire database of flowers searchable by name, style, event type, etc.  It includes prices, shipping calculations and also integrates with auth.net so users can actually order flowers to be drop shipped.  It is functional now up to cart creation in a sandbox environment.
 
 ## Database schema
-Following is the database schema in crows foot notation. [database schema](Planning\virtual-memorial_schema1.jpg)
-![database schema](Planning\virtual-memorial_schema1.jpg)
+Following is the database schema in crows foot notation. [database schema](virtual-memorial_schema1.jpg)
+![database schema](virtual-memorial_schema1.jpg)
 
 ## User Flow
 The general user flow involves loggin in or creating an account.  Then the user can either visit or create a memorial.  Already-created memorials can be accessed through a search box made with jQuery-UI. This functionality also uses an internal REST API using JSON to communicate between the front and back end.
