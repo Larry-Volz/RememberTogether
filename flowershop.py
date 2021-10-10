@@ -41,7 +41,6 @@ def flowershop_get_session(flower_user, flower_pass):
     return session['cart_id']
 
 
-
 # def check_or_create_cart(flower_user, flower_pass):
     """ requests cart contents to see if session is valid
         if API session id is NOT VALID
@@ -69,6 +68,9 @@ def create_cart(flower_user, flower_pass):
     return cart['SESSIONID']
 
 def get_flower_urls(cart_contents):
+    """ 
+    Since cart contents only has code and name of the flowers this brings up the picture URLs from the code#'s in the cart so they can be displayed
+    """
     flower_urls=[]
     flower_user = getenv('FLORIST_ONE_KEY')
     flower_pass = getenv('FLORIST_ONE_PASSWORD')
@@ -89,7 +91,7 @@ def get_flower_urls(cart_contents):
 
 
 def get_cart_contents(cart_id, flower_user, flower_pass):
-    """ Get cart contents from API return them and store in flask-session """
+    """ Get current cart contents from API return them and store in flask-session """
     cart_contents = requests.get(f'https://www.floristone.com/api/rest/shoppingcart?sessionid={cart_id}', auth=(flower_user, flower_pass))
     cart_contents = cart_contents.json()
 
@@ -97,6 +99,19 @@ def get_cart_contents(cart_id, flower_user, flower_pass):
 
     return cart_contents
 
+def get_authorizenet_key(flower_user, flower_pass):
+    """ responds with a unique structure like this:
+        {
+        "USERNAME": "unique string 'o letters",
+        "AUTHORIZENET_KEY": "unique string 'o letters",
+        "AUTHORIZENET_URL": "https://jstest.authorize.net/v1/Accept.js"
+        }
+    Needed for the place order call which also returns a single-use token   
+    """
+    authorize_net = requests.get(f'https://www.floristone.com/api/rest/flowershop/getauthorizenetkey', auth=(flower_user, flower_pass))
+    authorize_net = authorize_net.json()
+
+    return authorize_net
 
 def print_test(variable_name, foo):
 

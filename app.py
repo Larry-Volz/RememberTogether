@@ -1,6 +1,6 @@
 import datetime
 from flask import Flask, request, render_template, redirect, flash, session, jsonify, url_for
-from flask_debugtoolbar import DebugToolbarExtension
+# from flask_debugtoolbar import DebugToolbarExtension
 from flask_uploads import configure_uploads, IMAGES, UploadSet
 from forms import User_registration, Create_memorial_form, Post_form, LoginForm, ZipForm, AddFlowerToCart, FlowerOrderForm
 import json 
@@ -11,6 +11,9 @@ import socket
 from flowershop import *
 import pdb
 from date_and_time_functions import *
+
+#TODO: TEMPORARY - ***** move these to environment variables and put in heroku *****
+from secrets import AUTH_NET_SANDBOX_LOGIN, AUTH_NET_SANDBOX_TRANSACTION_KEY, AUTH_NET_SANDBOX_KEY
 
 
 # ****NEED TO ALSO INSTALL Flask-Reloaded in requirements TO FIX BUGS IN flask_uploads!!!
@@ -27,7 +30,10 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///remembertogether'
 #secure variables
 #At ElephantSQL
 # app.config['SQLALCHEMY_DATABASE_URI'] = getenv('SQL_CONNECTION_STRING')
-app.config['SECRET_KEY']= getenv('API_SECRET_KEY')
+# app.config['SECRET_KEY']= getenv('API_SECRET_KEY')
+
+# IN ACTUAL HEROKU DEPLOYMENT THIS IS A SEPARATE ENVIRONMENT VARIABLE!
+app.config['SECRET_KEY']= 'temporarysecrettochangelater'
 
 app.config['FLORIST_ONE_KEY']= getenv('FLORIST_ONE_KEY')
 app.config['FLORIST_ONE_PASSWORD']= getenv('FLORIST_ONE_PASSWORD')
