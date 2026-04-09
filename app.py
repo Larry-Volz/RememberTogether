@@ -229,7 +229,10 @@ def edit_obituary(departed_id):
         #convert back to 
         departed.event_start_date = form.event_start_date.data  #date field
         departed.event_start_time = form.event_start_time.data  #time field
-        departed.event_end = form.event_end.data  #time field
+        dif form.event_end.data and departed.event_start:
+            departed.event_end = merge_into_DateTime(departed.event_start.date(), form.event_end.data)
+        else:
+            departed.event_end = None
 
         #convert timestamp to time
         # departed.event_start = merge_into_DateTime(event_start_date, event_start_time)
