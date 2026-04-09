@@ -13,8 +13,11 @@ import pdb
 from date_and_time_functions import *
 
 #TODO: TEMPORARY - ***** move these to environment variables and put in heroku *****
-from secrets import AUTH_NET_SANDBOX_LOGIN, AUTH_NET_SANDBOX_TRANSACTION_KEY, AUTH_NET_SANDBOX_KEY
 
+import os
+AUTH_NET_SANDBOX_LOGIN = os.environ.get('AUTH_NET_SANDBOX_LOGIN')
+AUTH_NET_SANDBOX_TRANSACTION_KEY = os.environ.get('AUTH_NET_SANDBOX_TRANSACTION_KEY')
+AUTH_NET_SANDBOX_KEY = os.environ.get('AUTH_NET_SANDBOX_KEY')
 
 # ****NEED TO ALSO INSTALL Flask-Reloaded in requirements TO FIX BUGS IN flask_uploads!!!
 
