@@ -28,7 +28,7 @@ AUTH_NET_SANDBOX_KEY = os.environ.get('AUTH_NET_SANDBOX_KEY')
 app=Flask(__name__)
 
 # original local postgresql db
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///remembertogether'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'postgresql:///remembertogether')
 
 #secure variables
 #At ElephantSQL
