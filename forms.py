@@ -3,7 +3,7 @@ from flask_wtf.file import FileField, FileRequired
 from wtforms.fields import DateField, DateTimeField, TimeField
 from wtforms import StringField, FloatField,IntegerField, StringField, TextAreaField, BooleanField, SubmitField, validators, HiddenField, PasswordField, SelectField
 from wtforms.validators import InputRequired, Optional, Email, NumberRange, AnyOf, URL,  EqualTo, DataRequired, Length
-from wtforms.fields.html5 import EmailField
+from wtforms.fields import EmailField
 from countryinfo import country_tuples
 
 states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DC", "DE", "FL", "GA",
