@@ -58,8 +58,8 @@ configure_uploads(app, images)
 
 
 connect_db(app)
-db.create_all()
-
+with app.app_context():
+    db.create_all()
 
 @app.route('/')
 def home():
