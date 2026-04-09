@@ -285,7 +285,7 @@ figure {
         display: table-cell;
         vertical-align: middle;
         min-height: 700px;
-        padding: 2.5em;
+        padding: 2.5em 2.5em 2.5em 5em;
         position: relative; }
         @media screen and (max-width: 768px) {
           #virtual-memorial-hero .flexslider .slider-text > .slider-text-inner {
