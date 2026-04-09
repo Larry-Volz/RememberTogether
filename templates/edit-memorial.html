@@ -48,37 +48,32 @@
 	<div class="col-md-8">
 		<h2 class="display-1 ml-5"><strong>Edit Memorial Page for <br> 
 			{{ departed.fname }} {{ departed.lname }}</strong></h2>
-		<form action="/create" method="POST" enctype="multipart/form-data">
+		<form action="/edit/{{ departed.id }}" method="POST" enctype="multipart/form-data">
 			{{ form.hidden_tag() }}
 	
 			{% for field in form if field.widget.input_type != 'hidden' %}
-
-
-				
-				<div class="form-group">
-
-					{% if field.name == "born":  %}
-
-						{{ field.label }}
-						{{ field(class_="datepicker")}}
-
-					{% else: %}
-
-						{{ field.label }}
-						{{field(class_="form-control")}}
-
-					{% endif %}
-
-					{% for error in field.errors %} 
-					<br>
-					<small class="form-text text-danger">
-						{{ error }} 
-					</small>
-					{% endfor %} 
-				</div>
-					
+			    <div class="form-group">
+			        {% if field.name == "headshot" %}
+			            <p>Current: <img src="/static/images/{{ departed.headshot }}" style="height:60px;"></p>
+			        {% elif field.name == "hero1" %}
+			            <p>Current: <img src="/static/images/{{ departed.hero1 }}" style="height:60px;"></p>
+			        {% elif field.name == "hero2" %}
+			            <p>Current: <img src="/static/images/{{ departed.hero2 }}" style="height:60px;"></p>
+			        {% endif %}
+			        {% if field.name == "born" %}
+			            {{ field.label }}
+			            {{ field(class_="datepicker") }}
+			        {% else %}
+			            {{ field.label }}
+			            {{ field(class_="form-control") }}
+			        {% endif %}
+			        {% for error in field.errors %}
+			        <br>
+			        <small class="form-text text-danger">{{ error }}</small>
+			        {% endfor %}
+			    </div>
 			{% endfor %}
-	
+				
 			<button class="btn btn-success" type="submit">Create Memorial Page</button>
 		</form>
 		<form action="/memorial/{{departed.id}}">
