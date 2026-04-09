@@ -2,7 +2,7 @@ import datetime
 from flask import Flask, request, render_template, redirect, flash, session, jsonify, url_for
 # from flask_debugtoolbar import DebugToolbarExtension
 from flask_uploads import configure_uploads, IMAGES, UploadSet
-from forms import User_registration, Create_memorial_form, Post_form, LoginForm, ZipForm, AddFlowerToCart, FlowerOrderForm
+from forms import User_registration, Create_memorial_form, Edit_memorial_form, Post_form, LoginForm, ZipForm, AddFlowerToCart, FlowerOrderForm
 import json 
 from models import db, connect_db, User, Admin_user, Departed, Post, Order, Order_item
 from os import getenv
@@ -199,7 +199,7 @@ def create_obituary():
 def edit_obituary(departed_id):
     """form and functionality to edit an obituary/memorial"""
     departed = Departed.query.get_or_404(departed_id)
-    form = Create_memorial_form(obj=departed)
+    form = Edit_memorial_form(obj=departed)
 
     if form.validate_on_submit(): #csrf & is POST
 
@@ -212,9 +212,12 @@ def edit_obituary(departed_id):
         departed.city_born = form.city_born.data
         departed.state_born = form.state_born.data
 
-        departed.headshot = form.headshot.data
-        departed.hero1 = form.hero1.data
-        departed.hero2 = form.hero2.data
+        if form.headshot.data:
+            departed.headshot = images.save(form.headshot.data)
+        if form.hero1.data:
+            departed.hero1 = images.save(form.hero1.data)
+        if form.hero2.data:
+            departed.hero2 = images.save(form.hero2.data)
 
 
         departed.biography = form.biography.data
