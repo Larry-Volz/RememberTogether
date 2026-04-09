@@ -60,6 +60,11 @@ class Create_memorial_form(FlaskForm):
     #TODO: figure out how to use URL field/validations
     event_url = StringField("Website of the funeral home")
 
+class Edit_memorial_form(Create_memorial_form):
+    headshot = FileField("Face picture (leave blank to keep current)")
+    hero1 = FileField("Big picture for top of screen (leave blank to keep current)")
+    hero2 = FileField("Another big picture for top of screen (leave blank to keep current)")
+
 class Post_form(FlaskForm):
     """For making a memorial post"""
 
